@@ -1,6 +1,0 @@
-framework module MHUI {
-  umbrella header "MHUI-umbrella.h"
-
-  export *
-  module * { export * }
-}
