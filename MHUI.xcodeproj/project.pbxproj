@@ -10,19 +10,19 @@
 		EC31452A1D0740C70025F669 /* MHUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145291D0740C70025F669 /* MHUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145311D0740C80025F669 /* MHUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3145261D0740C70025F669 /* MHUI.framework */; };
 		EC3145361D0740C80025F669 /* MHUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145351D0740C80025F669 /* MHUITests.m */; };
-		EC31454C1D0740EA0025F669 /* MHUDictionaryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145401D0740EA0025F669 /* MHUDictionaryViewController.h */; };
+		EC31454C1D0740EA0025F669 /* MHUDictionaryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145401D0740EA0025F669 /* MHUDictionaryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC31454D1D0740EA0025F669 /* MHUDictionaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145411D0740EA0025F669 /* MHUDictionaryViewController.m */; };
-		EC31454E1D0740EA0025F669 /* MHUFlipController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145421D0740EA0025F669 /* MHUFlipController.h */; };
+		EC31454E1D0740EA0025F669 /* MHUFlipController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145421D0740EA0025F669 /* MHUFlipController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC31454F1D0740EA0025F669 /* MHUFlipController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145431D0740EA0025F669 /* MHUFlipController.m */; };
-		EC3145501D0740EA0025F669 /* UIAlertController+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145441D0740EA0025F669 /* UIAlertController+MHU.h */; };
+		EC3145501D0740EA0025F669 /* UIAlertController+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145441D0740EA0025F669 /* UIAlertController+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145511D0740EA0025F669 /* UIAlertController+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145451D0740EA0025F669 /* UIAlertController+MHU.m */; };
-		EC3145521D0740EA0025F669 /* UINavigationBar+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145461D0740EA0025F669 /* UINavigationBar+MHU.h */; };
+		EC3145521D0740EA0025F669 /* UINavigationBar+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145461D0740EA0025F669 /* UINavigationBar+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145531D0740EA0025F669 /* UINavigationBar+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145471D0740EA0025F669 /* UINavigationBar+MHU.m */; };
-		EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145481D0740EA0025F669 /* UITabBar+MHU.h */; };
+		EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145481D0740EA0025F669 /* UITabBar+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145491D0740EA0025F669 /* UITabBar+MHU.m */; };
-		EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31454A1D0740EA0025F669 /* UIView+MHU.h */; };
+		EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31454A1D0740EA0025F669 /* UIView+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31454B1D0740EA0025F669 /* UIView+MHU.m */; };
-		ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */; };
+		ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */; };
 /* End PBXBuildFile section */
 
