@@ -22,6 +22,8 @@
 		EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145491D0740EA0025F669 /* UITabBar+MHU.m */; };
 		EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31454A1D0740EA0025F669 /* UIView+MHU.h */; };
 		EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31454B1D0740EA0025F669 /* UIView+MHU.m */; };
+		ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */; };
+		ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		EC3145491D0740EA0025F669 /* UITabBar+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+MHU.m"; sourceTree = "<group>"; };
 		EC31454A1D0740EA0025F669 /* UIView+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MHU.h"; sourceTree = "<group>"; };
 		EC31454B1D0740EA0025F669 /* UIView+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MHU.m"; sourceTree = "<group>"; };
+		ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MHU.h"; sourceTree = "<group>"; };
+		ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MHU.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				EC3145491D0740EA0025F669 /* UITabBar+MHU.m */,
 				EC31454A1D0740EA0025F669 /* UIView+MHU.h */,
 				EC31454B1D0740EA0025F669 /* UIView+MHU.m */,
+				ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */,
+				ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */,
 				EC31452B1D0740C70025F669 /* Info.plist */,
 			);
 			path = MHUI;
@@ -135,6 +141,7 @@
 				EC31452A1D0740C70025F669 /* MHUI.h in Headers */,
 				EC31454E1D0740EA0025F669 /* MHUFlipController.h in Headers */,
 				EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */,
+				ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */,
 				EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +246,7 @@
 				EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */,
 				EC3145511D0740EA0025F669 /* UIAlertController+MHU.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */,
+				ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */,
 				EC31454D1D0740EA0025F669 /* MHUDictionaryViewController.m in Sources */,
 				EC31454F1D0740EA0025F669 /* MHUFlipController.m in Sources */,
 			);
@@ -424,6 +432,7 @@
 				EC31453C1D0740C80025F669 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EC31453D1D0740C80025F669 /* Build configuration list for PBXNativeTarget "MHUITests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +441,7 @@
 				EC31453F1D0740C80025F669 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

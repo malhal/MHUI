@@ -22,3 +22,4 @@ FOUNDATION_EXPORT const unsigned char MHUIVersionString[];
 #import <MHUI/UINavigationBar+MHU.h>
 #import <MHUI/UITabBar+MHU.h>
 #import <MHUI/UIView+MHU.h>
+#import <MHUI/UINavigationItem+MHU.h>
