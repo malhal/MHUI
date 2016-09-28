@@ -17,6 +17,7 @@ FOUNDATION_EXPORT const unsigned char MHUIVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <MHUI/PublicHeader.h>
 #import <MHUI/MHUDictionaryViewController.h>
 #import <MHUI/MHUFlipController.h>
+#import <MHUI/MHUAuthViewController.h>
 
 #import <MHUI/UIAlertController+MHU.h>
 #import <MHUI/UINavigationBar+MHU.h>
