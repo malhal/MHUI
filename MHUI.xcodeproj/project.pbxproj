@@ -32,6 +32,7 @@
 		EC76D6E81D9E4470002DC0A0 /* UIViewController+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC76D6E91D9E4470002DC0A0 /* UIViewController+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */; };
 		EC76D6EB1D9E44CF002DC0A0 /* MHUNamespaceDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC76D6EF1D9E4537002DC0A0 /* MHUAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC76D6EE1D9E4537002DC0A0 /* MHUAuth.storyboard */; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MHU.h"; sourceTree = "<group>"; };
 		EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MHU.m"; sourceTree = "<group>"; };
 		EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUNamespaceDefines.h; sourceTree = "<group>"; };
+		EC76D6EE1D9E4537002DC0A0 /* MHUAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MHUAuth.storyboard; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MHU.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MHU.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 				ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */,
 				EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */,
 				EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */,
+				EC76D6EE1D9E4537002DC0A0 /* MHUAuth.storyboard */,
 				EC31452B1D0740C70025F669 /* Info.plist */,
 			);
 			path = MHUI;
@@ -262,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC76D6EF1D9E4537002DC0A0 /* MHUAuth.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
