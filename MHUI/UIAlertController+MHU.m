@@ -11,6 +11,21 @@
 
 @implementation UIAlertController (MHU)
 
++ (UIAlertController *)mhu_alertControllerWithTitle:(NSString *)title message:(NSString *)message{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              
+                                                          }];
+    // set loading after button pressed?
+    [alert addAction:defaultAction];
+    
+    return alert;
+}
+
 // replace the implementation of viewDidDisappear via swizzling.
 + (void)load {
     static dispatch_once_t once_token;

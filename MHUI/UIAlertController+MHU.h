@@ -10,6 +10,8 @@
 
 @interface UIAlertController (MHU)
 
++ (UIAlertController *)mhu_alertControllerWithTitle:(NSString *)title message:(NSString *)message;
+
 // Gives previous behavior of UIAlertView in that alerts are queued up.
 -(void)mhu_show;
 

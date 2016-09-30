@@ -7,11 +7,9 @@
 //
 
 #import "MHUAuthViewController.h"
-#import "UINavigationItem+MHU.h"
 
-@interface MHUAuthViewController ()
-
-@end
+NSString * const MHUAuthLogInSegueIdentifier = @"LogIn";
+NSString * const MHUAuthSignUpSegueIdentifier = @"SignUp";
 
 @implementation MHUAuthViewController
 
@@ -27,8 +25,14 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     // pass through the delegate.
-    MHUAuthViewController *auth = (MHUAuthViewController *)segue.destinationViewController;
-    auth.delegate = self.delegate;
+    if([segue.identifier isEqualToString:MHUAuthLogInSegueIdentifier]){
+        MHULogInViewController *logIn = (MHULogInViewController *)segue.destinationViewController;
+        logIn.delegate = self;
+    }
+    else if([segue.identifier isEqualToString:MHUAuthSignUpSegueIdentifier]){
+        MHUSignUpViewController *signUp = (MHUSignUpViewController *)segue.destinationViewController;
+        signUp.delegate = self;
+    }
 }
 
 /*
@@ -67,86 +71,25 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //NSLog(@"loaded");
 }
 
 // only used from initial view
--(IBAction)cancelButtonTapped:(id)sender{
+- (IBAction)cancelButtonTapped:(id)sender{
+    if([self.delegate respondsToSelector:@selector(authViewControllerDidCancel:)]){
+        [self.delegate authViewControllerDidCancel:self];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
-    if([self.delegate respondsToSelector:@selector(authViewControllerDidTapCancelButton:)]){
-        [self.delegate authViewControllerDidTapCancelButton:self];
+}
+
+- (void)logInViewControllerDidTapLogInButton:(MHULogInViewController *)viewController{
+    if([self.delegate respondsToSelector:@selector(authViewController:logInViewControllerDidTapLogInButton:)]){
+        [self.delegate authViewController:self logInViewControllerDidTapLogInButton:viewController];
     }
 }
 
-// Match Calendar adding events and bring the keyboard up after the view appears.
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [_usernameTextField becomeFirstResponder];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)setLoading:(BOOL)loading{
-    if(_loading == loading){
-        return;
-    }
-    self.view.userInteractionEnabled = !loading;
-    self.navigationItem.rightBarButtonItem.enabled = !loading;
-    self.navigationItem.hidesBackButton = loading;
-    if(loading){
-        [self.navigationItem mhu_beginTitleRefreshing];
-    }else{
-        [self.navigationItem mhu_endTitleRefreshing];
-    }
-    _loading = loading;
-}
-
--(void)didError:(NSError*)error{
-    NSString* message = @"Invalid credentials";
-    // change if its another reason
-    if(error){
-        message = error.localizedDescription;
-    }
-    
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Alert"
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {
-                                                              
-                                                              
-                                                              
-                                                          }];
-    // set loading after button pressed?
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
-    self.loading = NO;
-    if([self.delegate respondsToSelector:@selector(authViewController:didError:)]){
-        [self.delegate authViewController:self didError:error];
-    }
-}
-
--(IBAction)logInButtonTapped:(id)sender{
-    if([self.delegate respondsToSelector:@selector(authViewControllerDidTapLogInButton:)]){
-        [self.delegate authViewControllerDidTapLogInButton:self];
-    }
-}
-
--(IBAction)signUpButtonTapped:(id)sender{
-    if([self.delegate respondsToSelector:@selector(authViewControllerDidTapSignUpButton:)]){
-        [self.delegate authViewControllerDidTapSignUpButton:self];
-    }
-}
-
--(void)didFinish{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    if([self.delegate respondsToSelector:@selector(authViewControllerDidFinish:)]){
-        [self.delegate authViewControllerDidFinish:self];
+- (void)logInViewController:(MHULogInViewController *)logInViewController didError:(NSError *)error{
+    if([self.delegate respondsToSelector:@selector(authViewController:logInViewController:didError:)]){
+        [self.delegate authViewController:self logInViewController:logInViewController didError:error];
     }
 }
 

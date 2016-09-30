@@ -78,7 +78,7 @@
         <!--Log In-->
         <scene sceneID="a1a-aK-PVk">
             <objects>
-                <tableViewController id="K2y-an-x2Z" userLabel="Log In" customClass="MHUAuthViewController" sceneMemberID="viewController">
+                <tableViewController id="K2y-an-x2Z" userLabel="Log In" customClass="MHULogInViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zhc-E7-Dff">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,7 +135,7 @@
                     <navigationItem key="navigationItem" title="Auth" id="Smb-9X-DBZ">
                         <barButtonItem key="rightBarButtonItem" title="Log In" id="bEm-5q-hoz">
                             <connections>
-                                <action selector="logInButtonTapped:" destination="K2y-an-x2Z" id="pFn-X2-HBp"/>
+                                <action selector="logInButtonTapped:" destination="K2y-an-x2Z" id="y4N-At-okP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -151,7 +151,7 @@
         <!--Sign Up-->
         <scene sceneID="pYF-B6-FBD">
             <objects>
-                <tableViewController id="WAW-hY-bZM" userLabel="Sign Up" customClass="MHUAuthViewController" sceneMemberID="viewController">
+                <tableViewController id="WAW-hY-bZM" userLabel="Sign Up" customClass="MHUSignUpViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fEH-iV-AVl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,7 +227,7 @@
                     <navigationItem key="navigationItem" title="Auth" id="2HA-zH-tCW">
                         <barButtonItem key="rightBarButtonItem" title="Sign Up" id="jao-qd-url">
                             <connections>
-                                <action selector="signUpButtonTapped:" destination="WAW-hY-bZM" id="kYF-Sl-whX"/>
+                                <action selector="signUpButtonTapped:" destination="WAW-hY-bZM" id="shp-bv-zLe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
