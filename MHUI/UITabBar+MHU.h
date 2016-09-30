@@ -8,6 +8,7 @@
 // Progress bar that appears at top of tab bar.
 
 #import <UIKit/UIKit.h>
+#import <MHUI/MHUDefines.h>
 
 @interface UITabBar (MHU)
 

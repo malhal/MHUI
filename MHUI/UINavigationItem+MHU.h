@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MHUI/MHUDefines.h>
 
 @interface UINavigationItem (MHU)
 

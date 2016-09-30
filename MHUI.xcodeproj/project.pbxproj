@@ -22,6 +22,16 @@
 		EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145491D0740EA0025F669 /* UITabBar+MHU.m */; };
 		EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31454A1D0740EA0025F669 /* UIView+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31454B1D0740EA0025F669 /* UIView+MHU.m */; };
+		EC76D6D81D9E431B002DC0A0 /* MHUDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6D71D9E42A5002DC0A0 /* MHUDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC76D6E01D9E4442002DC0A0 /* MHUAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6DA1D9E4442002DC0A0 /* MHUAuthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC76D6E11D9E4442002DC0A0 /* MHUAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6DB1D9E4442002DC0A0 /* MHUAuthViewController.m */; };
+		EC76D6E21D9E4442002DC0A0 /* MHULogInViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6DC1D9E4442002DC0A0 /* MHULogInViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC76D6E31D9E4442002DC0A0 /* MHULogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6DD1D9E4442002DC0A0 /* MHULogInViewController.m */; };
+		EC76D6E41D9E4442002DC0A0 /* MHUSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6DE1D9E4442002DC0A0 /* MHUSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC76D6E51D9E4442002DC0A0 /* MHUSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6DF1D9E4442002DC0A0 /* MHUSignUpViewController.m */; };
+		EC76D6E81D9E4470002DC0A0 /* UIViewController+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC76D6E91D9E4470002DC0A0 /* UIViewController+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */; };
+		EC76D6EB1D9E44CF002DC0A0 /* MHUNamespaceDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */; };
 /* End PBXBuildFile section */
@@ -55,6 +65,16 @@
 		EC3145491D0740EA0025F669 /* UITabBar+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+MHU.m"; sourceTree = "<group>"; };
 		EC31454A1D0740EA0025F669 /* UIView+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MHU.h"; sourceTree = "<group>"; };
 		EC31454B1D0740EA0025F669 /* UIView+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MHU.m"; sourceTree = "<group>"; };
+		EC76D6D71D9E42A5002DC0A0 /* MHUDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHUDefines.h; sourceTree = "<group>"; };
+		EC76D6DA1D9E4442002DC0A0 /* MHUAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUAuthViewController.h; sourceTree = "<group>"; };
+		EC76D6DB1D9E4442002DC0A0 /* MHUAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUAuthViewController.m; sourceTree = "<group>"; };
+		EC76D6DC1D9E4442002DC0A0 /* MHULogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHULogInViewController.h; sourceTree = "<group>"; };
+		EC76D6DD1D9E4442002DC0A0 /* MHULogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHULogInViewController.m; sourceTree = "<group>"; };
+		EC76D6DE1D9E4442002DC0A0 /* MHUSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUSignUpViewController.h; sourceTree = "<group>"; };
+		EC76D6DF1D9E4442002DC0A0 /* MHUSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUSignUpViewController.m; sourceTree = "<group>"; };
+		EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MHU.h"; sourceTree = "<group>"; };
+		EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MHU.m"; sourceTree = "<group>"; };
+		EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUNamespaceDefines.h; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MHU.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MHU.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +120,14 @@
 			isa = PBXGroup;
 			children = (
 				EC3145291D0740C70025F669 /* MHUI.h */,
+				EC76D6D71D9E42A5002DC0A0 /* MHUDefines.h */,
+				EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */,
+				EC76D6DA1D9E4442002DC0A0 /* MHUAuthViewController.h */,
+				EC76D6DB1D9E4442002DC0A0 /* MHUAuthViewController.m */,
+				EC76D6DC1D9E4442002DC0A0 /* MHULogInViewController.h */,
+				EC76D6DD1D9E4442002DC0A0 /* MHULogInViewController.m */,
+				EC76D6DE1D9E4442002DC0A0 /* MHUSignUpViewController.h */,
+				EC76D6DF1D9E4442002DC0A0 /* MHUSignUpViewController.m */,
 				EC3145401D0740EA0025F669 /* MHUDictionaryViewController.h */,
 				EC3145411D0740EA0025F669 /* MHUDictionaryViewController.m */,
 				EC3145421D0740EA0025F669 /* MHUFlipController.h */,
@@ -114,6 +142,8 @@
 				EC31454B1D0740EA0025F669 /* UIView+MHU.m */,
 				ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */,
 				ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */,
+				EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */,
+				EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */,
 				EC31452B1D0740C70025F669 /* Info.plist */,
 			);
 			path = MHUI;
@@ -136,12 +166,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC3145521D0740EA0025F669 /* UINavigationBar+MHU.h in Headers */,
+				EC76D6D81D9E431B002DC0A0 /* MHUDefines.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MHU.h in Headers */,
 				EC31454C1D0740EA0025F669 /* MHUDictionaryViewController.h in Headers */,
 				EC31452A1D0740C70025F669 /* MHUI.h in Headers */,
+				EC76D6E81D9E4470002DC0A0 /* UIViewController+MHU.h in Headers */,
+				EC76D6EB1D9E44CF002DC0A0 /* MHUNamespaceDefines.h in Headers */,
 				EC31454E1D0740EA0025F669 /* MHUFlipController.h in Headers */,
 				EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */,
 				ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */,
+				EC76D6E21D9E4442002DC0A0 /* MHULogInViewController.h in Headers */,
+				EC76D6E01D9E4442002DC0A0 /* MHUAuthViewController.h in Headers */,
+				EC76D6E41D9E4442002DC0A0 /* MHUSignUpViewController.h in Headers */,
 				EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +191,7 @@
 			buildPhases = (
 				EC3145211D0740C70025F669 /* Sources */,
 				EC3145221D0740C70025F669 /* Frameworks */,
+				EC76D6D91D9E43F0002DC0A0 /* ShellScript */,
 				EC3145231D0740C70025F669 /* Headers */,
 				EC3145241D0740C70025F669 /* Resources */,
 			);
@@ -237,6 +274,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		EC76D6D91D9E43F0002DC0A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "dependencies/MHNamespaceGenerator/script.sh MHUI MHU";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EC3145211D0740C70025F669 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -246,8 +299,12 @@
 				EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */,
 				EC3145511D0740EA0025F669 /* UIAlertController+MHU.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */,
+				EC76D6E91D9E4470002DC0A0 /* UIViewController+MHU.m in Sources */,
 				ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */,
+				EC76D6E51D9E4442002DC0A0 /* MHUSignUpViewController.m in Sources */,
+				EC76D6E11D9E4442002DC0A0 /* MHUAuthViewController.m in Sources */,
 				EC31454D1D0740EA0025F669 /* MHUDictionaryViewController.m in Sources */,
+				EC76D6E31D9E4442002DC0A0 /* MHULogInViewController.m in Sources */,
 				EC31454F1D0740EA0025F669 /* MHUFlipController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

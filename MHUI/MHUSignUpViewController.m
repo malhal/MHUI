@@ -7,6 +7,7 @@
 //
 
 #import "MHUSignUpViewController.h"
+#import "UIViewController+MHU.h"
 
 @implementation MHUSignUpViewController
 @dynamic delegate;

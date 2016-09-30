@@ -10,6 +10,7 @@
 // Didn't figure how to default the button to the initial tab item. selectedViewController isnt set until viewDidAppear.
 
 #import <UIKit/UIKit.h>
+#import <MHUI/MHUDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
