@@ -10,7 +10,7 @@
     #define __MHUI_NS_BRIDGE(ns, symbol) __MHUI_NS_REWRITE(ns, symbol)
     #define __MHUI_NS_SYMBOL(symbol) __MHUI_NS_BRIDGE(MHUI_NAMESPACE, symbol)
 // Classes
-    #define MHUAuthViewController __MHUI_NS_SYMBOL(MHUAuthViewController)
+    #define MHUAccountViewController __MHUI_NS_SYMBOL(MHUAccountViewController)
     #define MHUDictionaryViewController __MHUI_NS_SYMBOL(MHUDictionaryViewController)
     #define MHUFlipController __MHUI_NS_SYMBOL(MHUFlipController)
     #define MHULogInViewController __MHUI_NS_SYMBOL(MHULogInViewController)
@@ -28,8 +28,8 @@
     #define mhu_transitionSlide __MHUI_NS_SYMBOL(mhu_transitionSlide)
     #define mhu_viewDidDisappear __MHUI_NS_SYMBOL(mhu_viewDidDisappear)
 // Externs
-    #define MHUAuthLogInSegueIdentifier __MHUI_NS_SYMBOL(MHUAuthLogInSegueIdentifier)
-    #define MHUAuthSignUpSegueIdentifier __MHUI_NS_SYMBOL(MHUAuthSignUpSegueIdentifier)
+    #define MHUAccountLogInSegueIdentifier __MHUI_NS_SYMBOL(MHUAccountLogInSegueIdentifier)
+    #define MHUAccountSignUpSegueIdentifier __MHUI_NS_SYMBOL(MHUAccountSignUpSegueIdentifier)
     #define MHUIVersionNumber __MHUI_NS_SYMBOL(MHUIVersionNumber)
     #define MHUIVersionString __MHUI_NS_SYMBOL(MHUIVersionString)
 #endif

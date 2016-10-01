@@ -7,22 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MHUI/MHUDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MHUEditableTableCell;
 @protocol MHULogInViewControllerDelegate;
 
 @interface MHULogInViewController : UITableViewController
 
 @property (nonatomic, weak) id<MHULogInViewControllerDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet MHUEditableTableCell *usernameCell;
+@property (weak, nonatomic) IBOutlet MHUEditableTableCell *passwordCell;
 
 - (IBAction)logInButtonTapped:(id)sender;
 
+- (void)didTapLogInButton;
+
 // call when finished to dismiss the controller.
--(void)didFinish;
+- (void)didFinish;
 
 // shows the alert as an error.
 - (void)didError:(NSError*)error;
@@ -34,9 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)logInViewControllerDidFinish:(MHULogInViewController *)viewController;
-
 - (void)logInViewController:(MHULogInViewController *)viewController didError:(NSError *)error;
-
 - (void)logInViewControllerDidTapLogInButton:(MHULogInViewController *)viewController;
 
 @end

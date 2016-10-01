@@ -9,21 +9,37 @@
 #import "MHULogInViewController.h"
 #import "UIViewController+MHU.h"
 #import "UIAlertController+MHU.h"
+#import "MHUEditableTableCell.h"
 
 @implementation MHULogInViewController
- 
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    //self.usernameCell.textField
+    self.passwordCell.textField.secureTextEntry = YES;
+    self.passwordCell.alwaysEditable = YES;
+    
+    self.usernameCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.usernameCell.alwaysEditable = YES;
+}
+
 -(IBAction)logInButtonTapped:(id)sender{
+    [self didTapLogInButton];
+}
+
+-(void)didTapLogInButton{
     self.mhu_loading = YES;
     
     if([self.delegate respondsToSelector:@selector(logInViewControllerDidTapLogInButton:)]){
         [self.delegate logInViewControllerDidTapLogInButton:self];
     }
 }
-    
+
 -(void)didError:(NSError*)error{
     self.mhu_loading = NO;
     
-    UIAlertController *alert = [UIAlertController mhu_alertControllerWithTitle:@"Auth Error" message:error.localizedDescription];
+    UIAlertController *alert = [UIAlertController mhu_alertControllerWithTitle:error.localizedDescription message:error.localizedFailureReason];
     [self presentViewController:alert animated:YES completion:nil];
     
     if([self.delegate respondsToSelector:@selector(logInViewController:didError:)]){
@@ -34,7 +50,7 @@
 // Match Calendar adding events and bring the keyboard up after the view appears.
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [_usernameTextField becomeFirstResponder];
+    [self.usernameCell.textField becomeFirstResponder];
 }
 
 -(void)didFinish{

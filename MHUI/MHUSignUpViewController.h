@@ -6,11 +6,14 @@
 //  Copyright © 2016 Malcolm Hall. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <MHUI/MHUDefines.h>
 #import <MHUI/MHULogInViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class MHUSignUpViewController;
+@class MHUEditableTableCell;
 
 @protocol MHUSignUpViewControllerDelegate <NSObject, MHULogInViewControllerDelegate>
 
@@ -24,10 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id <MHUSignUpViewControllerDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet MHUEditableTableCell *emailCell;
+
 //@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField; // todo
 
 - (IBAction)signUpButtonTapped:(id)sender;
+
+- (void)didTapSignUpButton;
 
 @end
 

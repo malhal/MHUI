@@ -1,17 +1,14 @@
 //
-//  MHUAuthViewController.m
+//  MHUAccountViewController.m
 //  MHUI
 //
 //  Created by Malcolm Hall on 11/04/2015.
 //  Copyright (c) 2015 Malcolm Hall. All rights reserved.
 //
 
-#import "MHUAuthViewController.h"
+#import "MHUAccountViewController.h"
 
-NSString * const MHUAuthLogInSegueIdentifier = @"LogIn";
-NSString * const MHUAuthSignUpSegueIdentifier = @"SignUp";
-
-@implementation MHUAuthViewController
+@implementation MHUAccountViewController
 
 /*
 +(UINavigationController *)presentFromViewController:(UIViewController*)viewController{
@@ -24,14 +21,13 @@ NSString * const MHUAuthSignUpSegueIdentifier = @"SignUp";
 */
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    // pass through the delegate.
-    if([segue.identifier isEqualToString:MHUAuthLogInSegueIdentifier]){
-        MHULogInViewController *logIn = (MHULogInViewController *)segue.destinationViewController;
-        logIn.delegate = self;
-    }
-    else if([segue.identifier isEqualToString:MHUAuthSignUpSegueIdentifier]){
+    if([segue.destinationViewController isKindOfClass:[MHUSignUpViewController class]]){
         MHUSignUpViewController *signUp = (MHUSignUpViewController *)segue.destinationViewController;
         signUp.delegate = self;
+    }
+    else if([segue.destinationViewController isKindOfClass:[MHULogInViewController class]]){
+        MHULogInViewController *logIn = (MHULogInViewController *)segue.destinationViewController;
+        logIn.delegate = self;
     }
 }
 
@@ -73,27 +69,57 @@ NSString * const MHUAuthSignUpSegueIdentifier = @"SignUp";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-// only used from initial view
 - (IBAction)cancelButtonTapped:(id)sender{
-    if([self.delegate respondsToSelector:@selector(authViewControllerDidCancel:)]){
-        [self.delegate authViewControllerDidCancel:self];
+    if([self.delegate respondsToSelector:@selector(accountViewControllerDidCancel:)]){
+        [self.delegate accountViewControllerDidCancel:self];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)logInViewControllerDidTapLogInButton:(MHULogInViewController *)viewController{
-    if([self.delegate respondsToSelector:@selector(authViewController:logInViewControllerDidTapLogInButton:)]){
-        [self.delegate authViewController:self logInViewControllerDidTapLogInButton:viewController];
+- (void)logInViewControllerDidTapLogInButton:(MHULogInViewController *)logInOrSignUp{
+    if([self.delegate respondsToSelector:@selector(accountViewController:logInViewControllerDidTapLogInButton:)]){
+        [self.delegate accountViewController:self logInViewControllerDidTapLogInButton:logInOrSignUp];
     }
 }
 
-- (void)logInViewController:(MHULogInViewController *)logInViewController didError:(NSError *)error{
-    if([self.delegate respondsToSelector:@selector(authViewController:logInViewController:didError:)]){
-        [self.delegate authViewController:self logInViewController:logInViewController didError:error];
+- (void)logInViewController:(MHULogInViewController *)logInOrSignUp didError:(NSError *)error{
+    if([self.delegate respondsToSelector:@selector(accountViewController:logInViewController:didError:)]){
+        [self.delegate accountViewController:self logInViewController:logInOrSignUp didError:error];
     }
 }
+
+- (void)logInViewControllerDidFinish:(MHULogInViewController *)logInOrSignUp{
+    if([self.delegate respondsToSelector:@selector(accountViewController:logInViewControllerDidFinish:)]){
+        [self.delegate accountViewController:self logInViewControllerDidFinish:logInOrSignUp];
+    }
+}
+
+-(void)signUpViewControllerDidTapSignUpButton:(MHUSignUpViewController *)signUp{
+    if([self.delegate respondsToSelector:@selector(accountViewController:signUpViewControllerDidTapSignUpButton:)]){
+        [self.delegate accountViewController:self signUpViewControllerDidTapSignUpButton:signUp];
+    }
+}
+
+
 
 #pragma mark - Table view data source
+
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+//{
+//    if(section != 0){
+//        return;
+//    }
+//    UITableViewHeaderFooterView* headerView = (UITableViewHeaderFooterView *)view;
+//    [self willDisplayHeaderView:headerView];
+//}
+//
+//- (void)willDisplayHeaderView:(UITableViewHeaderFooterView *)headerView{
+//    headerView.textLabel.text = @"Sign up for a free account in seconds.";
+//    headerView.textLabel.textAlignment = NSTextAlignmentCenter;
+//    if([self.delegate respondsToSelector:@selector(accountViewController:willDisplayHeaderView:)]){
+//        [self.delegate accountViewController:self willDisplayHeaderView:headerView];
+//    }
+//}
 /*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
