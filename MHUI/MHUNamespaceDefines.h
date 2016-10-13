@@ -2,7 +2,7 @@
 //  MHUNamespaceDefines.h
 //  MHUI
 //
-//  Generated using MHNamespaceGenerator on 30/09/2016
+//  Generated using MHNamespaceGenerator on 13/10/2016
 //
 
 #if !defined(__MHUI_NS_SYMBOL) && defined(MHUI_NAMESPACE)
@@ -12,6 +12,7 @@
 // Classes
     #define MHUAccountViewController __MHUI_NS_SYMBOL(MHUAccountViewController)
     #define MHUDictionaryViewController __MHUI_NS_SYMBOL(MHUDictionaryViewController)
+    #define MHUEditableTableCell __MHUI_NS_SYMBOL(MHUEditableTableCell)
     #define MHUFlipController __MHUI_NS_SYMBOL(MHUFlipController)
     #define MHULogInViewController __MHUI_NS_SYMBOL(MHULogInViewController)
     #define MHUSignUpViewController __MHUI_NS_SYMBOL(MHUSignUpViewController)
@@ -28,8 +29,4 @@
     #define mhu_transitionSlide __MHUI_NS_SYMBOL(mhu_transitionSlide)
     #define mhu_viewDidDisappear __MHUI_NS_SYMBOL(mhu_viewDidDisappear)
 // Externs
-    #define MHUAccountLogInSegueIdentifier __MHUI_NS_SYMBOL(MHUAccountLogInSegueIdentifier)
-    #define MHUAccountSignUpSegueIdentifier __MHUI_NS_SYMBOL(MHUAccountSignUpSegueIdentifier)
-    #define MHUIVersionNumber __MHUI_NS_SYMBOL(MHUIVersionNumber)
-    #define MHUIVersionString __MHUI_NS_SYMBOL(MHUIVersionString)
 #endif

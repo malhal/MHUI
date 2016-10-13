@@ -22,7 +22,7 @@
     
     
     //test
-    [self.navigationItem mhu_beginTitleRefreshing];
+    //[self.navigationItem mhu_beginTitleRefreshing];
     
     
     // Do any additional setup after loading the view, typically from a nib.

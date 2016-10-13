@@ -6,19 +6,16 @@
 //  Copyright © 2016 Malcolm Hall. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for MHUI.
-FOUNDATION_EXPORT double MHUIVersionNumber;
+#import <MHUI/MHUDefines.h>
 
-//! Project version string for MHUI.
-FOUNDATION_EXPORT const unsigned char MHUIVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <MHUI/PublicHeader.h>
 #import <MHUI/MHUDictionaryViewController.h>
 #import <MHUI/MHUFlipController.h>
 #import <MHUI/MHUEditableTableCell.h>
 #import <MHUI/MHUAccountViewController.h>
+#import <MHUI/MHULogInViewController.h>
+#import <MHUI/MHUSignUpViewController.h>
 
 #import <MHUI/UIAlertController+MHU.h>
 #import <MHUI/UINavigationBar+MHU.h>
