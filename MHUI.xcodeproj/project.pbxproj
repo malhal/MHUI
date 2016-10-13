@@ -27,6 +27,8 @@
 		EC6758931DB024AC00838798 /* MHUAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6758911DB024AC00838798 /* MHUAccountViewController.m */; };
 		EC6758961DB0251E00838798 /* MHUEditableTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EC6758941DB0251E00838798 /* MHUEditableTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC6758971DB0251E00838798 /* MHUEditableTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6758951DB0251E00838798 /* MHUEditableTableCell.m */; };
+		EC6758A71DB02C1F00838798 /* UIAlertView+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC6758A51DB02C1F00838798 /* UIAlertView+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC6758A81DB02C1F00838798 /* UIAlertView+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6758A61DB02C1F00838798 /* UIAlertView+MHU.m */; };
 		EC76D6D81D9E431B002DC0A0 /* MHUDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6D71D9E42A5002DC0A0 /* MHUDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC76D6E21D9E4442002DC0A0 /* MHULogInViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6DC1D9E4442002DC0A0 /* MHULogInViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC76D6E31D9E4442002DC0A0 /* MHULogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6DD1D9E4442002DC0A0 /* MHULogInViewController.m */; };
@@ -73,6 +75,8 @@
 		EC6758911DB024AC00838798 /* MHUAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUAccountViewController.m; sourceTree = "<group>"; };
 		EC6758941DB0251E00838798 /* MHUEditableTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUEditableTableCell.h; sourceTree = "<group>"; };
 		EC6758951DB0251E00838798 /* MHUEditableTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUEditableTableCell.m; sourceTree = "<group>"; };
+		EC6758A51DB02C1F00838798 /* UIAlertView+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MHU.h"; sourceTree = "<group>"; };
+		EC6758A61DB02C1F00838798 /* UIAlertView+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MHU.m"; sourceTree = "<group>"; };
 		EC76D6D71D9E42A5002DC0A0 /* MHUDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHUDefines.h; sourceTree = "<group>"; };
 		EC76D6DC1D9E4442002DC0A0 /* MHULogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHULogInViewController.h; sourceTree = "<group>"; };
 		EC76D6DD1D9E4442002DC0A0 /* MHULogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHULogInViewController.m; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 				ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */,
 				EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */,
 				EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */,
+				EC6758A51DB02C1F00838798 /* UIAlertView+MHU.h */,
+				EC6758A61DB02C1F00838798 /* UIAlertView+MHU.m */,
 				EC67588E1DB024A200838798 /* MHUAccount.storyboard */,
 				EC31452B1D0740C70025F669 /* Info.plist */,
 			);
@@ -187,6 +193,7 @@
 				EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */,
 				ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */,
 				EC76D6E21D9E4442002DC0A0 /* MHULogInViewController.h in Headers */,
+				EC6758A71DB02C1F00838798 /* UIAlertView+MHU.h in Headers */,
 				EC76D6E41D9E4442002DC0A0 /* MHUSignUpViewController.h in Headers */,
 				EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */,
 			);
@@ -311,6 +318,7 @@
 				EC3145531D0740EA0025F669 /* UINavigationBar+MHU.m in Sources */,
 				EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */,
 				EC3145511D0740EA0025F669 /* UIAlertController+MHU.m in Sources */,
+				EC6758A81DB02C1F00838798 /* UIAlertView+MHU.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */,
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MHU.m in Sources */,
 				ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */,

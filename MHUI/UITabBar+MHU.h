@@ -10,8 +10,12 @@
 #import <UIKit/UIKit.h>
 #import <MHUI/MHUDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UITabBar (MHU)
 
-@property (nonatomic, readonly) UIProgressView* mhu_progressView;
+@property (nonatomic, strong, readonly) UIProgressView *mhu_progressView;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -26,6 +26,9 @@
     #define mhu_setHidden __MHUI_NS_SYMBOL(mhu_setHidden)
     #define mhu_setLoading __MHUI_NS_SYMBOL(mhu_setLoading)
     #define mhu_show __MHUI_NS_SYMBOL(mhu_show)
+    #define mhu_showAlertWithError __MHUI_NS_SYMBOL(mhu_showAlertWithError)
+    #define mhu_showAlertWithMessage __MHUI_NS_SYMBOL(mhu_showAlertWithMessage)
+    #define mhu_showAlertWithTitle __MHUI_NS_SYMBOL(mhu_showAlertWithTitle)
     #define mhu_transitionSlide __MHUI_NS_SYMBOL(mhu_transitionSlide)
     #define mhu_viewDidDisappear __MHUI_NS_SYMBOL(mhu_viewDidDisappear)
 // Externs

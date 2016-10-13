@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MHUI/MHUDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UINavigationBar (MHU)
 
 @property (nonatomic, readonly) UIProgressView* mhu_progressView;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MHUI/MHUDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIAlertController (MHU)
 
 + (UIAlertController *)mhu_alertControllerWithTitle:(NSString *)title message:(NSString *)message;
@@ -17,3 +19,5 @@
 -(void)mhu_show;
 
 @end
+
+NS_ASSUME_NONNULL_END
