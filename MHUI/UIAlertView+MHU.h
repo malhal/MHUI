@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIAlertView (MHU)
 
-+ (void)mhu_showAlertWithTitle:(NSString *)title message:(NSString *)message delegate:(nullable id<UIAlertViewDelegate>)delegate;
-+ (void)mhu_showAlertWithTitle:(NSString *)title message:(NSString *)message;
-+ (void)mhu_showAlertWithMessage:(NSString *)message delegate:(nullable id<UIAlertViewDelegate>)delegate;
-+ (void)mhu_showAlertWithMessage:(NSString *)message;
++ (void)mhu_showAlertWithTitle:(nullable NSString *)title message:(nullable NSString *)message delegate:(nullable id<UIAlertViewDelegate>)delegate;
++ (void)mhu_showAlertWithTitle:(nullable NSString *)title message:(nullable NSString *)message;
++ (void)mhu_showAlertWithMessage:(nullable NSString *)message delegate:(nullable id<UIAlertViewDelegate>)delegate;
++ (void)mhu_showAlertWithMessage:(nullable NSString *)message;
 + (void)mhu_showAlertWithError:(NSError *)error;
 
 @end
