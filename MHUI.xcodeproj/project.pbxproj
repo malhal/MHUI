@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		EC6759951DB15E4000838798 /* Namespace */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = EC6759981DB15E4000838798 /* Build configuration list for PBXAggregateTarget "Namespace" */;
+			buildPhases = (
+				EC6759991DB15E4F00838798 /* ShellScript */,
+			);
+			dependencies = (
+				EC67599B1DB15E6600838798 /* PBXTargetDependency */,
+			);
+			name = Namespace;
+			productName = Namespace;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		EC31452A1D0740C70025F669 /* MHUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145291D0740C70025F669 /* MHUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145311D0740C80025F669 /* MHUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3145261D0740C70025F669 /* MHUI.framework */; };
@@ -43,6 +58,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		EC3145321D0740C80025F669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC31451D1D0740C70025F669 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC3145251D0740C70025F669;
+			remoteInfo = MHUI;
+		};
+		EC67599A1DB15E6600838798 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC31451D1D0740C70025F669 /* Project object */;
 			proxyType = 1;
@@ -208,7 +230,6 @@
 			buildPhases = (
 				EC3145211D0740C70025F669 /* Sources */,
 				EC3145221D0740C70025F669 /* Frameworks */,
-				EC76D6D91D9E43F0002DC0A0 /* ShellScript */,
 				EC3145231D0740C70025F669 /* Headers */,
 				EC3145241D0740C70025F669 /* Resources */,
 			);
@@ -254,6 +275,9 @@
 					EC31452F1D0740C80025F669 = {
 						CreatedOnToolsVersion = 7.3;
 					};
+					EC6759951DB15E4000838798 = {
+						CreatedOnToolsVersion = 7.3;
+					};
 				};
 			};
 			buildConfigurationList = EC3145201D0740C70025F669 /* Build configuration list for PBXProject "MHUI" */;
@@ -270,6 +294,7 @@
 			targets = (
 				EC3145251D0740C70025F669 /* MHUI */,
 				EC31452F1D0740C80025F669 /* MHUITests */,
+				EC6759951DB15E4000838798 /* Namespace */,
 			);
 		};
 /* End PBXProject section */
@@ -293,7 +318,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		EC76D6D91D9E43F0002DC0A0 /* ShellScript */ = {
+		EC6759991DB15E4F00838798 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,7 +329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "dependencies/MHNamespaceGenerator/script.sh MHUI MHU";
+			shellScript = "dependencies/MHNamespaceGenerator/script.sh MHUI.framework MHUI MHU";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -344,6 +369,11 @@
 			isa = PBXTargetDependency;
 			target = EC3145251D0740C70025F669 /* MHUI */;
 			targetProxy = EC3145321D0740C80025F669 /* PBXContainerItemProxy */;
+		};
+		EC67599B1DB15E6600838798 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC3145251D0740C70025F669 /* MHUI */;
+			targetProxy = EC67599A1DB15E6600838798 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -484,6 +514,20 @@
 			};
 			name = Release;
 		};
+		EC6759961DB15E4000838798 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EC6759971DB15E4000838798 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,6 +557,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		EC6759981DB15E4000838798 /* Build configuration list for PBXAggregateTarget "Namespace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6759961DB15E4000838798 /* Debug */,
+				EC6759971DB15E4000838798 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

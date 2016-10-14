@@ -2,7 +2,7 @@
 //  MHUNamespaceDefines.h
 //  MHUI
 //
-//  Generated using MHNamespaceGenerator on 13/10/2016
+//  Generated using MHNamespaceGenerator on 14/10/2016
 //
 
 #if !defined(__MHUI_NS_SYMBOL) && defined(MHUI_NAMESPACE)
