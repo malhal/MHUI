@@ -6,8 +6,6 @@
 //  Copyright © 2016 Malcolm Hall. All rights reserved.
 //
 
-#import <MHUI/MHUNamespaceDefines.h>
-
 #ifndef MHUI_EXTERN
     #ifdef __cplusplus
         #define MHUI_EXTERN   extern "C" __attribute__((visibility ("default")))
@@ -15,3 +13,5 @@
         #define MHUI_EXTERN   extern __attribute__((visibility ("default")))
     #endif
 #endif
+
+#import <MHUI/MHUDefines+Namespace.h>

@@ -51,9 +51,9 @@
 		EC76D6E51D9E4442002DC0A0 /* MHUSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6DF1D9E4442002DC0A0 /* MHUSignUpViewController.m */; };
 		EC76D6E81D9E4470002DC0A0 /* UIViewController+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC76D6E91D9E4470002DC0A0 /* UIViewController+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */; };
-		EC76D6EB1D9E44CF002DC0A0 /* MHUNamespaceDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */; };
+		ECD142CB1DB921F2000B38AC /* MHUDefines+Namespace.h in Headers */ = {isa = PBXBuildFile; fileRef = ECD142CA1DB921F2000B38AC /* MHUDefines+Namespace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,9 +106,9 @@
 		EC76D6DF1D9E4442002DC0A0 /* MHUSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUSignUpViewController.m; sourceTree = "<group>"; };
 		EC76D6E61D9E4470002DC0A0 /* UIViewController+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MHU.h"; sourceTree = "<group>"; };
 		EC76D6E71D9E4470002DC0A0 /* UIViewController+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MHU.m"; sourceTree = "<group>"; };
-		EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUNamespaceDefines.h; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MHU.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MHU.m"; sourceTree = "<group>"; };
+		ECD142CA1DB921F2000B38AC /* MHUDefines+Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MHUDefines+Namespace.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +153,7 @@
 			children = (
 				EC3145291D0740C70025F669 /* MHUI.h */,
 				EC76D6D71D9E42A5002DC0A0 /* MHUDefines.h */,
-				EC76D6EA1D9E44CF002DC0A0 /* MHUNamespaceDefines.h */,
+				ECD142CA1DB921F2000B38AC /* MHUDefines+Namespace.h */,
 				EC6758941DB0251E00838798 /* MHUEditableTableCell.h */,
 				EC6758951DB0251E00838798 /* MHUEditableTableCell.m */,
 				EC6758901DB024AC00838798 /* MHUAccountViewController.h */,
@@ -205,12 +205,12 @@
 				EC3145521D0740EA0025F669 /* UINavigationBar+MHU.h in Headers */,
 				EC76D6D81D9E431B002DC0A0 /* MHUDefines.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MHU.h in Headers */,
+				ECD142CB1DB921F2000B38AC /* MHUDefines+Namespace.h in Headers */,
 				EC31454C1D0740EA0025F669 /* MHUDictionaryViewController.h in Headers */,
 				EC31452A1D0740C70025F669 /* MHUI.h in Headers */,
 				EC76D6E81D9E4470002DC0A0 /* UIViewController+MHU.h in Headers */,
 				EC6758961DB0251E00838798 /* MHUEditableTableCell.h in Headers */,
 				EC6758921DB024AC00838798 /* MHUAccountViewController.h in Headers */,
-				EC76D6EB1D9E44CF002DC0A0 /* MHUNamespaceDefines.h in Headers */,
 				EC31454E1D0740EA0025F669 /* MHUFlipController.h in Headers */,
 				EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */,
 				ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */,
@@ -565,6 +565,7 @@
 				EC6759971DB15E4000838798 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
