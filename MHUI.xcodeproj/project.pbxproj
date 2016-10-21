@@ -37,6 +37,8 @@
 		EC3145551D0740EA0025F669 /* UITabBar+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145491D0740EA0025F669 /* UITabBar+MHU.m */; };
 		EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31454A1D0740EA0025F669 /* UIView+MHU.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145571D0740EA0025F669 /* UIView+MHU.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31454B1D0740EA0025F669 /* UIView+MHU.m */; };
+		EC3E0E091DBA46C800D49472 /* MHUMultilineTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3E0E071DBA46C800D49472 /* MHUMultilineTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC3E0E0A1DBA46C800D49472 /* MHUMultilineTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3E0E081DBA46C800D49472 /* MHUMultilineTableCell.m */; };
 		EC67588F1DB024A200838798 /* MHUAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC67588E1DB024A200838798 /* MHUAccount.storyboard */; };
 		EC6758921DB024AC00838798 /* MHUAccountViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC6758901DB024AC00838798 /* MHUAccountViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC6758931DB024AC00838798 /* MHUAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC6758911DB024AC00838798 /* MHUAccountViewController.m */; };
@@ -92,6 +94,8 @@
 		EC3145491D0740EA0025F669 /* UITabBar+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+MHU.m"; sourceTree = "<group>"; };
 		EC31454A1D0740EA0025F669 /* UIView+MHU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MHU.h"; sourceTree = "<group>"; };
 		EC31454B1D0740EA0025F669 /* UIView+MHU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MHU.m"; sourceTree = "<group>"; };
+		EC3E0E071DBA46C800D49472 /* MHUMultilineTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUMultilineTableCell.h; sourceTree = "<group>"; };
+		EC3E0E081DBA46C800D49472 /* MHUMultilineTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUMultilineTableCell.m; sourceTree = "<group>"; };
 		EC67588E1DB024A200838798 /* MHUAccount.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MHUAccount.storyboard; sourceTree = "<group>"; };
 		EC6758901DB024AC00838798 /* MHUAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUAccountViewController.h; sourceTree = "<group>"; };
 		EC6758911DB024AC00838798 /* MHUAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUAccountViewController.m; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				ECD142CA1DB921F2000B38AC /* MHUDefines+Namespace.h */,
 				EC6758941DB0251E00838798 /* MHUEditableTableCell.h */,
 				EC6758951DB0251E00838798 /* MHUEditableTableCell.m */,
+				EC3E0E071DBA46C800D49472 /* MHUMultilineTableCell.h */,
+				EC3E0E081DBA46C800D49472 /* MHUMultilineTableCell.m */,
 				EC6758901DB024AC00838798 /* MHUAccountViewController.h */,
 				EC6758911DB024AC00838798 /* MHUAccountViewController.m */,
 				EC76D6DC1D9E4442002DC0A0 /* MHULogInViewController.h */,
@@ -215,6 +221,7 @@
 				EC3145541D0740EA0025F669 /* UITabBar+MHU.h in Headers */,
 				ECAE233F1D90878500806031 /* UINavigationItem+MHU.h in Headers */,
 				EC76D6E21D9E4442002DC0A0 /* MHULogInViewController.h in Headers */,
+				EC3E0E091DBA46C800D49472 /* MHUMultilineTableCell.h in Headers */,
 				EC6758A71DB02C1F00838798 /* UIAlertView+MHU.h in Headers */,
 				EC76D6E41D9E4442002DC0A0 /* MHUSignUpViewController.h in Headers */,
 				EC3145561D0740EA0025F669 /* UIView+MHU.h in Headers */,
@@ -348,6 +355,7 @@
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MHU.m in Sources */,
 				ECAE23401D90878500806031 /* UINavigationItem+MHU.m in Sources */,
 				EC76D6E51D9E4442002DC0A0 /* MHUSignUpViewController.m in Sources */,
+				EC3E0E0A1DBA46C800D49472 /* MHUMultilineTableCell.m in Sources */,
 				EC31454D1D0740EA0025F669 /* MHUDictionaryViewController.m in Sources */,
 				EC76D6E31D9E4442002DC0A0 /* MHULogInViewController.m in Sources */,
 				EC31454F1D0740EA0025F669 /* MHUFlipController.m in Sources */,

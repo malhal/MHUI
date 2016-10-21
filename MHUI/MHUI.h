@@ -13,6 +13,7 @@
 #import <MHUI/MHUDictionaryViewController.h>
 #import <MHUI/MHUFlipController.h>
 #import <MHUI/MHUEditableTableCell.h>
+#import <MHUI/MHUMultilineTableCell.h>
 #import <MHUI/MHUAccountViewController.h>
 #import <MHUI/MHULogInViewController.h>
 #import <MHUI/MHUSignUpViewController.h>
