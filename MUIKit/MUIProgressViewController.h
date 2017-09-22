@@ -11,14 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ICCircularProgressView;
+@class MUICircularProgressView;
 
 @protocol MUIProgressViewControllerDelegate;
 
 @interface MUIProgressViewController : UIViewController
 
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (strong, nonatomic) ICCircularProgressView *circularProgressView;
+@property (strong, nonatomic) MUICircularProgressView *circularProgressView;
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) NSProgress *observedProgress;
 @property (weak, nonatomic) id<MUIProgressViewControllerDelegate> progressDelegate;

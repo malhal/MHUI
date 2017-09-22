@@ -18,6 +18,8 @@
 #import <MUIKit/MUILogInViewController.h>
 #import <MUIKit/MUISignUpViewController.h>
 #import <MUIKit/MUIAlertController.h>
+#import <MUIKit/MUILongRunningTaskController.h>
+#import <MUIKit/MUIProgressViewController.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
