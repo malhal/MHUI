@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5D1C8C1F75C451008BC02E /* MUILongRunningTaskController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC31452A1D0740C70025F669 /* MUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145291D0740C70025F669 /* MUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145311D0740C80025F669 /* MUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3145261D0740C70025F669 /* MUIKit.framework */; };
 		EC3145361D0740C80025F669 /* MUIKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145351D0740C80025F669 /* MUIKitTests.m */; };
@@ -232,6 +233,7 @@
 				EC31454C1D0740EA0025F669 /* MUIDictionaryViewController.h in Headers */,
 				EC31452A1D0740C70025F669 /* MUIKit.h in Headers */,
 				EC76D6E81D9E4470002DC0A0 /* UIViewController+MUI.h in Headers */,
+				EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */,
 				EC6758961DB0251E00838798 /* MUIEditableTableCell.h in Headers */,
 				EC6758921DB024AC00838798 /* MUIAccountViewController.h in Headers */,
 				EC5D1C8A1F75C2F3008BC02E /* MUIAlertController.h in Headers */,

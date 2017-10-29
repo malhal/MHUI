@@ -5,6 +5,6 @@
       location = "group:MUIDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/mh/Development/Open Source/MHUI/MUIKit.xcodeproj">
+      location = "group:MUIKit.xcodeproj">
    </FileRef>
 </Workspace>
