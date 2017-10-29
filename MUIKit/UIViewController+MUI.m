@@ -35,4 +35,8 @@
     return [objc_getAssociatedObject(self, @selector(mui_loading)) boolValue];
 }
 
+- (BOOL)mui_isViewVisible{
+    return self.isViewLoaded && self.view.window;
+}
+
 @end

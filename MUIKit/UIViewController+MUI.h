@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, setter=mui_setLoading:) BOOL mui_loading;
 
+@property (nonatomic, assign, readonly) BOOL mui_isViewVisible;
+
 @end
 
 NS_ASSUME_NONNULL_END
