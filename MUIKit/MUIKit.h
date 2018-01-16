@@ -28,3 +28,4 @@
 #import <MUIKit/UINavigationItem+MUI.h>
 #import <MUIKit/UIViewController+MUI.h>
 #import <MUIKit/UIAlertView+MUI.h>
+#import <MUIKit/UITextField+MUI.h>
