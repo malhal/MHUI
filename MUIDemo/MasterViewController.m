@@ -9,8 +9,9 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import <MUIKit/MUIKit.h>
+#import "DemoCell.h"
 
-@interface MasterViewController ()
+@interface MasterViewController ()<MUITableViewDelegate>
 
 @property NSMutableArray *objects;
 @end
@@ -20,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.tableView.delegate = self;
     //test
     //[self.navigationItem mhu_beginTitleRefreshing];
     
@@ -75,10 +76,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"DemoCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(!cell){
+        cell = [DemoCell.alloc initWithStyle:MUITableViewCellStyleEditable1 reuseIdentifier:cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.textLabel.text = @"Date";
     NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    cell.mui_editableTextField.text = [object description];
     return cell;
 }
 
@@ -94,6 +101,10 @@
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
+}
+
+- (void)tableView:(UITableView *)arg1 didUpdateTextFieldForRowAtIndexPath:(NSIndexPath *)indexPath withValue:(NSString *)value{
+    NSLog(@"%@", value);
 }
 
 @end

@@ -29,3 +29,5 @@
 #import <MUIKit/UIViewController+MUI.h>
 #import <MUIKit/UIAlertView+MUI.h>
 #import <MUIKit/UITextField+MUI.h>
+#import <MUIKit/UITableViewCell+MUI.h>
+#import <MUIKit/UITableView+MUI.h>

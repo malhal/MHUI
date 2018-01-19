@@ -23,6 +23,10 @@
 
 /* Begin PBXBuildFile section */
 		EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5D1C8C1F75C451008BC02E /* MUILongRunningTaskController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E129A201299290036130D /* UITableViewCell+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC1E129D201299290036130D /* UITableViewCell+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E129B201299290036130D /* UITableViewCell+MUI.m */; };
+		EC1E12A82012A60C0036130D /* UITableView+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E12A62012A60C0036130D /* UITableView+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC1E12A92012A60C0036130D /* UITableView+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E12A72012A60C0036130D /* UITableView+MUI.m */; };
 		EC2F7E35200D8455001B9D3B /* UITextField+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC2F7E33200D8455001B9D3B /* UITextField+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC2F7E36200D8455001B9D3B /* UITextField+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2F7E34200D8455001B9D3B /* UITextField+MUI.m */; };
 		EC31452A1D0740C70025F669 /* MUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = EC3145291D0740C70025F669 /* MUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -84,6 +88,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC1E129A201299290036130D /* UITableViewCell+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+MUI.h"; sourceTree = "<group>"; };
+		EC1E129B201299290036130D /* UITableViewCell+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+MUI.m"; sourceTree = "<group>"; };
+		EC1E12A62012A60C0036130D /* UITableView+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+MUI.h"; sourceTree = "<group>"; };
+		EC1E12A72012A60C0036130D /* UITableView+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+MUI.m"; sourceTree = "<group>"; };
 		EC2F7E33200D8455001B9D3B /* UITextField+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+MUI.h"; sourceTree = "<group>"; };
 		EC2F7E34200D8455001B9D3B /* UITextField+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+MUI.m"; sourceTree = "<group>"; };
 		EC3145261D0740C70025F669 /* MUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +220,10 @@
 				EC5D1C8F1F75C4B0008BC02E /* MUIProgressViewController.m */,
 				EC2F7E33200D8455001B9D3B /* UITextField+MUI.h */,
 				EC2F7E34200D8455001B9D3B /* UITextField+MUI.m */,
+				EC1E129A201299290036130D /* UITableViewCell+MUI.h */,
+				EC1E129B201299290036130D /* UITableViewCell+MUI.m */,
+				EC1E12A62012A60C0036130D /* UITableView+MUI.h */,
+				EC1E12A72012A60C0036130D /* UITableView+MUI.m */,
 			);
 			path = MUIKit;
 			sourceTree = "<group>";
@@ -234,11 +246,13 @@
 			files = (
 				EC3145521D0740EA0025F669 /* UINavigationBar+MUI.h in Headers */,
 				EC76D6D81D9E431B002DC0A0 /* MUIDefines.h in Headers */,
+				EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MUI.h in Headers */,
 				ECD142CB1DB921F2000B38AC /* MUIDefines+Namespace.h in Headers */,
 				EC31454C1D0740EA0025F669 /* MUIDictionaryViewController.h in Headers */,
 				EC2F7E35200D8455001B9D3B /* UITextField+MUI.h in Headers */,
 				EC31452A1D0740C70025F669 /* MUIKit.h in Headers */,
+				EC1E12A82012A60C0036130D /* UITableView+MUI.h in Headers */,
 				EC76D6E81D9E4470002DC0A0 /* UIViewController+MUI.h in Headers */,
 				EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */,
 				EC6758961DB0251E00838798 /* MUIEditableTableCell.h in Headers */,
@@ -384,7 +398,9 @@
 				EC5D1C911F75C4B0008BC02E /* MUIProgressViewController.m in Sources */,
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */,
 				ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */,
+				EC1E12A92012A60C0036130D /* UITableView+MUI.m in Sources */,
 				EC76D6E51D9E4442002DC0A0 /* MUISignUpViewController.m in Sources */,
+				EC1E129D201299290036130D /* UITableViewCell+MUI.m in Sources */,
 				EC3E0E0A1DBA46C800D49472 /* MUIMultilineTableCell.m in Sources */,
 				EC5D1C8D1F75C451008BC02E /* MUILongRunningTaskController.m in Sources */,
 				EC31454D1D0740EA0025F669 /* MUIDictionaryViewController.m in Sources */,

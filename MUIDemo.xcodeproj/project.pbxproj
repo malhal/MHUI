@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC1E12A520129D4B0036130D /* DemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E12A420129D4B0036130D /* DemoCell.m */; };
 		EC5D1C831F75B7DD008BC02E /* MUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5D1C781F75B6F6008BC02E /* MUIKit.framework */; };
 		EC5D1C841F75B7DD008BC02E /* MUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC5D1C781F75B6F6008BC02E /* MUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ECAE23521D908A5F00806031 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE23511D908A5F00806031 /* main.m */; };
@@ -64,6 +65,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EC1E12A320129D4B0036130D /* DemoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoCell.h; sourceTree = "<group>"; };
+		EC1E12A420129D4B0036130D /* DemoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoCell.m; sourceTree = "<group>"; };
 		EC5D1C711F75B6F6008BC02E /* MUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MUIKit.xcodeproj; sourceTree = "<group>"; };
 		ECAE234D1D908A5F00806031 /* MUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECAE23511D908A5F00806031 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				ECAE23611D908A5F00806031 /* LaunchScreen.storyboard */,
 				ECAE23641D908A5F00806031 /* Info.plist */,
 				ECAE23501D908A5F00806031 /* Supporting Files */,
+				EC1E12A320129D4B0036130D /* DemoCell.h */,
+				EC1E12A420129D4B0036130D /* DemoCell.m */,
 			);
 			path = MUIDemo;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECAE23551D908A5F00806031 /* AppDelegate.m in Sources */,
+				EC1E12A520129D4B0036130D /* DemoCell.m in Sources */,
 				ECAE23581D908A5F00806031 /* MasterViewController.m in Sources */,
 				ECAE23521D908A5F00806031 /* main.m in Sources */,
 				ECAE235B1D908A5F00806031 /* DetailViewController.m in Sources */,
