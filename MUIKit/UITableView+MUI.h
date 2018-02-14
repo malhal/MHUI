@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MUITableViewDelegate <UITableViewDelegate>
 
 @optional
-- (void)tableView:(UITableView *)arg1 didUpdateTextFieldForRowAtIndexPath:(NSIndexPath *)indexPath withValue:(NSString *)value;
+- (void)tableView:(UITableView *)tableView didUpdateTextFieldForRowAtIndexPath:(NSIndexPath *)indexPath withValue:(NSString *)value;
+- (void)tableViewDidFinishReload:(UITableView *)tableView;
 
 @end
 

@@ -31,3 +31,4 @@
 #import <MUIKit/UITextField+MUI.h>
 #import <MUIKit/UITableViewCell+MUI.h>
 #import <MUIKit/UITableView+MUI.h>
+#import <MUIKit/UIImage+MUI.h>
