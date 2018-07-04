@@ -6,11 +6,11 @@
 //  Copyright © 2016 Malcolm Hall. All rights reserved.
 //
 
-#ifndef MUIKit_EXTERN
+#ifndef MUIKIT_EXTERN
     #ifdef __cplusplus
-        #define MUIKit_EXTERN   extern "C" __attribute__((visibility ("default")))
+        #define MUIKIT_EXTERN   extern "C" __attribute__((visibility ("default")))
     #else
-        #define MUIKit_EXTERN   extern __attribute__((visibility ("default")))
+        #define MUIKIT_EXTERN   extern __attribute__((visibility ("default")))
     #endif
 #endif
 

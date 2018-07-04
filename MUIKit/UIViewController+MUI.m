@@ -62,4 +62,8 @@
     }
 }
 
++ (__kindof UIViewController *)mui_viewControllerForView:(UIView *)view{
+    return [view valueForKey:@"_viewDelegate"];
+}
+
 @end

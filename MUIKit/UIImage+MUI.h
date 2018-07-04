@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MUIKit/MUIDefines.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (MUI)
 
 + (UIImage *)mui_imageNamed:(NSString *)name inBundle:(NSBundle *)bundle;
 
 @end
+
+NS_ASSUME_NONNULL_END
