@@ -39,4 +39,27 @@
     return self.isViewLoaded && self.view.window;
 }
 
+- (void)mui_reloadView{
+    UIView *view = self.viewIfLoaded;
+    BOOL callAppearanceMethods = self.parentViewController && !self.parentViewController.shouldAutomaticallyForwardAppearanceMethods;
+    UIView *superview = view.superview;
+    if(callAppearanceMethods){
+        [self beginAppearanceTransition:NO animated:NO];
+    }
+    [view removeFromSuperview];
+    if(callAppearanceMethods){
+        [self endAppearanceTransition];
+    }
+    self.view = nil;
+    view = self.view;
+    // workaround for nav controller and tab controller not forwarding viewWillAppear
+    if(callAppearanceMethods){
+        [self beginAppearanceTransition:YES animated:NO];
+    }
+    [superview addSubview:view];
+    if(callAppearanceMethods){
+        [self endAppearanceTransition];
+    }
+}
+
 @end

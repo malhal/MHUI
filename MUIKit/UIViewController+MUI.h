@@ -17,6 +17,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) BOOL mui_isViewVisible;
 
+// on iPad in a splitview the detail view loads with no detail item. This allows you to
+// override default view and when no detail item show a place holder view.
+// Then when the detail item is available call this and in load view call super, e.g.
+/*
+- (void)loadView{
+    if(!self.fetchedResultsController){
+        self.view = [UIView.alloc init];
+        return;
+    }
+    [super loadView];
+}
+*/
+// Not actually using this because decided to set a default UIViewController on the nav controller at start up instead.
+- (void)mui_reloadView;
+
 @end
 
 NS_ASSUME_NONNULL_END
