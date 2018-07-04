@@ -33,7 +33,6 @@ const UITableViewCellStyle MUITableViewCellStyleEditable1 = 1000;
 //    return nil;
 }
 
-
 - (UITextField *)mui_editableTextField{
     return [self valueForKey:@"_editableTextField"];
 }

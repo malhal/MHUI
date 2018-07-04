@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) BOOL mui_isViewVisible;
 
++ (__kindof UIViewController *)mui_viewControllerForView:(UIView *)view;
+
 @end
 
 NS_ASSUME_NONNULL_END
