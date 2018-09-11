@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Not actually using this because decided to set a default UIViewController on the nav controller at start up instead.
 - (void)mui_reloadView;
 
+// reimplementation of private method.
+// only works for the controller's view.
 + (__kindof UIViewController *)mui_viewControllerForView:(UIView *)view;
 
 @end

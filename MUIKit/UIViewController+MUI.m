@@ -63,6 +63,7 @@
 }
 
 + (__kindof UIViewController *)mui_viewControllerForView:(UIView *)view{
+    // doesn't work on UITableViewCell
     return [view valueForKey:@"_viewDelegate"];
 }
 

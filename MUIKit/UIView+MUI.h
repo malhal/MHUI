@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger, MHViewAnimationTransitionSlide) {
 // The 
 - (void)mui_transitionSlide:(MHViewAnimationTransitionSlide)transitionSlide completion:(void (^ __nullable)(BOOL finished))completion;
 
+- (__kindof UIViewController *)mui_viewController;
+
 @end
 
 NS_ASSUME_NONNULL_END
