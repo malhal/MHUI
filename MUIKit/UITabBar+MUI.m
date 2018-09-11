@@ -15,7 +15,7 @@
     // find prev instance
     UIProgressView *progress = objc_getAssociatedObject(self, "mui_progressView");
     if(!progress){
-        progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        progress = [UIProgressView.alloc initWithProgressViewStyle:UIProgressViewStyleBar];
         [self addSubview:progress];
         // pin to bottom
         [progress.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
