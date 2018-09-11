@@ -6,21 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		EC6759951DB15E4000838798 /* Namespace */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = EC6759981DB15E4000838798 /* Build configuration list for PBXAggregateTarget "Namespace" */;
-			buildPhases = (
-				EC6759991DB15E4F00838798 /* ShellScript */,
-			);
-			dependencies = (
-				EC67599B1DB15E6600838798 /* PBXTargetDependency */,
-			);
-			name = Namespace;
-			productName = Namespace;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5D1C8C1F75C451008BC02E /* MUILongRunningTaskController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E129A201299290036130D /* UITableViewCell+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,18 +54,10 @@
 		EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */; };
-		ECD142CB1DB921F2000B38AC /* MUIDefines+Namespace.h in Headers */ = {isa = PBXBuildFile; fileRef = ECD142CA1DB921F2000B38AC /* MUIDefines+Namespace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		EC3145321D0740C80025F669 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EC31451D1D0740C70025F669 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EC3145251D0740C70025F669;
-			remoteInfo = MHUI;
-		};
-		EC67599A1DB15E6600838798 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC31451D1D0740C70025F669 /* Project object */;
 			proxyType = 1;
@@ -140,7 +117,6 @@
 		EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MUI.m"; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MUI.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MUI.m"; sourceTree = "<group>"; };
-		ECD142CA1DB921F2000B38AC /* MUIDefines+Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MUIDefines+Namespace.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +162,6 @@
 				EC31452B1D0740C70025F669 /* Info.plist */,
 				EC3145291D0740C70025F669 /* MUIKit.h */,
 				EC76D6D71D9E42A5002DC0A0 /* MUIDefines.h */,
-				ECD142CA1DB921F2000B38AC /* MUIDefines+Namespace.h */,
 				EC6758941DB0251E00838798 /* MUIEditableTableCell.h */,
 				EC6758951DB0251E00838798 /* MUIEditableTableCell.m */,
 				EC3E0E071DBA46C800D49472 /* MUIMultilineTableCell.h */,
@@ -254,7 +229,6 @@
 				EC76D6D81D9E431B002DC0A0 /* MUIDefines.h in Headers */,
 				EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MUI.h in Headers */,
-				ECD142CB1DB921F2000B38AC /* MUIDefines+Namespace.h in Headers */,
 				EC31454C1D0740EA0025F669 /* MUIDictionaryViewController.h in Headers */,
 				EC2F7E35200D8455001B9D3B /* UITextField+MUI.h in Headers */,
 				EC31452A1D0740C70025F669 /* MUIKit.h in Headers */,
@@ -322,16 +296,13 @@
 		EC31451D1D0740C70025F669 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Malcolm Hall";
 				TargetAttributes = {
 					EC3145251D0740C70025F669 = {
 						CreatedOnToolsVersion = 7.3;
 					};
 					EC31452F1D0740C80025F669 = {
-						CreatedOnToolsVersion = 7.3;
-					};
-					EC6759951DB15E4000838798 = {
 						CreatedOnToolsVersion = 7.3;
 					};
 				};
@@ -350,7 +321,6 @@
 			targets = (
 				EC3145251D0740C70025F669 /* MUIKit */,
 				EC31452F1D0740C80025F669 /* MUIKitTests */,
-				EC6759951DB15E4000838798 /* Namespace */,
 			);
 		};
 /* End PBXProject section */
@@ -372,22 +342,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		EC6759991DB15E4F00838798 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "dependencies/MHNamespaceGenerator/script.sh MUIKit.framework MUIKit MUI";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC3145211D0740C70025F669 /* Sources */ = {
@@ -434,11 +388,6 @@
 			target = EC3145251D0740C70025F669 /* MUIKit */;
 			targetProxy = EC3145321D0740C80025F669 /* PBXContainerItemProxy */;
 		};
-		EC67599B1DB15E6600838798 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EC3145251D0740C70025F669 /* MUIKit */;
-			targetProxy = EC67599A1DB15E6600838798 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -455,12 +404,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -487,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -508,12 +459,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -534,7 +487,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -596,20 +549,6 @@
 			};
 			name = Release;
 		};
-		EC6759961DB15E4000838798 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		EC6759971DB15E4000838798 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -636,15 +575,6 @@
 			buildConfigurations = (
 				EC31453E1D0740C80025F669 /* Debug */,
 				EC31453F1D0740C80025F669 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EC6759981DB15E4000838798 /* Build configuration list for PBXAggregateTarget "Namespace" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EC6759961DB15E4000838798 /* Debug */,
-				EC6759971DB15E4000838798 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

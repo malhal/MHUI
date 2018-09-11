@@ -13,5 +13,3 @@
         #define MUIKIT_EXTERN   extern __attribute__((visibility ("default")))
     #endif
 #endif
-
-#import <MUIKit/MUIDefines+Namespace.h>
