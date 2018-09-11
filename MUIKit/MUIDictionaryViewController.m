@@ -86,10 +86,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *key = self.keys[indexPath.row];
     NSDictionary* d = self.dictionary[key];
-    if(![d isKindOfClass:[NSDictionary class]]){
+    if(![d isKindOfClass:NSDictionary.class]){
         return;
     }
-    MUIDictionaryViewController* dvc = [[MUIDictionaryViewController alloc] initWithStyle:UITableViewStylePlain];
+    MUIDictionaryViewController* dvc = [MUIDictionaryViewController.alloc initWithStyle:UITableViewStylePlain];
     dvc.dictionary = d;
     dvc.title = key;
     [self.navigationController pushViewController:dvc animated:YES];
