@@ -34,7 +34,7 @@ static void * const kMUILongRunningTaskControllerKVOContext = (void*)&kMUILongRu
     }
     if(self.progress){
         if(self.openProgressDate){
-            NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.openProgressDate];
+            NSTimeInterval interval = [NSDate.date timeIntervalSinceDate:self.openProgressDate];
             if(interval < 0.0){
                 [NSThread sleepForTimeInterval:-interval];
             }

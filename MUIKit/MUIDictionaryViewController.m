@@ -55,7 +55,7 @@
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kIdentifier];
     if(!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kIdentifier];
+        cell = [UITableViewCell.alloc initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kIdentifier];
     }
     NSString* key = self.keys[indexPath.row];
     cell.textLabel.text = key;

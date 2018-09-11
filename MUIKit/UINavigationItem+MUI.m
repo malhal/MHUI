@@ -19,7 +19,7 @@
         // create a default
         static UIActivityIndicatorView* kDefault = nil;
         if(!kDefault){
-            kDefault = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            kDefault = [UIActivityIndicatorView.alloc initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             [kDefault startAnimating];
         }
         // return the default

@@ -46,10 +46,10 @@
 
 - (void)mui_show{
     void (^showAlert)(void) = ^void() {
-        UIWindow* w = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        UIWindow* w = [UIWindow.alloc initWithFrame:[UIScreen mainScreen].bounds];
         // we need to retain the window so it can be set to hidden before it is dealloced so the observation fires.
         [self mui_setAlertWindow:w];
-        w.rootViewController = [[UIViewController alloc] init];
+        w.rootViewController = [UIViewController.alloc init];
         w.windowLevel = UIWindowLevelAlert;
         [w makeKeyAndVisible];
         [w.rootViewController presentViewController:self animated:YES completion:nil];

@@ -19,7 +19,7 @@
 
 - (UIBarButtonItem*)flipButton{
     if(!_flipButton){
-        _flipButton = [[UIBarButtonItem alloc] initWithTitle:self.titleForFlipButton style:UIBarButtonItemStylePlain target:self action:@selector(flipViewControllers:)];
+        _flipButton = [UIBarButtonItem.alloc initWithTitle:self.titleForFlipButton style:UIBarButtonItemStylePlain target:self action:@selector(flipViewControllers:)];
     }
     return _flipButton;
 }

@@ -26,7 +26,7 @@
 }
 
 - (UIVisualEffectView*)mui_createBlurredBackgroundView{
-    UIVisualEffectView* v = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+    UIVisualEffectView* v = [UIVisualEffectView.alloc initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     v.frame = self.frame;
     v.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     return v;

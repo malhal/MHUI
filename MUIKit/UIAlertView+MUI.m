@@ -22,13 +22,13 @@
     /* open an alert with an OK button */
     UIAlertView *alert;
     if(delegate){
-        alert = [[UIAlertView alloc] initWithTitle:title
+        alert = [UIAlertView.alloc initWithTitle:title
                                            message:message
                                           delegate:delegate
                                  cancelButtonTitle:@"Cancel"
                                  otherButtonTitles:@"OK", nil];
     }else{
-        alert = [[UIAlertView alloc] initWithTitle:title
+        alert = [UIAlertView.alloc initWithTitle:title
                                            message:message
                                           delegate:delegate
                                  cancelButtonTitle:@"OK"

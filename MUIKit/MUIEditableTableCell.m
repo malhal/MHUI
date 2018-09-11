@@ -22,7 +22,7 @@
 
 - (UITextField *)textField{
     if(!_textField){
-        _textField = [[UITextField alloc] initWithFrame:CGRectZero];
+        _textField = [UITextField.alloc initWithFrame:CGRectZero];
         _textField.delegate = self;
         _textField.font = self.detailTextLabel.font;
         _textField.text = self.detailTextLabel.text;
