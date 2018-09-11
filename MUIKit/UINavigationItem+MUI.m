@@ -11,7 +11,7 @@
 
 @implementation UINavigationItem (TitleRefresh)
 
--(UIView*)mui_getTitleRefreshView{
+- (UIView*)mui_getTitleRefreshView{
 
     UIView* titleRefreshView = objc_getAssociatedObject(self, @selector(mui_getTitleRefreshView));
     
@@ -37,18 +37,18 @@
     [self didChangeValueForKey:@"titleRefreshView"];
 }
 
--(NSInteger)mui_getBeginTitleRefreshingCount{
+- (NSInteger)mui_getBeginTitleRefreshingCount{
     NSNumber* number = objc_getAssociatedObject(self, @selector(mui_getBeginTitleRefreshingCount));
     return number.integerValue;
 }
 
--(void)mui_setBeginTitleRefreshingCount:(NSInteger)count{
+- (void)mui_setBeginTitleRefreshingCount:(NSInteger)count{
     objc_setAssociatedObject(self, @selector(mui_getBeginTitleRefreshingCount),
                              [NSNumber numberWithInteger:count],
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)mui_beginTitleRefreshing{
+- (void)mui_beginTitleRefreshing{
     
     NSInteger count = [self mui_getBeginTitleRefreshingCount];
     count++;
@@ -57,11 +57,11 @@
     self.titleView = [self mui_getTitleRefreshView];
 }
 
--(void)mui_endTitleRefreshing{
+- (void)mui_endTitleRefreshing{
     [self mui_endTitleRefreshingResetCounter:NO];
 }
 
--(void)mui_endTitleRefreshingResetCounter:(BOOL)resetCounter{
+- (void)mui_endTitleRefreshingResetCounter:(BOOL)resetCounter{
     self.titleView = nil;
     
 //    NSInteger count = [self mui_getBeginTitleRefreshingCount];

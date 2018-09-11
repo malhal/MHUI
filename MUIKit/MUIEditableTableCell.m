@@ -20,7 +20,7 @@
 
 @implementation MUIEditableTableCell
 
--(UITextField *)textField{
+- (UITextField *)textField{
     if(!_textField){
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.delegate = self;
@@ -34,7 +34,7 @@
     return _textField;
 }
 
--(void)layoutSubviews{
+- (void)layoutSubviews{
     // prevent infinite loop that occurs with Right Detail cells.
     if(!self.textFieldResized){
         // trick to make the text field the full size of the cell rather than just the size of current label.
@@ -86,7 +86,7 @@
 }
 
 
--(void)prepareForReuse{
+- (void)prepareForReuse{
     [super prepareForReuse];
     self.textField.text = self.detailTextLabel.text;
     [self.textField resignFirstResponder];

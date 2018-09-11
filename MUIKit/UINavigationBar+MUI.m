@@ -11,7 +11,7 @@
 
 @implementation UINavigationBar (MUI)
 
--(UIProgressView*)mui_progressView{
+- (UIProgressView*)mui_progressView{
     // find prev instance
     UIProgressView *progress = objc_getAssociatedObject(self, "mui_progressView");
     if(!progress){

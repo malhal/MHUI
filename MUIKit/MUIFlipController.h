@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) UIBarButtonItem *flipButton;
 
 // called like prepareForSegue before flipping.
--(void)willFlipToViewController:(UIViewController*)viewController;
+- (void)willFlipToViewController:(UIViewController*)viewController;
 
 @end
 

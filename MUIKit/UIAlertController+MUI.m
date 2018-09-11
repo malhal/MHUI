@@ -36,15 +36,15 @@
     });
 }
 
--(UIWindow*)mui_alertWindow{
+- (UIWindow*)mui_alertWindow{
     return objc_getAssociatedObject(self, "mui_alertWindow");
 }
 
--(void)mui_setAlertWindow:(UIWindow*)window{
+- (void)mui_setAlertWindow:(UIWindow*)window{
     objc_setAssociatedObject(self, "mui_alertWindow", window, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)mui_show{
+- (void)mui_show{
     void (^showAlert)(void) = ^void() {
         UIWindow* w = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         // we need to retain the window so it can be set to hidden before it is dealloced so the observation fires.

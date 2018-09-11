@@ -83,7 +83,7 @@
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *key = self.keys[indexPath.row];
     NSDictionary* d = self.dictionary[key];
     if(![d isKindOfClass:NSDictionary.class]){

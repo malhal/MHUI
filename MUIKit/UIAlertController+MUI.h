@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIAlertController *)mui_alertControllerWithTitle:(NSString *)title message:(NSString *)message;
 
 // Gives previous behavior of UIAlertView in that alerts are queued up.
--(void)mui_show;
+- (void)mui_show;
 
 @end
 

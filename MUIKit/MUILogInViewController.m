@@ -13,7 +13,7 @@
 
 @implementation MUILogInViewController
 
--(void)viewDidLoad{
+- (void)viewDidLoad{
     [super viewDidLoad];
     //self.usernameCell.textField
     self.passwordCell.textField.secureTextEntry = YES;
@@ -24,11 +24,11 @@
     self.usernameCell.alwaysEditable = YES;
 }
 
--(IBAction)logInButtonTapped:(id)sender{
+- (IBAction)logInButtonTapped:(id)sender{
     [self didTapLogInButton];
 }
 
--(void)didTapLogInButton{
+- (void)didTapLogInButton{
     self.mui_loading = YES;
     
     if([self.delegate respondsToSelector:@selector(logInViewControllerDidTapLogInButton:)]){
@@ -36,7 +36,7 @@
     }
 }
 
--(void)didError:(NSError*)error{
+- (void)didError:(NSError*)error{
     self.mui_loading = NO;
     
     UIAlertController *alert = [UIAlertController mui_alertControllerWithTitle:error.localizedDescription message:error.localizedFailureReason];
@@ -48,12 +48,12 @@
 }
 
 // Match Calendar adding events and bring the keyboard up after the view appears.
--(void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.usernameCell.textField becomeFirstResponder];
 }
 
--(void)didFinish{
+- (void)didFinish{
     [self dismissViewControllerAnimated:YES completion:nil];
     
     if([self.delegate respondsToSelector:@selector(logInViewControllerDidFinish:)]){

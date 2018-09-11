@@ -10,7 +10,7 @@
 
 @implementation UIView (MUI)
 
--(void)mui_setHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL finished))completion{
+- (void)mui_setHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL finished))completion{
     if (!animated) {
         self.hidden = hidden;
     }
@@ -25,14 +25,14 @@
     }
 }
 
--(UIVisualEffectView*)mui_createBlurredBackgroundView{
+- (UIVisualEffectView*)mui_createBlurredBackgroundView{
     UIVisualEffectView* v = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     v.frame = self.frame;
     v.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     return v;
 }
 
--(void)mui_transitionSlide:(MHViewAnimationTransitionSlide)transitionSlide completion:(void (^ __nullable)(BOOL finished))completion{
+- (void)mui_transitionSlide:(MHViewAnimationTransitionSlide)transitionSlide completion:(void (^ __nullable)(BOOL finished))completion{
     CGAffineTransform onscreen = CGAffineTransformIdentity;
     CGAffineTransform offscreen;
     switch (transitionSlide) {

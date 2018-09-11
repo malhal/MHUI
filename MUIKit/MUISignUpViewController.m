@@ -13,7 +13,7 @@
 @implementation MUISignUpViewController
 @dynamic delegate;
 
--(void)viewDidLoad{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     self.emailCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;

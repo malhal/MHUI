@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
--(void)editableTableCell:(MUIEditableTableCell *)editableTableCell textDidChange:(NSString *)text;
+- (void)editableTableCell:(MUIEditableTableCell *)editableTableCell textDidChange:(NSString *)text;
 
 @end
 

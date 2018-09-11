@@ -12,7 +12,7 @@
 
 @implementation UIViewController (MUI)
 
--(void)mui_setLoading:(BOOL)loading{
+- (void)mui_setLoading:(BOOL)loading{
     BOOL mui_loading = [objc_getAssociatedObject(self, @selector(mui_loading)) boolValue];
     if(loading == mui_loading){
         return;
@@ -31,7 +31,7 @@
     [self didChangeValueForKey:keyPath];
 }
 
--(BOOL)mui_loading{
+- (BOOL)mui_loading{
     return [objc_getAssociatedObject(self, @selector(mui_loading)) boolValue];
 }
 

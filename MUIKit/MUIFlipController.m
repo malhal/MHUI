@@ -17,14 +17,14 @@
 
 @implementation MUIFlipController
 
--(UIBarButtonItem*)flipButton{
+- (UIBarButtonItem*)flipButton{
     if(!_flipButton){
         _flipButton = [[UIBarButtonItem alloc] initWithTitle:self.titleForFlipButton style:UIBarButtonItemStylePlain target:self action:@selector(flipViewControllers:)];
     }
     return _flipButton;
 }
 
--(NSString*)titleForFlipButton{
+- (NSString*)titleForFlipButton{
 
     NSString* title = self.selectedViewController.tabBarItem.title;
     if(!title){
@@ -33,7 +33,7 @@
     return title;
 }
 
--(IBAction)flipViewControllers:(id)sender{
+- (IBAction)flipViewControllers:(id)sender{
     NSUInteger index = self.selectedIndex;
     index++;
     if(index >= self.childViewControllers.count){
@@ -66,7 +66,7 @@
                     animations:nil completion:nil];
 }
 
--(void)willFlipToViewController:(UIViewController*)viewController{
+- (void)willFlipToViewController:(UIViewController*)viewController{
     // default implemetation does nothing.
 }
 

@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 //+(UINavigationController *)presentFromViewController:(UIViewController*)viewController;
 
 // the alert will be presented from the supplied view controller. Completion handler is fired after the alert is closed which you can use to refresh UI.
-//-(void)logoutWithConfirmationFromViewController:(UIViewController*)viewController completionHandler:(void(^)(void))completionHandler;
+//- (void)logoutWithConfirmationFromViewController:(UIViewController*)viewController completionHandler:(void(^)(void))completionHandler;
 
 @property (nonatomic, weak) id <MUIAccountViewControllerDelegate> delegate;
 

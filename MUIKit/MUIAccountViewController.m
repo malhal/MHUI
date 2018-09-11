@@ -20,7 +20,7 @@
 }
 */
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.destinationViewController isKindOfClass:[MUISignUpViewController class]]){
         MUISignUpViewController *signUp = (MUISignUpViewController *)segue.destinationViewController;
         signUp.delegate = self;
@@ -32,7 +32,7 @@
 }
 
 /*
--(void)logoutWithConfirmationFromViewController:(UIViewController*)viewController completionHandler:(void(^)(void))completionHandler{
+- (void)logoutWithConfirmationFromViewController:(UIViewController*)viewController completionHandler:(void(^)(void))completionHandler{
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Log Out"
                                                                    message:@"Are you sure you would like to log out?"
                                                             preferredStyle:UIAlertControllerStyleAlert];
@@ -94,7 +94,7 @@
     }
 }
 
--(void)signUpViewControllerDidTapSignUpButton:(MUISignUpViewController *)signUp{
+- (void)signUpViewControllerDidTapSignUpButton:(MUISignUpViewController *)signUp{
     if([self.delegate respondsToSelector:@selector(accountViewController:signUpViewControllerDidTapSignUpButton:)]){
         [self.delegate accountViewController:self signUpViewControllerDidTapSignUpButton:signUp];
     }

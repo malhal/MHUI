@@ -11,9 +11,9 @@
 
 @implementation UITabBar (MUI)
 
--(UIProgressView*)mui_progressView{
+- (UIProgressView*)mui_progressView{
     // find prev instance
-    UIProgressView *progress = objc_getAssociatedObject(self, "mui_progressView");
+    UIProgressView *progress = objc_getAssociatedObject(self, @selector(mui_progressView));
     if(!progress){
         progress = [UIProgressView.alloc initWithProgressViewStyle:UIProgressViewStyleBar];
         [self addSubview:progress];
@@ -23,7 +23,7 @@
         [progress.bottomAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
         progress.translatesAutoresizingMaskIntoConstraints = NO;
         // remember it
-        objc_setAssociatedObject(self, "mui_progressView", progress, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, @selector(mui_progressView), progress, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return progress;
 }
