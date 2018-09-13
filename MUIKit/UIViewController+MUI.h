@@ -38,4 +38,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIViewController (MUIDetailItemContents)
+
+- (id)mui_detailItem;
+
+- (BOOL)mui_containsDetailItem:(id)detailItem;
+
+- (id)mui_currentVisibleDetailItemWithSender:(id)sender;
+
+@end
+
+@interface UIViewController (MUIViewControllerShowing)
+
+// Returns whether calling showViewController:sender: would cause a navigation "push" to occur
+- (BOOL)mui_willShowingViewControllerPushWithSender:(id)sender;
+
+// Returns whether calling showDetailViewController:sender: would cause a navigation "push" to occur
+- (BOOL)mui_willShowingDetailViewControllerPushWithSender:(id)sender;
+
+@end
+
 NS_ASSUME_NONNULL_END
