@@ -123,6 +123,8 @@
     }
 }
 
+@end
+
 @implementation UINavigationController (MUIViewControllerShowing)
 
 - (BOOL)mui_willShowingViewControllerPushWithSender:(id)sender
