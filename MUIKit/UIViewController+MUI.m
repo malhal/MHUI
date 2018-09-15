@@ -99,24 +99,24 @@
 
 @implementation UIViewController (MUIViewControllerShowing)
 
-- (BOOL)aapl_willShowingViewControllerPushWithSender:(id)sender
+- (BOOL)mui_willShowingViewControllerPushWithSender:(id)sender
 {
     // Find and ask the right view controller about showing
-    UIViewController *target = [self targetViewControllerForAction:@selector(aapl_willShowingViewControllerPushWithSender:) sender:sender];
+    UIViewController *target = [self targetViewControllerForAction:@selector(mui_willShowingViewControllerPushWithSender:) sender:sender];
     if (target) {
-        return [target aapl_willShowingViewControllerPushWithSender:sender];
+        return [target mui_willShowingViewControllerPushWithSender:sender];
     } else {
         // Or if we can't find one, we won't be pushing
         return NO;
     }
 }
 
-- (BOOL)aapl_willShowingDetailViewControllerPushWithSender:(id)sender
+- (BOOL)mui_willShowingDetailViewControllerPushWithSender:(id)sender
 {
     // Find and ask the right view controller about showing detail
-    UIViewController *target = [self targetViewControllerForAction:@selector(aapl_willShowingDetailViewControllerPushWithSender:) sender:sender];
+    UIViewController *target = [self targetViewControllerForAction:@selector(mui_willShowingDetailViewControllerPushWithSender:) sender:sender];
     if (target) {
-        return [target aapl_willShowingDetailViewControllerPushWithSender:sender];
+        return [target mui_willShowingDetailViewControllerPushWithSender:sender];
     } else {
         // Or if we can't find one, we won't be pushing
         return NO;
