@@ -97,6 +97,42 @@
 
 @end
 
+@implementation UISplitViewController (MUIDetailItemContents)
+
+- (id)mui_currentVisibleDetailItemWithSender:(id)sender
+{
+    if (self.collapsed) {
+        // If we're collapsed, we don't have a detail
+        return nil;
+    } else {
+        // Otherwise, return our detail controller's contained photo (if any)
+        UIViewController *controller = [self.viewControllers lastObject];
+        return [controller mui_detailItem];
+        //return [controller mui_currentVisibleDetailItemWithSender:sender]; // maybe odd we call this on a nav controller that just said it couldn't perform the action.
+    }
+}
+
+@end
+
+@implementation UINavigationController (MUIDetailItemContents)
+
+// added this because our detail is a nav.
+// used by above method and also app delegate to find the detail item within a nav controllers and nested ones.
+// def needs tested for triple split.
+- (id)mui_detailItem
+{
+    id detailItem;
+    for(UIViewController *controller in self.viewControllers){
+        if((detailItem = controller.mui_detailItem)){
+            break;
+        }
+    }
+    return detailItem;
+}
+
+@end
+
+
 @implementation UIViewController (MUIViewControllerShowing)
 
 - (BOOL)mui_willShowingViewControllerPushWithSender:(id)sender

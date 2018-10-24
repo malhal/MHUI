@@ -20,6 +20,7 @@
 #import <MUIKit/MUIAlertController.h>
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
+#import <MUIKit/MUIMasterTableViewController.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
