@@ -7,18 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MUIKit/MUIDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol MUIMasterTableViewControllerDelegate, MUIMasterTableViewControllerDataSource;
+
 @interface MUIMasterTableViewController : UITableViewController
-
-- (NSIndexPath *)indexPathForItem:(id)item;
-
-- (void)showItemAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)showItemNearIndexPath:(NSIndexPath *)indexPath;
 
 - (void)updateSelectionForCurrentVisibleDetailItem;
+
+@property (strong, nonatomic, readonly) id selectedObject;
+
+// called either when edit animations ended or swipe menu closed animation has ended
+- (void)didEndEditing;
+
+- (NSIndexPath *)indexPathForObject:(id)object;
+
+- (id)objectAtIndexPath:(NSIndexPath *)object;
+
+- (void)showSelectedItem;
 
 @end
 

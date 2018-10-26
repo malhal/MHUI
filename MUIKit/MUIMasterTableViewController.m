@@ -20,9 +20,92 @@
 //@property (nonatomic, strong, nullable) NSIndexPath *selectedRowBeforeEditing;
 @property (nonatomic, strong, nullable) NSIndexPath *selectedRowDuringEditing;
 
+@property (strong, nonatomic, readwrite) id selectedObject;
+
 @end
 
 @implementation MUIMasterTableViewController
+
+- (void)showSelectedItem{
+    [self performSegueWithIdentifier:@"showDetail" sender:nil];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(!self.isEditing){
+        self.selectedObject = [self objectAtIndexPath:indexPath];
+    }
+    return indexPath;
+}
+
+// rename to should Currently
+- (BOOL)shouldAlwaysHaveSelectedObject{
+    if(self.splitViewController.isCollapsed){
+        //if(!self.shouldHaveSelectedObjectWhenNotInEditMode){
+        return NO;
+    }
+    else if(self.tableView.isEditing){
+        return NO;
+    }
+    return YES;//!self.isMovingOrDeletingObjects;
+}
+
+- (void)updateSelectionForCurrentVisibleDetailItem{
+    if(!self.shouldAlwaysHaveSelectedObject){
+        return;
+    }
+    id selectedObject = self.selectedObject;
+    if(!selectedObject){
+        return;
+    }
+    //    if([self mui_containsDetailItem:detailItem]){
+    //        return;
+    //    }
+    NSIndexPath *indexPath = [self indexPathForObject:selectedObject];
+    if(!indexPath){
+        //   NSIndexPath *ip = self.selectedRowOfDetailItem;
+        //   [self showItemNearIndexPath:ip];
+        return;
+    }
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    //[self selectRowForObject:detailItem];
+    //[self showObject:self.fetchedDataSource.fetchedResultsController.fetchedObjects.firstObject];//: startEditing:NO];
+    //[self showItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
+// if there are more rows beyond the index then use current index otherwise use 1 less.
+- (void)showItemNearIndexPath:(NSIndexPath *)indexPath{
+    // NSAssert(!self.tableView.isEditing, @"Cannot select while editing");
+    NSUInteger count = [self.tableView numberOfRowsInSection:indexPath.section] ;//self.fetchedResultsController.fetchedObjects.count;
+    //id item;
+    NSIndexPath *newIndexPath;
+    if(count){
+        NSUInteger row = count - 1;
+        if(indexPath.row < row){
+            row = indexPath.row;
+        }
+        newIndexPath = [NSIndexPath indexPathForRow:row inSection:indexPath.section];
+        //object = [self.fetchedResultsController objectAtIndexPath:ip];
+        //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:indexPath.section]];
+        //id c = cell.selectionSegueTemplate; // UIStoryboardShowSegueTemplate
+        
+        // select the row so it'll work in prepareForSegue.
+        // it wont work if editing but update selection after editing will
+        //[self.tableView selectRowAtIndexPath:ip animated:NO scrollPosition:0];
+        //[[cell selectionSegueTemplate] performSelector:NSSelectorFromString(@"perform:") withObject:cell];
+    }
+    //self.selectedObject = object;
+    //if(!self.splitViewController.isCollapsed){
+    id object;
+    if(newIndexPath){
+        object = [self objectAtIndexPath:newIndexPath];
+    }
+    self.selectedObject = object;
+    [self showSelectedItem];
+    [self updateSelectionForCurrentVisibleDetailItem];
+    // can't select the row just now because might be in editing.
+    //[self performSelector:@selector(reselectRowForVisibleDetailItem) withObject:nil afterDelay:0];
+    //}
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -33,20 +116,8 @@
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+        [self.tableView.delegate tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     }
-}
-
-// rename to should Currently
-- (BOOL)shouldAlwaysHaveSelectedObject{
-    if(self.splitViewController.isCollapsed){
-    //if(!self.shouldHaveSelectedObjectWhenNotInEditMode){
-        return NO;
-    }
-    else if(self.tableView.isEditing){
-        return NO;
-    }
-    return YES;//!self.isMovingOrDeletingObjects;
 }
 
 //- (BOOL)shouldHaveSelectedObjectWhenNotInEditMode{
@@ -68,6 +139,7 @@
 // we don't select a row if nothing was selected before.
 - (void)viewWillAppear:(BOOL)animated{
     //self.clearsSelectionOnViewWillAppear = !self.shouldAlwaysHaveSelectedObject;
+    self.selectedObject = [self mui_currentVisibleDetailItemWithSender:self];
     self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
     [super viewWillAppear:animated]; // if numberOfSections == 0 then it reloads data. But reloads anyway because of didMoveToWindow. It also clears selection.
     
@@ -105,7 +177,7 @@
     //}
     // this is for when in split and reselecting what is in detail. Not when seperating because detail object is nil.
     if(!self.clearsSelectionOnViewWillAppear){
-        [self updateSelectionForCurrentVisibleDetailItem];
+       // [self updateSelectionForCurrentVisibleDetailItem];
     }
 }
 
@@ -169,32 +241,7 @@
     //        return;
     //    }
     //    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:0 animated:animated];
-- (void)updateSelectionForCurrentVisibleDetailItem{
-    if(!self.shouldAlwaysHaveSelectedObject){
-        return;
-    }
-    id detailItem = [self mui_currentVisibleDetailItemWithSender:self];
-    if(!detailItem){
-        return;
-    }
-//    if([self mui_containsDetailItem:detailItem]){
-//        return;
-//    }
-    NSIndexPath *indexPath = [self indexPathForItem:detailItem];
-    if(!indexPath){
-     //   NSIndexPath *ip = self.selectedRowOfDetailItem;
-     //   [self showItemNearIndexPath:ip];
-        return;
-    }
-    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    //[self selectRowForObject:detailItem];
-    //[self showObject:self.fetchedDataSource.fetchedResultsController.fetchedObjects.firstObject];//: startEditing:NO];
-    //[self showItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-}
 
-- (NSIndexPath *)indexPathForItem:(id)item{
-    return nil;
-}
 
 // when editing there is nolonger the row selected so we saved it.
 //- (NSIndexPath *)selectedRowOfDetailItem{
@@ -285,15 +332,15 @@
 //}
 
 #pragma mark - Table Delegate
-
 /*
- - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
- if(!self.isEditing){
- self.selectedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
- }
- return indexPath;
- }
- 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.shouldAlwaysHaveSelectedObject){
+        self.selectedObject = [self.dataSource objectAtIndexPath:indexPath];
+    }
+    return indexPath;
+}
+
+
  // called by didMoveToWindow aswell and layoutsubviews
  - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
  return self.fetchedResultsController.sections.count;
@@ -380,41 +427,6 @@
 //    }
 //}
 
-// if there are more rows beyond the index then use current index otherwise use 1 less.
-- (void)showItemNearIndexPath:(NSIndexPath *)indexPath{
-   // NSAssert(!self.tableView.isEditing, @"Cannot select while editing");
-    NSUInteger count = [self.tableView numberOfRowsInSection:indexPath.section] ;//self.fetchedResultsController.fetchedObjects.count;
-    //id item;
-    NSIndexPath *newIndexPath;
-    if(count){
-        NSUInteger row = count - 1;
-        if(indexPath.row < row){
-            row = indexPath.row;
-        }
-        newIndexPath = [NSIndexPath indexPathForRow:row inSection:indexPath.section];
-        //object = [self.fetchedResultsController objectAtIndexPath:ip];
-        //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:indexPath.section]];
-        //id c = cell.selectionSegueTemplate; // UIStoryboardShowSegueTemplate
-
-        // select the row so it'll work in prepareForSegue.
-        // it wont work if editing but update selection after editing will
-        //[self.tableView selectRowAtIndexPath:ip animated:NO scrollPosition:0];
-        //[[cell selectionSegueTemplate] performSelector:NSSelectorFromString(@"perform:") withObject:cell];
-    }
-    //self.selectedObject = object;
-    //if(!self.splitViewController.isCollapsed){
-        [self showItemAtIndexPath:newIndexPath];
-    [self updateSelectionForCurrentVisibleDetailItem];
-        // can't select the row just now because might be in editing.
-        //[self performSelector:@selector(reselectRowForVisibleDetailItem) withObject:nil afterDelay:0];
-    //}
-}
-
-//- (void)showObject:(nullable NSManagedObject *)object startEditing:(BOOL)startEditing{
-- (void)showItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-}
-
 
 
 //- (void)configureDetailViewControllerWithObject:(NSManagedObject *)object{
@@ -427,9 +439,9 @@
 //    [self performSegueWithIdentifier:@"showDetail" sender:cell];
 //}
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"didDeselectRowAtIndexPath");
-}
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSLog(@"didDeselectRowAtIndexPath");
+//}
 
 #pragma mark - Restoration
 
