@@ -65,8 +65,6 @@
 		EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */; };
-		ECD8FA88214D928B00C33745 /* MUIMasterTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECD8FA86214D928B00C33745 /* MUIMasterTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECD8FA89214D928B00C33745 /* MUIMasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD8FA87214D928B00C33745 /* MUIMasterTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,8 +140,6 @@
 		EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MUI.m"; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MUI.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MUI.m"; sourceTree = "<group>"; };
-		ECD8FA86214D928B00C33745 /* MUIMasterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIMasterTableViewController.h; sourceTree = "<group>"; };
-		ECD8FA87214D928B00C33745 /* MUIMasterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIMasterTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,8 +201,6 @@
 				EC6758951DB0251E00838798 /* MUIEditableTableCell.m */,
 				EC3E0E071DBA46C800D49472 /* MUIMultilineTableCell.h */,
 				EC3E0E081DBA46C800D49472 /* MUIMultilineTableCell.m */,
-				ECD8FA86214D928B00C33745 /* MUIMasterTableViewController.h */,
-				ECD8FA87214D928B00C33745 /* MUIMasterTableViewController.m */,
 				EC913C942185FAC200E3E6DA /* MUIMasterController.h */,
 				EC596B0B21890DE0000B5302 /* MUIMasterController+Internal.h */,
 				EC913C952185FAC200E3E6DA /* MUIMasterController.m */,
@@ -298,7 +292,6 @@
 				ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */,
 				EC76D6E21D9E4442002DC0A0 /* MUILogInViewController.h in Headers */,
 				EC9A9CA120344F0900E5A698 /* UIImage+MUI.h in Headers */,
-				ECD8FA88214D928B00C33745 /* MUIMasterTableViewController.h in Headers */,
 				EC913C9D218658DE00E3E6DA /* MUITableViewController.h in Headers */,
 				EC3E0E091DBA46C800D49472 /* MUIMultilineTableCell.h in Headers */,
 				EC6758A71DB02C1F00838798 /* UIAlertView+MUI.h in Headers */,
@@ -415,7 +408,6 @@
 				EC6758A81DB02C1F00838798 /* UIAlertView+MUI.m in Sources */,
 				EC596B17218A4433000B5302 /* UIViewController+MUIShowing.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MUI.m in Sources */,
-				ECD8FA89214D928B00C33745 /* MUIMasterTableViewController.m in Sources */,
 				EC5D1C911F75C4B0008BC02E /* MUIProgressViewController.m in Sources */,
 				EC913C972185FAC200E3E6DA /* MUIMasterController.m in Sources */,
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */,
