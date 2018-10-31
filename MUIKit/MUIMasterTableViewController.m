@@ -63,7 +63,7 @@
     NSIndexPath *indexPath = [self indexPathForObject:selectedObject];
     if(!indexPath){
         //   NSIndexPath *ip = self.selectedRowOfDetailItem;
-        //   [self showItemNearIndexPath:ip];
+        //   [self selectMasterItemNearIndexPath:ip];
         return;
     }
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -73,7 +73,7 @@
 }
 
 // if there are more rows beyond the index then use current index otherwise use 1 less.
-- (void)showItemNearIndexPath:(NSIndexPath *)indexPath{
+- (void)selectMasterItemNearIndexPath:(NSIndexPath *)indexPath{
     // NSAssert(!self.tableView.isEditing, @"Cannot select while editing");
     NSUInteger count = [self.tableView numberOfRowsInSection:indexPath.section] ;//self.fetchedResultsController.fetchedObjects.count;
     //id item;

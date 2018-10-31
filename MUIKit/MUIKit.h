@@ -21,7 +21,8 @@
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
 #import <MUIKit/MUIMasterTableViewController.h>
-
+#import <MUIKit/MUIMasterController.h>
+#import <MUIKit/MUITableViewController.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>

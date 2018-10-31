@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MUIMasterTableViewController : UITableViewController
 
-- (void)showItemNearIndexPath:(NSIndexPath *)indexPath;
+- (void)selectMasterItemNearIndexPath:(NSIndexPath *)indexPath;
 
 - (void)updateSelectionForCurrentVisibleDetailItem;
 

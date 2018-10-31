@@ -106,7 +106,7 @@
         return nil;
     } else {
         // Otherwise, return our detail controller's contained photo (if any)
-        UIViewController *controller = [self.viewControllers lastObject];
+        UIViewController *controller = self.viewControllers.lastObject;
         return [controller mui_detailItem];
         //return [controller mui_currentVisibleDetailItemWithSender:sender]; // maybe odd we call this on a nav controller that just said it couldn't perform the action.
     }
