@@ -8,18 +8,28 @@
 
 #import "MUIMasterController+Internal.h"
 #import "MUITableViewController+Internal.h"
-#import "UIViewController+MUI.h"
+#import "UIViewController+MUIShowing.h"
+#import "UIViewController+MUIDetail.h"
 
 @implementation MUIMasterController
 
 - (instancetype)initWithTableViewController:(MUITableViewController *)tableViewController{
     self = [super init];
     if (self) {
-        _tableViewController = tableViewController;
         tableViewController.delegate = self;
         tableViewController.tableView.delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:tableViewController.splitViewController];
+        _tableViewController = tableViewController;
     }
     return self;
+}
+
+// update cell accessories.
+- (void)showDetailTargetDidChange:(NSNotification *)notification{
+    for (UITableViewCell *cell in self.tableView.visibleCells) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - MUITableViewControllerDelegate
@@ -65,6 +75,12 @@
 //    tableViewController.tableView.delegate = self;
 //    _tableViewController = tableViewController;
 //}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([self.tableDelegate respondsToSelector:_cmd]){
+        [self.tableDelegate tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    }
+}
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if([self.tableDelegate respondsToSelector:_cmd]){

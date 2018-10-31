@@ -8,7 +8,8 @@
 // Should handle the selected row being deleted by the user.
 
 #import "MUIMasterTableViewController.h"
-#import "UIViewController+MUI.h"
+#import "UIViewController+MUIDetail.h"
+
 
 @interface MUIMasterTableViewController ()
 

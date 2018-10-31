@@ -30,6 +30,8 @@
 #import <MUIKit/UIView+MUI.h>
 #import <MUIKit/UINavigationItem+MUI.h>
 #import <MUIKit/UIViewController+MUI.h>
+#import <MUIKit/UIViewController+MUIShowing.h>
+#import <MUIKit/UIViewController+MUIDetail.h>
 #import <MUIKit/UIAlertView+MUI.h>
 #import <MUIKit/UITextField+MUI.h>
 #import <MUIKit/UITableViewCell+MUI.h>
