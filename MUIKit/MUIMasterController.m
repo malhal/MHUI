@@ -192,7 +192,7 @@
     //[super tableView:tableView willBeginEditingRowAtIndexPath:indexPath];
     //[r20 updateNavAndBarButtonsAnimated:0x0];
     if([self.tableDelegate respondsToSelector:_cmd]){
-        return [self.tableDelegate tableView:tableView willBeginEditingRowAtIndexPath:indexPath];
+        [self.tableDelegate tableView:tableView willBeginEditingRowAtIndexPath:indexPath];
     }
     self.tableViewController.editButtonItem.enabled = NO;
 }
@@ -200,7 +200,7 @@
 // since during swipe to delete the selection highlight is lost we need to bring it back.
 -(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     if([self.tableDelegate respondsToSelector:_cmd]){
-        return [self.tableDelegate tableView:tableView didEndEditingRowAtIndexPath:indexPath];
+        [self.tableDelegate tableView:tableView didEndEditingRowAtIndexPath:indexPath];
     }
     //    [super tableView:tableView didEndEditingRowAtIndexPath:indexPath];
     //    if(indexPath){
