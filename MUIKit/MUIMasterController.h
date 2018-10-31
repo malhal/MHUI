@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MUIMasterControllerDelegate, MUIMasterControllerDataSource;
 @class MUITableViewController;
 
-@interface MUIMasterController : NSObject<MUITableViewControllerDelegate, UITableViewDelegate>
+@interface MUIMasterController : NSObject <MUITableViewControllerDelegate, UITableViewDelegate>
 
 - (instancetype)initWithTableViewController:(MUITableViewController *)tableViewController;
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) id<MUIMasterControllerDataSource> dataSource;
 
-@property (nonatomic, assign) id<UINavigationControllerDelegate> navigationDelegate;
+//@property (nonatomic, assign) id<UINavigationControllerDelegate> navigationDelegate;
 
 @property (nonatomic, assign) id<UITableViewDelegate> tableDelegate;
 //

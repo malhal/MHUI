@@ -25,8 +25,16 @@
 #pragma mark - MUITableViewControllerDelegate
 
 - (void)tableViewController:(MUITableViewController *)tableViewController viewWillAppear:(BOOL)animated{
+    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+        BOOL indexPathPushes = [self.tableViewController mui_willShowingDetailViewControllerPushWithSender:self];
+        if (indexPathPushes) {
+            // If we're pushing for this indexPath, deselect it when we appear
+            [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
+        }
+    }
     id item = [self.tableViewController mui_currentVisibleDetailItemWithSender:self.tableViewController];
     if (item) {
+        self.selectedMasterItem = item;
         NSIndexPath *indexPath = [self.dataSource masterController:self indexPathForMasterItem:item];
         [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }

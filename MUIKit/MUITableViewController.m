@@ -61,5 +61,10 @@
     [self.delegate tableViewController:self viewWillAppear:animated];
 }
 
+// delegate is not configured yet
+//- (void)viewDidLoad{
+//    [super viewDidLoad];
+//    [self.delegate viewDidLoadForTableViewController:self];
+//}
 
 @end
