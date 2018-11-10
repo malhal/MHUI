@@ -10,6 +10,12 @@
 
 @implementation UIViewController (MUIDetail)
 
+- (id)mui_masterItem
+{
+    // By default, view controllers don't contain photos
+    return nil;
+}
+
 - (id)mui_detailItem
 {
     // By default, view controllers don't contain photos
@@ -51,9 +57,42 @@
     }
 }
 
+//- (id)mui_masterItem
+//{
+//    id masterItem;
+//    for(UIViewController *controller in self.viewControllers){
+//        if((masterItem = controller.mui_masterItem)){
+//            break;
+//        }
+//    }
+//    return masterItem;
+//}
+
+- (id)mui_detailItem
+{
+    id detailItem;
+    for(UIViewController *controller in self.viewControllers){
+        if((detailItem = controller.mui_detailItem)){
+            break;
+        }
+    }
+    return detailItem;
+}
+
 @end
 
 @implementation UINavigationController (MUIDetail)
+
+//- (id)mui_masterItem
+//{
+//    id masterItem;
+//    for(UIViewController *controller in self.viewControllers){
+//        if((masterItem = controller.mui_masterItem)){
+//            break;
+//        }
+//    }
+//    return masterItem;
+//}
 
 // added this because our detail is a nav.
 // used by above method and also app delegate to find the detail item within a nav controllers and nested ones.

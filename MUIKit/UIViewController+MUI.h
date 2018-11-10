@@ -36,6 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
 // only works for the controller's view.
 + (__kindof UIViewController *)mui_viewControllerForView:(UIView *)view;
 
++ (BOOL)mui_doesOverrideViewControllerMethod:(SEL)method;
+
++ (BOOL)mui_doesOverrideViewControllerMethod:(SEL)method inBaseClass:(Class)aClass;
+
+- (UIViewController *)mui_ancestorViewControllerOfClass:(Class)aClass allowModalParent:(bool)allowModalParent;
+
 @end
 
 NS_ASSUME_NONNULL_END

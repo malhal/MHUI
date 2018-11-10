@@ -67,4 +67,26 @@
     return [view valueForKey:@"_viewDelegate"];
 }
 
++ (BOOL)mui_doesOverrideViewControllerMethod:(SEL)method{
+    return [self mui_doesOverrideViewControllerMethod:method inBaseClass:UIViewController.class];
+}
+
++ (BOOL)mui_doesOverrideViewControllerMethod:(SEL)method inBaseClass:(Class)aClass{
+    return class_getMethodImplementation(self, method) !=  class_getMethodImplementation(aClass, method);
+}
+
+- (UIViewController *)mui_ancestorViewControllerOfClass:(Class)aClass allowModalParent:(bool)allowModalParent{
+    UIViewController *parent = self.parentViewController;
+    if(!parent && allowModalParent){
+        parent = self.presentingViewController;
+    }
+    if(!parent){
+        return nil;
+    }
+    else if(![parent isKindOfClass:aClass]){
+        return [parent mui_ancestorViewControllerOfClass:aClass allowModalParent:allowModalParent];
+    }
+    return parent;
+}
+
 @end
