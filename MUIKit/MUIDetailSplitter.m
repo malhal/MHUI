@@ -20,7 +20,7 @@
     return self;
 }
 
-// needs tested
+// NO if we want to keep the detail
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
     
     id detailItem = secondaryViewController.mui_detailItem;
@@ -34,9 +34,9 @@
         return YES;
     }
     UINavigationController *nc = (UINavigationController *)primaryViewController;
-    if(nc.viewControllers.count == 1){
-        return YES;
-    }
+//    if(nc.viewControllers.count == 1){
+//        return YES;
+//    }
     for (UIViewController *controller in nc.viewControllers) {
         if (![controller mui_containsDetailItem:detailItem]) {
             return YES;
