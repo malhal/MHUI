@@ -79,6 +79,11 @@
     return detailItem;
 }
 
+- (BOOL)mui_containsDetailItem:(id)detailItem
+{
+    return [self.viewControllers.firstObject mui_containsDetailItem:detailItem];
+}
+
 @end
 
 @implementation UINavigationController (MUIDetail)
@@ -106,6 +111,11 @@
         }
     }
     return detailItem;
+}
+
+- (BOOL)mui_containsDetailItem:(id)detailItem
+{
+    return [self.topViewController mui_containsDetailItem:detailItem];
 }
 
 @end

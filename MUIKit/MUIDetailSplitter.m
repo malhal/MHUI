@@ -30,10 +30,10 @@
     }
     // Before collapsing, remove any view controllers on our stack that don't match the photo we are about to merge on
     // Malc: this is for when the table isnt showing the selected photo, i.e. in a different folder.
-    if(![primaryViewController isKindOfClass:[UINavigationController class]]) {
-        return YES;
-    }
-    UINavigationController *nc = (UINavigationController *)primaryViewController;
+//    if(![primaryViewController isKindOfClass:[UINavigationController class]]) {
+//        return YES;
+//    }
+//    UINavigationController *nc = (UINavigationController *)primaryViewController;
 //    if(nc.viewControllers.count == 1){
 //        return YES;
 //    }
@@ -42,8 +42,8 @@
 //            return YES;
 //        }
 //    }
-    UIViewController *top = nc.topViewController;
-    if (![top mui_containsDetailItem:detailItem]) {
+   // UIViewController *top = nc.topViewController;
+    else if (![primaryViewController mui_containsDetailItem:detailItem]) {
         return YES;
     }
     return NO;

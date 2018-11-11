@@ -32,21 +32,21 @@
         // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
         return YES;
     }
-    UIViewController *viewController = ((UISplitViewController *)primaryViewController).viewControllers.firstObject;
-        // Before collapsing, remove any view controllers on our stack that don't match the photo we are about to merge on
-        // Malc: this is for when the table isnt showing the selected photo, i.e. in a different folder.
-    if ([viewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *nav = (UINavigationController *)viewController;
-        viewController = nav.topViewController;
-        if ([viewController isKindOfClass:[UINavigationController class]]) {
-            UINavigationController *nav = (UINavigationController *)viewController;
-            viewController = nav.topViewController;
-        }
-        // if the controller doesnt contain the detail item then throw it away.
-        if (![viewController mui_containsDetailItem:detailItem]) {
+   // UIViewController *viewController = ((UISplitViewController *)primaryViewController).viewControllers.firstObject;
+//        // Before collapsing, remove any view controllers on our stack that don't match the photo we are about to merge on
+//        // Malc: this is for when the table isnt showing the selected photo, i.e. in a different folder.
+//    if ([viewController isKindOfClass:[UINavigationController class]]) {
+//        UINavigationController *nav = (UINavigationController *)viewController;
+//        viewController = nav.topViewController;
+//        if ([viewController isKindOfClass:[UINavigationController class]]) {
+//            UINavigationController *nav = (UINavigationController *)viewController;
+//            viewController = nav.topViewController;
+//        }
+//        // if the controller doesnt contain the detail item then throw it away.
+        if (![primaryViewController mui_containsDetailItem:detailItem]) {
             return YES;
         }
-    }
+//    }
     return NO;
     
     //if(primaryViewController.mui_masterItem && secondaryViewController.mui_detailItem){
