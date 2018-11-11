@@ -37,6 +37,7 @@
 
 // when in 3 column with no detail item (but has events list) and dragging on messages on to right.
 // and with detail iatem and dragging on messages on to right.
+//  YES to throwaway master
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
 //    if ([secondaryViewController isKindOfClass:[UINavigationController class]] &&
 //        [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[MasterViewController class]] &&
@@ -52,12 +53,13 @@
     //else {
         //return YES;
     //}
-    
+//    return NO;
     id detailItem = self.mui_detailItem;
-    if(!detailItem){
-        // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
-        return YES;
-    }
+//    if(!detailItem){
+//        // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
+//        return YES;
+//    }
+    return NO;
     //BOOL result = NO;
     // Malc: when we are in a different folder from the detail we need to throw detail away
     if ([secondaryViewController isKindOfClass:[UINavigationController class]]) {
@@ -80,12 +82,9 @@
     return NO;
 }
 
-
-
-
 // This is the inner seperating. called when collapsing from 3 to 1 because traits were changed.
 // in from 1 to 3 this needs to be called second to work.
-//- (nullable UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
+- (nullable UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
     // search for the Master Navigation Controller
 //    if([primaryViewController isKindOfClass:UINavigationController.class]){
 //       id i = [(UINavigationController *)primaryViewController topViewController];
@@ -94,9 +93,7 @@
 //       }
 //    //    return nil; // return nil doesn't just do the nav it can also find the preserved controller!
 //    }
-    
     // regular call to separateSecondaryViewControllerForSplitViewController on the root finds the detail instead of the master probably because its the top at the time.
-    
  //   if(primaryViewController.mui_masterItem){
         //splitViewController = self;
 //        UINavigationController *rootNav = (UINavigationController *)primaryViewController;
@@ -112,9 +109,25 @@
  //       return nil;//UIViewController.alloc.init;
 //    }
 //     return nil;
-//    return [splitViewController.storyboard instantiateViewControllerWithIdentifier:@"MasterNavigationController"]; // created twice when going from 1 to 3 (was cause of trait flip, ok now)
+    
+    // need to check if the master nav contains the detail item otherwise we don't keep it
+    return nil;
+    id detailItem = self.mui_detailItem;
+    if(detailItem){
+        UISplitViewController *rootMasterSplitViewController = self.rootMasterSplitViewController;
+        UINavigationController *nav = rootMasterSplitViewController.viewControllers.firstObject;
+        if([nav.topViewController isKindOfClass:UINavigationController.class]){
+            UINavigationController *nav2 = nav.topViewController;
+            UIViewController *vc = nav2.viewControllers.firstObject;
+            if([vc mui_containsDetailItem:detailItem]){
+                return nil;
+            }
+        }
+    }
+    
+    return [splitViewController.storyboard instantiateViewControllerWithIdentifier:@"MasterNavigationController"]; // created twice when going from 1 to 3 (was cause of trait flip, ok now)
 // //
-//}
+}
 
 // when the outer split changes its viewcontrollers it calls overide which causes the inner split to collapse and expand
 // however that is necessary to flag the nav as allowing nested.

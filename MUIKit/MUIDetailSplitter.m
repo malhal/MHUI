@@ -37,17 +37,21 @@
 //    if(nc.viewControllers.count == 1){
 //        return YES;
 //    }
-    for (UIViewController *controller in nc.viewControllers) {
-        if (![controller mui_containsDetailItem:detailItem]) {
-            return YES;
-        }
+//    for (UIViewController *controller in nc.viewControllers) {
+//        if (![controller mui_containsDetailItem:detailItem]) {
+//            return YES;
+//        }
+//    }
+    UIViewController *top = nav.topViewController;
+    if (![top aapl_containsPhoto:photo]) {
+        return YES;
     }
     return NO;
 }
 
 - (nullable UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
     if(primaryViewController.mui_detailItem){
-        // Do the standard behavior if we have a photo
+        // Do the standard behavior if we have an item
         return nil;
     }
     return [self.delegate createDetailViewControllerForDetailSplitter:self];

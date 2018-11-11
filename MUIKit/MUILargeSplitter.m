@@ -24,30 +24,6 @@
 // needs to push detail onto the root nav controller (not the master).
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
     
-    //    if ([secondaryViewController isKindOfClass:[UINavigationController class]] &&
-    //        [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] &&
-    //        ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)){
-    //        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-    //        return YES;
-    //    }
-    //    else {
-    //// forward this onto the navigation controller
-    //        UISplitViewController *MUIRootMasterSplitViewController = (UISplitViewController *)primaryViewController;
-    //        UINavigationController *nc = MUIRootMasterSplitViewController.viewControllers.firstObject;
-    //        nc = (UINavigationController *)nc.topViewController; // MasterNavigationController
-    //        [nc collapseSecondaryViewController:secondaryViewController forSplitViewController:splitViewController];
-    //        return YES;
-    //    }
-    
-    //    if ([secondaryViewController isKindOfClass:[UINavigationController class]] &&
-    //        [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] &&
-    //        ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)){
-    //        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-    //        return YES;
-    //    }
-    //    else {
-   // return NO;
-    
     // here we are deciding if the detail should be thrown away or not. Based on if the current controllers contain it.
     
     id detailItem = secondaryViewController.mui_detailItem;
@@ -60,9 +36,9 @@
         // Malc: this is for when the table isnt showing the selected photo, i.e. in a different folder.
     if ([primaryViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nav = (UINavigationController *)primaryViewController;
-        if(nav.viewControllers.count == 1){
-            return YES;
-        }
+//        if(nav.viewControllers.count == 1){
+//            return YES;
+//        }
         for (UIViewController *controller in nav.viewControllers) {
             if ([controller isKindOfClass:UINavigationController.class]) {
                 for (UIViewController *controller2 in [(UINavigationController *)controller viewControllers]) {
