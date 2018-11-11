@@ -55,27 +55,28 @@
     //}
 //    return NO;
     id detailItem = self.mui_detailItem;
-//    if(!detailItem){
-//        // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
-//        return YES;
-//    }
-    return NO;
+    if(!detailItem){
+        // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
+        return YES;
+    }
+   
     //BOOL result = NO;
     // Malc: when we are in a different folder from the detail we need to throw detail away
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]]) {
+    if ([primaryViewController isKindOfClass:[UINavigationController class]]) {
         //NSMutableArray *viewControllers = [NSMutableArray array];
-        UINavigationController *nav = (UINavigationController *)secondaryViewController;
-        NSArray *viewControllers = nav.viewControllers;
+        UINavigationController *nav = (UINavigationController *)primaryViewController;
+        //NSArray *viewControllers = nav.viewControllers;
 //        if(viewControllers.count == 1){
 //            return YES;
 //        }
-        for (UIViewController *controller in viewControllers) {
+         UIViewController *controller = nav.topViewController;
+        //for (UIViewController *controller in viewControllers) {
             //[viewControllers addObject:controller];
             if (![controller mui_containsDetailItem:detailItem]) {
                 //result = YES;
                 return YES;
             }
-        }
+       // }
 
         //[(UINavigationController *)primaryViewController setViewControllers:viewControllers];
     }

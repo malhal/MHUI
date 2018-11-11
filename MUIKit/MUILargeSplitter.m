@@ -22,6 +22,7 @@
 }
 
 // needs to push detail onto the root nav controller (not the master).
+// Return yes means throw away
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
     
     // here we are deciding if the detail should be thrown away or not. Based on if the current controllers contain it.
@@ -31,29 +32,20 @@
         // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
         return YES;
     }
-    primaryViewController = ((UISplitViewController *)primaryViewController).viewControllers.firstObject;
+    UIViewController *viewController = ((UISplitViewController *)primaryViewController).viewControllers.firstObject;
         // Before collapsing, remove any view controllers on our stack that don't match the photo we are about to merge on
         // Malc: this is for when the table isnt showing the selected photo, i.e. in a different folder.
-    if ([primaryViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *nav = (UINavigationController *)primaryViewController;
-//        if(nav.viewControllers.count == 1){
-//            return YES;
-//        }
-        for (UIViewController *controller in nav.viewControllers) {
-            if ([controller isKindOfClass:UINavigationController.class]) {
-                for (UIViewController *controller2 in [(UINavigationController *)controller viewControllers]) {
-                    if (![controller2 mui_containsDetailItem:detailItem]) {
-                        return YES;
-                    }
-                }
-                //[(UINavigationController *)primaryViewController setViewControllers:viewControllers];
-                //continue;
-            }
-            else if (![controller mui_containsDetailItem:detailItem]) {
-                return YES;
-            }
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nav = (UINavigationController *)viewController;
+        viewController = nav.topViewController;
+        if ([viewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *nav = (UINavigationController *)viewController;
+            viewController = nav.topViewController;
         }
-        //[(UINavigationController *)primaryViewController setViewControllers:viewControllers];
+        // if the controller doesnt contain the detail item then throw it away.
+        if (![viewController mui_containsDetailItem:detailItem]) {
+            return YES;
+        }
     }
     return NO;
     

@@ -42,8 +42,8 @@
 //            return YES;
 //        }
 //    }
-    UIViewController *top = nav.topViewController;
-    if (![top aapl_containsPhoto:photo]) {
+    UIViewController *top = nc.topViewController;
+    if (![top mui_containsDetailItem:detailItem]) {
         return YES;
     }
     return NO;
