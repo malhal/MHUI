@@ -16,7 +16,22 @@
 
 @end
 
+@interface UINavigationController()
+
+- (void)_safeAreaInsetsDidChangeForView;
+
+@end
+
 @implementation MUIRootMasterSplitViewController
+
+//- (void)_safeAreaInsetsDidChangeForView{
+//    [self.rootNavigationController _safeAreaInsetsDidChangeForView];
+//}
+
+- (void)viewSafeAreaInsetsDidChange{
+    [super viewSafeAreaInsetsDidChange];
+    NSLog(@"viewSafeAreaInsetsDidChange");
+}
 
 // decides if showDetailViewController should be passed up to the outer split, e.g. if choosing a detail item on the master
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender{

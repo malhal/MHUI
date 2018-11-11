@@ -29,10 +29,43 @@
     //UINavigationController *nav = self.viewControllers.firstObject;
     self.rootMasterSplitViewController = self.viewControllers.firstObject;//nav.topViewController;
     self.rootMasterSplitViewController.delegate = self;
+    //self.rootMasterSplitViewController.view.insetsContentViewsToSafeArea = YES;
     CGSize size = self.view.frame.size;
     [self configureColumnsWithSize:size];
     [self configureTraitsWithSize:size];
     [self updateForcedTraitCollection];
+}
+//
+//- (void)viewDidAppear:(BOOL)animated{
+//    [super viewDidAppear:animated];
+//    UIEdgeInsets oldSaveArea = self.view.safeAreaInsets; // 44
+//    UIEdgeInsets newSafeArea = UIEdgeInsetsZero;
+//    // Adjust the safe area to accommodate
+//    //  the width of the side view.
+//    newSafeArea.left = 55;
+////    if let sideViewWidth = sideView?.bounds.size.width {
+////        newSafeArea.right += sideViewWidth
+////    }
+////    // Adjust the safe area to accommodate
+////    //  the height of the bottom view.
+////    if let bottomViewHeight = bottomView?.bounds.size.height {
+////        newSafeArea.bottom += bottomViewHeight
+////    }
+//    // Adjust the safe area insets of the
+//    //  embedded child view controller.
+////    let child = self.childViewControllers[0]
+//    self.rootMasterSplitViewController.additionalSafeAreaInsets = newSafeArea;
+//}
+
+// XS hack for landscape overlay
+- (void)viewSafeAreaInsetsDidChange{
+    [super viewSafeAreaInsetsDidChange];
+    UIEdgeInsets b = self.view.safeAreaInsets;
+    UIEdgeInsets newSafeArea = UIEdgeInsetsZero;
+    if(b.left){
+        newSafeArea.left = b.left + 15;
+    }
+    self.rootMasterSplitViewController.additionalSafeAreaInsets = newSafeArea;
 }
 
 // when in 3 column with no detail item (but has events list) and dragging on messages on to right.
@@ -74,7 +107,7 @@
 
 // This is the inner seperating. called when collapsing from 3 to 1 because traits were changed.
 // in from 1 to 3 this needs to be called second to work.
-//- (nullable UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
+- (nullable UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
     // search for the Master Navigation Controller
 //    if([primaryViewController isKindOfClass:UINavigationController.class]){
 //       id i = [(UINavigationController *)primaryViewController topViewController];
@@ -98,7 +131,7 @@
         
  //       return nil;//UIViewController.alloc.init;
 //    }
-//     return nil;
+     return nil;
     
     // need to check if the master nav contains the detail item otherwise we don't keep it
 //    return nil;
@@ -116,7 +149,7 @@
 //    }
 //    
 //    return [splitViewController.storyboard instantiateViewControllerWithIdentifier:@"MasterNavigationController"]; // created twice when going from 1 to 3 (was cause of trait flip, ok now)
-//}
+}
 
 // when the outer split changes its viewcontrollers it calls overide which causes the inner split to collapse and expand
 // however that is necessary to flag the nav as allowing nested.
@@ -153,10 +186,9 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
- [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-    [self configureColumnsWithSize:size];
-
+        [self configureColumnsWithSize:size];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self configureTraitsWithSize:size];
     }];
@@ -167,7 +199,7 @@
         self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
     }
     else{
-        self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
+        self.forcedTraitCollection = nil;//[UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
     }
 }
 
@@ -175,7 +207,7 @@
     UISplitViewController *rootMasterSplitViewController = self.rootMasterSplitViewController;
     
     NSLog(@"display modes: %ld %ld", self.displayMode, rootMasterSplitViewController.displayMode);
-    
+    // check if we need to go back to 2 columns from 3
     if(size.width < 1366){ // 1280  to allow for other sizes? check ipad mini.
         // Otherwise, compact
         //self.preferredPrimaryColumnWidthFraction = UISplitViewControllerAutomaticDimension;
@@ -316,5 +348,7 @@
     return YES;
 }
 */
+
+
 
 @end
