@@ -56,10 +56,8 @@
 		EC76D6E51D9E4442002DC0A0 /* MUISignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6DF1D9E4442002DC0A0 /* MUISignUpViewController.m */; };
 		EC76D6E81D9E4470002DC0A0 /* UIViewController+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6E61D9E4470002DC0A0 /* UIViewController+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */; };
-		EC89EB90218DBCDE00C1E188 /* MUIDetailSplitter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC89EB8E218DBCDE00C1E188 /* MUIDetailSplitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC89EB91218DBCDE00C1E188 /* MUIDetailSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC89EB8F218DBCDE00C1E188 /* MUIDetailSplitter.m */; };
-		EC89EB94218DC08900C1E188 /* MUILargeSplitter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC89EB92218DC08900C1E188 /* MUILargeSplitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC89EB95218DC08900C1E188 /* MUILargeSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC89EB93218DC08900C1E188 /* MUILargeSplitter.m */; };
+		EC89EB94218DC08900C1E188 /* MUIDetailItemSplitter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC89EB92218DC08900C1E188 /* MUIDetailItemSplitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC89EB95218DC08900C1E188 /* MUIDetailItemSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC89EB93218DC08900C1E188 /* MUIDetailItemSplitter.m */; };
 		EC913C962185FAC200E3E6DA /* MUIMasterController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC913C942185FAC200E3E6DA /* MUIMasterController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC913C972185FAC200E3E6DA /* MUIMasterController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC913C952185FAC200E3E6DA /* MUIMasterController.m */; };
 		EC913C9D218658DE00E3E6DA /* MUITableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC913C9B218658DE00E3E6DA /* MUITableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,10 +67,8 @@
 		EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */; };
-		ECBD8829218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBD8827218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.m */; };
-		ECBD882A218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECBD8828218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECF5100721933112002AD004 /* MUIRootMasterSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECF5100521933112002AD004 /* MUIRootMasterSplitViewController.h */; };
-		ECF5100821933112002AD004 /* MUIRootMasterSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF5100621933112002AD004 /* MUIRootMasterSplitViewController.m */; };
+		ECBD8829218C7EC800F5E602 /* MUISplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */; };
+		ECBD882A218C7EC800F5E602 /* MUISplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,10 +135,8 @@
 		EC76D6DF1D9E4442002DC0A0 /* MUISignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUISignUpViewController.m; sourceTree = "<group>"; };
 		EC76D6E61D9E4470002DC0A0 /* UIViewController+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MUI.h"; sourceTree = "<group>"; };
 		EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MUI.m"; sourceTree = "<group>"; };
-		EC89EB8E218DBCDE00C1E188 /* MUIDetailSplitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIDetailSplitter.h; sourceTree = "<group>"; };
-		EC89EB8F218DBCDE00C1E188 /* MUIDetailSplitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIDetailSplitter.m; sourceTree = "<group>"; };
-		EC89EB92218DC08900C1E188 /* MUILargeSplitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUILargeSplitter.h; sourceTree = "<group>"; };
-		EC89EB93218DC08900C1E188 /* MUILargeSplitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUILargeSplitter.m; sourceTree = "<group>"; };
+		EC89EB92218DC08900C1E188 /* MUIDetailItemSplitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIDetailItemSplitter.h; sourceTree = "<group>"; };
+		EC89EB93218DC08900C1E188 /* MUIDetailItemSplitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIDetailItemSplitter.m; sourceTree = "<group>"; };
 		EC913C942185FAC200E3E6DA /* MUIMasterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIMasterController.h; sourceTree = "<group>"; };
 		EC913C952185FAC200E3E6DA /* MUIMasterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIMasterController.m; sourceTree = "<group>"; };
 		EC913C9B218658DE00E3E6DA /* MUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUITableViewController.h; sourceTree = "<group>"; };
@@ -152,10 +146,8 @@
 		EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MUI.m"; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MUI.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MUI.m"; sourceTree = "<group>"; };
-		ECBD8827218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIRootMasterDetailSplitViewController.m; sourceTree = "<group>"; };
-		ECBD8828218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIRootMasterDetailSplitViewController.h; sourceTree = "<group>"; };
-		ECF5100521933112002AD004 /* MUIRootMasterSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIRootMasterSplitViewController.h; sourceTree = "<group>"; };
-		ECF5100621933112002AD004 /* MUIRootMasterSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIRootMasterSplitViewController.m; sourceTree = "<group>"; };
+		ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUISplitViewController.m; sourceTree = "<group>"; };
+		ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUISplitViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,14 +215,10 @@
 				EC913C9B218658DE00E3E6DA /* MUITableViewController.h */,
 				EC913C9F2186596700E3E6DA /* MUITableViewController+Internal.h */,
 				EC913C9C218658DE00E3E6DA /* MUITableViewController.m */,
-				EC89EB8E218DBCDE00C1E188 /* MUIDetailSplitter.h */,
-				EC89EB8F218DBCDE00C1E188 /* MUIDetailSplitter.m */,
-				ECF5100521933112002AD004 /* MUIRootMasterSplitViewController.h */,
-				ECF5100621933112002AD004 /* MUIRootMasterSplitViewController.m */,
-				ECBD8828218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.h */,
-				ECBD8827218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.m */,
-				EC89EB92218DC08900C1E188 /* MUILargeSplitter.h */,
-				EC89EB93218DC08900C1E188 /* MUILargeSplitter.m */,
+				ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */,
+				ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */,
+				EC89EB92218DC08900C1E188 /* MUIDetailItemSplitter.h */,
+				EC89EB93218DC08900C1E188 /* MUIDetailItemSplitter.m */,
 				EC6758901DB024AC00838798 /* MUIAccountViewController.h */,
 				EC6758911DB024AC00838798 /* MUIAccountViewController.m */,
 				EC76D6DC1D9E4442002DC0A0 /* MUILogInViewController.h */,
@@ -296,7 +284,7 @@
 			files = (
 				EC3145521D0740EA0025F669 /* UINavigationBar+MUI.h in Headers */,
 				EC76D6D81D9E431B002DC0A0 /* MUIDefines.h in Headers */,
-				ECBD882A218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.h in Headers */,
+				ECBD882A218C7EC800F5E602 /* MUISplitViewController.h in Headers */,
 				EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MUI.h in Headers */,
 				EC31454C1D0740EA0025F669 /* MUIDictionaryViewController.h in Headers */,
@@ -308,7 +296,7 @@
 				EC6758961DB0251E00838798 /* MUIEditableTableCell.h in Headers */,
 				EC913CA021865A1800E3E6DA /* MUITableViewController+Internal.h in Headers */,
 				EC6758921DB024AC00838798 /* MUIAccountViewController.h in Headers */,
-				EC89EB94218DC08900C1E188 /* MUILargeSplitter.h in Headers */,
+				EC89EB94218DC08900C1E188 /* MUIDetailItemSplitter.h in Headers */,
 				EC596B16218A4433000B5302 /* UIViewController+MUIShowing.h in Headers */,
 				EC913C962185FAC200E3E6DA /* MUIMasterController.h in Headers */,
 				EC5D1C8A1F75C2F3008BC02E /* MUIAlertController.h in Headers */,
@@ -317,10 +305,8 @@
 				EC3145541D0740EA0025F669 /* UITabBar+MUI.h in Headers */,
 				ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */,
 				EC76D6E21D9E4442002DC0A0 /* MUILogInViewController.h in Headers */,
-				ECF5100721933112002AD004 /* MUIRootMasterSplitViewController.h in Headers */,
 				EC9A9CA120344F0900E5A698 /* UIImage+MUI.h in Headers */,
 				EC913C9D218658DE00E3E6DA /* MUITableViewController.h in Headers */,
-				EC89EB90218DBCDE00C1E188 /* MUIDetailSplitter.h in Headers */,
 				EC3E0E091DBA46C800D49472 /* MUIMultilineTableCell.h in Headers */,
 				EC6758A71DB02C1F00838798 /* UIAlertView+MUI.h in Headers */,
 				EC5D1C901F75C4B0008BC02E /* MUIProgressViewController.h in Headers */,
@@ -428,10 +414,10 @@
 			files = (
 				EC5D1C891F75C2F0008BC02E /* MUIAlertController.m in Sources */,
 				EC6758931DB024AC00838798 /* MUIAccountViewController.m in Sources */,
-				ECBD8829218C7EC800F5E602 /* MUIRootMasterDetailSplitViewController.m in Sources */,
+				ECBD8829218C7EC800F5E602 /* MUISplitViewController.m in Sources */,
 				EC6758971DB0251E00838798 /* MUIEditableTableCell.m in Sources */,
 				EC3145531D0740EA0025F669 /* UINavigationBar+MUI.m in Sources */,
-				EC89EB95218DC08900C1E188 /* MUILargeSplitter.m in Sources */,
+				EC89EB95218DC08900C1E188 /* MUIDetailItemSplitter.m in Sources */,
 				EC3145551D0740EA0025F669 /* UITabBar+MUI.m in Sources */,
 				EC3145511D0740EA0025F669 /* UIAlertController+MUI.m in Sources */,
 				EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */,
@@ -441,7 +427,6 @@
 				EC5D1C911F75C4B0008BC02E /* MUIProgressViewController.m in Sources */,
 				EC913C972185FAC200E3E6DA /* MUIMasterController.m in Sources */,
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */,
-				EC89EB91218DBCDE00C1E188 /* MUIDetailSplitter.m in Sources */,
 				EC913C9E218658DE00E3E6DA /* MUITableViewController.m in Sources */,
 				ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */,
 				EC1E12A92012A60C0036130D /* UITableView+MUI.m in Sources */,
@@ -451,7 +436,6 @@
 				EC5D1C8D1F75C451008BC02E /* MUILongRunningTaskController.m in Sources */,
 				EC596B1B218A44C4000B5302 /* UIViewController+MUIDetail.m in Sources */,
 				EC31454D1D0740EA0025F669 /* MUIDictionaryViewController.m in Sources */,
-				ECF5100821933112002AD004 /* MUIRootMasterSplitViewController.m in Sources */,
 				EC76D6E31D9E4442002DC0A0 /* MUILogInViewController.m in Sources */,
 				EC31454F1D0740EA0025F669 /* MUIFlipController.m in Sources */,
 				EC2F7E36200D8455001B9D3B /* UITextField+MUI.m in Sources */,

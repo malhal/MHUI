@@ -23,10 +23,9 @@
 
 #import <MUIKit/MUIMasterController.h>
 #import <MUIKit/MUITableViewController.h>
-#import <MUIKit/MUIRootMasterDetailSplitViewController.h>
-#import <MUIKit/MUIDetailSplitter.h>
-#import <MUIKit/MUILargeSplitter.h>
-//#import <MUIKit/MUIRootMasterSplitViewController.h>
+#import <MUIKit/MUISplitViewController.h>
+#import <MUIKit/MUIDetailItemSplitter.h>
+#import <MUIKit/MUIDetailItemSplitter.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
