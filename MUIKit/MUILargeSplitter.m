@@ -21,6 +21,35 @@
     return self;
 }
 
+// needed because the splitview checks for delegate methods when first set
+- (void)setSplitControllerDelegate:(NSObject<UISplitViewControllerDelegate> *)splitControllerDelegate{
+    if(splitControllerDelegate == _splitControllerDelegate){
+        return;
+    }
+    self.splitController.delegate = nil;
+    _splitControllerDelegate = splitControllerDelegate;
+    self.splitController.delegate = self;
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector{
+    if([super respondsToSelector:aSelector]){
+        return YES;
+    }
+    if(MHFProtocolHasInstanceMethod(@protocol(UISplitViewControllerDelegate), aSelector)){
+        return [self.splitControllerDelegate respondsToSelector:aSelector];
+    }
+    return NO;
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector{
+    if(MHFProtocolHasInstanceMethod(@protocol(UISplitViewControllerDelegate), aSelector)){
+        if([self.splitControllerDelegate respondsToSelector:aSelector]){
+            return self.splitControllerDelegate;
+        }
+    }
+    return [super forwardingTargetForSelector:aSelector];
+}
+
 // needs to push detail onto the root nav controller (not the master).
 // Return yes means throw away
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {

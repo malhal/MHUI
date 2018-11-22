@@ -18,12 +18,36 @@
 @property (copy, nonatomic) UITraitCollection *forcedTraitCollection;
 @property (strong, nonatomic) MUIRootMasterSplitViewController *rootMasterSplitViewController;
 
+@property (assign, nonatomic) BOOL largeSplit;
+
 @end
 
 @implementation MUIRootMasterDetailSplitViewController
 
+- (UIBarButtonItem *)threeColumnsButtonItem{
+    if(_threeColumnsButtonItem){
+        return _threeColumnsButtonItem;
+    }
+    _threeColumnsButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Mode" style:0 target:self action:@selector(triggerThreeColumnsAction:)];
+    [self updateThreeColumnsButtonItem];
+    return _threeColumnsButtonItem;
+}
+
+- (void)updateThreeColumnsButtonItem{
+    
+}
+
+- (void)triggerThreeColumnsAction:(id)sender{
+    self.largeSplit = !self.largeSplit;
+    CGSize size = self.view.frame.size;
+    [self configureColumnsWithSize:size];
+    [self configureTraitsWithSize:size];
+    [self updateForcedTraitCollection];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.largeSplit = YES;
     // Do any additional setup after loading the view.
     //self.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible; // these 3 call view did load so dont do it here
     //UINavigationController *nav = self.viewControllers.firstObject;
@@ -35,7 +59,7 @@
     [self configureTraitsWithSize:size];
     [self updateForcedTraitCollection];
 }
-//
+
 //- (void)viewDidAppear:(BOOL)animated{
 //    [super viewDidAppear:animated];
 //    UIEdgeInsets oldSaveArea = self.view.safeAreaInsets; // 44
@@ -151,6 +175,10 @@
 //    return [splitViewController.storyboard instantiateViewControllerWithIdentifier:@"MasterNavigationController"]; // created twice when going from 1 to 3 (was cause of trait flip, ok now)
 }
 
+//- (UISplitViewControllerDisplayMode)targetDisplayModeForActionInSplitViewController:(UISplitViewController *)svc{
+//    return UISplitViewControllerDisplayModePrimaryOverlay;
+//}
+
 // when the outer split changes its viewcontrollers it calls overide which causes the inner split to collapse and expand
 // however that is necessary to flag the nav as allowing nested.
 // no longer needed because we override it?
@@ -188,18 +216,19 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self configureColumnsWithSize:size];
+        
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self configureColumnsWithSize:size];
         [self configureTraitsWithSize:size];
     }];
 }
 
 - (void)configureTraitsWithSize:(CGSize)size{
-    if(size.width < 1366){
-        self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
+    if(self.largeSplit && size.width >= 1280){//< 1366){
+        self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
     }
     else{
-        self.forcedTraitCollection = nil;//[UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
+        self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
     }
 }
 
@@ -208,7 +237,17 @@
     
     NSLog(@"display modes: %ld %ld", self.displayMode, rootMasterSplitViewController.displayMode);
     // check if we need to go back to 2 columns from 3
-    if(size.width < 1366){ // 1280  to allow for other sizes? check ipad mini.
+    if(self.largeSplit && size.width >= 1280){//1366){ // 1280  to allow for other sizes? check ipad mini. Which is 4x320
+
+        // If we are large enough, force a regular size class
+        // self.preferredPrimaryColumnWidthFraction = 0.5;
+        //rootMasterSplitViewController.preferredPrimaryColumnWidthFraction = 0.5;
+        self.maximumPrimaryColumnWidth = 640;//320 * 2;//MAXFLOAT;
+        self.minimumPrimaryColumnWidth = 640;//320 * 2;
+        //rootMasterSplitViewController.maximumPrimaryColumnWidth = MAXFLOAT;
+        //  self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
+    }
+    else{
         // Otherwise, compact
         //self.preferredPrimaryColumnWidthFraction = UISplitViewControllerAutomaticDimension;
         //rootMasterSplitViewController.preferredPrimaryColumnWidthFraction = UISplitViewControllerAutomaticDimension;
@@ -216,15 +255,6 @@
         self.minimumPrimaryColumnWidth = UISplitViewControllerAutomaticDimension;
         //rootMasterSplitViewController.maximumPrimaryColumnWidth = UISplitViewControllerAutomaticDimension;
         //self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
-    }
-    else{
-        // If we are large enough, force a regular size class
-       // self.preferredPrimaryColumnWidthFraction = 0.5;
-        //rootMasterSplitViewController.preferredPrimaryColumnWidthFraction = 0.5;
-        self.maximumPrimaryColumnWidth = 640;//320 * 2;//MAXFLOAT;
-        self.minimumPrimaryColumnWidth = 640;//320 * 2;
-        //rootMasterSplitViewController.maximumPrimaryColumnWidth = MAXFLOAT;
-      //  self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
     }
 }
 
@@ -241,11 +271,11 @@
 {
     // Use our forcedTraitCollection to override our child's traits
     //UISplitViewController *splitViewController = self.viewControllers.firstObject;
-    id s = self.rootMasterSplitViewController;
+   // id s = self.rootMasterSplitViewController;
     [super setOverrideTraitCollection:self.forcedTraitCollection forChildViewController:self.rootMasterSplitViewController];
-    id i = self.rootMasterSplitViewController.viewControllers.firstObject;
-    [self.rootMasterSplitViewController setOverrideTraitCollection:self.forcedTraitCollection forChildViewController:i];
-    NSLog(@"");
+   // id i = self.rootMasterSplitViewController.viewControllers.firstObject;
+   // [self.rootMasterSplitViewController setOverrideTraitCollection:self.forcedTraitCollection forChildViewController:i];
+//    NSLog(@"");
     
 }
 

@@ -98,4 +98,12 @@
     return (UIViewController *)responder;
 }
 
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc{
+    UIView *view = vc.viewIfLoaded;
+    if(!view){
+        return NO;
+    }
+    return [self isDescendantOfView:view];
+}
+
 @end

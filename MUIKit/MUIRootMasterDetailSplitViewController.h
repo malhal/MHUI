@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MUIRootMasterDetailSplitViewController : UISplitViewController
 
+@property (strong, nonatomic) UIBarButtonItem *threeColumnsButtonItem;
+
+- (void)changeTraits;
+
 @end
 
 NS_ASSUME_NONNULL_END

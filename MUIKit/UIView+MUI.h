@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, MHViewAnimationTransitionSlide) {
 
 - (__kindof UIViewController *)mui_viewController;
 
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIViewController *)mui_ancestorViewControllerOfClass:(Class)aClass allowModalParent:(bool)allowModalParent;
 
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc;
+
 @end
 
 NS_ASSUME_NONNULL_END

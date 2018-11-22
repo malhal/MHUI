@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MHFoundation/MHFoundation.h>
 #import <MUIKit/MUIDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) MUIRootMasterDetailSplitViewController *splitController;
 
-//@property (nonatomic, assign) id<UISplitViewControllerDelegate> splitDelegate;
+@property (nonatomic, assign) NSObject<UISplitViewControllerDelegate> *splitControllerDelegate;
 
 @property (nonatomic, assign) id<MUILargeSplitterDelegate> delegate;
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MHFoundation/MHFoundation.h>
 #import <MUIKit/MUIDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
