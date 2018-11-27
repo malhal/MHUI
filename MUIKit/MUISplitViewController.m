@@ -18,7 +18,7 @@
 @property (copy, nonatomic) UITraitCollection *forcedTraitCollection;
 
 // used for the delegates when is the child split.
-@property (strong, nonatomic, readwrite) MUIDetailItemSplitter *detailItemSplitter;
+@property (strong, nonatomic, readwrite) MUIMasterItemSplitter *masterItemSplitter;
 
 //@property (strong, nonatomic) MUIRootMasterSplitViewController *rootMasterSplitViewController;
 //@property (assign, nonatomic) BOOL largeSplit;
@@ -65,13 +65,21 @@
     
     MUISplitViewController* childSplitController = self.childSplitController;
     if(childSplitController){
-        self.detailItemSplitter = [MUIDetailItemSplitter.alloc initWithSplitViewController:childSplitController];
+       // childSplitController.delegate = self.masterItemSplitter;
+        //self.detailItemSplitter = [MUIDetailItemSplitter.alloc initWithSplitViewController:childSplitController];
         //self.rootMasterSplitViewController.view.insetsContentViewsToSafeArea = YES;
         CGSize size = self.view.frame.size;
         [self configureColumnsWithSize:size];
         [self configureTraitsWithSize:size];
         [self updateForcedTraitCollection];
     }
+}
+
+- (MUIMasterItemSplitter *)masterItemSplitter{
+    if(!_masterItemSplitter){
+        _masterItemSplitter = [MUIMasterItemSplitter.alloc init];
+    }
+    return _masterItemSplitter;
 }
 
 - (MUISplitViewController *)childSplitController{
@@ -261,6 +269,7 @@
 // from 3 to 2 or 1 columns
 - (void)collapseSecondaryViewController:(UIViewController *)secondaryViewController forSplitViewController:(UISplitViewController *)splitViewController{
     [self.masterViewController collapseSecondaryViewController:secondaryViewController forSplitViewController:splitViewController];
+    self.preservedDetailViewController = nil;
 }
 
 // called when this split is a master in another
@@ -268,6 +277,7 @@
 - (nullable UIViewController *)separateSecondaryViewControllerForSplitViewController:(UISplitViewController *)splitViewController{
     return [self.masterViewController separateSecondaryViewControllerForSplitViewController:splitViewController];
 }
+
 
 
 @end

@@ -12,13 +12,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MUIDetailItemSplitter;
+@class MUIMasterItemSplitter;
 
 @interface MUISplitViewController : UISplitViewController
 
 //@property (strong, nonatomic) UIBarButtonItem *threeColumnsButtonItem;
 
-@property (strong, nonatomic, readonly) MUIDetailItemSplitter *detailSplitter;
+@property (strong, nonatomic, readonly) MUIMasterItemSplitter *masterItemSplitter;
+
+@property (strong, nonatomic, readonly) MUISplitViewController *childSplitController;
 
 @end
 

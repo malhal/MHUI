@@ -13,11 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (MUIDetail)
 
-//- (id)mui_masterItem;
+- (id)mui_masterItem;
 
 - (id)mui_detailItem;
 
 - (BOOL)mui_containsDetailItem:(id)detailItem;
+
+- (BOOL)mui_containsMasterItem:(id)masterItem;
+
+
 
 - (id)mui_currentVisibleDetailItemWithSender:(id)sender;
 

@@ -21,8 +21,7 @@
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
 
-#import <MUIKit/MUIMasterController.h>
-#import <MUIKit/MUITableViewController.h>
+#import <MUIKit/MUIMasterTableViewController.h>
 #import <MUIKit/MUISplitViewController.h>
 #import <MUIKit/MUIDetailItemSplitter.h>
 #import <MUIKit/MUIDetailItemSplitter.h>

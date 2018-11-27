@@ -13,16 +13,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUIDetailItemSplitterDelegate;
-@class MUISplitViewController;
 
-@interface MUIDetailItemSplitter : NSObject <UISplitViewControllerDelegate>
+//@class MUISplitViewController;
 
-- (instancetype)initWithSplitViewController:(MUISplitViewController *)splitController;
+@interface MUIItemSplitter : NSObject <UISplitViewControllerDelegate>
 
-@property (nonatomic, assign, readonly) MUISplitViewController *splitController;
+//- (instancetype)initWithSplitViewController:(UISplitViewController *)splitController;
+
+//@property (nonatomic, assign, readonly) UISplitViewController *splitController;
 
 @property (nonatomic, assign) NSObject<UISplitViewControllerDelegate> *splitControllerDelegate;
+
+@end
+
+@protocol MUIDetailItemSplitterDelegate;
+
+@interface MUIDetailItemSplitter : MUIItemSplitter
 
 @property (nonatomic, assign) id<MUIDetailItemSplitterDelegate> delegate;
 
@@ -30,8 +36,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUIDetailItemSplitterDelegate <NSObject>
 @optional
+// implement if after being in portrait and moving back from detail, and rotating landscape, to show a default detail rather than the preserved one.
+// usually use the storyboard to instantiate the detail navigation controller by its storyboard ID.
 - (UIViewController *)createDetailViewControllerForDetailSplitter:(MUIDetailItemSplitter *)splitter;
 
 @end
+
+@protocol MUIMasterItemSplitterDelegate;
+
+@interface MUIMasterItemSplitter : MUIItemSplitter
+
+@property (nonatomic, assign) id<MUIMasterItemSplitterDelegate> delegate;
+
+@end
+
+@protocol MUIMasterItemSplitterDelegate <NSObject>
+@optional
+// implement if after being in portrait and moving back from detail, and rotating landscape, to show a default detail rather than the preserved one.
+// usually use the storyboard to instantiate the detail navigation controller by its storyboard ID.
+- (UIViewController *)createMasterViewControllerForMasterSplitter:(MUIMasterItemSplitter *)splitter;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

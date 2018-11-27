@@ -58,7 +58,7 @@
 {
     if (self.collapsed) {
         // If we're collapsed, re-ask this question as showViewController: to our primary view controller
-        UIViewController *target = [self.viewControllers lastObject];
+        UIViewController *target = self.viewControllers.lastObject;
         return [target mui_willShowingViewControllerPushWithSender:sender];
     } else {
         // Otherwise, we don't push for showDetailViewController:

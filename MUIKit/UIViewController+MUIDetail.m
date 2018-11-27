@@ -12,8 +12,11 @@
 
 - (id)mui_masterItem
 {
-    // By default, view controllers don't contain photos
     return nil;
+}
+
+- (BOOL)mui_containsMasterItem:(id)masterItem{
+    return NO;
 }
 
 - (id)mui_detailItem
@@ -57,16 +60,20 @@
     }
 }
 
-//- (id)mui_masterItem
-//{
-//    id masterItem;
-//    for(UIViewController *controller in self.viewControllers){
-//        if((masterItem = controller.mui_masterItem)){
-//            break;
-//        }
-//    }
-//    return masterItem;
-//}
+- (id)mui_masterItem
+{
+    id masterItem;
+    for(UIViewController *controller in self.viewControllers){
+        if((masterItem = controller.mui_masterItem)){
+            break;
+        }
+    }
+    return masterItem;
+}
+
+- (BOOL)mui_containsMasterItem:(id)masterItem{
+    return [self.viewControllers.firstObject mui_containsMasterItem:masterItem];
+}
 
 - (id)mui_detailItem
 {
@@ -88,16 +95,21 @@
 
 @implementation UINavigationController (MUIDetail)
 
-//- (id)mui_masterItem
-//{
-//    id masterItem;
-//    for(UIViewController *controller in self.viewControllers){
-//        if((masterItem = controller.mui_masterItem)){
-//            break;
-//        }
-//    }
-//    return masterItem;
-//}
+- (id)mui_masterItem
+{
+    id masterItem;
+    for(UIViewController *controller in self.viewControllers){
+        if((masterItem = controller.mui_masterItem)){
+            break;
+        }
+    }
+    return masterItem;
+}
+
+- (BOOL)mui_containsMasterItem:(id)masterItem
+{
+    return [self.topViewController mui_containsMasterItem:masterItem];
+}
 
 // added this because our detail is a nav.
 // used by above method and also app delegate to find the detail item within a nav controllers and nested ones.

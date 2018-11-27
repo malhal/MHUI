@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id <MUITableViewDelegate> delegate;
 
+// for selecting another index after current index is deleted.
+- (NSIndexPath *)mui_indexPathNearIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 @protocol MUITableViewDelegate <UITableViewDelegate>
