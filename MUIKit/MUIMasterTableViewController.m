@@ -12,7 +12,7 @@
 
 @interface MUIMasterTableViewController()
 
-@property (strong, nonatomic, readwrite) id selectedMasterItem;
+//@property (strong, nonatomic, readwrite) id selectedMasterItem;
 
 @end
 
@@ -25,6 +25,9 @@
 
 // update cell accessories.
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
+    if(![self respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)]){
+        return;
+    }
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
@@ -112,20 +115,28 @@
 //    }
 //    self.selectedMasterItem = [self.delegate masterTableViewController:self masterItemAtIndexPath:indexPath];
 //    return nil;
+//      NSIndexPath *ip = tableView.indexPathForSelectedRow;
+//    return nil;
 //}
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //
 //        self.selectedMasterItem = [self.delegate masterTableViewController:self masterItemAtIndexPath:indexPath];
 //    }
     // in case of allowsSelectionDuringEditing
-    if(tableView.isEditing){
-        return;
-    }
-    
-    id item = [self mui_currentVisibleDetailItemWithSender:self];
-    self.selectedMasterItem = item;
+//    if(tableView.isEditing){
+//        return;
+//    }
+//    NSIndexPath *ip = tableView.indexPathForSelectedRow;
+//    // do this after they showed a new detail controller.
+//    [self performSelector:@selector(updateSelectedMasterItem) withObject:nil afterDelay:0];
+//
+//}
+
+- (void)updateSelectedMasterItem{
+    self.selectedMasterItem = [self mui_currentVisibleDetailItemWithSender:self];
 }
+
 
 // we don't perform table cell segues when editing but we allow other segues like from bar button items.
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -158,7 +169,7 @@
     //    if([self mui_containsDetailItem:detailItem]){
     //        return;
     //    }
-    NSIndexPath *indexPath = [self.delegate masterTableViewController:self indexPathForMasterItem:selectedMasterItem];
+    NSIndexPath *indexPath = [self.datasource masterTableViewController:self indexPathForMasterItem:selectedMasterItem];
     if(!indexPath){
         //   NSIndexPath *ip = self.selectedRowOfDetailItem;
         //   [self selectMasterItemNearIndexPath:ip];
@@ -167,20 +178,12 @@
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
-- (void)selectMasterItem:(id)masterItem{
-    [self selectMasterItem:masterItem notify:NO];
-}
-
-- (void)selectMasterItem:(id)masterItem notify:(BOOL)notify{
-    self.selectedMasterItem = masterItem;
+- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify{
+    self.selectedMasterItem = selectedMasterItem;
     if(notify){
-        [self didSelectMasterItem];
+        [self.delegate masterTableViewControllerDidSelectMasterItem:self];
         [self updateSelectionForCurrentSelectedMasterItem];
     }
-}
-
-- (void)didSelectMasterItem{
-    
 }
 
 //- (void)viewDidLoad{

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC02A87D21808BE300DCC84C /* MHFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC02A87C21808BE300DCC84C /* MHFoundation.framework */; };
 		EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5D1C8C1F75C451008BC02E /* MUILongRunningTaskController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC17D98C2181F9680045B7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC17D98B2181F9680045B7C3 /* UIKit.framework */; };
 		EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E129A201299290036130D /* UITableViewCell+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,7 +78,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC02A87C21808BE300DCC84C /* MHFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MHFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC17D98B2181F9680045B7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EC1E129A201299290036130D /* UITableViewCell+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+MUI.h"; sourceTree = "<group>"; };
 		EC1E129B201299290036130D /* UITableViewCell+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+MUI.m"; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC17D98C2181F9680045B7C3 /* UIKit.framework in Frameworks */,
-				EC02A87D21808BE300DCC84C /* MHFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				EC17D98B2181F9680045B7C3 /* UIKit.framework */,
-				EC02A87C21808BE300DCC84C /* MHFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

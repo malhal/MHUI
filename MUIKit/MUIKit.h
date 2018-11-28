@@ -22,8 +22,8 @@
 #import <MUIKit/MUIProgressViewController.h>
 
 #import <MUIKit/MUIMasterTableViewController.h>
+//#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
-#import <MUIKit/MUIDetailItemSplitter.h>
 #import <MUIKit/MUIDetailItemSplitter.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
