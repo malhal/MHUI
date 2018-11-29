@@ -6,7 +6,7 @@
 //  Copyright © 2018 Malcolm Hall. All rights reserved.
 //
 
-#import <MCoreData/MCoreData.h>
+#import <CoreData/CoreData.h>
 #import <MUIKit/MUIDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
