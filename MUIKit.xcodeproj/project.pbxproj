@@ -117,6 +117,13 @@
 			remoteGlobalIDString = EC3144D91D073E010025F669;
 			remoteInfo = MCoreData;
 		};
+		EC90CB1D21AF821B001A7883 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EC31444C1D073A1A0025F669;
+			remoteInfo = MHFoundation;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -392,6 +399,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EC90CB1E21AF821B001A7883 /* PBXTargetDependency */,
 				EC90CA4321AF70C5001A7883 /* PBXTargetDependency */,
 			);
 			name = MUIKit;
@@ -567,6 +575,11 @@
 			isa = PBXTargetDependency;
 			name = MCoreData;
 			targetProxy = EC90CA4221AF70C5001A7883 /* PBXContainerItemProxy */;
+		};
+		EC90CB1E21AF821B001A7883 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MHFoundation;
+			targetProxy = EC90CB1D21AF821B001A7883 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
