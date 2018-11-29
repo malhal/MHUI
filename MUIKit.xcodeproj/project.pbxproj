@@ -57,6 +57,11 @@
 		EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */; };
 		EC89EB94218DC08900C1E188 /* MUIDetailItemSplitter.h in Headers */ = {isa = PBXBuildFile; fileRef = EC89EB92218DC08900C1E188 /* MUIDetailItemSplitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC89EB95218DC08900C1E188 /* MUIDetailItemSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC89EB93218DC08900C1E188 /* MUIDetailItemSplitter.m */; };
+		EC90C9FF21AF53D9001A7883 /* MUITableViewCellObject.h in Headers */ = {isa = PBXBuildFile; fileRef = EC90C9FC21AF53D9001A7883 /* MUITableViewCellObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC90CA0221AF540A001A7883 /* MUIFetchedTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EC90CA0021AF5409001A7883 /* MUIFetchedTableDataSource.m */; };
+		EC90CA0321AF540A001A7883 /* MUIFetchedTableDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = EC90CA0121AF5409001A7883 /* MUIFetchedTableDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC90CA4021AF70BA001A7883 /* MHFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC90CA3421AF70AB001A7883 /* MHFoundation.framework */; };
+		EC90CA4121AF70BD001A7883 /* MCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC90CA3D21AF70AD001A7883 /* MCoreData.framework */; };
 		EC913C962185FAC200E3E6DA /* MUIMasterTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC913C942185FAC200E3E6DA /* MUIMasterTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC913C972185FAC200E3E6DA /* MUIMasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC913C952185FAC200E3E6DA /* MUIMasterTableViewController.m */; };
 		EC9A9CA120344F0900E5A698 /* UIImage+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC9A9C9F20344F0900E5A698 /* UIImage+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -65,7 +70,8 @@
 		ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */; };
 		ECBD8829218C7EC800F5E602 /* MUISplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */; };
 		ECBD882A218C7EC800F5E602 /* MUISplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECF493A821AED43700A58030 /* MHFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF493A521AED42D00A58030 /* MHFoundation.framework */; };
+		ECF493EA21AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = ECF493E621AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECF493EB21AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF493E921AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,19 +82,40 @@
 			remoteGlobalIDString = EC3145251D0740C70025F669;
 			remoteInfo = MHUI;
 		};
-		ECF493A421AED42D00A58030 /* PBXContainerItemProxy */ = {
+		EC90CA3321AF70AB001A7883 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = ECF4939F21AED42D00A58030 /* MHFoundation.xcodeproj */;
+			containerPortal = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EC31444D1D073A1A0025F669;
 			remoteInfo = MHFoundation;
 		};
-		ECF493A621AED42D00A58030 /* PBXContainerItemProxy */ = {
+		EC90CA3521AF70AB001A7883 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = ECF4939F21AED42D00A58030 /* MHFoundation.xcodeproj */;
+			containerPortal = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EC3144571D073A1A0025F669;
 			remoteInfo = MHFoundationTests;
+		};
+		EC90CA3C21AF70AD001A7883 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC3144DA1D073E010025F669;
+			remoteInfo = MCoreData;
+		};
+		EC90CA3E21AF70AD001A7883 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC3144E41D073E010025F669;
+			remoteInfo = MCoreDataTests;
+		};
+		EC90CA4221AF70C5001A7883 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EC3144D91D073E010025F669;
+			remoteInfo = MCoreData;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -146,6 +173,11 @@
 		EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MUI.m"; sourceTree = "<group>"; };
 		EC89EB92218DC08900C1E188 /* MUIDetailItemSplitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIDetailItemSplitter.h; sourceTree = "<group>"; };
 		EC89EB93218DC08900C1E188 /* MUIDetailItemSplitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIDetailItemSplitter.m; sourceTree = "<group>"; };
+		EC90C9FC21AF53D9001A7883 /* MUITableViewCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUITableViewCellObject.h; sourceTree = "<group>"; };
+		EC90CA0021AF5409001A7883 /* MUIFetchedTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIFetchedTableDataSource.m; sourceTree = "<group>"; };
+		EC90CA0121AF5409001A7883 /* MUIFetchedTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIFetchedTableDataSource.h; sourceTree = "<group>"; };
+		EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MHFoundation.xcodeproj; path = MHFoundation/MHFoundation.xcodeproj; sourceTree = "<group>"; };
+		EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MCoreData.xcodeproj; path = MCoreData/MCoreData.xcodeproj; sourceTree = "<group>"; };
 		EC913C942185FAC200E3E6DA /* MUIMasterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIMasterTableViewController.h; sourceTree = "<group>"; };
 		EC913C952185FAC200E3E6DA /* MUIMasterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIMasterTableViewController.m; sourceTree = "<group>"; };
 		EC9A9C9F20344F0900E5A698 /* UIImage+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+MUI.h"; sourceTree = "<group>"; };
@@ -154,7 +186,8 @@
 		ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MUI.m"; sourceTree = "<group>"; };
 		ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUISplitViewController.m; sourceTree = "<group>"; };
 		ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUISplitViewController.h; sourceTree = "<group>"; };
-		ECF4939F21AED42D00A58030 /* MHFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MHFoundation.xcodeproj; path = MHFoundation/MHFoundation.xcodeproj; sourceTree = "<group>"; };
+		ECF493E621AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIFetchedTableDataSourceMasterSupport.h; sourceTree = "<group>"; };
+		ECF493E921AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIFetchedTableDataSourceMasterSupport.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +195,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECF493A821AED43700A58030 /* MHFoundation.framework in Frameworks */,
+				EC90CA4121AF70BD001A7883 /* MCoreData.framework in Frameworks */,
+				EC90CA4021AF70BA001A7883 /* MHFoundation.framework in Frameworks */,
 				EC17D98C2181F9680045B7C3 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,7 +215,8 @@
 		EC02A87B21808BE300DCC84C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ECF4939F21AED42D00A58030 /* MHFoundation.xcodeproj */,
+				EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */,
+				EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */,
 				EC17D98B2181F9680045B7C3 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -218,6 +253,11 @@
 				EC3E0E081DBA46C800D49472 /* MUIMultilineTableCell.m */,
 				EC913C942185FAC200E3E6DA /* MUIMasterTableViewController.h */,
 				EC913C952185FAC200E3E6DA /* MUIMasterTableViewController.m */,
+				EC90C9FC21AF53D9001A7883 /* MUITableViewCellObject.h */,
+				EC90CA0121AF5409001A7883 /* MUIFetchedTableDataSource.h */,
+				EC90CA0021AF5409001A7883 /* MUIFetchedTableDataSource.m */,
+				ECF493E621AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.h */,
+				ECF493E921AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.m */,
 				ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */,
 				ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */,
 				EC89EB92218DC08900C1E188 /* MUIDetailItemSplitter.h */,
@@ -278,11 +318,20 @@
 			path = MUIKitTests;
 			sourceTree = "<group>";
 		};
-		ECF493A021AED42D00A58030 /* Products */ = {
+		EC90CA2F21AF70AB001A7883 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ECF493A521AED42D00A58030 /* MHFoundation.framework */,
-				ECF493A721AED42D00A58030 /* MHFoundationTests.xctest */,
+				EC90CA3421AF70AB001A7883 /* MHFoundation.framework */,
+				EC90CA3621AF70AB001A7883 /* MHFoundationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC90CA3821AF70AD001A7883 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC90CA3D21AF70AD001A7883 /* MCoreData.framework */,
+				EC90CA3F21AF70AD001A7883 /* MCoreDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,6 +356,7 @@
 				EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */,
 				EC6758961DB0251E00838798 /* MUIEditableTableCell.h in Headers */,
 				EC6758921DB024AC00838798 /* MUIAccountViewController.h in Headers */,
+				ECF493EA21AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.h in Headers */,
 				EC89EB94218DC08900C1E188 /* MUIDetailItemSplitter.h in Headers */,
 				EC596B16218A4433000B5302 /* UIViewController+MUIShowing.h in Headers */,
 				EC913C962185FAC200E3E6DA /* MUIMasterTableViewController.h in Headers */,
@@ -316,9 +366,11 @@
 				EC3145541D0740EA0025F669 /* UITabBar+MUI.h in Headers */,
 				ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */,
 				EC76D6E21D9E4442002DC0A0 /* MUILogInViewController.h in Headers */,
+				EC90CA0321AF540A001A7883 /* MUIFetchedTableDataSource.h in Headers */,
 				EC9A9CA120344F0900E5A698 /* UIImage+MUI.h in Headers */,
 				EC3E0E091DBA46C800D49472 /* MUIMultilineTableCell.h in Headers */,
 				EC6758A71DB02C1F00838798 /* UIAlertView+MUI.h in Headers */,
+				EC90C9FF21AF53D9001A7883 /* MUITableViewCellObject.h in Headers */,
 				EC5D1C901F75C4B0008BC02E /* MUIProgressViewController.h in Headers */,
 				EC76D6E41D9E4442002DC0A0 /* MUISignUpViewController.h in Headers */,
 				EC3145561D0740EA0025F669 /* UIView+MUI.h in Headers */,
@@ -340,6 +392,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EC90CA4321AF70C5001A7883 /* PBXTargetDependency */,
 			);
 			name = MUIKit;
 			productName = MHUI;
@@ -393,8 +446,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = ECF493A021AED42D00A58030 /* Products */;
-					ProjectRef = ECF4939F21AED42D00A58030 /* MHFoundation.xcodeproj */;
+					ProductGroup = EC90CA3821AF70AD001A7883 /* Products */;
+					ProjectRef = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+				},
+				{
+					ProductGroup = EC90CA2F21AF70AB001A7883 /* Products */;
+					ProjectRef = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -406,18 +463,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		ECF493A521AED42D00A58030 /* MHFoundation.framework */ = {
+		EC90CA3421AF70AB001A7883 /* MHFoundation.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = MHFoundation.framework;
-			remoteRef = ECF493A421AED42D00A58030 /* PBXContainerItemProxy */;
+			remoteRef = EC90CA3321AF70AB001A7883 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		ECF493A721AED42D00A58030 /* MHFoundationTests.xctest */ = {
+		EC90CA3621AF70AB001A7883 /* MHFoundationTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = MHFoundationTests.xctest;
-			remoteRef = ECF493A621AED42D00A58030 /* PBXContainerItemProxy */;
+			remoteRef = EC90CA3521AF70AB001A7883 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC90CA3D21AF70AD001A7883 /* MCoreData.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MCoreData.framework;
+			remoteRef = EC90CA3C21AF70AD001A7883 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC90CA3F21AF70AD001A7883 /* MCoreDataTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MCoreDataTests.xctest;
+			remoteRef = EC90CA3E21AF70AD001A7883 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -450,6 +521,7 @@
 				ECBD8829218C7EC800F5E602 /* MUISplitViewController.m in Sources */,
 				EC6758971DB0251E00838798 /* MUIEditableTableCell.m in Sources */,
 				EC3145531D0740EA0025F669 /* UINavigationBar+MUI.m in Sources */,
+				ECF493EB21AEF00700A58030 /* MUIFetchedTableDataSourceMasterSupport.m in Sources */,
 				EC89EB95218DC08900C1E188 /* MUIDetailItemSplitter.m in Sources */,
 				EC3145551D0740EA0025F669 /* UITabBar+MUI.m in Sources */,
 				EC3145511D0740EA0025F669 /* UIAlertController+MUI.m in Sources */,
@@ -460,6 +532,7 @@
 				EC5D1C911F75C4B0008BC02E /* MUIProgressViewController.m in Sources */,
 				EC913C972185FAC200E3E6DA /* MUIMasterTableViewController.m in Sources */,
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */,
+				EC90CA0221AF540A001A7883 /* MUIFetchedTableDataSource.m in Sources */,
 				ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */,
 				EC1E12A92012A60C0036130D /* UITableView+MUI.m in Sources */,
 				EC76D6E51D9E4442002DC0A0 /* MUISignUpViewController.m in Sources */,
@@ -489,6 +562,11 @@
 			isa = PBXTargetDependency;
 			target = EC3145251D0740C70025F669 /* MUIKit */;
 			targetProxy = EC3145321D0740C80025F669 /* PBXContainerItemProxy */;
+		};
+		EC90CA4321AF70C5001A7883 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MCoreData;
+			targetProxy = EC90CA4221AF70C5001A7883 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
