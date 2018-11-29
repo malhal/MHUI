@@ -26,6 +26,10 @@
 #import <MUIKit/MUISplitViewController.h>
 #import <MUIKit/MUIDetailItemSplitter.h>
 
+#import <MUIKit/MUITableViewCellObject.h>
+#import <MUIKit/MUIFetchedTableDataSource.h>
+#import <MUIKit/MUIFetchedTableDataSourceMasterSupport.h>
+
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
 #import <MUIKit/UITabBar+MUI.h>
@@ -39,3 +43,5 @@
 #import <MUIKit/UITableViewCell+MUI.h>
 #import <MUIKit/UITableView+MUI.h>
 #import <MUIKit/UIImage+MUI.h>
+
+
