@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)titleForTableViewCell;
 @optional
 - (NSString *)subtitleForTableViewCell;
-- (BOOL)containsObject:(NSManagedObject *)object;
+//- (BOOL)containsObject:(NSManagedObject *)object;
 
 @end
 

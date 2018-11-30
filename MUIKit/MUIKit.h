@@ -27,8 +27,8 @@
 #import <MUIKit/MUIDetailItemSplitter.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
-#import <MUIKit/MUIFetchedTableDataSource.h>
-#import <MUIKit/MUIFetchedTableDataSourceMasterSupport.h>
+#import <MUIKit/MUITableFetchedDataSource.h>
+#import <MUIKit/MUIMasterTableFetchedDataSource.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>

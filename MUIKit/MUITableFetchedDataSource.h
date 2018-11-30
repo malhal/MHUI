@@ -1,5 +1,5 @@
 //
-//  MUIFetchedTableDataSource.h
+//  MUITableFetchedDataSource.h
 //  MCoreData
 //
 //  Created by Malcolm Hall on 15/09/2018.
@@ -14,13 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FetchedTableDataSourceDelegate;
 
-@interface MUIFetchedTableDataSource<CellObject : NSManagedObject<MUITableViewCellObject> *> : NSObject <UITableViewDataSource, NSFetchedResultsControllerDelegate>
+@interface MUITableFetchedDataSource<CellObject : NSManagedObject<MUITableViewCellObject> *> : NSObject <UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 //- (instancetype)initWithTableView:(UITableView *)tableView;
 
-- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;// tableView:(UITableView *)tableView;
+- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController tableView:(UITableView *)tableView;
 
-@property (nonatomic, assign) id<FetchedTableDataSourceDelegate> delgate;
+@property (nonatomic, assign) id<FetchedTableDataSourceDelegate> delegate;
 
 @property (nonatomic, assign) id<NSFetchedResultsControllerDelegate> fetchedResultsControllerDelgate;
 
@@ -38,9 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
-//- (void)updateForFetchedDataSource:(MUIFetchedTableDataSource *)fetchedDataSource;
+//- (void)updateForFetchedDataSource:(MUITableFetchedDataSource *)fetchedDataSource;
 
-- (void)fetchedTableDataSource:(MUIFetchedTableDataSource *)fetchedTableDataSource configureCell:(UITableViewCell *)cell withObject:(NSManagedObject<MUITableViewCellObject> *)object;
+- (void)fetchedTableDataSource:(MUITableFetchedDataSource *)fetchedTableDataSource configureCell:(UITableViewCell *)cell withObject:(NSManagedObject<MUITableViewCellObject> *)object;
 
 @end
 

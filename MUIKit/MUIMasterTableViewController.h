@@ -23,11 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) id selectedMasterItem;
 
 // notify will select the table cell and call didSelectMasterItem for showing the view controller.
-- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify;
+//- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify;
 
 //@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
-//- (void)updateSelectionForCurrentSelectedMasterItem;
+- (void)updateSelectionForCurrentSelectedMasterItem;
 
 // call after deleting
 //- (NSIndexPath *)indexPathNearIndexPath:(NSIndexPath *)indexPath;
@@ -35,10 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 // Can be overridden but the default implementation performs the showDetail segue with self as the sender. In prepareForSegue check sender and in this case use self.selectedMasterItem.
 //- (void)showDetailViewControllerForSelectedMasterItem;
 
-- (void)selectMasterItem:(id)masterItem;
+//- (void)selectMasterItem:(id)masterItem;
 
 // if notify is true then didSelectMasterItem is called.
-- (void)selectMasterItem:(id)masterItem notify:(BOOL)notify;
+//- (void)selectMasterItem:(id)masterItem notify:(BOOL)notify;
 
 // show the detail controller if necessary not collapsed. This is not show detail because it might not be the right time to show it in all cases, e.g. if collapsed.
 
@@ -50,14 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @protocol MUIMasterTableViewControllerDelegate <NSObject>
-@required
-- (void)masterTableViewControllerDidSelectMasterItem:(MUIMasterTableViewController *)masterTableViewController;
-
+//@required
+//- (void)masterTableViewControllerDidSelectMasterItem:(MUIMasterTableViewController *)masterTableViewController;
+@optional
+- (NSIndexPath *)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController indexPathForMasterItem:(id)masterItem;
 @end
 
 @protocol MUIMasterTableViewControllerDataSource <NSObject>
-@optional
-- (NSIndexPath *)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController indexPathForMasterItem:(id)masterItem;
+
+
 
 //- (id)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath;
 @end

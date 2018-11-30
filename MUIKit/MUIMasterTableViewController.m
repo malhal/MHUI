@@ -169,7 +169,7 @@
     //    if([self mui_containsDetailItem:detailItem]){
     //        return;
     //    }
-    NSIndexPath *indexPath = [self.datasource masterTableViewController:self indexPathForMasterItem:selectedMasterItem];
+    NSIndexPath *indexPath = [self.delegate masterTableViewController:self indexPathForMasterItem:selectedMasterItem];
     if(!indexPath){
         //   NSIndexPath *ip = self.selectedRowOfDetailItem;
         //   [self selectMasterItemNearIndexPath:ip];
@@ -178,13 +178,13 @@
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
-- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify{
-    self.selectedMasterItem = selectedMasterItem;
-    if(notify){
-        [self.delegate masterTableViewControllerDidSelectMasterItem:self];
-        [self updateSelectionForCurrentSelectedMasterItem];
-    }
-}
+//- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify{
+//    self.selectedMasterItem = selectedMasterItem;
+//    if(notify){
+//        [self.delegate masterTableViewControllerDidSelectMasterItem:self];
+//        [self updateSelectionForCurrentSelectedMasterItem];
+//    }
+//}
 
 //- (void)viewDidLoad{
 //    [super viewDidLoad];
