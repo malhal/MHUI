@@ -25,10 +25,10 @@
 - (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController tableView:(UITableView *)tableView{
     self = [super init];
     if (self) {
-//        tableView.dataSource = self;
         fetchedResultsController.delegate = self;
         _fetchedResultsController = fetchedResultsController;
-        
+
+        tableView.dataSource = self;
         if(![tableView dequeueReusableCellWithIdentifier:@"Cell"]){
             [tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"Cell"];
         }

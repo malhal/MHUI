@@ -18,7 +18,7 @@
 
 // Need to pick first cell in the table because otherwise get in a mess when collapsing.
 
-#import "MUIMasterTableFetchedDataSource.h"
+#import "MUIPrimaryTableFetchedDataSource.h"
 #import "MUITableFetchedDataSource.h"
 //#import "NSManagedObjectContext+MCD.h"
 #import <objc/runtime.h>
@@ -26,7 +26,7 @@
 //static NSString * const kDefaultmessageWhenNoRows = @"There is no data available to display";
 //static void * const kMCDFetchedResultsTableViewControllerKVOContext = (void *)&kMCDFetchedResultsTableViewControllerKVOContext;
 
-@interface MUIMasterTableFetchedDataSource() <NSFetchedResultsControllerDelegate>
+@interface MUIPrimaryTableFetchedDataSource() <NSFetchedResultsControllerDelegate>
 
 // used to help select a row close to the deleted one.
 //@property (nonatomic, strong, nullable) NSIndexPath *selectionPathOfDeletedRow;
@@ -48,43 +48,45 @@
 - (id)selectionSegueTemplate;
 @end
 
-@implementation MUIMasterTableFetchedDataSource
+@implementation MUIPrimaryTableFetchedDataSource
 @dynamic delegate;
 
-//- (instancetype)initWithMasterController:(MUIMasterTableViewController *)masterSupport{
-- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController masterTableViewController:(MUIMasterTableViewController *)masterTableViewController{
-    self = [super initWithFetchedResultsController:fetchedResultsController tableView:masterTableViewController.tableView];
+//- (instancetype)initWithMasterController:(MUIPrimaryTableViewController *)masterSupport{
+- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController{
+    self = [super initWithFetchedResultsController:fetchedResultsController tableView:primaryTableViewController.tableView];
     if (self) {
-        _masterTableViewController = masterTableViewController;
+        primaryTableViewController.delegate = self;
+        _primaryTableViewController = primaryTableViewController;
     }
     return self;
 }
 
 #pragma mark - Master Data Source
 
-//- (id)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath{
+//- (id)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath{
 //    return [self.fetchedTableDataSource.fetchedResultsController objectAtIndexPath:indexPath];
 //}
 
-- (NSIndexPath *)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController indexPathForMasterItem:(id)masterItem{
-    return [self.fetchedResultsController indexPathForObject:masterItem];
+- (NSIndexPath *)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController indexPathForItem:(id)item{
+    return [self.fetchedResultsController indexPathForObject:item];
 }
 
 #pragma mark - Fetch Controller Delegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
   // self.detailItemBeforeChangingContent = [controller objectAtIndexPath:self.fetchedTableDataSource.selec]
-}
+//}
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
+    [super controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
     //UITableView *tableView = self.tableView;
     //NSIndexPath *selectedIndexPath = self.indexPathOfDetailItem;
     switch(type) {
         case NSFetchedResultsChangeDelete:
         {
-            if(anObject == self.masterTableViewController.selectedMasterItem){
+            if(anObject == self.primaryTableViewController.secondaryItemController.item){ //self.primaryTableViewController.selectedMasterItem){
                 //Event *event = [controller objectAtIndexPath:indexPath];
                 //self.highlightedEvent = event;
                 //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
@@ -99,15 +101,20 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [super controllerDidChangeContent:controller];
     NSLog(@"controllerDidChangeContent");
     //self.detailItemBeforeChangingContent = nil;
     if(self.indexPathOfDeletedObject){
-        NSIndexPath *indexPath = [self.masterTableViewController.tableView mui_indexPathNearIndexPath:self.indexPathOfDeletedObject];
+        NSIndexPath *indexPath = [self.primaryTableViewController.tableView mui_indexPathNearIndexPath:self.indexPathOfDeletedObject];
         id object = [controller objectAtIndexPath:indexPath];
-        //[self.masterTableViewController setSelectedMasterItem:object notify:YES];
-        self.masterTableViewController.selectedMasterItem = object;
-        [self.masterTableViewController updateSelectionForCurrentSelectedMasterItem];
-        [self.delegate selectionChangedByMasterTableFetchedDataSource:self];
+        //[self.primaryTableViewController setSelectedMasterItem:object notify:YES];
+        //self.primaryTableViewController.selectedMasterItem = object;
+        
+        self.primaryTableViewController.secondaryItemController.item = object;
+        [self.primaryTableViewController updateSelectionForCurrentSecondaryItem];
+        //[self.primaryTableViewController selectMasterItem:object];
+        
+   //     [self.delegate selectionChangedByMasterTableFetchedDataSource:self];
         self.indexPathOfDeletedObject = nil;
     }
 }

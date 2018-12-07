@@ -13,28 +13,28 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class MUITableFetchedDataSource;
-@protocol MUIMasterTableFetchedDataSourceDelegate;
+//@protocol MUIPrimaryTableFetchedDataSourceDelegate;
 
 // default cell reuse identifier is Cell, so in storyboard set the table view to this or change it using the property.
 // perform fetch is done in view will appear
 // <ResultType : id<NSFetchRequestResult>>
-@interface MUIMasterTableFetchedDataSource : MUITableFetchedDataSource <MUIMasterTableViewControllerDelegate> //<FetchedTableDataSourceDelegate, NSFetchedResultsControllerDelegate>
+@interface MUIPrimaryTableFetchedDataSource : MUITableFetchedDataSource <MUIPrimaryTableViewControllerDelegate> //<FetchedTableDataSourceDelegate, NSFetchedResultsControllerDelegate>
 
-- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController masterTableViewController:(MUIMasterTableViewController *)masterTableViewController;
+- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController;
 
-@property (strong, nonatomic, readonly) MUITableFetchedDataSource *fetchedTableDataSource;
+//@property (strong, nonatomic, readonly) MUITableFetchedDataSource *fetchedTableDataSource;
 
-@property (weak, nonatomic, readonly) MUIMasterTableViewController *masterTableViewController;
+@property (weak, nonatomic, readonly) MUIPrimaryTableViewController *primaryTableViewController;
 
-@property (nonatomic, assign) id<MUIMasterTableFetchedDataSourceDelegate> delegate;
-
-@end
-
-@protocol MUIMasterTableFetchedDataSourceDelegate <FetchedTableDataSourceDelegate>
-
-- (void)selectionChangedByMasterTableFetchedDataSource:(MUITableFetchedDataSource *)fetchedTableDataSource;
+//@property (nonatomic, assign) id<MUIPrimaryTableFetchedDataSourceDelegate> delegate;
 
 @end
+
+//@protocol MUIPrimaryTableFetchedDataSourceDelegate <FetchedTableDataSourceDelegate>
+
+//- (void)selectionChangedByMasterTableFetchedDataSource:(MUITableFetchedDataSource *)fetchedTableDataSource;
+
+//@end
 
 //@property (strong, nonatomic) ResultType selectedObject;
 

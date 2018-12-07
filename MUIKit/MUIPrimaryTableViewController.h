@@ -1,5 +1,5 @@
 //
-//  MUIMasterTableViewController.h
+//  MUIPrimaryTableViewController.h
 //  MUIKit
 //
 //  Created by Malcolm Hall on 28/10/2018.
@@ -8,26 +8,30 @@
 // Selection can come from segue or from model changes. Also when in edit mode segues need to be disabled so rather than handle all that its best the table seclection delegate calls same method as the model changes.
 #import <MHFoundation/MHFoundation.h>
 #import <UIKit/UIKit.h>
-#import <MUIKit/MUIDefines.h>
+#import <MUIKit/MUITableViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUIMasterTableViewControllerDataSource, MUIMasterTableViewControllerDelegate;
+@protocol MUIPrimaryTableViewControllerDataSource, MUIPrimaryTableViewControllerDelegate;
+@class MUISecondaryItemController;
 
-@interface MUIMasterTableViewController : UITableViewController <UITableViewDelegate>
+@interface MUIPrimaryTableViewController : MUITableViewController //<UITableViewDelegate>
 
-@property (nonatomic, assign) id<MUIMasterTableViewControllerDataSource> datasource;
+//@property (nonatomic, assign) id<MUIPrimaryTableViewControllerDataSource> dataSource;
 
-@property (nonatomic, assign) id<MUIMasterTableViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<MUIPrimaryTableViewControllerDelegate> delegate;
 
-@property (strong, nonatomic) id selectedMasterItem;
+//@property (strong, nonatomic) id selectedMasterItem;
 
 // notify will select the table cell and call didSelectMasterItem for showing the view controller.
 //- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify;
 
 //@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
-- (void)updateSelectionForCurrentSelectedMasterItem;
+// defaults to self.splitViewController.secondaryItemController
+@property (strong, nonatomic) MUISecondaryItemController *secondaryItemController;
+
+- (void)updateSelectionForCurrentSecondaryItem;
 
 // call after deleting
 //- (NSIndexPath *)indexPathNearIndexPath:(NSIndexPath *)indexPath;
@@ -49,18 +53,20 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@protocol MUIMasterTableViewControllerDelegate <NSObject>
+@protocol MUIPrimaryTableViewControllerDelegate <NSObject>
 //@required
-//- (void)masterTableViewControllerDidSelectMasterItem:(MUIMasterTableViewController *)masterTableViewController;
+//- (void)primaryTableViewControllerDidSelectMasterItem:(MUIPrimaryTableViewController *)primaryTableViewController;
+
 @optional
-- (NSIndexPath *)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController indexPathForMasterItem:(id)masterItem;
+- (NSIndexPath *)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController indexPathForItem:(id)item;
+
 @end
 
-@protocol MUIMasterTableViewControllerDataSource <NSObject>
+@protocol MUIPrimaryTableViewControllerDataSource <NSObject>
 
 
 
-//- (id)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath;
+//- (id)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

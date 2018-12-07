@@ -1,22 +1,30 @@
 //
-//  MUIMasterTableViewController.m
+//  MUIPrimaryTableViewController.m
 //  MUIKit
 //
 //  Created by Malcolm Hall on 28/10/2018.
 //  Copyright © 2018 Malcolm Hall. All rights reserved.
 //
 
-#import "MUIMasterTableViewController.h"
+#import "MUIPrimaryTableViewController.h"
 #import "UIViewController+MUIShowing.h"
 #import "UIViewController+MUIDetail.h"
+#import "MUISecondaryItemController.h"
 
-@interface MUIMasterTableViewController()
+@interface MUIPrimaryTableViewController()
 
 //@property (strong, nonatomic, readwrite) id selectedMasterItem;
 
 @end
 
-@implementation MUIMasterTableViewController
+@implementation MUIPrimaryTableViewController
+
+- (MUISecondaryItemController *)secondaryItemController{
+    if(_secondaryItemController){
+        return _secondaryItemController;
+    }
+    return self.splitViewController.secondaryItemController;
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -34,6 +42,11 @@
     }
 }
 
+//- (void)selectMasterItem:(id)masterItem{
+//    self.secondaryItemController.item = masterItem;
+//    [self updateSelectionForCurrentSecondaryItem];
+//}
+
 //- (void)setSelectedMasterItem:(id)selectedMasterItem{
 //    if(selectedMasterItem == _selectedMasterItem){
 //        return;
@@ -44,28 +57,6 @@
 
 #pragma mark - View Controller
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated{
-    //self.selectedRowBeforeEditing = editing ? self.tableView.indexPathForSelectedRow : nil;
-    if(!editing && animated){
-        // because otherwise the checkmark gets selected when sliding back.
-        [CATransaction begin];
-        [CATransaction setCompletionBlock:^{
-            //[self.masterSupport updateSelectionForCurrentSelectedMasterItem];
-           [self updateSelectionForCurrentSelectedMasterItem];
-        }];
-    }
-    [super setEditing:editing animated:animated];
-    if(!editing){
-        if(animated){
-            [CATransaction commit];
-        }
-        else{
-            //[self.masterSupport updateSelectionForCurrentSelectedMasterItem]; // test if needs a perform after delay.
-            [self updateSelectionForCurrentSelectedMasterItem];
-        }
-    }
-}
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
@@ -75,13 +66,17 @@
             [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
         }
     }
-    id item = [self mui_currentVisibleDetailItemWithSender:self];
+    //id item = [self mui_currentVisibleDetailItemWithSender:self];
     //if (item) {
-    self.selectedMasterItem = item;
-    //NSIndexPath *indexPath = [self.delegate masterTableViewController:self indexPathForMasterItem:item];
+    //self.selectedMasterItem = item;
+    //NSIndexPath *indexPath = [self.delegate primaryTableViewController:self indexPathForItem:item];
     //[self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    [self updateSelectionForCurrentSelectedMasterItem];
+    [self updateSelectionForCurrentSecondaryItem];
     //}
+}
+
+- (void)tableViewDidEndEditing{
+    [self updateSelectionForCurrentSecondaryItem];
 }
 
 // after the detail is shown then we grab the new master item and update the cell.
@@ -113,7 +108,7 @@
 //    if(tableView.isEditing){
 //        return indexPath;
 //    }
-//    self.selectedMasterItem = [self.delegate masterTableViewController:self masterItemAtIndexPath:indexPath];
+//    self.selectedMasterItem = [self.delegate primaryTableViewController:self masterItemAtIndexPath:indexPath];
 //    return nil;
 //      NSIndexPath *ip = tableView.indexPathForSelectedRow;
 //    return nil;
@@ -121,7 +116,7 @@
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //
-//        self.selectedMasterItem = [self.delegate masterTableViewController:self masterItemAtIndexPath:indexPath];
+//        self.selectedMasterItem = [self.delegate primaryTableViewController:self masterItemAtIndexPath:indexPath];
 //    }
     // in case of allowsSelectionDuringEditing
 //    if(tableView.isEditing){
@@ -133,9 +128,9 @@
 //
 //}
 
-- (void)updateSelectedMasterItem{
-    self.selectedMasterItem = [self mui_currentVisibleDetailItemWithSender:self];
-}
+//- (void)updateSelectedMasterItem{
+//    self.selectedMasterItem = [self mui_currentVisibleDetailItemWithSender:self];
+//}
 
 
 // we don't perform table cell segues when editing but we allow other segues like from bar button items.
@@ -158,18 +153,18 @@
     return YES;//!self.isMovingOrDeletingObjects;
 }
 
-- (void)updateSelectionForCurrentSelectedMasterItem{
+- (void)updateSelectionForCurrentSecondaryItem{
     if(!self.shouldAlwaysHaveSelectedObject){
         return;
     }
-    id selectedMasterItem = self.selectedMasterItem;
-    if(!selectedMasterItem){
+    id secondaryItem = self.secondaryItemController.item;
+    if(!secondaryItem){
         return;
     }
     //    if([self mui_containsDetailItem:detailItem]){
     //        return;
     //    }
-    NSIndexPath *indexPath = [self.delegate masterTableViewController:self indexPathForMasterItem:selectedMasterItem];
+    NSIndexPath *indexPath = [self.delegate primaryTableViewController:self indexPathForItem:secondaryItem];
     if(!indexPath){
         //   NSIndexPath *ip = self.selectedRowOfDetailItem;
         //   [self selectMasterItemNearIndexPath:ip];
@@ -181,7 +176,7 @@
 //- (void)setSelectedMasterItem:(id)selectedMasterItem notify:(BOOL)notify{
 //    self.selectedMasterItem = selectedMasterItem;
 //    if(notify){
-//        [self.delegate masterTableViewControllerDidSelectMasterItem:self];
+//        [self.delegate primaryTableViewControllerDidSelectMasterItem:self];
 //        [self updateSelectionForCurrentSelectedMasterItem];
 //    }
 //}
@@ -243,18 +238,18 @@
 //    //self.deleteButton.enabled = editing && !self.tableViewEditingRowIndexPath;
 //}
 
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+//- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     //self.tableViewEditingRowIndexPath = indexPath;
     //[super tableView:tableView willBeginEditingRowAtIndexPath:indexPath];
     //[r20 updateNavAndBarButtonsAnimated:0x0];
 //    if([self.tableDelegate respondsToSelector:_cmd]){
 //        [self.tableDelegate tableView:tableView willBeginEditingRowAtIndexPath:indexPath];
 //    }
-    self.editButtonItem.enabled = NO;
-}
+//    self.editButtonItem.enabled = NO;
+//}
 
 // since during swipe to delete the selection highlight is lost we need to bring it back.
--(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+//-(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
 //    if([self.tableDelegate respondsToSelector:_cmd]){
 //        [self.tableDelegate tableView:tableView didEndEditingRowAtIndexPath:indexPath];
 //    }
@@ -267,9 +262,9 @@
     //    self.tableViewEditingRowIndexPath = nil;
     //NSIndexPath *ip = tableView.indexPathForSelectedRow;
     // [r20 updateNavAndBarButtonsAnimated:0x0];
-    self.editButtonItem.enabled = YES;
-    [self performSelector:@selector(updateSelectionForCurrentSelectedMasterItem) withObject:nil afterDelay:0];
-}
+//    self.editButtonItem.enabled = YES;
+//    [self performSelector:@selector(updateSelectionForCurrentSelectedMasterItem) withObject:nil afterDelay:0];
+//}
 
 // We're not a data source
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
