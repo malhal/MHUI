@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUIPrimaryTableViewControllerDataSource, MUIPrimaryTableViewControllerDelegate;
+@protocol MUIPrimaryTableViewControllerDataSource, MUIPrimaryTableViewControllerDelegate, MUISecondaryViewController;
 @class MUISecondaryItemController;
 
 @interface MUIPrimaryTableViewController : MUITableViewController //<UITableViewDelegate>
@@ -29,7 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
 // defaults to self.splitViewController.secondaryItemController
-@property (strong, nonatomic) MUISecondaryItemController *secondaryItemController;
+@property (strong, nonatomic) UIViewController<MUISecondaryViewController> *secondaryViewController;
+
+// the split controller that shows the detail item, defaults to self.splitViewController
+@property (strong, nonatomic) UISplitViewController *detailSplitViewController;
 
 - (void)updateSelectionForCurrentSecondaryItem;
 
@@ -52,6 +55,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol MUISecondaryViewController <NSObject>
+
+@property (strong, nonatomic) id secondaryItem;
+
+@end
 
 @protocol MUIPrimaryTableViewControllerDelegate <NSObject>
 //@required

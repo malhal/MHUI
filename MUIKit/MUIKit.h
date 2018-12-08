@@ -21,14 +21,13 @@
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
 
-
-#import <MUIKit/MUISecondaryItemController.h>
+#import <MUIKit/MUIPrimaryNavigationController.h>
 
 #import <MUIKit/MUITableViewController.h>
 #import <MUIKit/MUIPrimaryTableViewController.h>
 //#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
-#import <MUIKit/MUIDetailItemSplitter.h>
+//#import <MUIKit/MUIDetailItemSplitter.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
 #import <MUIKit/MUITableFetchedDataSource.h>
@@ -48,4 +47,4 @@
 #import <MUIKit/UITableView+MUI.h>
 #import <MUIKit/UIImage+MUI.h>
 
-
+#import <MUIKit/UISplitViewController+MUI.h>

@@ -9,7 +9,7 @@
 #import "MUISplitViewController.h"
 #import "UIViewController+MUI.h"
 #import "UIViewController+MUIDetail.h"
-#import "MUIDetailItemSplitter.h"
+//#import "MUIDetailItemSplitter.h"
 
 #define IS_IPAD_PRO_12_INCH (([UIScreen mainScreen].bounds.size.width == 1366 && [UIScreen mainScreen].bounds.size.height == 1024) || ([UIScreen mainScreen].bounds.size.width == 1024 && [UIScreen mainScreen].bounds.size.height == 1366))
 
@@ -75,12 +75,12 @@
     }
 }
 
-- (MUIMasterItemSplitter *)masterItemSplitter{
-    if(!_masterItemSplitter){
-        _masterItemSplitter = [MUIMasterItemSplitter.alloc init];
-    }
-    return _masterItemSplitter;
-}
+//- (MUIMasterItemSplitter *)masterItemSplitter{
+//    if(!_masterItemSplitter){
+//        _masterItemSplitter = [MUIMasterItemSplitter.alloc init];
+//    }
+//    return _masterItemSplitter;
+//}
 
 - (MUISplitViewController *)childSplitController{
     id i = self.viewControllers.firstObject;

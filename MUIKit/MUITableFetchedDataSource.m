@@ -46,7 +46,9 @@
 //}
 
 - (void)configureCell:(UITableViewCell *)cell withObject:(NSManagedObject<MUITableViewCellObject> *)object{
-    cell.textLabel.text = object.titleForTableViewCell;
+    if([object respondsToSelector:@selector(titleForTableViewCell)]){
+        cell.textLabel.text = object.titleForTableViewCell;
+    }
     if([object respondsToSelector:@selector(subtitleForTableViewCell)]){
         cell.detailTextLabel.text = object.subtitleForTableViewCell;
     }
