@@ -51,8 +51,8 @@
 @implementation MUIPrimaryTableFetchedDataSource
 @dynamic delegate;
 
-//- (instancetype)initWithMasterController:(MUIPrimaryTableViewController *)masterSupport{
-- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController{
+//- (instancetype)initWithMasterController:(MUIMasterTableViewController *)masterSupport{
+- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController primaryTableViewController:(MUIMasterTableViewController *)primaryTableViewController{
     self = [super initWithFetchedResultsController:fetchedResultsController tableView:primaryTableViewController.tableView];
     if (self) {
         primaryTableViewController.delegate = self;
@@ -63,11 +63,11 @@
 
 #pragma mark - Master Data Source
 
-//- (id)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath{
+//- (id)primaryTableViewController:(MUIMasterTableViewController *)primaryTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath{
 //    return [self.fetchedTableDataSource.fetchedResultsController objectAtIndexPath:indexPath];
 //}
 
-- (NSIndexPath *)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController indexPathForItem:(id)item{
+- (NSIndexPath *)primaryTableViewController:(MUIMasterTableViewController *)primaryTableViewController indexPathForItem:(id)item{
     return [self.fetchedResultsController indexPathForObject:item];
 }
 
@@ -86,11 +86,7 @@
     switch(type) {
         case NSFetchedResultsChangeDelete:
         {
-            if(anObject == self.primaryTableViewController.secondaryViewController.secondaryItem){ //self.primaryTableViewController.selectedMasterItem){
-                //Event *event = [controller objectAtIndexPath:indexPath];
-                //self.highlightedEvent = event;
-                //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                //cell.
+            if(anObject == self.primaryTableViewController.masterDetailController.detailItem){ //self.primaryTableViewController.selectedMasterItem){
                 self.indexPathOfDeletedObject = indexPath;
             }
             break;
@@ -104,15 +100,12 @@
     [super controllerDidChangeContent:controller];
     NSLog(@"controllerDidChangeContent");
     //self.detailItemBeforeChangingContent = nil;
-    if(self.indexPathOfDeletedObject){
-        NSIndexPath *indexPath = [self.primaryTableViewController.tableView mui_indexPathNearIndexPath:self.indexPathOfDeletedObject];
+    NSIndexPath *indexPathOfDeletedObject = self.indexPathOfDeletedObject;
+    if(indexPathOfDeletedObject){
+        NSIndexPath *indexPath = [self.primaryTableViewController.tableView mui_indexPathNearIndexPath:indexPathOfDeletedObject];
         id object = [controller objectAtIndexPath:indexPath];
-        self.primaryTableViewController.secondaryViewController.secondaryItem = object;
+        self.primaryTableViewController.masterDetailController.detailItem = object;
         [self.primaryTableViewController updateSelectionForCurrentSecondaryItem];
-        
-        //[self.primaryTableViewController selectMasterItem:object];
-        
-   //     [self.delegate selectionChangedByMasterTableFetchedDataSource:self];
         self.indexPathOfDeletedObject = nil;
     }
 }

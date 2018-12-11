@@ -24,10 +24,11 @@
 #import <MUIKit/MUIPrimaryNavigationController.h>
 
 #import <MUIKit/MUITableViewController.h>
-#import <MUIKit/MUIPrimaryTableViewController.h>
+#import <MUIKit/MUIMasterTableViewController.h>
 //#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
+#import <MUIKit/MUIMasterDetailController.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
 #import <MUIKit/MUITableFetchedDataSource.h>

@@ -1,5 +1,5 @@
 //
-//  MUIPrimaryTableViewController.h
+//  MUIMasterTableViewController.h
 //  MUIKit
 //
 //  Created by Malcolm Hall on 28/10/2018.
@@ -12,14 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUIPrimaryTableViewControllerDataSource, MUIPrimaryTableViewControllerDelegate, MUISecondaryViewController;
-@class MUISecondaryItemController;
+@protocol MUIMasterTableViewControllerDataSource, MUIMasterTableViewControllerDelegate, MUISecondaryViewController;
 
-@interface MUIPrimaryTableViewController : MUITableViewController //<UITableViewDelegate>
+@interface MUIMasterTableViewController : MUITableViewController //<UITableViewDelegate>
 
-//@property (nonatomic, assign) id<MUIPrimaryTableViewControllerDataSource> dataSource;
+//@property (nonatomic, assign) id<MUIMasterTableViewControllerDataSource> dataSource;
 
-@property (nonatomic, assign) id<MUIPrimaryTableViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<MUIMasterTableViewControllerDelegate> delegate;
 
 //@property (strong, nonatomic) id selectedMasterItem;
 
@@ -29,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
 // defaults to self.splitViewController.secondaryItemController
-@property (strong, nonatomic) UIViewController<MUISecondaryViewController> *secondaryViewController;
+//@property (strong, nonatomic) UIViewController<MUISecondaryViewController> *secondaryViewController;
 
 // the split controller that shows the detail item, defaults to self.splitViewController
-@property (strong, nonatomic) UISplitViewController *detailSplitViewController;
+//@property (strong, nonatomic) UISplitViewController *detailSplitViewController;
 
 - (void)updateSelectionForCurrentSecondaryItem;
 
@@ -61,20 +60,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol MUIPrimaryTableViewControllerDelegate <NSObject>
+@protocol MUIMasterTableViewControllerDelegate <NSObject>
 //@required
-//- (void)primaryTableViewControllerDidSelectMasterItem:(MUIPrimaryTableViewController *)primaryTableViewController;
+//- (void)primaryTableViewControllerDidSelectMasterItem:(MUIMasterTableViewController *)primaryTableViewController;
 
 @optional
-- (NSIndexPath *)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController indexPathForItem:(id)item;
+- (NSIndexPath *)primaryTableViewController:(MUIMasterTableViewController *)primaryTableViewController indexPathForItem:(id)item;
 
 @end
 
-@protocol MUIPrimaryTableViewControllerDataSource <NSObject>
+@protocol MUIMasterTableViewControllerDataSource <NSObject>
 
 
 
-//- (id)primaryTableViewController:(MUIPrimaryTableViewController *)primaryTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath;
+//- (id)primaryTableViewController:(MUIMasterTableViewController *)primaryTableViewController masterItemAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

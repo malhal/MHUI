@@ -1,27 +1,28 @@
 //
-//  MUIPrimaryTableViewController.m
+//  MUIMasterTableViewController.m
 //  MUIKit
 //
 //  Created by Malcolm Hall on 28/10/2018.
 //  Copyright © 2018 Malcolm Hall. All rights reserved.
 //
 
-#import "MUIPrimaryTableViewController.h"
+#import "MUIMasterTableViewController.h"
 #import "UIViewController+MUIShowing.h"
 #import "UIViewController+MUIDetail.h"
 #import "UISplitViewController+MUI.h"
+#import "MUIMasterDetailController.h"
 
-@interface MUIPrimaryTableViewController()
+@interface MUIMasterTableViewController()
 
 //@property (strong, nonatomic, readwrite) id selectedMasterItem;
 
 @end
 
-@implementation MUIPrimaryTableViewController
+@implementation MUIMasterTableViewController
 
 
 // rename to should Currently
-- (BOOL)shouldAlwaysHaveSelectedObject{
+- (BOOL)shouldAlwaysHaveSelectedDetailItem{
     if(self.splitViewController.isCollapsed){
         //if(!self.shouldHaveSelectedObjectWhenNotInEditMode){
         return NO;
@@ -32,11 +33,11 @@
     return YES;//!self.isMovingOrDeletingObjects;
 }
 
-- (void)updateSelectionForCurrentSecondaryItem{
-    if(!self.shouldAlwaysHaveSelectedObject){
+- (void)updateTableSelectionForCurrentSelectedDetailItem{
+    if(!self.shouldAlwaysHaveSelectedDetailItem){
         return;
     }
-    id secondaryItem = self.secondaryViewController.secondaryItem;
+    id secondaryItem = self.masterDetailController.detailItem;
     if(!secondaryItem){
         return;
     }
@@ -58,13 +59,13 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     }
-    [self updateSelectionForCurrentSecondaryItem];
+    [self updateTableSelectionForCurrentSelectedDetailItem];
 }
 
 #pragma mark - Primary Table View Controller
 
 - (void)tableViewDidEndEditing{
-    [self updateSelectionForCurrentSecondaryItem];
+    [self updateTableSelectionForCurrentSelectedDetailItem];
 }
 
 #pragma mark - View Controller
@@ -75,23 +76,23 @@
     // was nil when UI restoration changed to use isMovingToParentViewController below
 //    if(!self.splitViewController.isCollapsed){
 //        id i = self.splitViewController.viewControllers.lastObject.childViewControllers.firstObject;
-//        self.secondaryViewController = i;
+//        self.masterDetailController = i;
 //    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     // only do this for the first appear
-    if(self.isMovingToParentViewController){
-        // only when in split view
-        if(!self.splitViewController.isCollapsed){
-            UIViewController *vc = self.splitViewController.mui_secondaryNavigationController.viewControllers.firstObject;
-            if([vc conformsToProtocol:@protocol(MUISecondaryViewController)]){
-                self.secondaryViewController = (UIViewController<MUISecondaryViewController> *)vc;
-            }
-        }
-    }
-    
-    self.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
+//    if(self.isMovingToParentViewController){
+//        // only when in split view
+//        if(!self.splitViewController.isCollapsed){
+//            UIViewController *vc = self.splitViewController.mui_secondaryNavigationController.viewControllers.firstObject;
+//            if([vc conformsToProtocol:@protocol(MUISecondaryViewController)]){
+//                self.masterDetailController = (UIViewController<MUISecondaryViewController> *)vc;
+//            }
+//        }
+//    }
+
+    self.clearsSelectionOnViewWillAppear = self.masterDetailController.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
     
 //    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
@@ -101,9 +102,9 @@
 //            [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
 //        }
 //    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.splitViewController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterDetailController.splitViewController];
     
-    [self updateSelectionForCurrentSecondaryItem];
+    [self updateTableSelectionForCurrentSelectedDetailItem];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
