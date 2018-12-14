@@ -1,5 +1,5 @@
 //
-//  MUITableFetchedDataSource.m
+//  MUIFetchedTableRowsController.m
 //  MCoreData
 //
 //  Created by Malcolm Hall on 15/09/2018.
@@ -7,11 +7,11 @@
 //
 // Should support deletion of selected row by a background context
 
-#import "MUITableFetchedDataSource.h"
+#import "MUIFetchedTableRowsController.h"
 #import <objc/runtime.h>
 //#import "NSManagedObjectContext+MCD.h"
 
-@interface MUITableFetchedDataSource()
+@interface MUIFetchedTableRowsController()
 
 @property (nonatomic, assign) BOOL sectionsCountChanged;
 //@property (nonatomic, strong) NSIndexPath *selectedRowBeforeChanges;
@@ -19,15 +19,12 @@
 
 @end
 
-@implementation MUITableFetchedDataSource
+@implementation MUIFetchedTableRowsController
 
 //- (instancetype)initWithTableView:(UITableView *)tableView{
-- (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController tableView:(UITableView *)tableView{
+- (instancetype)initWithTableView:(UITableView *)tableView{
     self = [super init];
     if (self) {
-        fetchedResultsController.delegate = self;
-        _fetchedResultsController = fetchedResultsController;
-
         tableView.dataSource = self;
         if(![tableView dequeueReusableCellWithIdentifier:@"Cell"]){
             [tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"Cell"];
@@ -36,6 +33,7 @@
     }
     return self;
 }
+
 
 //- (void)setTableView:(UITableView *)tableView{
 //    if(tableView == _tableView){
@@ -52,8 +50,8 @@
     if([object respondsToSelector:@selector(subtitleForTableViewCell)]){
         cell.detailTextLabel.text = object.subtitleForTableViewCell;
     }
-    if([self.delegate respondsToSelector:@selector(fetchedTableDataSource:configureCell:withObject:)]){
-        [self.delegate fetchedTableDataSource:self configureCell:cell withObject:object];
+    if([self.delegate respondsToSelector:@selector(fetchedTableRowsController:configureCell:withObject:)]){
+        [self.delegate fetchedTableRowsController:self configureCell:cell withObject:object];
     }
 }
 
@@ -72,6 +70,18 @@
 }
 
 #pragma mark - Fetched results controller
+
+- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
+    if(fetchedResultsController == _fetchedResultsController){
+        return;
+    }
+    if(_fetchedResultsController.delegate == self){
+        _fetchedResultsController.delegate = nil;
+    }
+    fetchedResultsController.delegate = self;
+    _fetchedResultsController = fetchedResultsController;
+    [self.tableView reloadData];
+}
 
 //- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
 //    if(fetchedResultsController == _fetchedResultsController){
@@ -224,7 +234,7 @@
 
 // on encode it asks for first and selected. On restore it asks for first so maybe checks ID.
 - (nullable NSString *)modelIdentifierForElementAtIndexPath:(NSIndexPath *)idx inView:(UIView *)view{
-    //NSAssert(self.fetchedTableDataSource.fetchedResultsController.fetchedObjects, @"modelIdentifierForElementAtIndexPath requires fetchedObjects");
+    //NSAssert(self.fetchedTableRowsController.fetchedResultsController.fetchedObjects, @"modelIdentifierForElementAtIndexPath requires fetchedObjects");
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:idx];
     return object.objectID.URIRepresentation.absoluteString;
 }
@@ -234,7 +244,7 @@
     //  NSAssert(self.managedObjectContext, @"indexPathForElementWithModelIdentifier requires a context");
     NSManagedObject *object = [self.fetchedResultsController.managedObjectContext mcd_objectWithURI:objectURI];
     //[self.tableView reloadData];
-    //  NSAssert(self.fetchedTableDataSource.fetchedResultsController.fetchedObjects, @"indexPathForElementWithModelIdentifier requires fetchedObjects");
+    //  NSAssert(self.fetchedTableRowsController.fetchedResultsController.fetchedObjects, @"indexPathForElementWithModelIdentifier requires fetchedObjects");
     return [self.fetchedResultsController indexPathForObject:object];
 }
 

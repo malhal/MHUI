@@ -10,7 +10,7 @@
 #import "UIViewController+MUIShowing.h"
 #import "UIViewController+MUIDetail.h"
 #import "UISplitViewController+MUI.h"
-#import "MUIMasterDetailController.h"
+
 
 @interface MUIMasterTableViewController()
 
@@ -19,7 +19,23 @@
 @end
 
 @implementation MUIMasterTableViewController
+@synthesize masterDetailContext = _masterDetailContext;
 
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder{
+    [super encodeRestorableStateWithCoder:coder];
+    [coder encodeObject:self.masterDetailContext forKey:@"MasterDetailContext"];
+    //[coder encodeObject:self.masterDetailContext.detailItem.objectID.URIRepresentation forKey:@"DetailItem"];
+}
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder{
+    [super decodeRestorableStateWithCoder:coder];
+    self.masterDetailContext = [coder decodeObjectForKey:@"MasterDetailContext"];
+//    NSURL *objectURI = [coder decodeObjectForKey:@"DetailItem"];
+//    if(objectURI){
+//        self.masterDetailContext.detailItem = [self.managedObjectContext mcd_objectWithURI:objectURI];
+//    }
+    
+}
 
 // rename to should Currently
 - (BOOL)shouldAlwaysHaveSelectedDetailItem{
@@ -37,14 +53,12 @@
     if(!self.shouldAlwaysHaveSelectedDetailItem){
         return;
     }
-    id secondaryItem = self.masterDetailController.detailItem;
+    id secondaryItem = self.masterDetailContext.detailViewController.detailItem;
     if(!secondaryItem){
         return;
     }
-    NSIndexPath *indexPath = [self.delegate primaryTableViewController:self indexPathForItem:secondaryItem];
+    NSIndexPath *indexPath = [self.delegate masterTableViewController:self indexPathForItem:secondaryItem];
     if(!indexPath){
-        //   NSIndexPath *ip = self.selectedRowOfDetailItem;
-        //   [self selectMasterItemNearIndexPath:ip];
         return;
     }
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -52,12 +66,11 @@
 
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
     // update cell accessories.
-    if(![self respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)]){
-        return;
-    }
-    for (UITableViewCell *cell in self.tableView.visibleCells) {
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    if([self respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)]){
+        for (UITableViewCell *cell in self.tableView.visibleCells) {
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+        }
     }
     [self updateTableSelectionForCurrentSelectedDetailItem];
 }
@@ -76,8 +89,9 @@
     // was nil when UI restoration changed to use isMovingToParentViewController below
 //    if(!self.splitViewController.isCollapsed){
 //        id i = self.splitViewController.viewControllers.lastObject.childViewControllers.firstObject;
-//        self.masterDetailController = i;
+//        self.masterDetailContext = i;
 //    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -87,12 +101,12 @@
 //        if(!self.splitViewController.isCollapsed){
 //            UIViewController *vc = self.splitViewController.mui_secondaryNavigationController.viewControllers.firstObject;
 //            if([vc conformsToProtocol:@protocol(MUISecondaryViewController)]){
-//                self.masterDetailController = (UIViewController<MUISecondaryViewController> *)vc;
+//                self.masterDetailContext = (UIViewController<MUISecondaryViewController> *)vc;
 //            }
 //        }
 //    }
 
-    self.clearsSelectionOnViewWillAppear = self.masterDetailController.splitViewController.isCollapsed;
+    self.clearsSelectionOnViewWillAppear = self.masterDetailContext.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
     
 //    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
@@ -102,7 +116,7 @@
 //            [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
 //        }
 //    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterDetailController.splitViewController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterDetailContext.splitViewController];
     
     [self updateTableSelectionForCurrentSelectedDetailItem];
 }

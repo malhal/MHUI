@@ -28,11 +28,11 @@
 //#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
-#import <MUIKit/MUIMasterDetailController.h>
+#import <MUIKit/MUIMasterDetailContext.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
-#import <MUIKit/MUITableFetchedDataSource.h>
-#import <MUIKit/MUIPrimaryTableFetchedDataSource.h>
+#import <MUIKit/MUIFetchedTableRowsController.h>
+#import <MUIKit/MUIFetchedMasterTableSelectionController.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
