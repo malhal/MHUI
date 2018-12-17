@@ -24,8 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) id<NSFetchedResultsControllerDelegate> fetchedResultsControllerDelgate;
 
-//@property (strong, nonatomic) NSFetchedResultsController<CellObject> *fetchedResultsController;
-
 @property (strong, nonatomic) NSFetchedResultsController<CellObject> *fetchedResultsController;
 
 @property (weak, nonatomic, readonly) UITableView *tableView;

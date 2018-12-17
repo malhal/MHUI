@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateTableSelectionForCurrentSelectedDetailItem;
 
 // if it was a table cell and editing then prevents the segue.
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender NS_REQUIRES_SUPER;
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender NS_REQUIRES_SUPER;
 
 @end
 

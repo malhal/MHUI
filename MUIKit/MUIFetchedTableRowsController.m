@@ -34,14 +34,29 @@
     return self;
 }
 
+- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
+    if(fetchedResultsController == _fetchedResultsController){
+        return;
+    }
+    if(_fetchedResultsController.delegate == self){
+        _fetchedResultsController.delegate = nil;
+    }
+    _fetchedResultsController = fetchedResultsController;
+    fetchedResultsController.delegate = self;
+    //[self.tableView reloadData];
+}
 
-//- (void)setTableView:(UITableView *)tableView{
-//    if(tableView == _tableView){
-//        return;
-//    }
-//
-//    _tableView = tableView;
-//}
+- (void)setTableDataSource:(id<UITableViewDataSource>)tableDataSource{
+    if(tableDataSource == _tableDataSource){
+        return;
+    }
+    _tableDataSource = tableDataSource;
+    // do the dance because it cached the methods.
+    if(self.tableView.dataSource){
+        self.tableView.dataSource = nil;
+    }
+    self.tableView.dataSource = tableDataSource;
+}
 
 - (void)configureCell:(UITableViewCell *)cell withObject:(NSManagedObject<MUITableViewCellObject> *)object{
     if([object respondsToSelector:@selector(titleForTableViewCell)]){
@@ -71,17 +86,6 @@
 
 #pragma mark - Fetched results controller
 
-- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
-    if(fetchedResultsController == _fetchedResultsController){
-        return;
-    }
-    if(_fetchedResultsController.delegate == self){
-        _fetchedResultsController.delegate = nil;
-    }
-    fetchedResultsController.delegate = self;
-    _fetchedResultsController = fetchedResultsController;
-    [self.tableView reloadData];
-}
 
 //- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
 //    if(fetchedResultsController == _fetchedResultsController){
@@ -178,16 +182,6 @@
             break;
         case NSFetchedResultsChangeDelete:
         {
-            // Hardest thing is the object has already been deleted from teh detail fetch controller.
-            // We can hack it to work with swiping or editing.
-            // But if not editing and its deleted in background it gets messy.
-            
-            //            if([indexPath isEqual:self.selectedRowOfDetailItem]){
-            //                self.selectionPathOfDeletedRow = indexPath;
-            //            }
-            if([indexPath isEqual:tableView.indexPathForSelectedRow]){
-                
-            }
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
@@ -217,17 +211,6 @@
     if([self.fetchedResultsControllerDelgate respondsToSelector:_cmd]){
         [self.fetchedResultsControllerDelgate controllerDidChangeContent:controller];
     }
-    //    NSIndexPath *indexPath = self.selectionPathOfDeletedRow;
-    //    if(indexPath){
-    //        self.selectionPathOfDeletedRow = nil;
-    //        if(self.splitViewController.isCollapsed){ // fix
-    //            //self.selectedObject = nil; // what's this for?
-    //            [self.navigationController popToViewController:self animated:YES];
-    //        }
-    //        else{
-    //            [self performSelector:@selector(showObjectNearIndexPath:) withObject:indexPath afterDelay:0];
-    //        }
-    //    }
 }
 
 #pragma mark - Restoration

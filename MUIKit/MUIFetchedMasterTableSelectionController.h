@@ -25,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, readonly) MUIMasterTableViewController *masterTableViewController;
 
-//@property (weak, nonatomic, readonly) MUIMasterTableViewController *masterTableViewController;
-
 @property (nonatomic, assign) id<MUIFetchedMasterTableSelectionControllerDelegate> delegate;
 
 @end

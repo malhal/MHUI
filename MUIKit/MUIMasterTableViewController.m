@@ -19,27 +19,30 @@
 @end
 
 @implementation MUIMasterTableViewController
-@synthesize masterDetailContext = _masterDetailContext;
+@synthesize masterMasterDetailContext = _masterMasterDetailContext;
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder{
     [super encodeRestorableStateWithCoder:coder];
-    [coder encodeObject:self.masterDetailContext forKey:@"MasterDetailContext"];
+    //[coder encodeObject:self.masterDetailContext forKey:@"MasterDetailContext"];
     //[coder encodeObject:self.masterDetailContext.detailItem.objectID.URIRepresentation forKey:@"DetailItem"];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder{
     [super decodeRestorableStateWithCoder:coder];
-    self.masterDetailContext = [coder decodeObjectForKey:@"MasterDetailContext"];
+    //self.masterDetailContext = [coder decodeObjectForKey:@"MasterDetailContext"];
 //    NSURL *objectURI = [coder decodeObjectForKey:@"DetailItem"];
 //    if(objectURI){
 //        self.masterDetailContext.detailItem = [self.managedObjectContext mcd_objectWithURI:objectURI];
 //    }
-    
+}
+
+- (BOOL)containsDetailItem:(NSObject *)detailItem{
+    return NO;
 }
 
 // rename to should Currently
 - (BOOL)shouldAlwaysHaveSelectedDetailItem{
-    if(self.splitViewController.isCollapsed){
+    if(self.masterMasterDetailContext.splitViewController.isCollapsed){
         //if(!self.shouldHaveSelectedObjectWhenNotInEditMode){
         return NO;
     }
@@ -53,7 +56,7 @@
     if(!self.shouldAlwaysHaveSelectedDetailItem){
         return;
     }
-    id secondaryItem = self.masterDetailContext.detailViewController.detailItem;
+    id secondaryItem = self.masterMasterDetailContext.detailViewController.detailItem;
     if(!secondaryItem){
         return;
     }
@@ -91,7 +94,6 @@
 //        id i = self.splitViewController.viewControllers.lastObject.childViewControllers.firstObject;
 //        self.masterDetailContext = i;
 //    }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -106,7 +108,7 @@
 //        }
 //    }
 
-    self.clearsSelectionOnViewWillAppear = self.masterDetailContext.splitViewController.isCollapsed;
+    self.clearsSelectionOnViewWillAppear = self.masterMasterDetailContext.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
     
 //    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
@@ -116,7 +118,7 @@
 //            [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
 //        }
 //    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterDetailContext.splitViewController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterMasterDetailContext.splitViewController];
     
     [self updateTableSelectionForCurrentSelectedDetailItem];
 }

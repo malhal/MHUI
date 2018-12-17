@@ -18,7 +18,7 @@
 @property (copy, nonatomic) UITraitCollection *forcedTraitCollection;
 
 // used for the delegates when is the child split.
-@property (strong, nonatomic, readwrite) MUIMasterItemSplitter *masterItemSplitter;
+//@property (strong, nonatomic, readwrite) MUIMasterItemSplitter *masterItemSplitter;
 
 //@property (strong, nonatomic) MUIRootMasterSplitViewController *rootMasterSplitViewController;
 //@property (assign, nonatomic) BOOL largeSplit;
@@ -75,12 +75,6 @@
     }
 }
 
-//- (MUIMasterItemSplitter *)masterItemSplitter{
-//    if(!_masterItemSplitter){
-//        _masterItemSplitter = [MUIMasterItemSplitter.alloc init];
-//    }
-//    return _masterItemSplitter;
-//}
 
 - (MUISplitViewController *)childSplitController{
     id i = self.viewControllers.firstObject;
@@ -215,13 +209,14 @@
 
 // decides if showDetailViewController should be passed up to the outer split, e.g. if choosing a detail item on the master
 // the reason we handle it this way is so the outer split can preserve it. Then it calls show on us and we push it.
+// we need to pass it up so that the top split will preserve it.
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
     if(!self.childSplitController){
         if(action == @selector(showDetailViewController:sender:)){
             UIViewController *vc = [self childContainingSender:sender];
             // if showDetail came from the detail then we pass it up the chain.
             if(vc != self.masterViewController){
-                return NO;
+                return NO; // NO
             }
         }
     }
@@ -244,7 +239,9 @@
 }
 
 - (void)showViewController:(UIViewController *)vc sender:(id)sender{
-    [self.masterViewController showViewController:vc sender:sender];
+    UINavigationController *navigationController = [self childContainingSender:sender];
+    NSAssert([navigationController isKindOfClass:UINavigationController.class],@"unexpected class");
+    [navigationController showViewController:vc sender:sender];
 }
 
 - (UITraitCollection *)traitCollection{
@@ -275,9 +272,8 @@
 // called when this split is a master in another
 // from 1 to 2 or 3 columns
 - (nullable UIViewController *)separateSecondaryViewControllerForSplitViewController:(UISplitViewController *)splitViewController{
+    id a = [(UINavigationController *)self.masterViewController topViewController];
     return [self.masterViewController separateSecondaryViewControllerForSplitViewController:splitViewController];
 }
-
-
 
 @end

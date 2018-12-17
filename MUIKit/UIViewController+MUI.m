@@ -89,15 +89,13 @@
     return parent;
 }
 
-- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc{
-    if(self == vc){
-        return YES;
-    }
-    UIViewController *parent = nil;
-    while((parent = self.parentViewController)){
-        if(parent == vc){
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)highViewController{
+    UIViewController *vc = self;
+    while(vc){
+        if(vc == highViewController){
             return YES;
         }
+        vc = vc.parentViewController;
     }
     return NO;
 }

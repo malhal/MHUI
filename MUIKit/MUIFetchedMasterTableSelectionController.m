@@ -28,18 +28,8 @@
 
 @interface MUIFetchedMasterTableSelectionController() <NSFetchedResultsControllerDelegate>
 
-// used to help select a row close to the deleted one.
-//@property (nonatomic, strong, nullable) NSIndexPath *selectionPathOfDeletedRow;
-// used to differentiate between edit button and swipe to delete.
-//@property (nonatomic, strong, nullable) NSIndexPath *tableViewEditingRowIndexPath;
-// when entering edit the selected row is deselected so this hangs onto it so we can select a nearby row.
-//@property (nonatomic, strong, nullable) NSIndexPath *selectedRowBeforeEditing;
-
-//@property (nonatomic, assign) BOOL needsToUpdateViewsForCurrentFetchController;
-
-//@property (strong, nonatomic, readwrite) MUIFetchedTableRowsController *fetchedTableDataSource;
-
 @property (nonatomic, strong, nullable) id detailItemBeforeChangingContent;
+
 @property (strong, nonatomic) NSIndexPath *indexPathOfDeletedObject;
 
 @end
@@ -88,7 +78,7 @@
     switch(type) {
         case NSFetchedResultsChangeDelete:
         {
-            if(anObject == self.masterTableViewController.masterDetailContext.detailViewController.detailItem){ //self.masterTableViewController.selectedMasterItem){
+            if(anObject == self.masterTableViewController.masterMasterDetailContext.detailViewController.detailItem){ //self.masterTableViewController.selectedMasterItem){
                 self.indexPathOfDeletedObject = indexPath;
             }
             break;

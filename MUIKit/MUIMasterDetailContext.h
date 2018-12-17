@@ -11,15 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//extern NSString * const MUIMasterDetailContextDetailItemDidChange;
-
 @protocol MUIMasterViewControlling, MUIDetailViewControlling;
 
 @interface MUIMasterDetailContext : NSObject <UISplitViewControllerDelegate, UIStateRestoring>
 
 - (instancetype)initWithSplitViewController:(UISplitViewController *)splitViewController;
-
-//@property (strong, nonatomic) id detailItem;
 
 @property (strong, nonatomic) UIViewController<MUIMasterViewControlling> *masterViewController;
 
@@ -33,26 +29,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUIMasterViewControlling <NSObject>
 
-- (BOOL)canSelectDetailItem:(id)detailItem;
+- (BOOL)containsDetailItem:(id)detailItem;
 
-@property (strong, nonatomic) MUIMasterDetailContext *masterDetailContext;
+@property (strong, nonatomic) MUIMasterDetailContext *masterMasterDetailContext;
 
 @end
 
 @protocol MUIDetailViewControlling <NSObject>
 
-@property (strong, nonatomic) MUIMasterDetailContext *masterDetailContext;
+@property (strong, nonatomic) MUIMasterDetailContext *detailMasterDetailContext;
 
 @property (strong, nonatomic, readonly) id detailItem;
 
 @end
-
-
-//@interface UISplitViewController (MUIMasterDetailContext)
-//
-//// returns the owning context
-//@property (strong, nonatomic) MUIMasterDetailContext* masterDetailContext;
-//
-//@end
 
 NS_ASSUME_NONNULL_END
