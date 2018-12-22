@@ -28,7 +28,7 @@
 //#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
-#import <MUIKit/MUIMasterDetailContext.h>
+#import <MUIKit/MUICollapseController.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
 #import <MUIKit/MUIFetchedTableRowsController.h>

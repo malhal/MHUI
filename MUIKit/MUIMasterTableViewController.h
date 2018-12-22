@@ -9,13 +9,13 @@
 #import <MHFoundation/MHFoundation.h>
 #import <UIKit/UIKit.h>
 #import <MUIKit/MUITableViewController.h>
-#import <MUIKit/MUIMasterDetailContext.h>
+#import <MUIKit/MUICollapseController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUIMasterTableViewControllerDataSource, MUIMasterTableViewControllerDelegate;
 
-@interface MUIMasterTableViewController : MUITableViewController <MUIMasterViewControlling>//<UITableViewDelegate>
+@interface MUIMasterTableViewController : MUITableViewController <MUIMasterCollapsing>//<UITableViewDelegate>
 
 @property (nonatomic, assign) id<MUIMasterTableViewControllerDelegate> delegate;
 

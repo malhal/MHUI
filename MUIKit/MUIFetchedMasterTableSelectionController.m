@@ -78,7 +78,7 @@
     switch(type) {
         case NSFetchedResultsChangeDelete:
         {
-            if(anObject == self.masterTableViewController.masterMasterDetailContext.detailViewController.detailItem){ //self.masterTableViewController.selectedMasterItem){
+            if(anObject == self.masterTableViewController.masterCollapseController.detailViewController.detailItem){ //self.masterTableViewController.selectedMasterItem){
                 self.indexPathOfDeletedObject = indexPath;
             }
             break;

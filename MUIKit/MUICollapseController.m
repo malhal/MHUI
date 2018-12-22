@@ -1,17 +1,18 @@
 //
-//  MUIMasterDetailContext.m
+//  MUICollapseController.m
 //  RootMUIMasterDetail
 //
 //  Created by Malcolm Hall on 10/12/2018.
 //  Copyright © 2018 Malcolm Hall. All rights reserved.
 //
+// MUISplitCollapseController or MUICollapseController
 
-#import "MUIMasterDetailContext.h"
+#import "MUICollapseController.h"
 #import <objc/runtime.h>
 #import "MUIPrimaryNavigationController.h"
 #import "UIViewController+MUI.h"
 
-@implementation MUIMasterDetailContext
+@implementation MUICollapseController
 
 - (id<UIStateRestoring>)restorationParent{
     return self.splitViewController;
@@ -37,19 +38,19 @@
     return self;
 }
 
-- (void)setMasterViewController:(UIViewController<MUIMasterViewControlling> *)masterViewController{
+- (void)setMasterViewController:(UIViewController<MUIMasterCollapsing> *)masterViewController{
     if(masterViewController == _masterViewController){
         return;
     }
-    masterViewController.masterMasterDetailContext = self;
+    masterViewController.masterCollapseController = self;
     _masterViewController = masterViewController;
 }
 
-- (void)setDetailViewController:(UIViewController<MUIDetailViewControlling> *)detailViewController{
+- (void)setDetailViewController:(UIViewController<MUIDetailCollapsing> *)detailViewController{
     if(detailViewController == _detailViewController){
         return;
     }
-    detailViewController.detailMasterDetailContext = self;
+    detailViewController.detailCollapseController = self;
     _detailViewController = detailViewController;
 }
 
@@ -66,4 +67,3 @@
 //}
 
 @end
-

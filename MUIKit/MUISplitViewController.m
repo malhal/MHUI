@@ -10,6 +10,7 @@
 #import "UIViewController+MUI.h"
 #import "UIViewController+MUIDetail.h"
 //#import "MUIDetailItemSplitter.h"
+#import "UIView+MUI.h"
 
 #define IS_IPAD_PRO_12_INCH (([UIScreen mainScreen].bounds.size.width == 1366 && [UIScreen mainScreen].bounds.size.height == 1024) || ([UIScreen mainScreen].bounds.size.width == 1024 && [UIScreen mainScreen].bounds.size.height == 1366))
 
@@ -63,6 +64,12 @@
     //UINavigationController *nav = self.viewControllers.firstObject;
     //self.rootMasterSplitViewController = self.viewControllers.firstObject;//nav.topViewController;
     
+    if(self.splitViewController){
+        UINavigationController *nav = self.parentViewController;
+       // nav.navigationBarHidden = YES;
+    }
+    self.preservedDetailViewController = self.viewControllers[1];
+    
     MUISplitViewController* childSplitController = self.childSplitController;
     if(childSplitController){
        // childSplitController.delegate = self.masterItemSplitter;
@@ -78,6 +85,7 @@
 
 - (MUISplitViewController *)childSplitController{
     id i = self.viewControllers.firstObject;
+    //return i; // sometimes is a nav controller
     return MHFDynamicCast(MUISplitViewController.class, i);
 }
 
@@ -170,8 +178,10 @@
         // If we are large enough, force a regular size class
         // self.preferredPrimaryColumnWidthFraction = 0.5;
         //rootMasterSplitViewController.preferredPrimaryColumnWidthFraction = 0.5;
+        
         self.maximumPrimaryColumnWidth = 640;//320 * 2;//MAXFLOAT;
         self.minimumPrimaryColumnWidth = 640;//320 * 2;
+        
         //rootMasterSplitViewController.maximumPrimaryColumnWidth = MAXFLOAT;
         //  self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
     }
@@ -179,8 +189,10 @@
         // Otherwise, compact
         //self.preferredPrimaryColumnWidthFraction = UISplitViewControllerAutomaticDimension;
         //rootMasterSplitViewController.preferredPrimaryColumnWidthFraction = UISplitViewControllerAutomaticDimension;
-        self.maximumPrimaryColumnWidth = UISplitViewControllerAutomaticDimension;
+        
+        self.maximumPrimaryColumnWidth = UISplitViewControllerAutomaticDimension;//
         self.minimumPrimaryColumnWidth = UISplitViewControllerAutomaticDimension;
+        
         //rootMasterSplitViewController.maximumPrimaryColumnWidth = UISplitViewControllerAutomaticDimension;
         //self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassCompact];
     }
@@ -211,13 +223,24 @@
 // the reason we handle it this way is so the outer split can preserve it. Then it calls show on us and we push it.
 // we need to pass it up so that the top split will preserve it.
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-    if(!self.childSplitController){
+    //if(!self.childSplitController){
+    if(self.splitViewController){
         if(action == @selector(showDetailViewController:sender:)){
-            UIViewController *vc = [self childContainingSender:sender];
-            // if showDetail came from the detail then we pass it up the chain.
-            if(vc != self.masterViewController){
-                return NO; // NO
+            
+            UIView *view = (UIView *)sender;
+            UIViewController *vcc = view.mui_viewController; // RootViewController or MasterViewController
+            UINavigationController *nav = vcc.parentViewController; // RootNavigationController or MasterNavigationController
+
+            UIViewController *firstChild = self.childViewControllers.firstObject;
+            if(nav != firstChild){
+                return NO;
             }
+            //UIViewController *vc = [self childContainingSender:sender];
+            // if showDetail came from the detail then we pass it up the chain.
+            // if the controller is not our master nav controller then it means it is the detail one
+//            if(vc != self.masterViewController){
+//                return NO; // NO
+//            }
         }
     }
     return [super canPerformAction:action withSender:sender];

@@ -19,7 +19,7 @@
 @end
 
 @implementation MUIMasterTableViewController
-@synthesize masterMasterDetailContext = _masterMasterDetailContext;
+@synthesize masterCollapseController = _masterCollapseController;
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder{
     [super encodeRestorableStateWithCoder:coder];
@@ -42,7 +42,7 @@
 
 // rename to should Currently
 - (BOOL)shouldAlwaysHaveSelectedDetailItem{
-    if(self.masterMasterDetailContext.splitViewController.isCollapsed){
+    if(self.masterCollapseController.splitViewController.isCollapsed){
         //if(!self.shouldHaveSelectedObjectWhenNotInEditMode){
         return NO;
     }
@@ -56,7 +56,7 @@
     if(!self.shouldAlwaysHaveSelectedDetailItem){
         return;
     }
-    id secondaryItem = self.masterMasterDetailContext.detailViewController.detailItem;
+    id secondaryItem = self.masterCollapseController.detailViewController.detailItem;
     if(!secondaryItem){
         return;
     }
@@ -108,7 +108,7 @@
 //        }
 //    }
 
-    self.clearsSelectionOnViewWillAppear = self.masterMasterDetailContext.splitViewController.isCollapsed;
+    self.clearsSelectionOnViewWillAppear = self.masterCollapseController.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
     
 //    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
@@ -118,7 +118,7 @@
 //            [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
 //        }
 //    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterMasterDetailContext.splitViewController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:self.masterCollapseController.splitViewController];
     
     [self updateTableSelectionForCurrentSelectedDetailItem];
 }
