@@ -220,27 +220,27 @@
 //}
 
 // decides if showDetailViewController should be passed up to the outer split, e.g. if choosing a detail item on the master
-// the reason we handle it this way is so the outer split can preserve it. Then it calls show on us and we push it.
+// the reason we handle it this way is so the outer split can preserve it. Then it calls show on us and we push it on the master that then handles passing it to a child nav controller.
 // we need to pass it up so that the top split will preserve it.
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
     //if(!self.childSplitController){
     if(self.splitViewController){
         if(action == @selector(showDetailViewController:sender:)){
             
-            UIView *view = (UIView *)sender;
-            UIViewController *vcc = view.mui_viewController; // RootViewController or MasterViewController
-            UINavigationController *nav = vcc.parentViewController; // RootNavigationController or MasterNavigationController
-
-            UIViewController *firstChild = self.childViewControllers.firstObject;
-            if(nav != firstChild){
-                return NO;
-            }
-            //UIViewController *vc = [self childContainingSender:sender];
+//            UIView *view = (UIView *)sender;
+//            UIViewController *vcc = view.mui_viewController; // RootViewController or MasterViewController
+//            UINavigationController *nav = vcc.parentViewController; // RootNavigationController or MasterNavigationController
+//            UIViewController *firstChild = self.childViewControllers.firstObject;
+//            if(nav != firstChild){
+//                return NO;
+//            }
+            UIViewController *vc = [self childContainingSender:sender];
             // if showDetail came from the detail then we pass it up the chain.
             // if the controller is not our master nav controller then it means it is the detail one
-//            if(vc != self.masterViewController){
-//                return NO; // NO
-//            }
+            id i = self.masterViewController;
+            if(vc != self.masterViewController){
+                return NO; // NO
+            }
         }
     }
     return [super canPerformAction:action withSender:sender];
@@ -262,10 +262,40 @@
 }
 
 - (void)showViewController:(UIViewController *)vc sender:(id)sender{
-    UINavigationController *navigationController = [self childContainingSender:sender];
-    NSAssert([navigationController isKindOfClass:UINavigationController.class],@"unexpected class");
-    [navigationController showViewController:vc sender:sender];
+//    UINavigationController *navigationController = [self childContainingSender:sender];
+//    NSAssert([navigationController isKindOfClass:UINavigationController.class],@"unexpected class");
+//    //[navigationController showViewController:vc sender:sender];
+//
+//    [self.childSplitController showViewController:vc sender:sender];
+    UIViewController *firstChild = self.childViewControllers.firstObject;
+    [firstChild showViewController:vc sender:sender];
 }
+
+
+
+// called when this split is a master in another
+// from 3 to 2 or 1 columns
+- (void)collapseSecondaryViewController:(UIViewController *)secondaryViewController forSplitViewController:(UISplitViewController *)splitViewController{
+    id i = self.masterViewController;
+    [self.masterViewController collapseSecondaryViewController:secondaryViewController forSplitViewController:splitViewController];
+    //self.preservedDetailViewController = nil;
+}
+
+// called when this split is a master in another
+// from 1 to 2 or 3 columns
+- (nullable UIViewController *)separateSecondaryViewControllerForSplitViewController:(UISplitViewController *)splitViewController{
+    UINavigationController *navigationController = (UINavigationController *)self.masterViewController;
+    NSArray *viewControllers = navigationController.viewControllers;
+    if(viewControllers.count == 2){
+        return nil;
+    }
+    UIViewController *result = [self.masterViewController separateSecondaryViewControllerForSplitViewController:splitViewController];
+   // id d = [a topViewController];
+   // id e = [b topViewController];
+    return result;
+}
+
+#pragma mark overlay fix
 
 - (UITraitCollection *)traitCollection{
     UITraitCollection *traitCollection = super.traitCollection;
@@ -283,20 +313,6 @@
     [super showDetailViewController:vc sender:sender];
     self.preservedDetailViewController = vc;
     self.overlayFix = NO;
-}
-
-// called when this split is a master in another
-// from 3 to 2 or 1 columns
-- (void)collapseSecondaryViewController:(UIViewController *)secondaryViewController forSplitViewController:(UISplitViewController *)splitViewController{
-    [self.masterViewController collapseSecondaryViewController:secondaryViewController forSplitViewController:splitViewController];
-    self.preservedDetailViewController = nil;
-}
-
-// called when this split is a master in another
-// from 1 to 2 or 3 columns
-- (nullable UIViewController *)separateSecondaryViewControllerForSplitViewController:(UISplitViewController *)splitViewController{
-    id a = [(UINavigationController *)self.masterViewController topViewController];
-    return [self.masterViewController separateSecondaryViewControllerForSplitViewController:splitViewController];
 }
 
 @end

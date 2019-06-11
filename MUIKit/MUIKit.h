@@ -21,10 +21,9 @@
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
 
-#import <MUIKit/MUIPrimaryNavigationController.h>
-
 #import <MUIKit/MUITableViewController.h>
-#import <MUIKit/MUIMasterTableViewController.h>
+#import <MUIKit/MUIMasterTableSelectionController.h>
+#import <MUIKit/MUIRootNavigationController.h>
 //#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>

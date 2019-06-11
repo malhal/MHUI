@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)tableView:(UITableView *)tableView didUpdateTextFieldForRowAtIndexPath:(NSIndexPath *)indexPath withValue:(NSString *)value;
-- (void)tableViewDidFinishReload:(UITableView *)tableView;
+
 
 @end
 

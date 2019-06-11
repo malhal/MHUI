@@ -1,5 +1,5 @@
 //
-//  MUIPrimaryNavigationController.h
+//  MUIRootNavigationController.h
 //  MUIKit
 //
 //  Created by Malcolm Hall on 08/12/2018.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MUIPrimaryNavigationController : UINavigationController
+@interface MUIRootNavigationController : UINavigationController
 
 @end
 

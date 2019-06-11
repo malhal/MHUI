@@ -9,8 +9,15 @@
 
 #import "MUICollapseController.h"
 #import <objc/runtime.h>
-#import "MUIPrimaryNavigationController.h"
 #import "UIViewController+MUI.h"
+#import <objc/runtime.h>
+
+@interface UIViewController ()
+
+@property (weak, nonatomic, readwrite, setter=mui_setCollapseControllerForMaster:) MUICollapseController *mui_collapseControllerForMaster;
+@property (weak, nonatomic, readwrite, setter=mui_setCollapseControllerForDetail:) MUICollapseController *mui_collapseControllerForDetail;
+
+@end
 
 @implementation MUICollapseController
 
@@ -28,12 +35,13 @@
   //  self.detailItem = [coder decodeObjectForKey:@"DetailItem"];
 }
 
+
 - (instancetype)initWithSplitViewController:(UISplitViewController *)splitViewController{
     self = [super init];
     if (self) {
-        //NSAssert([splitViewController.viewControllers.firstObject isKindOfClass:MUIPrimaryNavigationController.class], @"Primary must be instance of MUIPrimaryNavigationController");
+        //NSAssert([splitViewController.viewControllers.firstObject isKindOfClass:MUIRootNavigationController.class], @"Primary must be instance of MUIRootNavigationController");
         splitViewController.delegate = self;
-        _splitViewController = splitViewController;   
+        _splitViewController = splitViewController;
     }
     return self;
 }
@@ -42,7 +50,7 @@
     if(masterViewController == _masterViewController){
         return;
     }
-    masterViewController.masterCollapseController = self;
+    masterViewController.mui_collapseControllerForMaster = self;
     _masterViewController = masterViewController;
 }
 
@@ -50,7 +58,7 @@
     if(detailViewController == _detailViewController){
         return;
     }
-    detailViewController.detailCollapseController = self;
+    detailViewController.mui_collapseControllerForDetail = self;
     _detailViewController = detailViewController;
 }
 
@@ -62,8 +70,41 @@
     return YES;
 }
 
-//- (UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
-//    return nil;
-//}
+- (UIViewController *)splitViewController:(UISplitViewController *)splitViewController separateSecondaryViewControllerFromPrimaryViewController:(UIViewController *)primaryViewController{
+    NSLog(@"");
+    return nil;
+}
+
+@end
+
+@implementation UIViewController (MUICollapseController)
+
+- (MUICollapseController *)mui_collapseControllerForDetail{
+    return objc_getAssociatedObject(self, @selector(mui_collapseControllerForDetail));
+}
+
+- (void)mui_setCollapseControllerForDetail:(MUICollapseController *)collapseControllerForDetail {
+    objc_setAssociatedObject(self, @selector(mui_collapseControllerForDetail), collapseControllerForDetail, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (MUICollapseController *)mui_collapseControllerForMaster{
+    return objc_getAssociatedObject(self, @selector(mui_collapseControllerForMaster));
+}
+
+- (void)mui_setCollapseControllerForMaster:(MUICollapseController *)collapseControllerForMaster {
+    objc_setAssociatedObject(self, @selector(mui_collapseControllerForMaster), collapseControllerForMaster, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (BOOL)isMemberOfViewControllerHierarchy:(UIViewController *)highViewController{
+    UIViewController *vc = self;
+    while(vc){
+        if(vc == highViewController){
+            return YES;
+        }
+        vc = vc.parentViewController;
+    }
+    return NO;
+}
+
 
 @end

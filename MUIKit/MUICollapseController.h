@@ -12,18 +12,22 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUIMasterCollapsing, MUIDetailCollapsing;
+@class MUIRootNavigationController;
 
 @interface MUICollapseController : NSObject <UISplitViewControllerDelegate, UIStateRestoring>
 
+//- (instancetype)initWithPrimaryNavigationController:(MUIRootNavigationController *)primaryNavigationController splitViewController:(UISplitViewController *)splitViewController;
+
+// Doesn't take a master param because in case if 2-split with initial pushing master it doesn't exist yet.
 - (instancetype)initWithSplitViewController:(UISplitViewController *)splitViewController;
 
-@property (strong, nonatomic) UIViewController<MUIMasterCollapsing> *masterViewController;
+@property (strong, nonatomic, nullable) UIViewController<MUIMasterCollapsing> *masterViewController;
 
-@property (strong, nonatomic) UIViewController<MUIDetailCollapsing> *detailViewController;
+@property (strong, nonatomic, nullable) UIViewController<MUIDetailCollapsing> *detailViewController;
 
 @property (strong, nonatomic, readonly) UISplitViewController *splitViewController;
 
-@property (weak, nonatomic) id<UISplitViewControllerDelegate> splitDelegate;
+@property (weak, nonatomic, nullable) id<UISplitViewControllerDelegate> splitDelegate;
 
 @end
 
@@ -31,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)containsDetailItem:(id)detailItem;
 
-@property (strong, nonatomic) MUICollapseController *masterCollapseController;
+//@property (strong, nonatomic) MUICollapseController *collapseControllerForMaster;
 
 @end
 
@@ -39,7 +43,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, readonly) id detailItem;
 
-@property (strong, nonatomic) MUICollapseController *detailCollapseController;
+//@property (weak, nonatomic) MUICollapseController *collapseControllerForDetail;
+
+@end
+
+@interface UIViewController (MUICollapseController)
+
+@property (weak, nonatomic, nullable, readonly) MUICollapseController* mui_collapseControllerForMaster;
+
+@property (weak, nonatomic, nullable, readonly) MUICollapseController* mui_collapseControllerForDetail;
+
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)highViewController;
 
 @end
 

@@ -26,6 +26,10 @@
 //static NSString * const kDefaultmessageWhenNoRows = @"There is no data available to display";
 //static void * const kMCDFetchedResultsTableViewControllerKVOContext = (void *)&kMCDFetchedResultsTableViewControllerKVOContext;
 
+//@interface MUIMasterTableSelectionController()
+//@property (weak, nonatomic) MUITableViewController *tableViewController;
+//@end
+
 @interface MUIFetchedMasterTableSelectionController() <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong, nullable) id detailItemBeforeChangingContent;
@@ -41,14 +45,14 @@
 @implementation MUIFetchedMasterTableSelectionController
 
 //- (instancetype)initWithMasterController:(MUIMasterTableViewController *)masterSupport{
-- (instancetype)initWithFetchedTableRowsController:(MUIFetchedTableRowsController *)fetchedTableRowsController masterTableViewController:(MUIMasterTableViewController *)masterTableViewController{
-    self = [super init];
+- (instancetype)initWithFetchedTableRowsController:(MUIFetchedTableRowsController *)fetchedTableRowsController{
+    self = [super initWithTableViewController:fetchedTableRowsController.tableViewController];
     if (self) {
-        fetchedTableRowsController.fetchedResultsControllerDelgate = self;
+        fetchedTableRowsController.fetchedResultsControllerDelegate = self;
         _fetchedTableRowsController = fetchedTableRowsController;
-        
-        masterTableViewController.delegate = self;
-        _masterTableViewController = masterTableViewController;
+
+        //masterTableViewController.delegate = self;
+        //_masterTableViewController = masterTableViewController;
     }
     return self;
 }
@@ -59,7 +63,11 @@
 //    return [self.fetchedTableDataSource.fetchedResultsController objectAtIndexPath:indexPath];
 //}
 
-- (NSIndexPath *)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController indexPathForItem:(id)item{
+//- (NSIndexPath *)masterTableViewController:(MUIMasterTableViewController *)masterTableViewController indexPathForItem:(id)item{
+//    return [self.fetchedTableRowsController.fetchedResultsController indexPathForObject:item];
+//}
+
+- (NSIndexPath *)indexPathForItem:(id)item{
     return [self.fetchedTableRowsController.fetchedResultsController indexPathForObject:item];
 }
 
@@ -78,7 +86,7 @@
     switch(type) {
         case NSFetchedResultsChangeDelete:
         {
-            if(anObject == self.masterTableViewController.masterCollapseController.detailViewController.detailItem){ //self.masterTableViewController.selectedMasterItem){
+            if(anObject == self.tableViewController.mui_collapseControllerForMaster.detailViewController.detailItem){ //self.masterTableViewController.selectedMasterItem){
                 self.indexPathOfDeletedObject = indexPath;
             }
             break;
@@ -93,14 +101,20 @@
     //self.detailItemBeforeChangingContent = nil;
     NSIndexPath *indexPathOfDeletedObject = self.indexPathOfDeletedObject;
     if(indexPathOfDeletedObject){
+        self.indexPathOfDeletedObject = nil;
+        
         NSIndexPath *indexPath = [self.fetchedTableRowsController.fetchedResultsController mcd_indexPathNearIndexPath:indexPathOfDeletedObject];//[self.masterTableViewController.tableView mui_indexPathNearIndexPath:indexPathOfDeletedObject];
         id object = [controller objectAtIndexPath:indexPath];
         //self.masterTableViewController.masterDetailContext.detailItem = object;
-        [self.delegate fetchedMasterTableSelectionController:self didSelectObject:object];
-        
-        self.indexPathOfDeletedObject = nil;
+       // [self performSelector:@selector(malc:) withObject:object afterDelay:0];
+        [self.delegate masterTableSelectionController:self didSelectItem:object];
+        [self updateTableSelectionForCurrentSelectedDetailItem];
     }
 }
+
+//- (void)malc:(id)object{
+//    [self.delegate fetchedMasterTableSelectionController:self didSelectObject:object];
+//}
 
 @end
 

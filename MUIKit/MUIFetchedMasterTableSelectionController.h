@@ -7,7 +7,7 @@
 //
 
 #import <MCoreData/MCoreData.h>
-#import <MUIKit/MUIMasterTableViewController.h>
+#import <MUIKit/MUIMasterTableSelectionController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,22 +17,24 @@ NS_ASSUME_NONNULL_BEGIN
 // default cell reuse identifier is Cell, so in storyboard set the table view to this or change it using the property.
 // perform fetch is done in view will appear
 // <ResultType : id<NSFetchRequestResult>>
-@interface MUIFetchedMasterTableSelectionController : NSObject <NSFetchedResultsControllerDelegate, MUIMasterTableViewControllerDelegate> // <FetchedTableDataSourceDelegate, >
+@interface MUIFetchedMasterTableSelectionController : MUIMasterTableSelectionController // <NSFetchedResultsControllerDelegate, MUIMasterTableViewControllerDelegate> // <FetchedTableDataSourceDelegate, >
 
-- (instancetype)initWithFetchedTableRowsController:(MUIFetchedTableRowsController *)fetchedTableRowsController masterTableViewController:(MUIMasterTableViewController *)masterTableViewController; //masterTableViewController:(MUIMasterTableViewController *)masterTableViewController;
+- (instancetype)initWithFetchedTableRowsController:(MUIFetchedTableRowsController *)fetchedTableRowsController;// masterTableViewController:(MUIMasterTableViewController *)masterTableViewController; //masterTableViewController:(MUIMasterTableViewController *)masterTableViewController;
 
-@property (strong, nonatomic, readonly) MUIFetchedTableRowsController *fetchedTableRowsController;
+- (instancetype)initWithTableViewController:(MUITableViewController *)tableViewController NS_UNAVAILABLE;
 
-@property (strong, nonatomic, readonly) MUIMasterTableViewController *masterTableViewController;
+@property (strong, nonatomic) MUIFetchedTableRowsController *fetchedTableRowsController;
 
-@property (nonatomic, assign) id<MUIFetchedMasterTableSelectionControllerDelegate> delegate;
+//@property (assign, nonatomic, readonly) MUIMasterTableViewController *masterTableViewController;
 
-@end
-
-@protocol MUIFetchedMasterTableSelectionControllerDelegate <NSObject>
-
-- (void)fetchedMasterTableSelectionController:(MUIFetchedMasterTableSelectionController *)fetchedMasterTableSelectionController didSelectObject:(id)object;
+//@property (nonatomic, assign) id<MUIFetchedMasterTableSelectionControllerDelegate> delegate;
 
 @end
+
+//@protocol MUIFetchedMasterTableSelectionControllerDelegate <NSObject>
+//
+//- (void)fetchedMasterTableSelectionController:(MUIFetchedMasterTableSelectionController *)fetchedMasterTableSelectionController didSelectObject:(id)object;
+//
+//@end
 
 NS_ASSUME_NONNULL_END
