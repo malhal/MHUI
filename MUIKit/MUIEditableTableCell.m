@@ -20,6 +20,7 @@
 
 @implementation MUIEditableTableCell
 
+
 - (UITextField *)textField{
     if(!_textField){
         _textField = [UITextField.alloc initWithFrame:CGRectZero];
