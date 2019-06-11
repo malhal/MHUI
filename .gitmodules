@@ -1,6 +1,6 @@
-[submodule "MHFoundation"]
-	path = MHFoundation
+[submodule "Submodules/MHFoundation"]
+	path = Submodules/MHFoundation
 	url = https://github.com/malhal/MHFoundation.git
-[submodule "MCoreData"]
-	path = MCoreData
+[submodule "Submodules/MCoreData"]
+	path = Submodules/MCoreData
 	url = https://github.com/malhal/MCoreData.git
