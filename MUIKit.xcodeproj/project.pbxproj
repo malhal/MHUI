@@ -102,6 +102,13 @@
 			remoteGlobalIDString = EC3145251D0740C70025F669;
 			remoteInfo = MHUI;
 		};
+		EC56BA0122AFE02600C6D57B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EC3144D91D073E010025F669;
+			remoteInfo = MCoreData;
+		};
 		EC90CA3321AF70AB001A7883 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
@@ -129,13 +136,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = EC3144E41D073E010025F669;
 			remoteInfo = MCoreDataTests;
-		};
-		EC90CA4221AF70C5001A7883 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EC3144D91D073E010025F669;
-			remoteInfo = MCoreData;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -427,7 +427,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EC90CA4321AF70C5001A7883 /* PBXTargetDependency */,
+				EC56BA0222AFE02600C6D57B /* PBXTargetDependency */,
 			);
 			name = MUIKit;
 			productName = MHUI;
@@ -628,10 +628,10 @@
 			target = EC3145251D0740C70025F669 /* MUIKit */;
 			targetProxy = EC3145321D0740C80025F669 /* PBXContainerItemProxy */;
 		};
-		EC90CA4321AF70C5001A7883 /* PBXTargetDependency */ = {
+		EC56BA0222AFE02600C6D57B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MCoreData;
-			targetProxy = EC90CA4221AF70C5001A7883 /* PBXContainerItemProxy */;
+			targetProxy = EC56BA0122AFE02600C6D57B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
