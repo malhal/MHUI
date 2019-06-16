@@ -16,7 +16,7 @@
 
 @interface MUISplitViewController()
 
-@property (copy, nonatomic) UITraitCollection *forcedTraitCollection;
+//@property (copy, nonatomic) UITraitCollection *forcedTraitCollection;
 
 // used for the delegates when is the child split.
 //@property (strong, nonatomic, readwrite) MUIMasterItemSplitter *masterItemSplitter;
@@ -26,35 +26,18 @@
 
 // the overlay fix is needed to allow root row selection to work in the master in overlay.
 // something to do with because the split is in a popover it didn't inherit the traits like a nav controller does in a single level split view.
-@property (assign, nonatomic) BOOL overlayFix;
-@property (strong, nonatomic, readonly) UIViewController *masterViewController;
-@property (assign, nonatomic) UIViewController *preservedDetailViewController;
+//@property (assign, nonatomic) BOOL overlayFix;
+//@property (strong, nonatomic, readonly) UIViewController *masterViewController;
+//@property (assign, nonatomic) UIViewController *preservedDetailViewController;
 
 @end
 
 @implementation MUISplitViewController
-@dynamic masterViewController; // private
+//@dynamic masterViewController; // private
 
-//- (UIBarButtonItem *)threeColumnsButtonItem{
-//    if(_threeColumnsButtonItem){
-//        return _threeColumnsButtonItem;
-//    }
-//    _threeColumnsButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Mode" style:0 target:self action:@selector(triggerThreeColumnsAction:)];
-//    [self updateThreeColumnsButtonItem];
-//    return _threeColumnsButtonItem;
-//}
-//
-//- (void)updateThreeColumnsButtonItem{
-//
-//}
-//
-//- (void)triggerThreeColumnsAction:(id)sender{
-//    self.largeSplit = !self.largeSplit;
-//    CGSize size = self.view.frame.size;
-//    [self configureColumnsWithSize:size];
-//    [self configureTraitsWithSize:size];
-//    [self updateForcedTraitCollection];
-//}
+
+/*
+ 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -313,6 +296,19 @@
     [super showDetailViewController:vc sender:sender];
     self.preservedDetailViewController = vc;
     self.overlayFix = NO;
+}
+*/
+
+@end
+
+@implementation UIViewController (MUISplitViewController)
+
+- (MUISplitViewController *)mui_splitViewController{
+    UINavigationController *nav = self.splitViewController;
+    if([nav isKindOfClass:MUISplitViewController.class]){
+        return (MUISplitViewController *)nav;
+    }
+    return nav.mui_splitViewController;
 }
 
 @end

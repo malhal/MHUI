@@ -7,6 +7,7 @@
 //
 
 #import "MUITableViewController.h"
+#import "MUIFetchedDataSource.h"
 
 @interface MUITableViewController ()
 
@@ -53,6 +54,20 @@
     return [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
+- (void)setDataSource:(MUIFetchedDataSource *)dataSource{
+    if(dataSource == _dataSource){
+        return;
+    }
+    else if(self.tableView.dataSource){
+        self.tableView.dataSource = nil;
+    }
+    _dataSource = dataSource;
+    dataSource.tableViewController = self;
+    self.tableView.dataSource = self;
+}
+
+/*
+ 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     //self.selectedRowBeforeEditing = editing ? self.tableView.indexPathForSelectedRow : nil;
     if(!editing && animated){
@@ -74,12 +89,13 @@
         }
     }
 }
+*/
 
-- (void)tableViewControllerDidEndEditing{
-    if([self.delegate respondsToSelector:@selector(tableViewControllerDidEndEditing:)]){
-        [self.delegate tableViewControllerDidEndEditing:self];
-    }
-}
+//- (void)tableViewControllerDidEndEditing{
+//    if([self.delegate respondsToSelector:@selector(tableViewControllerDidEndEditing:)]){
+//        [self.delegate tableViewControllerDidEndEditing:self];
+//    }
+//}
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     self.editButtonItem.enabled = NO;

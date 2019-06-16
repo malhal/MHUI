@@ -8,11 +8,11 @@
 
 #import <MHFoundation/MHFoundation.h>
 #import <UIKit/UIKit.h>
-#import <MUIKit/MUIDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUITableViewControllerDelegate, MUITableViewControllerDataSource;
+@class MUIFetchedDataSource;
 
 @interface MUITableViewController : UITableViewController
 
@@ -30,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) id<MUITableViewControllerDelegate> delegate;
 
-@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
+//@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
+@property (strong, nonatomic) MUIFetchedDataSource *dataSource;
 
 @end
 

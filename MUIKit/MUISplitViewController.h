@@ -20,7 +20,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (strong, nonatomic, readonly) MUIMasterItemSplitter *masterItemSplitter;
 
-@property (strong, nonatomic, readonly) MUISplitViewController *childSplitController;
+//@property (strong, nonatomic, readonly) MUISplitViewController *childSplitController;
+
+@property (strong, nonatomic) id selectedObject;
+
+@end
+
+@interface UIViewController (MUISplitViewController)
+
+@property (strong, nonatomic, readonly) MUISplitViewController *mui_splitViewController;
 
 @end
 
