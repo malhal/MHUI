@@ -18,6 +18,14 @@
 
 @implementation MUISelectionManager
 
+//- (void)setObjectDataSource:(MUIObjectDataSource *)objectDataSource{
+//    if(objectDataSource == _objectDataSource){
+//        return;
+//    }
+//    _objectDataSource = objectDataSource;
+//    objectDataSource.tableViewController.tableViewDelegate = self;
+//}
+
 - (void)selectObject:(id)object{
     [self selectObject:object notifyDelegate:NO];
 }
@@ -91,6 +99,12 @@
 
 - (BOOL)shouldAlwaysHaveSelectedRowWhenNotInEditMode{
     return !self.objectDataSource.tableViewController.splitViewController.isCollapsed;// || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
+}
+
+- (void)selectionManager:(MUISelectionManager *)selectionManager didSelectObject:(id)object{
+    if([self.delegate respondsToSelector:@selector(selectionManager:didSelectObject:)]){
+        [self.delegate selectionManager:selectionManager didSelectObject:object];
+    }
 }
 
 @end

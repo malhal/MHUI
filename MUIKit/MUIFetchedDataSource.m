@@ -37,7 +37,11 @@
         return;
     }
     self.selectionManager = fetchedSelectionManager;
-    self.fetchedResultsControllerDelegate = fetchedSelectionManager;
+    //self.fetchedResultsControllerDelegate = fetchedSelectionManager;
+}
+
+- (MUIFetchedSelectionManager *)fetchedSelectionManager{
+    return (MUIFetchedSelectionManager *)self.selectionManager;
 }
 
 //- (void)setTableViewController:(MUITableViewController *)tableViewController{
@@ -52,8 +56,8 @@
 
 - (id)forwardingTargetForSelector:(SEL)aSelector{
     if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
-        if([self.fetchedResultsControllerDelegate respondsToSelector:aSelector]){
-            return self.fetchedResultsControllerDelegate;
+        if([self.fetchedSelectionManager respondsToSelector:aSelector]){
+            return self.fetchedSelectionManager;
         }
     }
     return [super forwardingTargetForSelector:aSelector];
@@ -64,7 +68,7 @@
         return YES;
     }
     else if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
-        return [self.fetchedResultsControllerDelegate respondsToSelector:aSelector];
+        return [self.fetchedSelectionManager respondsToSelector:aSelector];
     }
     return NO;
 }
@@ -158,8 +162,8 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
-    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controllerWillChangeContent:)]){
-        [self.fetchedResultsControllerDelegate controllerWillChangeContent:controller];
+    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerWillChangeContent:)]){
+        [self.fetchedSelectionManager controllerWillChangeContent:controller];
     }
 }
 
@@ -179,8 +183,8 @@
         default:
             return;
     }
-    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controller:didChangeSection:atIndex:forChangeType:)]){
-        [self.fetchedResultsControllerDelegate controller:controller didChangeSection:sectionInfo atIndex:sectionIndex forChangeType:type];
+    if([self.fetchedSelectionManager respondsToSelector:@selector(controller:didChangeSection:atIndex:forChangeType:)]){
+        [self.fetchedSelectionManager controller:controller didChangeSection:sectionInfo atIndex:sectionIndex forChangeType:type];
     }
 }
 
@@ -219,8 +223,8 @@
             
             break;
     }
-    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]){
-        [self.fetchedResultsControllerDelegate controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
+    if([self.fetchedSelectionManager respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]){
+        [self.fetchedSelectionManager controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
     }
 }
 
@@ -228,8 +232,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controllerDidChangeContent:)]){
-        [self.fetchedResultsControllerDelegate controllerDidChangeContent:controller];
+    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerDidChangeContent:)]){
+        [self.fetchedSelectionManager controllerDidChangeContent:controller];
     }
 }
 

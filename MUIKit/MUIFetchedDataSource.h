@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object;
 
-@property (weak, nonatomic) id<NSFetchedResultsControllerDelegate> fetchedResultsControllerDelegate;
+//@property (weak, nonatomic) id<NSFetchedResultsControllerDelegate> fetchedResultsControllerDelegate;
 
 //@property (weak, nonatomic) id<MUIFetchedDataSourceDelegate> delegate;
 

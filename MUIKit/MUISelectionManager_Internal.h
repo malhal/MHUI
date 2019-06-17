@@ -12,4 +12,6 @@
 
 - (void)selectObject:(id)object notifyDelegate:(BOOL)notifyDelegate;
 
+@property (weak, nonatomic, readwrite) MUIObjectDataSource *objectDataSource;
+
 @end

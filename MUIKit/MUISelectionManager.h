@@ -10,11 +10,12 @@
 #import <CoreData/CoreData.h>
 #import <MUIKit/MUIDefines.h>
 #import <MUIKit/MUITableView.h>
-#import <MUIKit/MUIObjectDataSource.h>
+//#import <MUIKit/MUIObjectDataSource.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUISelectionManagerDelegate;
+@class MUIObjectDataSource;
 
 @interface MUISelectionManager : NSObject <MUITableViewDelegate>
 
@@ -31,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 //TableChangeManager
 - (void)reselectTableRowIfNecessary;
 
-@property (weak, nonatomic) MUIObjectDataSource *objectDataSource;
+@property (weak, nonatomic, readonly) MUIObjectDataSource *objectDataSource;
 
 @property (weak, nonatomic) id<MUISelectionManagerDelegate> delegate;
 

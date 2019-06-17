@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MUIKit/MUIDefines.h>
+#import <MUIKit/MUISelectionManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUIObjectDataSourceDelegate;
-@class MUITableViewController, MUISelectionManager;
+@class MUITableViewController;
 
 @interface MUIObjectDataSource : NSObject <UITableViewDataSource>
 
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol MUIObjectDataSourceDelegate <NSObject>
+@protocol MUIObjectDataSourceDelegate <MUISelectionManagerDelegate>
 
 - (void)objectDataSource:(MUIObjectDataSource *)objectDataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object;
 

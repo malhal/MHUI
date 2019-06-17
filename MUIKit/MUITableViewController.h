@@ -12,10 +12,12 @@
 //#import <MUIKit/MUIFetchedDataSource.h>
 #import <MUIKit/MUITableView.h>
 #import <MUIKit/MUIObjectDataSource.h>
+//#import <MUIKit/MUISelectionManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 //@protocol MUITableViewControllerDelegate, MUITableViewControllerDataSource;
+
 
 @interface MUITableViewController : UITableViewController <MUIObjectDataSourceDelegate>
 
@@ -32,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath NS_REQUIRES_SUPER;
 
 @property (assign, nonatomic) id<MUITableViewDelegate> tableViewDelegate;
+//@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
 //@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
 @property (strong, nonatomic) MUIObjectDataSource *dataSource;

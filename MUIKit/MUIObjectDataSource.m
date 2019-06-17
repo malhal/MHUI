@@ -7,7 +7,7 @@
 //
 
 #import "MUIObjectDataSource_Internal.h"
-#import "MUISelectionManager.h"
+#import "MUISelectionManager_Internal.h"
 #import "MUITableViewController.h"
 
 @implementation MUIObjectDataSource
@@ -32,8 +32,16 @@
     }
     _selectionManager = selectionManager;
     selectionManager.objectDataSource = self;
-    //self.fetchedResultsControllerDelegate = selectionManager;
-    self.tableViewController.tableViewDelegate = selectionManager;
+//    selectionManager.delegate = self;
+    //self.tableViewController.tableViewDelegate = selectionManager;
+}
+
+- (void)setTableViewController:(MUITableViewController *)tableViewController{
+    if(tableViewController == _tableViewController){
+        return;
+    }
+    _tableViewController = tableViewController;
+    tableViewController.tableViewDelegate = self.selectionManager;
 }
 
 @end
