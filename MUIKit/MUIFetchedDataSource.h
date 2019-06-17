@@ -10,29 +10,31 @@
 #import <CoreData/CoreData.h>
 #import <MUIKit/MUIDefines.h>
 //#import <MUIKit/MUITableViewController.h>
-//#import "DataSource.h"
+#import <MUIKit/MUIObjectDataSource.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol FetchedDataSourceDelegate;
-@class MUITableViewController;
+//@protocol MUIFetchedDataSourceDelegate;
+@class MUITableViewController, MUIFetchedSelectionManager;
 
-@interface MUIFetchedDataSource : NSObject <UITableViewDataSource>//, MalcsProtocol>
+@interface MUIFetchedDataSource : MUIObjectDataSource <NSFetchedResultsControllerDelegate>//, MalcsProtocol>
 
 @property (strong, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
 
-//@property (nonatomic, assign) id<UITableViewDataSource> tableViewDataSource;
-
-@property (weak, nonatomic) MUITableViewController *tableViewController;
-
 - (instancetype)initWithFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
 
+- (void)configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object;
+
+@property (weak, nonatomic) id<NSFetchedResultsControllerDelegate> fetchedResultsControllerDelegate;
+
+//@property (weak, nonatomic) id<MUIFetchedDataSourceDelegate> delegate;
+
+- (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class;
+
+@property (strong, nonatomic) MUIFetchedSelectionManager *fetchedSelectionManager;
+
 @end
 
-@protocol FetchedDataSourceDelegate <NSObject>
 
-//- (void)FetchedDataSource:(TableChangeManager *)tableChangeManager configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object;
-
-@end
 
 NS_ASSUME_NONNULL_END

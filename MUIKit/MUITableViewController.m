@@ -7,7 +7,8 @@
 //
 
 #import "MUITableViewController.h"
-#import "MUIFetchedDataSource.h"
+#import "MUIObjectDataSource_Internal.h"
+#import "MUITableView.h"
 
 @interface MUITableViewController ()
 
@@ -21,9 +22,9 @@
             return self.dataSource;
         }
     }
-    else if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDelegate), aSelector)){
-        if([self.delegate respondsToSelector:aSelector]){
-            return self.delegate;
+    else if(MHFProtocolHasInstanceMethod(@protocol(MUITableViewDelegate), aSelector)){
+        if([self.tableViewDelegate respondsToSelector:aSelector]){
+            return self.tableViewDelegate;
         }
     }
     return [super forwardingTargetForSelector:aSelector];
@@ -36,8 +37,8 @@
     else if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDataSource), aSelector)){
         return [self.dataSource respondsToSelector:aSelector];
     }
-    else if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDelegate), aSelector)){
-        return [self.delegate respondsToSelector:aSelector];
+    else if(MHFProtocolHasInstanceMethod(@protocol(MUITableViewDelegate), aSelector)){
+        return [self.tableViewDelegate respondsToSelector:aSelector];
     }
     return NO;
 }
@@ -54,20 +55,36 @@
     return [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
-- (void)setDataSource:(MUIFetchedDataSource *)dataSource{
+- (void)setDataSource:(MUIObjectDataSource *)dataSource{
     if(dataSource == _dataSource){
         return;
     }
     else if(self.tableView.dataSource){
         self.tableView.dataSource = nil;
     }
+    // if _dataSource _dataSource.delegate = nil;
     _dataSource = dataSource;
     dataSource.tableViewController = self;
+    dataSource.delegate = self;
     self.tableView.dataSource = self;
 }
 
+- (void)setTableViewDelegate:(id<MUITableViewDelegate>)tableViewDelegate{
+    if(tableViewDelegate == _tableViewDelegate){
+        return;
+    }
+    else if(self.tableView.delegate){
+        self.tableView.delegate = nil;
+    }
+    _tableViewDelegate = tableViewDelegate;
+    self.tableView.delegate = self;
+}
+
+//- (UITableViewCell *)fetchedDataSource:(MUIFetchedDataSource *)fetchedDataSource configureCell:(nullable UITableViewCell *)cell withObject:(NSManagedObject *)object atIndexPath:(NSIndexPath *)indexPath{
+//    return nil;
+//}
+
 /*
- 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     //self.selectedRowBeforeEditing = editing ? self.tableView.indexPathForSelectedRow : nil;
     if(!editing && animated){
@@ -92,25 +109,29 @@
 */
 
 //- (void)tableViewControllerDidEndEditing{
-//    if([self.delegate respondsToSelector:@selector(tableViewControllerDidEndEditing:)]){
-//        [self.delegate tableViewControllerDidEndEditing:self];
+//    if([self.tableViewDelegate respondsToSelector:@selector(tableViewControllerDidEndEditing:)]){
+//        [self.tableViewDelegate tableViewControllerDidEndEditing:self];
 //    }
 //}
 
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.editButtonItem.enabled = NO;
-}
-
--(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.editButtonItem.enabled = YES;
-    [self performSelector:@selector(tableViewControllerDidEndEditing) withObject:nil afterDelay:0];
-}
+//- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+//    self.editButtonItem.enabled = NO;
+//}
+//
+//-(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+//    self.editButtonItem.enabled = YES;
+//    [self performSelector:@selector(tableViewControllerDidEndEditing) withObject:nil afterDelay:0];
+//}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    if([self.delegate respondsToSelector:@selector(tableViewControllerViewDidLoad:)]){
-        [self.delegate tableViewControllerViewDidLoad:self];
-    }
+//    if([self.tableViewDelegate respondsToSelector:@selector(tableViewControllerViewDidLoad:)]){
+//        [self.tableViewDelegate tableViewControllerViewDidLoad:self];
+//    }
+}
+
+- (void)objectDataSource:(MUIObjectDataSource *)dataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object{
+    
 }
 
 @end

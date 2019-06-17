@@ -10,10 +10,13 @@
 //#import "NSManagedObjectContext+MCD.h"
 //#import <objc/runtime.h>
 #import "MUITableViewController.h"
+#import "MUIFetchedSelectionManager.h"
 
 @interface MUIFetchedDataSource()
 
 @property (strong, nonatomic, readwrite) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSMutableDictionary *objectClassesByReuseIdentifier;
+@property (assign, nonatomic) BOOL sectionsCountChanged;
 
 @end
 
@@ -24,8 +27,50 @@
     if (self) {
         _fetchedResultsController = fetchedResultsController;
         fetchedResultsController.delegate = self;
+        _objectClassesByReuseIdentifier = [NSMutableDictionary dictionaryWithObject:NSManagedObject.class forKey:@"Cell"];
     }
     return self;
+}
+
+- (void)setFetchedSelectionManager:(MUIFetchedSelectionManager *)fetchedSelectionManager{
+    if(fetchedSelectionManager == self.selectionManager){
+        return;
+    }
+    self.selectionManager = fetchedSelectionManager;
+    self.fetchedResultsControllerDelegate = fetchedSelectionManager;
+}
+
+//- (void)setTableViewController:(MUITableViewController *)tableViewController{
+//    if(tableViewController == _tableViewController){
+//        return;
+//    }
+//    _tableViewController = tableViewController;
+    //tableViewController.delegate = self.selectionManager;
+//}
+
+
+
+- (id)forwardingTargetForSelector:(SEL)aSelector{
+    if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
+        if([self.fetchedResultsControllerDelegate respondsToSelector:aSelector]){
+            return self.fetchedResultsControllerDelegate;
+        }
+    }
+    return [super forwardingTargetForSelector:aSelector];
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector{
+    if([super respondsToSelector:aSelector]){
+        return YES;
+    }
+    else if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
+        return [self.fetchedResultsControllerDelegate respondsToSelector:aSelector];
+    }
+    return NO;
+}
+
+- (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class{
+    self.objectClassesByReuseIdentifier[reuseIdentifier] = class;
 }
 
 - (id)objectAtIndexPath:(NSIndexPath *)indexPath{
@@ -68,7 +113,18 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return nil;
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSString *reuseIdentifier = nil;
+    for(NSString *s in self.objectClassesByReuseIdentifier.allKeys){
+        Class class = self.objectClassesByReuseIdentifier[s];
+        if([object isKindOfClass:class]){
+            reuseIdentifier = s;
+            break;
+        }
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    [self configureCell:cell withObject:object];
+    return cell;
 }
 
 
@@ -98,29 +154,33 @@
     return self.tableViewController.tableView;
 }
 
-
- 
-
 #pragma mark - Fetched results controller
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
-    //[self.fetchedResultsControllerDelegate controllerWillChangeContent:controller];
+    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controllerWillChangeContent:)]){
+        [self.fetchedResultsControllerDelegate controllerWillChangeContent:controller];
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     switch(type) {
         case NSFetchedResultsChangeInsert:
+            self.sectionsCountChanged = YES;
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            self.sectionsCountChanged = YES;
             break;
             
         default:
             return;
+    }
+    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controller:didChangeSection:atIndex:forChangeType:)]){
+        [self.fetchedResultsControllerDelegate controller:controller didChangeSection:sectionInfo atIndex:sectionIndex forChangeType:type];
     }
 }
 
@@ -140,27 +200,37 @@
             
         case NSFetchedResultsChangeUpdate:
             [self configureCell:[tableView cellForRowAtIndexPath:indexPath] withObject:anObject];
+            //[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             //[self.delegate tableFetch:self configureCell:[tableView cellForRowAtIndexPath:indexPath]];
             break;
             
         case NSFetchedResultsChangeMove:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] withObject:anObject];
-            //[self.delegate tableFetch:self configureCell:[tableView cellForRowAtIndexPath:indexPath]];
-            [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+            // Can't use the tableView move method becasue its animation does not play with section inserts/deletes.
+            // Also if we used move would need to update the cell manually which might use the wrong index.
+            // Even if old and new indices are the same we still need to call the methods.
+            if(!self.sectionsCountChanged && indexPath.section == newIndexPath.section){
+                [self configureCell:[tableView cellForRowAtIndexPath:indexPath] withObject:anObject];
+                [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+            }
+            else{
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+            
             break;
+    }
+    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]){
+        [self.fetchedResultsControllerDelegate controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
     }
 }
 
-- (void)configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object{
-   // if([self.delegate respondsToSelector:@selector(tableChangeManager:configureCell:withObject:)]){
-        //[self.delegate tableChangeManager:self configureCell:cell withObject:object];
-   // }
-}
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-   // [self.fetchedResultsControllerDelegate controllerDidChangeContent:controller];
+    if([self.fetchedResultsControllerDelegate respondsToSelector:@selector(controllerDidChangeContent:)]){
+        [self.fetchedResultsControllerDelegate controllerDidChangeContent:controller];
+    }
 }
 
 

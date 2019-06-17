@@ -304,7 +304,7 @@
 @implementation UIViewController (MUISplitViewController)
 
 - (MUISplitViewController *)mui_splitViewController{
-    UINavigationController *nav = self.splitViewController;
+    UISplitViewController *nav = self.splitViewController;
     if([nav isKindOfClass:MUISplitViewController.class]){
         return (MUISplitViewController *)nav;
     }

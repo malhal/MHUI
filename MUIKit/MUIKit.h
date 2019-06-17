@@ -24,18 +24,21 @@
 
 #import <MUIKit/MUITableView.h>
 #import <MUIKit/MUITableViewController.h>
-#import <MUIKit/MUIMasterTableSelectionController.h>
+//#import <MUIKit/MUIMasterTableSelectionController.h>
 #import <MUIKit/MUIRootNavigationController.h>
 #import <MUIKit/MUIDetailNavigationController.h>
 //#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
 #import <MUIKit/MUICollapseController.h>
+#import <MUIKit/MUIObjectDataSource.h>
 #import <MUIKit/MUIFetchedDataSource.h>
+#import <MUIKit/MUISelectionManager.h>
+#import <MUIKit/MUIFetchedSelectionManager.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
-#import <MUIKit/MUIFetchedTableRowsController.h>
-#import <MUIKit/MUIFetchedMasterTableSelectionController.h>
+//#import <MUIKit/MUIFetchedTableRowsController.h>
+//#import <MUIKit/MUIFetchedMasterTableSelectionController.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>

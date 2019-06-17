@@ -8,13 +8,16 @@
 
 #import <MHFoundation/MHFoundation.h>
 #import <UIKit/UIKit.h>
+#import <MUIKit/MUIDefines.h>
+//#import <MUIKit/MUIFetchedDataSource.h>
+#import <MUIKit/MUITableView.h>
+#import <MUIKit/MUIObjectDataSource.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUITableViewControllerDelegate, MUITableViewControllerDataSource;
-@class MUIFetchedDataSource;
+//@protocol MUITableViewControllerDelegate, MUITableViewControllerDataSource;
 
-@interface MUITableViewController : UITableViewController
+@interface MUITableViewController : UITableViewController <MUIObjectDataSourceDelegate>
 
 // override, default implementation does nothing.
 //- (void)tableViewDidEndEditing;
@@ -28,20 +31,20 @@ NS_ASSUME_NONNULL_BEGIN
 // enables the edit button and delay invokes tableViewDidEndEditing
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath NS_REQUIRES_SUPER;
 
-@property (assign, nonatomic) id<MUITableViewControllerDelegate> delegate;
+@property (assign, nonatomic) id<MUITableViewDelegate> tableViewDelegate;
 
 //@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
-@property (strong, nonatomic) MUIFetchedDataSource *dataSource;
+@property (strong, nonatomic) MUIObjectDataSource *dataSource;
 
 @end
 
-@protocol MUITableViewControllerDelegate <NSObject>
+//@protocol MUITableViewControllerDelegate <NSObject>
 
-- (void)tableViewControllerViewDidLoad:(MUITableViewController *)tableViewController;
+//- (void)tableViewControllerViewDidLoad:(MUITableViewController *)tableViewController;
 
-- (void)tableViewControllerDidEndEditing:(MUITableViewController *)tableViewController;
+//- (void)tableViewControllerDidEndEditing:(MUITableViewController *)tableViewController;
 
-@end
+//@end
 
 //@protocol MUITableViewControllerDataSource <UITableViewDataSource>
 

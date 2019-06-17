@@ -20,6 +20,9 @@
         [super setEditing:editing animated:animated];
         return;
     }
+//    else if(editing == self.isEditing){
+//        return;
+//    }
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
         if(self.isEditing){
