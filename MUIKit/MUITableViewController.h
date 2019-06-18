@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol MUITableViewControllerDelegate, MUITableViewControllerDataSource;
+@protocol MUITableViewControllerDelegate;//, MUITableViewControllerDataSource;
 
 
 @interface MUITableViewController : UITableViewController <MUIObjectDataSourceDelegate>
@@ -33,21 +33,30 @@ NS_ASSUME_NONNULL_BEGIN
 // enables the edit button and delay invokes tableViewDidEndEditing
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath NS_REQUIRES_SUPER;
 
-@property (assign, nonatomic) id<MUITableViewDelegate> tableViewDelegate;
+@property (assign, nonatomic) id<MUITableViewControllerDelegate> tableViewDelegate;
 //@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
 //@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
 @property (strong, nonatomic) MUIObjectDataSource *dataSource;
 
+@property (strong, nonatomic, readonly) id selectedObject;
+- (void)selectObject:(id)object;
+- (void)selectObject:(id)object notifyDelegate:(BOOL)notifyDelegate;
+- (void)reselectTableRowIfNecessary;
+
 @end
 
-//@protocol MUITableViewControllerDelegate <NSObject>
+@protocol MUITableViewControllerDelegate <MUITableViewDelegate>
+
+//- (void)tableViewController:(MUITableViewController *)tableViewController viewDidAppear:(BOOL)animated;
+//- (void)tableViewController:(MUITableViewController *)tableViewController viewWillAppear:(BOOL)animated;
+//- (void)tableViewController:(MUITableViewController *)tableViewController viewWillDisappear:(BOOL)animated;
 
 //- (void)tableViewControllerViewDidLoad:(MUITableViewController *)tableViewController;
 
 //- (void)tableViewControllerDidEndEditing:(MUITableViewController *)tableViewController;
 
-//@end
+@end
 
 //@protocol MUITableViewControllerDataSource <UITableViewDataSource>
 

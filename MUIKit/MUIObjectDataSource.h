@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MUIKit/MUIDefines.h>
-#import <MUIKit/MUISelectionManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSIndexPath *)indexPathForObject:(id)object;
 
-@property (strong, nonatomic) MUISelectionManager *selectionManager;
+//@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
 @end
 
-@protocol MUIObjectDataSourceDelegate <MUISelectionManagerDelegate>
+@protocol MUIObjectDataSourceDelegate <NSObject>
 
 - (void)objectDataSource:(MUIObjectDataSource *)objectDataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object;
 

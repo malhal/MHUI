@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //@protocol MUIFetchedDataSourceDelegate;
-@class MUITableViewController, MUIFetchedSelectionManager;
+@class MUITableViewController;
 
 @interface MUIFetchedDataSource : MUIObjectDataSource <NSFetchedResultsControllerDelegate>//, MalcsProtocol>
 
@@ -30,8 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (weak, nonatomic) id<MUIFetchedDataSourceDelegate> delegate;
 
 - (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class;
-
-@property (strong, nonatomic) MUIFetchedSelectionManager *fetchedSelectionManager;
 
 @end
 

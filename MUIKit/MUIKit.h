@@ -33,8 +33,6 @@
 #import <MUIKit/MUICollapseController.h>
 #import <MUIKit/MUIObjectDataSource.h>
 #import <MUIKit/MUIFetchedDataSource.h>
-#import <MUIKit/MUISelectionManager.h>
-#import <MUIKit/MUIFetchedSelectionManager.h>
 
 #import <MUIKit/MUITableViewCellObject.h>
 //#import <MUIKit/MUIFetchedTableRowsController.h>

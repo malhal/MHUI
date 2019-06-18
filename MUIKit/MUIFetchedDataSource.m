@@ -10,13 +10,13 @@
 //#import "NSManagedObjectContext+MCD.h"
 //#import <objc/runtime.h>
 #import "MUITableViewController.h"
-#import "MUIFetchedSelectionManager.h"
 
 @interface MUIFetchedDataSource()
 
 @property (strong, nonatomic, readwrite) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSMutableDictionary *objectClassesByReuseIdentifier;
 @property (assign, nonatomic) BOOL sectionsCountChanged;
+@property (strong, nonatomic) NSArray *objects;
 
 @end
 
@@ -32,17 +32,17 @@
     return self;
 }
 
-- (void)setFetchedSelectionManager:(MUIFetchedSelectionManager *)fetchedSelectionManager{
-    if(fetchedSelectionManager == self.selectionManager){
-        return;
-    }
-    self.selectionManager = fetchedSelectionManager;
+//- (void)setFetchedSelectionManager:(MUIFetchedSelectionManager *)fetchedSelectionManager{
+//    if(fetchedSelectionManager == self.selectionManager){
+//        return;
+//    }
+//    self.selectionManager = fetchedSelectionManager;
     //self.fetchedResultsControllerDelegate = fetchedSelectionManager;
-}
+//}
 
-- (MUIFetchedSelectionManager *)fetchedSelectionManager{
-    return (MUIFetchedSelectionManager *)self.selectionManager;
-}
+//- (MUIFetchedSelectionManager *)fetchedSelectionManager{
+//    return (MUIFetchedSelectionManager *)self.selectionManager;
+//}
 
 //- (void)setTableViewController:(MUITableViewController *)tableViewController{
 //    if(tableViewController == _tableViewController){
@@ -54,24 +54,24 @@
 
 
 
-- (id)forwardingTargetForSelector:(SEL)aSelector{
-    if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
-        if([self.fetchedSelectionManager respondsToSelector:aSelector]){
-            return self.fetchedSelectionManager;
-        }
-    }
-    return [super forwardingTargetForSelector:aSelector];
-}
+//- (id)forwardingTargetForSelector:(SEL)aSelector{
+//    if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
+//        if([self.fetchedSelectionManager respondsToSelector:aSelector]){
+//            return self.fetchedSelectionManager;
+//        }
+//    }
+//    return [super forwardingTargetForSelector:aSelector];
+//}
 
-- (BOOL)respondsToSelector:(SEL)aSelector{
-    if([super respondsToSelector:aSelector]){
-        return YES;
-    }
-    else if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
-        return [self.fetchedSelectionManager respondsToSelector:aSelector];
-    }
-    return NO;
-}
+//- (BOOL)respondsToSelector:(SEL)aSelector{
+//    if([super respondsToSelector:aSelector]){
+//        return YES;
+//    }
+//    else if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
+//        return [self.fetchedSelectionManager respondsToSelector:aSelector];
+//    }
+//    return NO;
+//}
 
 - (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class{
     self.objectClassesByReuseIdentifier[reuseIdentifier] = class;
@@ -162,9 +162,10 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
-    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerWillChangeContent:)]){
-        [self.fetchedSelectionManager controllerWillChangeContent:controller];
-    }
+//    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerWillChangeContent:)]){
+//        [self.fetchedSelectionManager controllerWillChangeContent:controller];
+//    }
+    self.objects = controller.fetchedObjects;
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -183,9 +184,9 @@
         default:
             return;
     }
-    if([self.fetchedSelectionManager respondsToSelector:@selector(controller:didChangeSection:atIndex:forChangeType:)]){
-        [self.fetchedSelectionManager controller:controller didChangeSection:sectionInfo atIndex:sectionIndex forChangeType:type];
-    }
+//    if([self.fetchedSelectionManager respondsToSelector:@selector(controller:didChangeSection:atIndex:forChangeType:)]){
+//        [self.fetchedSelectionManager controller:controller didChangeSection:sectionInfo atIndex:sectionIndex forChangeType:type];
+//    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
@@ -223,18 +224,30 @@
             
             break;
     }
-    if([self.fetchedSelectionManager respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]){
-        [self.fetchedSelectionManager controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
-    }
+//    if([self.fetchedSelectionManager respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]){
+//        [self.fetchedSelectionManager controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
+//    }
 }
-
-
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerDidChangeContent:)]){
-        [self.fetchedSelectionManager controllerDidChangeContent:controller];
+//    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerDidChangeContent:)]){
+//        [self.fetchedSelectionManager controllerDidChangeContent:controller];
+//    }
+    NSManagedObject *detailItem = self.tableViewController.selectedObject;
+    if(detailItem && ![controller.fetchedObjects containsObject:detailItem]){
+        NSManagedObject *object;
+        NSArray *fetchedObjects = controller.fetchedObjects;
+        if(fetchedObjects.count > 0){
+            NSUInteger i = [self.objects indexOfObject:detailItem];
+            if(i >= fetchedObjects.count){
+                i = fetchedObjects.count - 1;
+            }
+            object = fetchedObjects[i];
+        }
+        [self.tableViewController selectObject:object notifyDelegate:YES];
     }
+    self.objects = nil;
 }
 
 
