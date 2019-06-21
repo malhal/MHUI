@@ -62,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)tableViewControllerViewDidLoad:(MUITableViewController *)tableViewController;
 //- (void)tableViewControllerDidEndEditing:(MUITableViewController *)tableViewController;
 
+// so that a popped master can have access to the split controller.
+// another way could be to set self weak on the detail controller given I don't need a new method its just getting access to the parent.
 - (UIViewController *)showDetailTargetForTableViewController:(MUITableViewController *)tableViewController;
 
 @end
