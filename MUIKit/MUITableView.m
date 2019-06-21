@@ -20,7 +20,7 @@
         [super setEditing:editing animated:animated];
         return;
     }
-//    else if(editing == self.isEditing){
+//    else if(editing == self.isEditing){ // this is called when view controller appears
 //        return;
 //    }
     [CATransaction begin];

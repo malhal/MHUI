@@ -10,22 +10,22 @@
 
 @implementation UIViewController (MUIDetail)
 
-- (id)mui_masterItem
-{
-    return nil;
-}
+//- (id)mui_masterItem
+//{
+//    return nil;
+//}
 
-- (BOOL)mui_containsMasterItem:(id)masterItem{
-    return NO;
-}
+//- (BOOL)mui_containsMasterItem:(id)masterItem{
+//    return NO;
+//}
 
-- (id)mui_detailItem
+- (id)mui_viewedObject
 {
     // By default, view controllers don't contain photos
     return nil;
 }
 
-- (BOOL)mui_containsDetailItem:(id)detailItem
+- (BOOL)mui_containsViewedObject:(id)object
 {
     // By default, view controllers don't contain photos
     return NO;
@@ -43,6 +43,10 @@
     }
 }
 
+- (UIViewController *)mui_viewedObjectViewController{
+    return nil;
+}
+
 @end
 
 @implementation UISplitViewController (MUIDetail)
@@ -55,79 +59,79 @@
     } else {
         // Otherwise, return our detail controller's contained photo (if any)
         UIViewController *controller = self.viewControllers.lastObject;
-        return [controller mui_detailItem];
+        return [controller mui_viewedObject];
         //return [controller mui_currentVisibleDetailItemWithSender:sender]; // maybe odd we call this on a nav controller that just said it couldn't perform the action.
     }
 }
 
-- (id)mui_masterItem
+//- (id)mui_masterItem
+//{
+//    id masterItem;
+//    for(UIViewController *controller in self.viewControllers){
+//        if((masterItem = controller.mui_masterItem)){
+//            break;
+//        }
+//    }
+//    return masterItem;
+//}
+
+//- (BOOL)mui_containsMasterItem:(id)masterItem{
+//    return [self.viewControllers.firstObject mui_containsMasterItem:masterItem];
+//}
+
+- (id)mui_viewedObject
 {
-    id masterItem;
+    id viewedObject;
     for(UIViewController *controller in self.viewControllers){
-        if((masterItem = controller.mui_masterItem)){
+        if((viewedObject = controller.mui_viewedObject)){
             break;
         }
     }
-    return masterItem;
+    return viewedObject;
 }
 
-- (BOOL)mui_containsMasterItem:(id)masterItem{
-    return [self.viewControllers.firstObject mui_containsMasterItem:masterItem];
-}
-
-- (id)mui_detailItem
+- (BOOL)mui_containsViewedObject:(id)object
 {
-    id detailItem;
-    for(UIViewController *controller in self.viewControllers){
-        if((detailItem = controller.mui_detailItem)){
-            break;
-        }
-    }
-    return detailItem;
-}
-
-- (BOOL)mui_containsDetailItem:(id)detailItem
-{
-    return [self.viewControllers.firstObject mui_containsDetailItem:detailItem];
+    return [self.viewControllers.firstObject mui_containsViewedObject:object];
 }
 
 @end
 
 @implementation UINavigationController (MUIDetail)
 
-- (id)mui_masterItem
-{
-    id masterItem;
-    for(UIViewController *controller in self.viewControllers){
-        if((masterItem = controller.mui_masterItem)){
-            break;
-        }
-    }
-    return masterItem;
-}
+//- (id)mui_masterItem
+//{
+//    id masterItem;
+//    for(UIViewController *controller in self.viewControllers){
+//        if((masterItem = controller.mui_masterItem)){
+//            break;
+//        }
+//    }
+//    return masterItem;
+//}
 
-- (BOOL)mui_containsMasterItem:(id)masterItem
-{
-    return [self.topViewController mui_containsMasterItem:masterItem];
-}
+//- (BOOL)mui_containsMasterItem:(id)masterItem
+//{
+//    return [self.topViewController mui_containsMasterItem:masterItem];
+//}
 
 // added this because our detail is a nav.
 // used by above method and also app delegate to find the detail item within a nav controllers and nested ones.
 // def needs tested for triple split.
-- (id)mui_detailItem
+- (id)mui_viewedObject
 {
-    id detailItem;
+    id object;
     for(UIViewController *controller in self.viewControllers){
-        if((detailItem = controller.mui_detailItem)){
+        if((object = controller.mui_viewedObject)){
             break;
         }
     }
-    return detailItem;
+    return object;
 }
 
-- (BOOL)mui_containsDetailItem:(id)detailItem
+- (BOOL)mui_containsViewedObject:(id)object
 {
-    return [self.topViewController mui_containsDetailItem:detailItem];
+    return [self.topViewController mui_containsViewedObject:object];
 }
 
 @end

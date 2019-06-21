@@ -9,6 +9,7 @@
 #import "MUITableViewController.h"
 #import "MUIObjectDataSource_Internal.h"
 #import "MUITableView.h"
+#import "UIViewController+MUIDetail.h"
 
 @interface MUITableViewController ()
 
@@ -17,6 +18,88 @@
 @end
 
 @implementation MUITableViewController
+
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.isMasterViewController = YES;
+}
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    //    if([self.tableViewDelegate respondsToSelector:@selector(tableViewControllerViewDidLoad:)]){
+    //        [self.tableViewDelegate tableViewControllerViewDidLoad:self];
+    //    }
+    
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent{
+    [super didMoveToParentViewController:parent];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reselectTableRowIfNecessary];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
+    
+    // runs all the changes since the fetch controller was cached.
+    //[self.managedObjectContext processPendingChanges];
+    
+    //NSString *mi = self.modelIdentifierForSelectedElement;
+    //NSIndexPath *ipp = self.tableView.indexPathForSelectedRow;
+    //NSIndexPath *ip = [self indexPathForElementWithModelIdentifier:mi inView:self.tableView];
+    
+    // we need this to only select an object
+    if(!self.isMasterViewController){
+        return;
+    }
+    
+    
+    id object = self.selectedObject;
+    NSIndexPath *ip = [self.dataSource indexPathForObject:object];
+    if(!ip){
+        object = self.dataSource.objects.firstObject;
+        [self selectObject:object notifyDelegate:YES];
+    }
+}
+
+- (BOOL)shouldSelectObject{
+    
+    if(self.splitViewController.isCollapsed){
+        if(self.navigationController.topViewController == self){
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }else{
+        if(self.navigationController.topViewController == self){
+            
+            if(self.isMasterViewController){
+                return YES;
+            }
+            
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    
+    // if we are top of the stack
+
+    
+}
+
+
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
+}
 
 - (id)forwardingTargetForSelector:(SEL)aSelector{
     if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDataSource), aSelector)){
@@ -44,28 +127,6 @@
     }
     return NO;
 }
-
-//- (void)viewDidAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    if([self.tableViewDelegate respondsToSelector:@selector(tableViewController:viewDidAppear:)]){
-//        [self.tableViewDelegate tableViewController:self viewDidAppear:animated];
-//    }
-//}
-
-//- (void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    if([self.tableViewDelegate respondsToSelector:@selector(tableViewController:viewWillAppear:)]){
-//        [self.tableViewDelegate tableViewController:self viewWillAppear:animated];
-//    }
-//}
-
-//- (void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:animated];
-//
-//    if([self.tableViewDelegate respondsToSelector:@selector(tableViewController:viewWillDisappear:)]){
-//        [self.tableViewDelegate tableViewController:self viewWillDisappear:animated];
-//    }
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.dataSource numberOfSectionsInTableView:tableView];
@@ -147,12 +208,6 @@
 //    [self performSelector:@selector(tableViewControllerDidEndEditing) withObject:nil afterDelay:0];
 //}
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
-//    if([self.tableViewDelegate respondsToSelector:@selector(tableViewControllerViewDidLoad:)]){
-//        [self.tableViewDelegate tableViewControllerViewDidLoad:self];
-//    }
-}
 
 - (void)objectDataSource:(MUIObjectDataSource *)dataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object{
     
@@ -164,8 +219,6 @@
 
 - (void)selectObject:(id)object notifyDelegate:(BOOL)notifyDelegate{
     self.selectedObject = object;
-    //self.fetchControllerSelectedIndexPath = indexPath;
-    //[self performSegueWithIdentifier:@"showDetail" sender:self];
     if(notifyDelegate){
         [self didSelectObject:object];
     }
@@ -182,14 +235,6 @@
     [self reselectTableRowIfNecessary];
 }
 
-//- (NSFetchedResultsController *)fetchedResultsController{
-//    return self.fetchedDataSource.fetchedResultsController;
-//}
-
-//- (UITableView *)tableView{
-//    return self.fetchedDataSource.tableViewController.tableView;
-//}
-
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(!tableView.isEditing){
         self.selectedObject = [self.dataSource objectAtIndexPath:indexPath];
@@ -205,7 +250,7 @@
     if(!self.shouldAlwaysHaveSelectedRow){
         return;
     }
-    id object = self.selectedObject;//self.shownViewController.object;
+    id object = self.selectedObject;
     if(!object){
         return;
     }
@@ -215,21 +260,21 @@
     //    id<MalcsProtocol> x = (id<MalcsProtocol>)self.tableView.dataSource;
     //   NSIndexPath *indexPath = [x indexPathForObject:object];
     NSIndexPath *indexPath = [self.dataSource indexPathForObject:object];
-    [self.dataSource.tableViewController.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:scrollToSelection ? UITableViewScrollPositionMiddle : UITableViewScrollPositionNone];
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:scrollToSelection ? UITableViewScrollPositionMiddle : UITableViewScrollPositionNone];
 }
 
 - (BOOL)shouldAlwaysHaveSelectedRow{
     if(!self.shouldAlwaysHaveSelectedRowWhenNotInEditMode){
         return NO;
     }
-    else if(self.dataSource.tableViewController.tableView.isEditing){
+    else if(self.tableView.isEditing){
         return NO;
     }
     return YES;
 }
 
 - (BOOL)shouldAlwaysHaveSelectedRowWhenNotInEditMode{
-    return !self.dataSource.tableViewController.splitViewController.isCollapsed;// || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
+    return !self.splitViewController.isCollapsed;// || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
 }
 
 //- (void)selectionManager:(MUISelectionManager *)selectionManager didSelectObject:(id)object{
@@ -238,15 +283,7 @@
 //    }
 //}
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
-}
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
-}
 
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
     //    // update cell accessories.
@@ -260,6 +297,16 @@
     if(!svc.isCollapsed){
         [self reselectTableRowIfNecessary];
     }
+}
+
+
+- (UIViewController *)targetViewControllerForAction:(SEL)action sender:(id)sender{
+    if(action == @selector(showDetailViewController:sender:)){
+        if([self.delegate respondsToSelector:@selector(showDetailTargetForTableViewController:)]){
+            return [self.delegate showDetailTargetForTableViewController:self];
+        }
+    }
+    return [super targetViewControllerForAction:action sender:sender];
 }
 
 @end

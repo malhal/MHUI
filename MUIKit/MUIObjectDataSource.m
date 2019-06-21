@@ -25,6 +25,10 @@
     return nil;
 }
 
+- (NSArray *)objects{
+    return nil;
+}
+
 //- (void)setSelectionManager:(MUISelectionManager *)selectionManager{
 //    if(selectionManager == _selectionManager){
 //        return;

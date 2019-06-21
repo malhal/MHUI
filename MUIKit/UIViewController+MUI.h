@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc;
 
+//@property (nonatomic, strong, setter=mui_setShownViewController:) UIViewController *mui_shownViewController
+
 @end
 
 NS_ASSUME_NONNULL_END

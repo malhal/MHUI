@@ -116,12 +116,12 @@
 // and with detail iatem and dragging on messages on to right.
 //  YES to throwaway master
 //- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-//    id detailItem = self.mui_detailItem;
+//    id detailItem = self.mui_viewedObject;
 //    if(!detailItem){
 //        // If our secondary controller doesn't show a detail item, do the collapse ourself by doing nothing
 //        return YES;
 //    }
-//    else if (![secondaryViewController mui_containsDetailItem:detailItem]) {
+//    else if (![secondaryViewController mui_containsViewedObject:detailItem]) {
 //        return YES;
 //    }
 //    return NO;

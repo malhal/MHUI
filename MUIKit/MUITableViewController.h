@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUITableViewControllerDelegate;//, MUITableViewControllerDataSource;
 
-
 @interface MUITableViewController : UITableViewController <MUIObjectDataSourceDelegate>
 
 // override, default implementation does nothing.
@@ -33,7 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 // enables the edit button and delay invokes tableViewDidEndEditing
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath NS_REQUIRES_SUPER;
 
-@property (assign, nonatomic) id<MUITableViewControllerDelegate> tableViewDelegate;
+@property (assign, nonatomic) id<MUITableViewDelegate> tableViewDelegate;
+
+@property (assign, nonatomic) id<MUITableViewControllerDelegate> delegate;
+
 //@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
 //@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
@@ -42,29 +44,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) id selectedObject;
 - (void)selectObject:(id)object;
 - (void)selectObject:(id)object notifyDelegate:(BOOL)notifyDelegate;
+- (void)didSelect:(id)object;
 - (void)reselectTableRowIfNecessary;
+- (void)reselectTableRowIfNecessaryScrollToSelection:(BOOL)scrollToSelection;
+
+@property (assign, nonatomic) BOOL isMasterViewController;
+
+- (BOOL)shouldSelectObject;
 
 @end
 
-@protocol MUITableViewControllerDelegate <MUITableViewDelegate>
+@protocol MUITableViewControllerDelegate <NSObject>
 
 //- (void)tableViewController:(MUITableViewController *)tableViewController viewDidAppear:(BOOL)animated;
 //- (void)tableViewController:(MUITableViewController *)tableViewController viewWillAppear:(BOOL)animated;
 //- (void)tableViewController:(MUITableViewController *)tableViewController viewWillDisappear:(BOOL)animated;
-
 //- (void)tableViewControllerViewDidLoad:(MUITableViewController *)tableViewController;
-
 //- (void)tableViewControllerDidEndEditing:(MUITableViewController *)tableViewController;
+
+- (UIViewController *)showDetailTargetForTableViewController:(MUITableViewController *)tableViewController;
 
 @end
 
 //@protocol MUITableViewControllerDataSource <UITableViewDataSource>
 
 //- (id)masterViewController:(MasterViewController *)masterViewController objectAtIndexPath:(NSIndexPath *)indexPath;
-
 //- (void)masterViewController:(MasterViewController *)masterViewController didLoadTableView:(UITableView *)tableView;
 
 //@end
-
 
 NS_ASSUME_NONNULL_END

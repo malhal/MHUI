@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSIndexPath *)indexPathForObject:(id)object;
 
+- (NSArray *)objects;
+
 //@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
 @end

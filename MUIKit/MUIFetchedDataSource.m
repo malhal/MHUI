@@ -10,13 +10,14 @@
 //#import "NSManagedObjectContext+MCD.h"
 //#import <objc/runtime.h>
 #import "MUITableViewController.h"
+#import "UIViewController+MUIDetail.h"
 
 @interface MUIFetchedDataSource()
 
 @property (strong, nonatomic, readwrite) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSMutableDictionary *objectClassesByReuseIdentifier;
 @property (assign, nonatomic) BOOL sectionsCountChanged;
-@property (strong, nonatomic) NSArray *objects;
+@property (strong, nonatomic) NSArray *fetchedObjectsBeforeChange;
 
 @end
 
@@ -85,6 +86,10 @@
     return [self.fetchedResultsController indexPathForObject:object];
 }
 
+- (NSArray *)objects{
+    return self.fetchedResultsController.fetchedObjects;
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -101,20 +106,7 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-            abort();
-        }
-    }
-}
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -136,14 +128,14 @@
 //    return object.objectID.URIRepresentation.absoluteString;
 //}
 
-//// on encode it asks for first and selected. On restore it asks for first so maybe checks ID. idx can be nil. called on decode too but with nil.
+// on encode it asks for first and selected. On restore it asks for first so maybe checks ID. idx can be nil. called on decode too but with nil.
 //- (nullable NSString *)modelIdentifierForElementAtIndexPath:(NSIndexPath *)idx inView:(UIView *)view{
 //    NSManagedObject *object = [self objectAtIndexPath:idx];
 //    NSString *identifier = object.objectID.URIRepresentation.absoluteString;
 //    return identifier;
 //}
 //
-//// called on decode
+// called on decode
 //- (nullable NSIndexPath *)indexPathForElementWithModelIdentifier:(NSString *)identifier inView:(UIView *)view{
 //    if(!identifier){
 //        return nil;
@@ -165,7 +157,7 @@
 //    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerWillChangeContent:)]){
 //        [self.fetchedSelectionManager controllerWillChangeContent:controller];
 //    }
-    self.objects = controller.fetchedObjects;
+    self.fetchedObjectsBeforeChange = controller.fetchedObjects;
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -196,6 +188,7 @@
     
     switch(type) {
         case NSFetchedResultsChangeInsert:
+            NSLog(@"Insert %@", [(NSManagedObject *)anObject objectID]);
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
@@ -234,21 +227,34 @@
 //    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerDidChangeContent:)]){
 //        [self.fetchedSelectionManager controllerDidChangeContent:controller];
 //    }
+    
+    if(!self.tableViewController.shouldSelectObject){
+        return;
+    }
+    
+    // its different context
     NSManagedObject *detailItem = self.tableViewController.selectedObject;
     if(detailItem && ![controller.fetchedObjects containsObject:detailItem]){
         NSManagedObject *object;
         NSArray *fetchedObjects = controller.fetchedObjects;
         if(fetchedObjects.count > 0){
-            NSUInteger i = [self.objects indexOfObject:detailItem];
+            NSUInteger i = [self.fetchedObjectsBeforeChange indexOfObject:detailItem];
             if(i >= fetchedObjects.count){
                 i = fetchedObjects.count - 1;
             }
             object = fetchedObjects[i];
         }
         [self.tableViewController selectObject:object notifyDelegate:YES];
+        //[self.tableViewController reselectTableRowIfNecessaryScrollToSelection:YES];
     }
-    self.objects = nil;
+    self.fetchedObjectsBeforeChange = nil;
 }
+
+// in split and when on the root and the venue is deleted we don't want to select the next object
+// but if in split and
+// so maybe if the bool is set but we are not the top of the hierachy.
+
+
 
 
 
