@@ -11,14 +11,16 @@
 #import <MUIKit/MUIDefines.h>
 //#import <MUIKit/MUIFetchedDataSource.h>
 #import <MUIKit/MUITableView.h>
-#import <MUIKit/MUIObjectDataSource.h>
+#import <MUIKit/MUIDataSource.h>
 //#import <MUIKit/MUISelectionManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MUITableViewControllerDelegate;//, MUITableViewControllerDataSource;
 
-@interface MUITableViewController : UITableViewController <MUIObjectDataSourceDelegate>
+@interface MUITableViewController : UITableViewController <MUIDataSourceDelegate>
+
+@property (strong, nonatomic) UINavigationController *detailNavigationController;
 
 // override, default implementation does nothing.
 //- (void)tableViewDidEndEditing;
@@ -39,18 +41,21 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
 //@property (assign, nonatomic) id<UITableViewDataSource> dataSource;
-@property (strong, nonatomic) MUIObjectDataSource *dataSource;
+@property (strong, nonatomic) MUIDataSource *dynamicDataSource;
 
 @property (strong, nonatomic, readonly) id selectedObject;
 - (void)selectObject:(id)object;
 - (void)selectObject:(id)object notifyDelegate:(BOOL)notifyDelegate;
-- (void)didSelect:(id)object;
+- (void)didSelectObject:(id)object;
 - (void)reselectTableRowIfNecessary;
 - (void)reselectTableRowIfNecessaryScrollToSelection:(BOOL)scrollToSelection;
 
-@property (assign, nonatomic) BOOL isMasterViewController;
+// defaults YES
+// set NO on Root view controller
+@property (assign, nonatomic) BOOL showsDetail;
+// clearsSelectionOnViewWillAppear
 
-- (BOOL)shouldSelectObject;
+- (BOOL)shouldAlwaysHaveSelectedObject;
 
 @end
 
@@ -64,7 +69,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 // so that a popped master can have access to the split controller.
 // another way could be to set self weak on the detail controller given I don't need a new method its just getting access to the parent.
+
+@optional
 - (UIViewController *)showDetailTargetForTableViewController:(MUITableViewController *)tableViewController;
+- (void)tableViewControllerDynamicDataSourceDidChange:(MUITableViewController *)tableViewController;
 
 @end
 

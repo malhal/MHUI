@@ -7,9 +7,10 @@
 //
 
 #import "MUITableViewController.h"
-#import "MUIObjectDataSource_Internal.h"
+#import "MUIDataSource_Internal.h"
 #import "MUITableView.h"
 #import "UIViewController+MUIDetail.h"
+#import "UITableView+MUI.h"
 
 @interface MUITableViewController ()
 
@@ -21,7 +22,7 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    self.isMasterViewController = YES;
+    self.showsDetail = YES;
 }
 
 - (void)viewDidLoad{
@@ -29,16 +30,45 @@
     //    if([self.tableViewDelegate respondsToSelector:@selector(tableViewControllerViewDidLoad:)]){
     //        [self.tableViewDelegate tableViewControllerViewDidLoad:self];
     //    }
-    
+    [self configureTableViewDataSource];
+    [self configureTableViewDelegate];
 }
 
+// has to be in will so that when in landscape on root and swipe to delete the venue it causes a detail to show.
+- (void)willMoveToParentViewController:(nullable UIViewController *)parent{
+    [super willMoveToParentViewController:parent];
+    if(!parent){
+        return;
+    }
+    NSLog(@"");
+    
+    if(!self.shouldAlwaysHaveSelectedObject){
+        return;
+    }
+    id object = self.selectedObject;
+    NSIndexPath *ip = [self.dynamicDataSource indexPathForObject:object];
+    if(!ip){
+        object = self.dynamicDataSource.objects.firstObject;
+        [self selectObject:object notifyDelegate:YES];
+    }
+}
+
+// called after viewWillAppear
 - (void)didMoveToParentViewController:(UIViewController *)parent{
     [super didMoveToParentViewController:parent];
+    if(!parent){
+        return;
+    }
+    NSLog(@"");
+
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self reselectTableRowIfNecessary];
+    if(self.isMovingToParentViewController){
+        [self reselectTableRowIfNecessary];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -47,29 +77,20 @@
     
     // runs all the changes since the fetch controller was cached.
     //[self.managedObjectContext processPendingChanges];
+  //  return;
     
-    //NSString *mi = self.modelIdentifierForSelectedElement;
-    //NSIndexPath *ipp = self.tableView.indexPathForSelectedRow;
-    //NSIndexPath *ip = [self indexPathForElementWithModelIdentifier:mi inView:self.tableView];
-    
-    // we need this to only select an object
-    if(!self.isMasterViewController){
-        return;
-    }
-    
-    
-    id object = self.selectedObject;
-    NSIndexPath *ip = [self.dataSource indexPathForObject:object];
-    if(!ip){
-        object = self.dataSource.objects.firstObject;
-        [self selectObject:object notifyDelegate:YES];
-    }
+
 }
 
-- (BOOL)shouldSelectObject{
-    
+// for view did appear and fetch controller selecting next in list.
+// when root is in stack but viewig master then we should have selected object.
+// but if on root then don't need because don't want to push on master.
+- (BOOL)shouldAlwaysHaveSelectedObject{
     if(self.splitViewController.isCollapsed){
         if(self.navigationController.topViewController == self){
+            if(self.showsDetail){
+                return YES;
+            }
             return NO;
         }
         else{
@@ -77,24 +98,16 @@
         }
     }else{
         if(self.navigationController.topViewController == self){
-            
-            if(self.isMasterViewController){
+            if(self.showsDetail){
                 return YES;
             }
-            
             return NO;
         }
         else{
             return YES;
         }
     }
-    
-    // if we are top of the stack
-
-    
 }
-
-
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -103,8 +116,8 @@
 
 - (id)forwardingTargetForSelector:(SEL)aSelector{
     if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDataSource), aSelector)){
-        if([self.dataSource respondsToSelector:aSelector]){
-            return self.dataSource;
+        if([self.dynamicDataSource respondsToSelector:aSelector]){
+            return self.dynamicDataSource;
         }
     }
     else if(MHFProtocolHasInstanceMethod(@protocol(MUITableViewDelegate), aSelector)){
@@ -120,7 +133,7 @@
         return YES;
     }
     else if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDataSource), aSelector)){
-        return [self.dataSource respondsToSelector:aSelector];
+        return [self.dynamicDataSource respondsToSelector:aSelector];
     }
     else if(MHFProtocolHasInstanceMethod(@protocol(MUITableViewDelegate), aSelector)){
         return [self.tableViewDelegate respondsToSelector:aSelector];
@@ -129,40 +142,57 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.dataSource numberOfSectionsInTableView:tableView];
+    return [self.dynamicDataSource numberOfSectionsInTableView:tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.dataSource tableView:tableView numberOfRowsInSection:section];
+    return [self.dynamicDataSource tableView:tableView numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [self.dynamicDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
-- (void)setDataSource:(MUIObjectDataSource *)dataSource{
-    if(dataSource == _dataSource){
+- (void)setDynamicDataSource:(MUIDataSource *)dynamicDataSource{
+    if(dynamicDataSource == _dynamicDataSource){
         return;
     }
-    else if(self.tableView.dataSource){
-        self.tableView.dataSource = nil;
-    }
     // if _dataSource _dataSource.delegate = nil;
-    _dataSource = dataSource;
-    dataSource.tableViewController = self;
-    dataSource.delegate = self;
-    self.tableView.dataSource = self;
+    _dynamicDataSource = dynamicDataSource;
+    dynamicDataSource.tableViewController = self;
+    dynamicDataSource.delegate = self;
+    if(self.isViewLoaded){
+        [self configureTableViewDataSource];
+    }
+    
+}
+
+- (void)configureTableViewDataSource{
+    if(self.dynamicDataSource){
+        if(self.tableView.dataSource){
+            self.tableView.dataSource = nil;
+        }
+        self.tableView.dataSource = self;
+    }
 }
 
 - (void)setTableViewDelegate:(id<MUITableViewDelegate>)tableViewDelegate{
     if(tableViewDelegate == _tableViewDelegate){
         return;
     }
-    else if(self.tableView.delegate){
-        self.tableView.delegate = nil;
-    }
     _tableViewDelegate = tableViewDelegate;
-    self.tableView.delegate = self;
+    if(self.isViewLoaded){
+        [self configureTableViewDelegate];
+    }
+}
+
+- (void)configureTableViewDelegate{
+    if(self.tableViewDelegate){
+        if(self.tableView.delegate){
+            self.tableView.delegate = nil;
+        }
+        self.tableView.delegate = self;
+    }
 }
 
 //- (UITableViewCell *)fetchedDataSource:(MUIFetchedDataSource *)fetchedDataSource configureCell:(nullable UITableViewCell *)cell withObject:(NSManagedObject *)object atIndexPath:(NSIndexPath *)indexPath{
@@ -209,7 +239,7 @@
 //}
 
 
-- (void)objectDataSource:(MUIObjectDataSource *)dataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object{
+- (void)objectDataSource:(MUIDataSource *)dataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object{
     
 }
 
@@ -222,7 +252,9 @@
     if(notifyDelegate){
         [self didSelectObject:object];
     }
-    [self reselectTableRowIfNecessaryScrollToSelection:YES];
+    if(self.isViewLoaded){
+        [self reselectTableRowIfNecessaryScrollToSelection:YES];
+    }
 }
 
 - (void)didSelectObject:(id)object{
@@ -237,7 +269,7 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(!tableView.isEditing){
-        self.selectedObject = [self.dataSource objectAtIndexPath:indexPath];
+        self.selectedObject = [self.dynamicDataSource objectAtIndexPath:indexPath];
     }
     return indexPath;
 }
@@ -259,7 +291,7 @@
     //    }
     //    id<MalcsProtocol> x = (id<MalcsProtocol>)self.tableView.dataSource;
     //   NSIndexPath *indexPath = [x indexPathForObject:object];
-    NSIndexPath *indexPath = [self.dataSource indexPathForObject:object];
+    NSIndexPath *indexPath = [self.dynamicDataSource indexPathForObject:object];
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:scrollToSelection ? UITableViewScrollPositionMiddle : UITableViewScrollPositionNone];
 }
 
@@ -274,16 +306,36 @@
 }
 
 - (BOOL)shouldAlwaysHaveSelectedRowWhenNotInEditMode{
-    return !self.splitViewController.isCollapsed;// || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
+    //return !self.splitViewController.isCollapsed;// || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
+    
+    if(self.splitViewController.isCollapsed){
+        if(self.navigationController.topViewController == self){
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }else{
+        if(self.navigationController.topViewController == self){
+            if(self.showsDetail){
+                return YES;
+            }
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
 }
 
-//- (void)selectionManager:(MUISelectionManager *)selectionManager didSelectObject:(id)object{
-//    if([self.delegate respondsToSelector:@selector(selectionManager:didSelectObject:)]){
-//        [self.delegate selectionManager:selectionManager didSelectObject:object];
-//    }
-//}
-
-
+- (void)objectDataSource:(MUIDataSource *)objectDataSource didDeleteObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
+    if(object != self.selectedObject){
+        return;
+    }
+    NSIndexPath *ip = [self.tableView mui_indexPathNearDeletedIndexPath:indexPath];
+    id o = [self.dynamicDataSource objectAtIndexPath:ip];
+    [self selectObject:o notifyDelegate:YES];
+}
 
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
     //    // update cell accessories.
@@ -299,14 +351,34 @@
     }
 }
 
-
 - (UIViewController *)targetViewControllerForAction:(SEL)action sender:(id)sender{
     if(action == @selector(showDetailViewController:sender:)){
         if([self.delegate respondsToSelector:@selector(showDetailTargetForTableViewController:)]){
+            
+            BOOL a = self.splitViewController.isCollapsed;
+            BOOL b = self.navigationController.topViewController == self;
+            // no yes master landscape
+            // yes yes portrait master swipe to delete prev selected.
+            
+//            if(a && b){
+//                if([sender isKindOfClass:UIView.class]){
+//                    
+//                    UINavigationController *nv = self.detailNavigationController;
+//                    return nv;
+//                    
+//                    return self;
+//                    
+//                }
+//            }
+            
             return [self.delegate showDetailTargetForTableViewController:self];
         }
     }
     return [super targetViewControllerForAction:action sender:sender];
 }
+
+//- (void)showDetailViewController:(UIViewController *)vc sender:(id)sender{
+//    NSLog(@"");
+//}
 
 @end

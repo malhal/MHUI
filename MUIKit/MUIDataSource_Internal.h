@@ -6,9 +6,9 @@
 //  Copyright © 2019 Malcolm Hall. All rights reserved.
 //
 
-#import "MUIObjectDataSource.h"
+#import "MUIDataSource.h"
 
-@interface MUIObjectDataSource()
+@interface MUIDataSource()
 
 @property (weak, nonatomic, readwrite) MUITableViewController *tableViewController;
 

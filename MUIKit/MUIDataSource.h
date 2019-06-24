@@ -1,5 +1,5 @@
 //
-//  MUIObjectDataSource.h
+//  MUIDataSource.h
 //  MUIKit
 //
 //  Created by Malcolm Hall on 17/06/2019.
@@ -11,12 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUIObjectDataSourceDelegate;
+@protocol MUIDataSourceDelegate;
 @class MUITableViewController;
 
-@interface MUIObjectDataSource : NSObject <UITableViewDataSource>
+@interface MUIDataSource : NSObject <UITableViewDataSource>
 
-@property (weak, nonatomic) id<MUIObjectDataSourceDelegate> delegate;
+@property (weak, nonatomic) id<MUIDataSourceDelegate> delegate;
 
 - (void)configureCell:(UITableViewCell *)cell withObject:(id)object;
 
@@ -30,11 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (strong, nonatomic) MUISelectionManager *selectionManager;
 
+- (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class;
+
 @end
 
-@protocol MUIObjectDataSourceDelegate <NSObject>
+@protocol MUIDataSourceDelegate <NSObject>
 
-- (void)objectDataSource:(MUIObjectDataSource *)objectDataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object;
+@optional
+- (void)objectDataSource:(MUIDataSource *)objectDataSource configureCell:(nullable UITableViewCell *)cell withObject:(id)object;
+
+- (void)objectDataSource:(MUIDataSource *)objectDataSource didDeleteObject:(id)object atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+#import <MCoreData/MCoreData.h>
 #import <MUIKit/MUIDefines.h>
 //#import <MUIKit/MUITableViewController.h>
-#import <MUIKit/MUIObjectDataSource.h>
+#import <MUIKit/MUIDataSource.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol MUIFetchedDataSourceDelegate;
+@protocol MUIFetchedDataSourceDelegate;
 @class MUITableViewController;
 
-@interface MUIFetchedDataSource : MUIObjectDataSource <NSFetchedResultsControllerDelegate>//, MalcsProtocol>
+@interface MUIFetchedDataSource : MUIDataSource <NSFetchedResultsControllerDelegate>//, MalcsProtocol>
 
 @property (strong, nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
 
@@ -29,10 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (weak, nonatomic) id<MUIFetchedDataSourceDelegate> delegate;
 
-- (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class;
-
 @end
 
+@protocol MUIFetchedDataSourceDelegate <NSObject>
+
+- (void)fetchedDataSourceDidSetDelegate:(MUIFetchedDataSource *)fetchedDataSource;
+
+@end
 
 
 NS_ASSUME_NONNULL_END

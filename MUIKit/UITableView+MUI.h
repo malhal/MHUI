@@ -11,22 +11,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MUITableViewDelegate;
+@protocol UITableViewDelegate_MUI;
 
 @interface UITableView (MUI)
 
-@property (nonatomic, weak, nullable) id <MUITableViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <UITableViewDelegate_MUI> delegate;
 
-// for selecting another index after current index is deleted.
-- (NSIndexPath *)mui_indexPathNearIndexPath:(NSIndexPath *)indexPath;
+// returns all the indexPaths in the table.
+- (NSArray *)mui_indexPaths;
+
+// for selecting another index after current index is deleted. Either returns same if still availbale or count - 1 if not
+// for when the last one was deleted.
+- (NSIndexPath *)mui_indexPathNearDeletedIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
-@protocol MUITableViewDelegate <UITableViewDelegate>
+@protocol UITableViewDelegate_MUI <UITableViewDelegate>
 
 @optional
 - (void)tableView:(UITableView *)tableView didUpdateTextFieldForRowAtIndexPath:(NSIndexPath *)indexPath withValue:(NSString *)value;
-
 
 @end
 

@@ -31,7 +31,7 @@
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
 #import <MUIKit/MUICollapseController.h>
-#import <MUIKit/MUIObjectDataSource.h>
+#import <MUIKit/MUIDataSource.h>
 #import <MUIKit/MUIFetchedDataSource.h>
 
 #import <MUIKit/MUITableViewCellObject.h>

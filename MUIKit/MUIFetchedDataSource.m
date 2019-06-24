@@ -11,13 +11,15 @@
 //#import <objc/runtime.h>
 #import "MUITableViewController.h"
 #import "UIViewController+MUIDetail.h"
+#import "MUIDataSource_Internal.h"
 
 @interface MUIFetchedDataSource()
 
 @property (strong, nonatomic, readwrite) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSMutableDictionary *objectClassesByReuseIdentifier;
 @property (assign, nonatomic) BOOL sectionsCountChanged;
-@property (strong, nonatomic) NSArray *fetchedObjectsBeforeChange;
+//@property (strong, nonatomic) NSArray *fetchedObjectsBeforeChange;
+@property (assign, nonatomic) id deletedObject;
+@property (assign, nonatomic) NSIndexPath *deletedObjectIndexPath;
 
 @end
 
@@ -27,55 +29,10 @@
     self = [super init];//[super initWithTableViewController:tableViewController];
     if (self) {
         _fetchedResultsController = fetchedResultsController;
-        fetchedResultsController.delegate = self;
-        _objectClassesByReuseIdentifier = [NSMutableDictionary dictionaryWithObject:NSManagedObject.class forKey:@"Cell"];
+        //[fetchedResultsController mcd_setDelegateNotifyingParent:self];
+        _fetchedResultsController.delegate = self;
     }
     return self;
-}
-
-//- (void)setFetchedSelectionManager:(MUIFetchedSelectionManager *)fetchedSelectionManager{
-//    if(fetchedSelectionManager == self.selectionManager){
-//        return;
-//    }
-//    self.selectionManager = fetchedSelectionManager;
-    //self.fetchedResultsControllerDelegate = fetchedSelectionManager;
-//}
-
-//- (MUIFetchedSelectionManager *)fetchedSelectionManager{
-//    return (MUIFetchedSelectionManager *)self.selectionManager;
-//}
-
-//- (void)setTableViewController:(MUITableViewController *)tableViewController{
-//    if(tableViewController == _tableViewController){
-//        return;
-//    }
-//    _tableViewController = tableViewController;
-    //tableViewController.delegate = self.selectionManager;
-//}
-
-
-
-//- (id)forwardingTargetForSelector:(SEL)aSelector{
-//    if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
-//        if([self.fetchedSelectionManager respondsToSelector:aSelector]){
-//            return self.fetchedSelectionManager;
-//        }
-//    }
-//    return [super forwardingTargetForSelector:aSelector];
-//}
-
-//- (BOOL)respondsToSelector:(SEL)aSelector{
-//    if([super respondsToSelector:aSelector]){
-//        return YES;
-//    }
-//    else if(MHFProtocolHasInstanceMethod(@protocol(NSFetchedResultsControllerDelegate), aSelector)){
-//        return [self.fetchedSelectionManager respondsToSelector:aSelector];
-//    }
-//    return NO;
-//}
-
-- (void)registerReuseIdentifier:(NSString *)reuseIdentifier forObjectOfClass:(Class)class{
-    self.objectClassesByReuseIdentifier[reuseIdentifier] = class;
 }
 
 - (id)objectAtIndexPath:(NSIndexPath *)indexPath{
@@ -100,29 +57,6 @@
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     return [sectionInfo numberOfObjects];
 }
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSString *reuseIdentifier = nil;
-    for(NSString *s in self.objectClassesByReuseIdentifier.allKeys){
-        Class class = self.objectClassesByReuseIdentifier[s];
-        if([object isKindOfClass:class]){
-            reuseIdentifier = s;
-            break;
-        }
-    }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    [self configureCell:cell withObject:object];
-    return cell;
-}
-
 
 //- (nullable NSString *)modelIdentifierForObject:(NSManagedObject *)object{
 //    return object.objectID.URIRepresentation.absoluteString;
@@ -157,7 +91,7 @@
 //    if([self.fetchedSelectionManager respondsToSelector:@selector(controllerWillChangeContent:)]){
 //        [self.fetchedSelectionManager controllerWillChangeContent:controller];
 //    }
-    self.fetchedObjectsBeforeChange = controller.fetchedObjects;
+  //  self.fetchedObjectsBeforeChange = controller.fetchedObjects;
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -194,6 +128,10 @@
             
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            if(anObject == self.tableViewController.selectedObject){
+                self.deletedObject = anObject;
+                self.deletedObjectIndexPath = indexPath;
+            }
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -228,34 +166,48 @@
 //        [self.fetchedSelectionManager controllerDidChangeContent:controller];
 //    }
     
-    if(!self.tableViewController.shouldSelectObject){
+    if(!self.deletedObject){
         return;
     }
-    
-    // its different context
-    NSManagedObject *detailItem = self.tableViewController.selectedObject;
-    if(detailItem && ![controller.fetchedObjects containsObject:detailItem]){
-        NSManagedObject *object;
-        NSArray *fetchedObjects = controller.fetchedObjects;
-        if(fetchedObjects.count > 0){
-            NSUInteger i = [self.fetchedObjectsBeforeChange indexOfObject:detailItem];
-            if(i >= fetchedObjects.count){
-                i = fetchedObjects.count - 1;
-            }
-            object = fetchedObjects[i];
-        }
-        [self.tableViewController selectObject:object notifyDelegate:YES];
-        //[self.tableViewController reselectTableRowIfNecessaryScrollToSelection:YES];
+    if([self.delegate respondsToSelector:@selector(objectDataSource:didDeleteObject:atIndexPath:)]){
+        [self.delegate objectDataSource:self didDeleteObject:self.deletedObject atIndexPath:self.deletedObjectIndexPath];
     }
-    self.fetchedObjectsBeforeChange = nil;
+    self.deletedObject = nil;
+    self.deletedObjectIndexPath = nil;
+    
+//    NSArray *fetchedObjectsBeforeChange = self.fetchedObjectsBeforeChange;
+//    self.fetchedObjectsBeforeChange = nil;
+//
+//    if(!self.selectedObjectWasDeleted){
+//        return;
+//    }
+//    self.selectedObjectWasDeleted = NO;
+//
+//    if(!self.tableViewController.shouldAlwaysHaveSelectedObject){
+//        return;
+//    }
+    // its different context
+//    NSManagedObject *detailItem = self.tableViewController.selectedObject;
+//    //if(detailItem && ![controller.fetchedObjects containsObject:detailItem]){
+//    NSManagedObject *object;
+//    NSArray *fetchedObjects = controller.fetchedObjects;
+//    if(fetchedObjects.count > 0){
+//        NSUInteger i = [fetchedObjectsBeforeChange indexOfObject:detailItem];
+//        if(i >= fetchedObjects.count){
+//            i = fetchedObjects.count - 1;
+//        }
+//        object = fetchedObjects[i];
+//    }
+//    [self.tableViewController selectObject:object notifyDelegate:YES];
+    
+    
+        //[self.tableViewController reselectTableRowIfNecessaryScrollToSelection:YES];
+  //  }
+ 
 }
 
 // in split and when on the root and the venue is deleted we don't want to select the next object
 // but if in split and
 // so maybe if the bool is set but we are not the top of the hierachy.
-
-
-
-
 
 @end
