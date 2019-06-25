@@ -11,6 +11,7 @@
 #import "MUITableView.h"
 #import "UIViewController+MUIDetail.h"
 #import "UITableView+MUI.h"
+#import "UIViewController+MUIShowing.h"
 
 @interface MUITableViewController ()
 
@@ -20,9 +21,10 @@
 
 @implementation MUITableViewController
 
+#pragma mark - UIViewController
+
 - (void)awakeFromNib{
     [super awakeFromNib];
-    self.showsDetail = YES;
 }
 
 - (void)viewDidLoad{
@@ -32,24 +34,44 @@
     //    }
     [self configureTableViewDataSource];
     [self configureTableViewDelegate];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
 }
 
 // has to be in will so that when in landscape on root and swipe to delete the venue it causes a detail to show.
 - (void)willMoveToParentViewController:(nullable UIViewController *)parent{
+    if(parent){
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            NSLog(@"");
+            
+            id object = self.selectedObject;
+            if(object){
+                if([self.dynamicDataSource indexPathForObject:object]){
+                    // if the object is in the data source nothing to do
+                    return;
+                }
+            }
+            else if(!self.dynamicDataSource.objects.count){
+                // we don't have a selected object and there is none to select
+                return;
+            }
+            object = self.dynamicDataSource.objects.firstObject; // we might have had a selected object but now might have none
+            if(object){
+                NSIndexPath *ip = [self.dynamicDataSource indexPathForObject:object];
+                if(![self shouldShowDetailForIndexPath:ip]){
+                    return;
+                }
+            }
+            [self selectObject:object notifyDelegate:YES];
+            
+        }];
+    }
     [super willMoveToParentViewController:parent];
-    if(!parent){
-        return;
-    }
-    NSLog(@"");
-    
-    if(!self.shouldAlwaysHaveSelectedObject){
-        return;
-    }
-    id object = self.selectedObject;
-    NSIndexPath *ip = [self.dynamicDataSource indexPathForObject:object];
-    if(!ip){
-        object = self.dynamicDataSource.objects.firstObject;
-        [self selectObject:object notifyDelegate:YES];
+
+    NSLog(@"willMoveToParentViewController");
+    if(parent){
+        [CATransaction commit];
     }
 }
 
@@ -59,8 +81,12 @@
     if(!parent){
         return;
     }
-    NSLog(@"");
-
+    NSLog(@"didMoveToParentViewController");
+    
+    
+    //if(!self.shouldAlwaysHaveSelectedObject){
+    //return;
+    // }
 
 }
 
@@ -73,45 +99,17 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
-    
+ 
     // runs all the changes since the fetch controller was cached.
     //[self.managedObjectContext processPendingChanges];
   //  return;
-    
-
 }
 
-// for view did appear and fetch controller selecting next in list.
-// when root is in stack but viewig master then we should have selected object.
-// but if on root then don't need because don't want to push on master.
-- (BOOL)shouldAlwaysHaveSelectedObject{
-    if(self.splitViewController.isCollapsed){
-        if(self.navigationController.topViewController == self){
-            if(self.showsDetail){
-                return YES;
-            }
-            return NO;
-        }
-        else{
-            return YES;
-        }
-    }else{
-        if(self.navigationController.topViewController == self){
-            if(self.showsDetail){
-                return YES;
-            }
-            return NO;
-        }
-        else{
-            return YES;
-        }
-    }
-}
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
+   // [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
 }
 
 - (id)forwardingTargetForSelector:(SEL)aSelector{
@@ -263,6 +261,37 @@
 //    }
 }
 
+- (BOOL)shouldShowDetailForIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (BOOL)shouldPushForIndexPath:(NSIndexPath *)indexPath{
+    BOOL push;
+    if([self shouldShowDetailForIndexPath:indexPath]){
+        push = [self mui_willShowingDetailViewControllerPushWithSender:self];
+    } else {
+        push = [self mui_willShowingViewControllerPushWithSender:self];
+    }
+    return push;
+}
+
+#pragma mark - UITableView
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BOOL push = [self shouldPushForIndexPath:indexPath];
+         
+     // Only show a disclosure indicator if we're pushing
+     if (push) {
+         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+     } else {
+         cell.accessoryType = UITableViewCellAccessoryNone;
+     }
+    
+     //    AAPLConversation *conversation = [self conversationForIndexPath:indexPath];
+     //    cell.textLabel.text = conversation.name;
+}
+         
 - (void)tableViewDidEndEditing:(MUITableView *)tableView{
     [self reselectTableRowIfNecessary];
 }
@@ -279,9 +308,9 @@
 }
 
 - (void)reselectTableRowIfNecessaryScrollToSelection:(BOOL)scrollToSelection{
-    if(!self.shouldAlwaysHaveSelectedRow){
-        return;
-    }
+//    if(!self.shouldAlwaysHaveSelectedRow){
+//        return;
+//    }
     id object = self.selectedObject;
     if(!object){
         return;
@@ -292,8 +321,18 @@
     //    id<MalcsProtocol> x = (id<MalcsProtocol>)self.tableView.dataSource;
     //   NSIndexPath *indexPath = [x indexPathForObject:object];
     NSIndexPath *indexPath = [self.dynamicDataSource indexPathForObject:object];
+    
+    // this needs to reselect if we are the top controller and in landscape or we are pushed on the stack.
+    if(self.navigationController.topViewController == self){
+        if([self shouldPushForIndexPath:indexPath]){
+            return;
+        }
+    }
+    
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:scrollToSelection ? UITableViewScrollPositionMiddle : UITableViewScrollPositionNone];
 }
+
+/*
 
 - (BOOL)shouldAlwaysHaveSelectedRow{
     if(!self.shouldAlwaysHaveSelectedRowWhenNotInEditMode){
@@ -317,9 +356,9 @@
         }
     }else{
         if(self.navigationController.topViewController == self){
-            if(self.showsDetail){
-                return YES;
-            }
+//            if(self.showsDetail){
+//                return YES;
+//            }
             return NO;
         }
         else{
@@ -327,24 +366,64 @@
         }
     }
 }
+ */
+
+// for view did appear and fetch controller selecting next in list.
+// when root is in stack but viewig master then we should have selected object.
+// but if on root then don't need because don't want to push on master.
+//- (BOOL)shouldAlwaysHaveSelectedObject{
+//    if(self.splitViewController.isCollapsed){
+//        if(self.navigationController.topViewController == self){
+//            if(self.showsDetail){
+//                return YES;
+//            }
+//            return NO;
+//        }
+//        else{
+//            return YES;
+//        }
+//    }else{
+//        if(self.navigationController.topViewController == self){
+//            if(self.showsDetail){
+//                return YES;
+//            }
+//            return NO;
+//        }
+//        else{
+//            return YES;
+//        }
+//    }
+//}
 
 - (void)objectDataSource:(MUIDataSource *)objectDataSource didDeleteObject:(id)object atIndexPath:(NSIndexPath *)indexPath{
     if(object != self.selectedObject){
         return;
     }
     NSIndexPath *ip = [self.tableView mui_indexPathNearDeletedIndexPath:indexPath];
+    //id o;
+  //  if(![self shouldShowDetailForIndexPath:ip]){
+        
+        // try blanking
+        
+//        if(self.navigationController.topViewController != self){
+//            [self.navigationController popToViewController:self animated:YES];
+//
+//        }
+        
+//        return;
+//    }
+    // select the row only if it won't push, but should we show blank if it was a detail that was deleted?
     id o = [self.dynamicDataSource objectAtIndexPath:ip];
     [self selectObject:o notifyDelegate:YES];
 }
 
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
-    //    // update cell accessories.
-    //    if([self respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)]){
-    //        for (UITableViewCell *cell in self.tableView.visibleCells) {
-    //            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    //            [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    //        }
-    //    }
+    // update cell accessories.
+    for (UITableViewCell *cell in self.tableView.visibleCells) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        [self tableView:self.tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    }
+    
     UISplitViewController *svc = (UISplitViewController *)notification.object;
     if(!svc.isCollapsed){
         [self reselectTableRowIfNecessary];

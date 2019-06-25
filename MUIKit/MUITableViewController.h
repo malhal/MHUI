@@ -46,16 +46,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) id selectedObject;
 - (void)selectObject:(id)object;
 - (void)selectObject:(id)object notifyDelegate:(BOOL)notifyDelegate;
-- (void)didSelectObject:(id)object;
+
 - (void)reselectTableRowIfNecessary;
 - (void)reselectTableRowIfNecessaryScrollToSelection:(BOOL)scrollToSelection;
 
 // defaults YES
 // set NO on Root view controller
-@property (assign, nonatomic) BOOL showsDetail;
+//@property (assign, nonatomic) BOOL showsDetail;
 // clearsSelectionOnViewWillAppear
 
-- (BOOL)shouldAlwaysHaveSelectedObject;
+//- (BOOL)shouldAlwaysHaveSelectedObject;
+
+
+// overrides
+- (BOOL)shouldShowDetailForIndexPath:(NSIndexPath *)indexPath;
+- (void)didSelectObject:(id)object;
 
 @end
 
