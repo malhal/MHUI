@@ -40,4 +40,8 @@
 //    return newIndexPath;
 }
 
+- (NSArray<NSIndexPath *> *)mui_indexPathsForSafeAreaRows{
+    return [self indexPathsForRowsInRect:self.safeAreaLayoutGuide.layoutFrame];
+}
+
 @end

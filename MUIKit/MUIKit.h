@@ -20,23 +20,22 @@
 #import <MUIKit/MUIAlertController.h>
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
-
+#import <MUIKit/MUICompletionStoryboardSegue.h>
 
 #import <MUIKit/MUITableView.h>
-#import <MUIKit/MUITableViewController.h>
-//#import <MUIKit/MUIMasterTableSelectionController.h>
+#import <MUIKit/MUIFetchedTableViewController.h>
+#import <MUIKit/MUIMasterViewController.h>
 #import <MUIKit/MUIRootNavigationController.h>
 //#import <MUIKit/MUIDetailNavigationController.h>
-//#import <MUIKit/MUIFetchedMasterTableViewControllerSupport.h>
+//#import <MUIKit/MUIFetchedTableViewControllerViewControllerSupport.h>
 #import <MUIKit/MUISplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
 #import <MUIKit/MUICollapseController.h>
-#import <MUIKit/MUIDataSource.h>
-#import <MUIKit/MUIFetchedDataSource.h>
+//#import <MUIKit/MUIObjectsTable.h>
 
-#import <MUIKit/MUITableViewCellObject.h>
+
 //#import <MUIKit/MUIFetchedTableRowsController.h>
-//#import <MUIKit/MUIFetchedMasterTableSelectionController.h>
+//#import <MUIKit/MUIFetchedTableViewControllerSelectionController.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
@@ -51,5 +50,10 @@
 #import <MUIKit/UITableViewCell+MUI.h>
 #import <MUIKit/UITableView+MUI.h>
 #import <MUIKit/UIImage+MUI.h>
+#import <MUIKit/UIBarButtonItem+MUI.h>
+#import <MUIKit/UIResponder+MUI.h>
 
 #import <MUIKit/UISplitViewController+MUI.h>
+#import <MUIKit/UINavigationController+MUI.h>
+
+//#import <MUIKit/MUIFetchedTableViewController.h>

@@ -11,18 +11,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MUITableView;
+@class MUITableView, MUIMasterTable;
 
 @protocol MUITableViewDelegate <UITableViewDelegate>
 
 @optional
 - (void)tableViewDidEndEditing:(MUITableView *)tableView;
+- (void)tableViewDidMoveToSuperview:(MUITableView *)tableView;
+//- (void)tableView:(MUITableView *)tableView willMoveToWindow:(UIWindow *)newWindow;
+//- (void)tableViewDidMoveToWindow:(MUITableView *)tableView;
 
 @end
 
 @interface MUITableView : UITableView
 
 @property (weak, nonatomic) id<MUITableViewDelegate> delegate;
+
+@property (strong, nonatomic) MUIMasterTable *masterTable;
 
 @end
 

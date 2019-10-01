@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 // for when the last one was deleted.
 - (NSIndexPath *)mui_indexPathNearDeletedIndexPath:(NSIndexPath *)indexPath;
 
+// rows that are fully visible and not under any translucent bars.
+- (NSArray *)mui_indexPathsForSafeAreaRows;
+
 @end
 
 @protocol UITableViewDelegate_MUI <UITableViewDelegate>

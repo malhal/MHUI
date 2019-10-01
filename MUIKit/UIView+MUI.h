@@ -18,7 +18,6 @@ typedef NS_ENUM(NSInteger, MHViewAnimationTransitionSlide) {
     MHViewAnimationTransitionSlideToFromBottom,
 };
 
-
 @interface UIView (MUI)
 
 // set this as backgroundView on tableView to have a table that matches the look of a nav bar or toolbar. Also set backgroundColor to clear.
@@ -31,10 +30,7 @@ typedef NS_ENUM(NSInteger, MHViewAnimationTransitionSlide) {
 // The 
 - (void)mui_transitionSlide:(MHViewAnimationTransitionSlide)transitionSlide completion:(void (^ __nullable)(BOOL finished))completion;
 
-- (__kindof UIViewController *)mui_viewController;
-
-- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc;
-
 @end
+
 
 NS_ASSUME_NONNULL_END

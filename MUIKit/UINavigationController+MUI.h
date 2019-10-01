@@ -6,8 +6,22 @@
 //  Copyright © 2019 Malcolm Hall. All rights reserved.
 //
 
-#ifndef UINavigationController_MUI_h
-#define UINavigationController_MUI_h
+#import <MHFoundation/MHFoundation.h>
+#import <UIKit/UIKit.h>
+#import <MUIKit/MUIDefines.h>
 
 
-#endif /* UINavigationController_MUI_h */
+//NS_ASSUME_NONNULL_BEGIN
+
+
+MUIKIT_EXTERN NSNotificationName const MUINavigationControllerWillShowViewControllerNotification;
+MUIKIT_EXTERN NSNotificationName const MUINavigationControllerDidShowViewControllerNotification;
+MUIKIT_EXTERN NSString * const MUINavigationControllerNextVisibleViewController;
+MUIKIT_EXTERN NSString * const MUINavigationControllerLastVisibleViewController;
+
+//}
+//NS_ASSUME_NONNULL_END
+
+//@interface UINavigationController (MUI)
+//
+//@end

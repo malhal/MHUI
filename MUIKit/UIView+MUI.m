@@ -90,20 +90,6 @@
                      }];
 }
 
-- (__kindof UIViewController *)mui_viewController{
-    UIResponder *responder = self;
-    while (responder && ![responder isKindOfClass:UIViewController.class]){ // from the cell go up the views to the controller.
-        responder = [responder nextResponder];
-    }
-    return (UIViewController *)responder;
-}
-
-- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc{
-    UIView *view = vc.viewIfLoaded;
-    if(!view){
-        return NO;
-    }
-    return [self isDescendantOfView:view];
-}
-
 @end
+
+

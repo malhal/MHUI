@@ -9,6 +9,9 @@
 #import "UIViewController+MUI.h"
 #import "UINavigationItem+MUI.h"
 #import <objc/runtime.h>
+#import "UIView+MUI.h"
+#import "UIBarButtonItem+MUI.h"
+#import "UIResponder+MUI.h"
 
 @implementation UIViewController (MUI)
 
@@ -100,4 +103,38 @@
     return NO;
 }
 
+- (UIViewController *)mui_childContainingSender:(id)sender{
+    // check the detail first because when collapsed the sender will also be in the master's hierarchy.
+    for(UIViewController *vc in self.childViewControllers){
+        if(![sender conformsToProtocol:@protocol(MUIViewControllerHierarchy)]){
+            continue;
+        }
+        else if(![sender mui_isMemberOfViewControllerHierarchy:vc]){
+            continue;
+        }
+        return vc;
+    }
+    return nil;
+}
+
 @end
+
+@implementation UIView (MUIViewControllerHierarchy)
+
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc{
+    UIView *view = vc.viewIfLoaded;
+    if(!view){
+        return NO;
+    }
+    return [self isDescendantOfView:view];
+}
+
+@end
+
+//@implementation UIBarButtonItem (MUIViewControllerHierarchy)
+//
+//- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc{
+//    return [self.mui_viewController mui_isMemberOfViewControllerHierarchy:vc];
+//}
+//
+//@end

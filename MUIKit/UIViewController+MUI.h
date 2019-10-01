@@ -11,7 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIViewController (MUI)
+
+@protocol MUIViewControllerHierarchy <NSObject>
+
+- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc;
+
+@end
+
+@interface UIViewController (MUI) <MUIViewControllerHierarchy>
 
 @property (nonatomic, assign, setter=mui_setLoading:) BOOL mui_loading;
 
@@ -42,10 +49,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIViewController *)mui_ancestorViewControllerOfClass:(Class)aClass allowModalParent:(bool)allowModalParent;
 
-- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)vc;
-
-//@property (nonatomic, strong, setter=mui_setShownViewController:) UIViewController *mui_shownViewController
+- (UIViewController *)mui_childContainingSender:(id)sender;
 
 @end
+
+@interface UIView (MUIViewControllerHierarchy) <MUIViewControllerHierarchy>
+@end
+
+//@interface UIBarButtonItem (MUIViewControllerHierarchy) <MUIViewControllerHierarchy>
+//@end
 
 NS_ASSUME_NONNULL_END
