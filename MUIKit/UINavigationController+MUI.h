@@ -22,6 +22,8 @@ MUIKIT_EXTERN NSString * const MUINavigationControllerLastVisibleViewController;
 //}
 //NS_ASSUME_NONNULL_END
 
-//@interface UINavigationController (MUI)
-//
-//@end
+@interface UINavigationController (MUI)
+
+
+
+@end

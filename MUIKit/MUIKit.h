@@ -21,6 +21,7 @@
 #import <MUIKit/MUILongRunningTaskController.h>
 #import <MUIKit/MUIProgressViewController.h>
 #import <MUIKit/MUICompletionStoryboardSegue.h>
+#import <MUIKit/MUIMasterNavigationController.h>
 
 #import <MUIKit/MUITableView.h>
 #import <MUIKit/MUIFetchedTableViewController.h>
@@ -44,7 +45,6 @@
 #import <MUIKit/UINavigationItem+MUI.h>
 #import <MUIKit/UIViewController+MUI.h>
 #import <MUIKit/UIViewController+MUIShowing.h>
-#import <MUIKit/UIViewController+MUIDetail.h>
 #import <MUIKit/UIAlertView+MUI.h>
 #import <MUIKit/UITextField+MUI.h>
 #import <MUIKit/UITableViewCell+MUI.h>

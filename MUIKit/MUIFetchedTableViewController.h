@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // only put table stuff in here
 @interface MUIFetchedTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIDataSourceModelAssociation>{
-    @protected
-    NSFetchedResultsController *_fetchedResultsController;
+    //@protected
+    //NSFetchedResultsController *_fetchedResultsController;
 }
 
 //- (instancetype)initWithTableViewController:(UITableViewController *)tableViewController;
@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(nullable NSIndexPath *)indexPath NS_REQUIRES_SUPER;
 
 @property (assign, nonatomic) id<MUIFetchedTableViewControllerDelegate> delegate;
+
+- (void)createFetchedResultsController;
 
 @end
 

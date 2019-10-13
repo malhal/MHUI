@@ -9,7 +9,6 @@
 #import "MUIFetchedTableViewController.h"
 //#import "MUIDataSource_Internal.h"
 #import "MUITableView.h"
-#import "UIViewController+MUIDetail.h"
 #import "UITableView+MUI.h"
 #import "UIViewController+MUIShowing.h"
 #import "UIViewController+MUI.h"
@@ -19,9 +18,7 @@
 
 //NSString * const MUIFetchedTableViewControllerSelectedObjectDidUpdateNotification = @"MUIFetchedTableViewControllerSelectedObjectDidUpdateNotification";
 
-@interface MUIFetchedTableViewController(){
-    //NSFetchedResultsController *_fetchedResultsController;
-}
+@interface MUIFetchedTableViewController()
 
 //@property (strong, nonatomic, readwrite) NSManagedObject *selectedObject;
 @property (assign, nonatomic) BOOL sectionsCountChanged;
@@ -39,6 +36,8 @@
 @end
 
 @implementation MUIFetchedTableViewController
+@synthesize fetchedResultsController = _fetchedResultsController;
+
 
 //- (instancetype)initWithTableViewController:(UITableViewController *)tableViewController {
 //    self = [super init];
@@ -228,7 +227,7 @@
         if((transitionCoordinator = self.transitionCoordinator)){
             [transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
                 UITableViewCell *cell = [tableView cellForRowAtIndexPath:ip];
-                if(cell){
+                if(cell){   
                     [cell setNeedsLayout];
                 }
                 else{
@@ -260,14 +259,24 @@
 //   // [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
 //}
 
+- (NSFetchedResultsController *)fetchedResultsController{
+    if(!_fetchedResultsController){
+        [self createFetchedResultsController];
+        NSAssert(_fetchedResultsController, @"FRC must be set at end of create");
+    }
+    return _fetchedResultsController;
+}
+
+- (void)createFetchedResultsController{
+    //NSAssert(NO, @"To be overridden by subclass");
+}
+
 - (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
     if(fetchedResultsController == _fetchedResultsController){
         return;
     }
-    else if(_fetchedResultsController){
-        if(_fetchedResultsController.delegate == self){
-            _fetchedResultsController.delegate = nil;
-        }
+    else if(_fetchedResultsController && _fetchedResultsController.delegate == self){
+        _fetchedResultsController.delegate = nil;
     }
     _fetchedResultsController = fetchedResultsController;
     if(!fetchedResultsController.delegate){

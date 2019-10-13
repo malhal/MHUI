@@ -12,13 +12,11 @@
 NSString * const MasterViewControllerStateRestorationDetailViewControllerKey = @"DetailViewController";
 NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"PersistentContainer";
 
-@interface MUIMasterViewController () <MUIFetchedTableViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIViewControllerRestoration>
+@interface MUIMasterViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerRestoration>
 
 // state
-@property (strong, nonatomic, null_resettable) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) MUIFetchedTableViewController *fetchedTableViewController;
 @property (strong, nonatomic) NSIndexPath *indexPathOfDeletedDetailItem;
-@property (strong, nonatomic, readwrite) __kindof NSManagedObject *objectForShowDetail;
+@property (strong, nonatomic, readwrite) __kindof NSManagedObject *selectedObject;
 @property (assign, nonatomic) BOOL selectionIsUserDriven;
 @property (assign, nonatomic) BOOL isEditingRow;
 //@property (assign, nonatomic) BOOL isTopViewController;
@@ -29,8 +27,12 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
 @end
 
 @implementation MUIMasterViewController
-@synthesize fetchedResultsController = _fetchedResultsController;
+//@synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize countOfFetchedObjects = _countOfFetchedObjects;
+
+- (BOOL)mui_canSelectSplitDetailItemObject:(id)object{
+    return [self.fetchedTableViewController.fetchedResultsController indexPathForObject:object];
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder persistentContainer:(NSPersistentContainer *)persistentContainer{
     self = [super initWithCoder:coder];
@@ -39,6 +41,35 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     }
     return self;
 }
+
+- (NSFetchedResultsController *)fetchedResultsController{
+    return self.fetchedTableViewController.fetchedResultsController;
+}
+
+//- (NSFetchedResultsController *)fetchedResultsController{
+//    if(!_fetchedResultsController){
+//        [self createFetchedResultsController];
+//        NSAssert(_fetchedResultsController, @"FRC must be set at end of create");
+//    }
+//    return _fetchedResultsController;
+//}
+//
+//- (void)createFetchedResultsController{
+//    NSAssert(NO, @"To be overridden by subclass");
+//}
+//
+//- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController{
+//    if(fetchedResultsController == _fetchedResultsController){
+//        return;
+//    }
+//    else if(_fetchedResultsController && _fetchedResultsController.delegate == self){
+//        _fetchedResultsController.delegate = nil;
+//    }
+//    _fetchedResultsController = fetchedResultsController;
+//    if(!fetchedResultsController.delegate){
+//        fetchedResultsController.delegate = self;
+//    }
+//}
 
 - (NSManagedObjectContext *)managedObjectContext{
     return self.persistentContainer.viewContext;
@@ -92,18 +123,42 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     return _countOfFetchedObjects;
 }
 
+- (void)setSelectedObject:(__kindof NSManagedObject *)selectedObject{
+    if(_selectedObject == selectedObject){
+        return;
+    }
+    _selectedObject = selectedObject;
+    if(self.isViewLoaded && !self.selectionIsUserDriven){
+        [self updateRowSelectionAnimated:NO];
+        [self updateCurrentDetailObject];
+    }
+}
+
 // this needs to both show the detail if necessary and also select the table row if necessary.
 // or they call a method after this.
 //- (void)showDetailObject:(__kindof NSManagedObject *)detailObject{// configureView:(BOOL)configureView{d
-- (void)showDetailObject:(__kindof NSManagedObject *)object{
-    self.objectForShowDetail = object;
-    //if(self.selectionIsUserDriven){
-    [self performShowDetailWithObject:object];
-}
 
-- (void)performShowDetailWithObject:(NSManagedObject *)object{
+//- (void)__showDetailObject:(__kindof NSManagedObject *)object{
+//    self.selectedObject = object;
+    //if(self.selectionIsUserDriven){
+//    [self showDetailWithObject:object];
+//    self.detailViewControllerDetailItem = object;
+//}
+
+- (void)showDetailWithObject:(NSManagedObject *)object{
     
 }
+
+//- (void)setDetailViewController:(UIViewController<MUIDetail> *)detailViewController{
+//    if(detailViewController == _detailViewController){
+//        return;
+//    }
+//    _detailViewController = detailViewController;
+//    if(detailViewController.parentViewController.parentViewController){
+//        NSLog(@"");
+//    }
+//}
+    
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -135,20 +190,10 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     self.fetchedTableViewController.fetchedResultsController = self.fetchedResultsController;
     self.fetchedTableViewController.tableView.delegate = self;
     self.fetchedTableViewController.tableView.dataSource = self; // these can't be done until the self.fetchedTableViewController is set so the forwarding works.
-    
+
     [self updateEditButton];
 }
 
-- (UIViewController<MUIDetail> *)targetDetailViewController{
-    UIViewController<MUIDetail> *dvc;
-    if(self.splitViewController.viewControllers.count == 2){ // it might not be collapsed right now but it is during state restoration
-        dvc = ((UINavigationController *)self.splitViewController.viewControllers.lastObject).viewControllers.firstObject;
-    }
-    else if([self.navigationController.topViewController isKindOfClass:UINavigationController.class]){
-        dvc = ((UINavigationController *)self.navigationController.topViewController).viewControllers.firstObject;
-    }
-    return dvc;
-}
 
 // this can't set anything
 - (void)updateEditButton{
@@ -159,11 +204,13 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     [self updateRowSelectionAnimated:animated scrollToSelection:NO];
 }
 
+
+// depenendednt on detail item and visible
 - (void)updateRowSelectionAnimated:(BOOL)animated scrollToSelection:(BOOL)scrollToSelection{
-    if(!self.shouldAlwaysHaveSelectedRow){
+    if(!self.alwaysHaveSelectedRow){
         return;
     }
-    NSManagedObject *object = self.detailViewController.detailItem;
+    NSManagedObject *object = self.selectedObject;
     if(!object){
         return;
     }
@@ -184,9 +231,9 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:animated];
 }
 
-- (BOOL)shouldAlwaysHaveSelectedRow{
+- (BOOL)alwaysHaveSelectedRow{
     BOOL result = NO;
-    if(self.shouldAlwaysShowDetailObject){
+    if(self.alwaysShowDetailObject){
 //        if(self.tableView.isEditing){
 //            result = self.isMovingOrDeletingNotes;
 //        }
@@ -195,91 +242,93 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     return result;
 }
 
-- (BOOL)shouldAlwaysShowDetailObject{
+- (BOOL)alwaysShowDetailObject{
     // splitViewController  traitCollection horizontalSizeClass
     // isInHardwareKeyboardMode
-     return !self.splitViewController.isCollapsed || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
+//    if(![self.navigationController.viewControllers containsObject:self]){
+//        return NO;
+//    }
+//    else if(self.splitViewController.isCollapsed &&  ![self.navigationController.topViewController isKindOfClass:UINavigationController.class]){
+//        return NO;
+//    }
+//    return YES;
+    // can't check detail visible because during interactive pop it is visible but might go back on the stack so we would push a second detail on.
+    return !self.splitViewController.isCollapsed || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
 }
 
-// This one actually shows a note if one isn't selected.
-// Called from note container did change and appear.
-// updateSelectionForCurrentNoteContainerAnimated
-- (void)updateDetailObjectAnimated:(BOOL)animated{
-    //if(!self.tableViewIndexPathsForSelectedEditableRows.count){
-        if(!self.shouldAlwaysShowDetailObject){
-            //if(!self.tableView.isEditing){
+
+// called on a appear and controller changed if the selected object was deleted.
+- (void)updateSelectedObject{
+  
+}
+
+- (void)updateCurrentDetailObject{
+    if(!self.alwaysShowDetailObject){
+        //if(!self.tableView.isEditing){
 //                for(NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows.copy){
 //                    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 //                }
-            //}
-            return;
-        }
-    //}
-    
-    // we need a valid detail item.
-    id object = self.detailViewController.detailItem;
-    if([self.fetchedResultsController indexPathForObject:object]){
+        //}
         return;
     }
-    else if(self.indexPathOfDeletedDetailItem){
-        @try {
-            object = [self.fetchedResultsController objectAtIndexPath:self.indexPathOfDeletedDetailItem];
-        } @catch (NSException *exception) {
-            object = self.fetchedResultsController.fetchedObjects.lastObject;
-        }
-    }else{
-        object = self.fetchedResultsController.fetchedObjects.firstObject;
+    else if(self.splitViewController.mui_currentSplitDetailItem.object != self.selectedObject){
+        [self showDetailWithObject:self.selectedObject];
     }
-    // dont show if collapsed and detail is not showing
-    [self showDetailObject:object];
 }
 
-//- (void)replaceDetailIfNecessary{
-//    // we don't need to show when going to portrait and don't want to select either
-//    if(!self.splitViewController.isCollapsed){
-//        // if the detail item isn't in this list, e.g. it was deleted while the list was not visible.
-//        if(![self.fetchedResultsController.fetchedObjects containsObject:self.detailViewController.detailItem]){
-//            // when we selected an object but did not show it.
-//            if(self.selectedObject){
-//                [self showSelectedObjectIfNecessary];
-//            }
-//            else{
-//                NSManagedObject *object = self.fetchedResultsController.fetchedObjects.firstObject;
-//                [self selectObject:object];
-//            }
-//        }
+//- (void)setDetailViewController:(UIViewController<MUIDetail> *)detailViewController{
+//    if(detailViewController == _detailViewController){
+//        return;
+//    }
+//    _detailViewController = detailViewController;
+//    if(self.isViewLoaded && !self.selectionIsUserDriven){
+//        [self updateRowSelectionAnimated:NO];
 //    }
 //}
 
-
 - (void)viewWillAppear:(BOOL)animated {
-    [self updateDetailObjectAnimated:animated];
-    [self updateRowSelectionAnimated:animated];
-    //[self replaceDetailIfNecessary];
+    
+    if(self.isMovingToParentViewController){
+        id object = self.splitViewController.mui_currentSplitDetailItem.object;
+        if(![self.fetchedResultsController indexPathForObject:object]){
+          object = self.fetchedResultsController.fetchedObjects.firstObject;
+        }
+        self.selectedObject = object;
+    }
+    
+    
+    //[self updateSelectedObject]; // this won't cause updateCurrentDetailObject if we select nil because it is already nil by default.
+    [self updateCurrentDetailObject];
+    //[self updateRowSelectionAnimated:animated];
     [self updateEditButton];
+    
 //    [self showSelectedObjectIsUserDriven:NO];
     self.fetchedTableViewController.clearsSelectionOnViewWillAppear = self.splitViewController.isCollapsed;
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
+- (void)didMoveToParentViewController:(UIViewController *)parent{
+    [super didMoveToParentViewController:parent];
 }
 
-//- (void)navigationControllerDidShowViewController:(NSNotification *)notification{
-//    self.isTopViewController = self.navigationController.topViewController == self;
-//}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    // for when deleting the item that is being interative popping and is cancelled.
+    if(self.isMovingFromParentViewController){
+        return;
+    }
+    [self updateCurrentDetailObject];
+}
 
 // i.e. isCollapsed changed
 - (void)showDetailTargetDidChange:(NSNotification *)notification{
-    //[self selectDefaultCurrentDetailObjectIfNecessary];
-    // if current item detail is not in list or if nothing selected then choose first item if seperated.
-    // show if detail isn't showing the currently selected.
-    // don't show if collapsed
-    //[self replaceDetailIfNecessary];
-    //[self updateEditButton];
-    [self updateDetailObjectAnimated:NO];
+    // so we always select first if in a new master.
+    // turned this off because when on root and no detail was selected, rotating will select show the first on the detail even tho we aren't on the master.
+    // actually added it back but added the check if always show detail.
+    // removed it again because.
+    //[self updateSelectedObject];
+    
+    [self updateCurrentDetailObject];
     [self updateRowSelectionAnimated:NO];
    // [self select];
     // its possible to find the detail if it wasn't previously.
@@ -327,155 +376,57 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
 
 #pragma mark - Table View
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    if([self.tableDataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:)]){
-    //        return [self.tableDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
-    //    }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.textLabel.opaque = NO;
-    cell.textLabel.backgroundColor = UIColor.clearColor;
-    //if(!cell.selectedBackgroundView){
-//        UIView *v = [UIView.alloc init];
-//        v.backgroundColor = v.tintColor;
-//        cell.selectedBackgroundView = v;
-//    }
-    return cell;
-}
-
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     self.isEditingRow = YES;
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSelector:@selector(end) withObject:nil afterDelay:0];
+    [self performSelector:@selector(didEndEditingRowAtIndexPath:) withObject:indexPath afterDelay:0];
 }
 
-- (void)end{
+- (void)didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     self.isEditingRow = NO;
 }
 
 #pragma mark - Fetched results controller
-
-//- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if([indexPath isEqual:tableView.indexPathForSelectedRow]){
-//        return nil;
-//    }
-//    return indexPath;
-//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(!self.isEditing){
         NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
         // don't show if in landscape and the object is already selected.
         self.selectionIsUserDriven = YES;
-        [self showDetailObject:object];
+        self.selectedObject = object;
+        [self showDetailWithObject:object];
         self.selectionIsUserDriven = NO;
     }
-    //  [self updateRowsForCurrentDetailObject];
-    // [self configureViewForCurrentDetailObject];
 }
-
-//- (UIViewController *)targetViewControllerForAction:(SEL)action sender:(id)sender{
-//
-//    if(action != @selector(showDetailViewController:sender:)){
-//        return [super targetViewControllerForAction:action sender:sender];
-//    }
-//
-//        return [super targetViewControllerForAction:action sender:sender];
-//    }
-//    return self;
-//}
-
-//- (BOOL)canPerformAction:(SEL)action withSender:(id)sender{
-//    if(action != @selector(showDetailViewController:sender:)){
-//        return [super canPerformAction:action withSender:sender];
-//    }
-//    else if(self.navigationController.topViewController == self){
-//        return NO;
-//    }
-//    return YES;
-//}
-//
-//- (void)showDetailViewController:(UIViewController *)vc sender:(id)sender{
-//    UINavigationController *existingDetailNav = (UINavigationController *)self.navigationController.topViewController;
-//    UINavigationController *newDetailNav = (UINavigationController *)vc;
-//    existingDetailNav.viewControllers = @[newDetailNav.topViewController];
-//    
-    //bad
-    //    // replace the master nav stack with the master and the new detail.
-    //    self.navigationController.viewControllers = @[self, vc];
-//}
-
-/*
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        default:
-            return;
-    }
-}
-*/
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     [self.fetchedTableViewController controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
-   // UITableView *tableView = self.tableView;
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            //[tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            // &&
-            if(anObject == self.detailViewController.detailItem){ // need to select the next one even if not visible.
-                self.indexPathOfDeletedDetailItem = indexPath;
-            }
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            //[self updateCell:[tableView cellForRowAtIndexPath:indexPath] withEvent:anObject];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-           // [self updateCell:[tableView cellForRowAtIndexPath:indexPath] withEvent:anObject];
-           // [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-            break;
+    if(type != NSFetchedResultsChangeDelete){
+        return;
+    }
+    else if(anObject == self.selectedObject){ // need to select the next one even if not visible.
+        self.indexPathOfDeletedDetailItem = indexPath;
     }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.fetchedTableViewController controllerDidChangeContent:controller];
     if(self.indexPathOfDeletedDetailItem){
-        [self updateDetailObjectAnimated:NO];
-        [self updateRowSelectionAnimated:NO];
+        NSManagedObject *object;
+        @try {
+            object = [self.fetchedResultsController objectAtIndexPath:self.indexPathOfDeletedDetailItem];
+        } @catch (NSException *exception) {
+            object = self.fetchedResultsController.fetchedObjects.lastObject;
+        }
+        self.selectedObject = object;
         self.indexPathOfDeletedDetailItem = nil;
     }
     self.countOfFetchedObjects = @(controller.fetchedObjects.count);
 }
-
-/*
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
-*/
 
 - (id)forwardingTargetForSelector:(SEL)aSelector{
     if(MHFProtocolHasInstanceMethod(@protocol(UITableViewDelegate), aSelector)){
@@ -531,27 +482,35 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
 
 #pragma mark - UIStateRestoration
 
-//#define kDetailViewControllerKey @"DetailViewController"
 #define kCurrentDetailObjectKey @"CurrentDetailObject"
 #define kFetchedTableViewControllerKey @"FetchedTableViewController"
-
-//#define kModelIdentifierForSelectedElementKey @"ModelIdentifierForSelectedElement"
-//#define kSelectedMasterObjectKey @"kSelectedMasterObjectKey"
+#define kSelectedObjectKey @"SelectedObject"
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
-    if(self.detailViewController){
-        [coder encodeObject:self.detailViewController forKey:MasterViewControllerStateRestorationDetailViewControllerKey];
-    }
-    //[coder encodeObject:self.managedObjectContext forKey:kManagedObjectContextKey];
-    
+    //if(self.detailViewController){
+        //[coder encodeObject:self.detailViewController forKey:MasterViewControllerStateRestorationDetailViewControllerKey];
+    //}
     [coder encodeObject:self.fetchedTableViewController forKey:kFetchedTableViewControllerKey];
     [coder encodeObject:self.persistentContainer forKey:MasterViewControllerStateRestorationPersistentContainerKey];
+    //[coder encodeObject:self.selectedObject.objectID.URIRepresentation forKey:kSelectedObjectKey];
 }
-
+ 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
-    self.detailViewController = [coder decodeObjectForKey:MasterViewControllerStateRestorationDetailViewControllerKey]; // it doesnt have the detail item. Why are we preserving the detail again?
+    UIViewController *dvc = [coder decodeObjectForKey:MasterViewControllerStateRestorationDetailViewControllerKey]; // it doesnt have the detail item. Why are we preserving the detail again?
+    //self.detailViewController = dvc;
+    
+//    NSURL *objectURI = [coder decodeObjectForKey:kSelectedObjectKey];
+//    if(objectURI){
+//        NSManagedObject *so = [self.persistentContainer.viewContext mcd_existingObjectWithURI:objectURI error:nil];
+//        if(so){
+//            //self.selectedObject = so;
+//        }
+//    }
+    
+    
+    
 }
 
 - (void)applicationFinishedRestoringState{
@@ -559,7 +518,7 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
    // [self reselectTableRowIfNecessary];
     // [self configureViewForCurrentDetailObject];
     
-    UISplitViewController *splitViewController = self.splitViewController;
+   // UISplitViewController *splitViewController = self.splitViewController;
     //NSIndexPath *indexPath = self.fetchedTableViewController.tableView.indexPathForSelectedRow;
     //if(!self.splitViewController.isCollapsed){
 //    id detailItem = self.detailViewController.detailItem;

@@ -14,16 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MUIMasterCollapsing, MUIDetailCollapsing;
 @class MUIRootNavigationController;
 
-@interface MUICollapseController : NSObject <UISplitViewControllerDelegate, UIStateRestoring>
+@interface MUISplitDetailItem : NSObject
 
-//- (instancetype)initWithPrimaryNavigationController:(MUIRootNavigationController *)primaryNavigationController splitViewController:(UISplitViewController *)splitViewController;
+@property (strong, nonatomic) id object;
+
+@end
+
+@interface MUICollapseController : NSObject <UISplitViewControllerDelegate, UIStateRestoring>
 
 // Doesn't take a master param because in case if 2-split with initial pushing master it doesn't exist yet.
 - (instancetype)initWithSplitViewController:(UISplitViewController *)splitViewController;
-
-@property (strong, nonatomic, nullable) UIViewController<MUIMasterCollapsing> *masterViewController;
-
-@property (strong, nonatomic, nullable) UIViewController<MUIDetailCollapsing> *detailViewController;
 
 @property (strong, nonatomic, readonly) UISplitViewController *splitViewController;
 
@@ -31,29 +31,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol MUIMasterCollapsing <NSObject>
-
-- (BOOL)containsDetailItem:(id)detailItem;
-
-//@property (strong, nonatomic) MUICollapseController *collapseControllerForMaster;
-
-@end
-
-@protocol MUIDetailCollapsing <NSObject>
-
-@property (strong, nonatomic, readonly) id detailItem;
-
-//@property (weak, nonatomic) MUICollapseController *collapseControllerForDetail;
-
-@end
-
 @interface UIViewController (MUICollapseController)
 
-@property (weak, nonatomic, nullable, readonly) MUICollapseController* mui_collapseControllerForMaster;
+- (BOOL)mui_canSelectSplitDetailItemObject:(id)object;
 
-@property (weak, nonatomic, nullable, readonly) MUICollapseController* mui_collapseControllerForDetail;
+@property (strong, nonatomic, readonly) MUISplitDetailItem *mui_splitDetailItem;
 
-- (BOOL)mui_isMemberOfViewControllerHierarchy:(UIViewController *)highViewController;
+@end
+
+@interface UISplitViewController (MUICollapseController)
+
+@property (strong, nonatomic, readonly) MUISplitDetailItem *mui_currentSplitDetailItem;
 
 @end
 

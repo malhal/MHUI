@@ -7,6 +7,7 @@
 //
 
 #import "UINavigationController+MUI.h"
+#import <objc/runtime.h>
 
 NSNotificationName const MUINavigationControllerWillShowViewControllerNotification = @"UINavigationControllerWillShowViewControllerNotification";
 NSNotificationName const MUINavigationControllerDidShowViewControllerNotification = @"UINavigationControllerDidShowViewControllerNotification";
@@ -14,10 +15,7 @@ NSString * const MUINavigationControllerNextVisibleViewController = @"UINavigati
 NSString * const MUINavigationControllerLastVisibleViewController = @"UINavigationControllerLastVisibleViewController";
 
 
-//@implementation UINavigationController (MUI)
-//
-//- (UIViewController *)mui_childContainingSender:(id)sender{
-//
-//}
-//
-//@end
+@implementation UINavigationController (MUI)
+
+
+@end

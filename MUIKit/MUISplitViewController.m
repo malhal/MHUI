@@ -8,9 +8,9 @@
 
 #import "MUISplitViewController.h"
 #import "UIViewController+MUI.h"
-#import "UIViewController+MUIDetail.h"
 //#import "MUIDetailItemSplitter.h"
 #import "UIView+MUI.h"
+#import <objc/runtime.h>
 
 #define IS_IPAD_PRO_12_INCH (([UIScreen mainScreen].bounds.size.width == 1366 && [UIScreen mainScreen].bounds.size.height == 1024) || ([UIScreen mainScreen].bounds.size.width == 1024 && [UIScreen mainScreen].bounds.size.height == 1366))
 
@@ -35,9 +35,13 @@
 @implementation MUISplitViewController
 //@dynamic masterViewController; // private
 
+- (void)showDetailViewController:(UIViewController *)vc sender:(id)sender{
+    [super showDetailViewController:vc sender:sender];
+    //self.currentSplitDetailItem = vc.mui_splitDetailItem;
+}
+
 
 /*
- 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -310,5 +314,9 @@
     }
     return nav.mui_splitViewController;
 }
+
+//- (void)mui_setSplitDetailItem:(id)splitDetailItem {
+//
+//}
 
 @end
