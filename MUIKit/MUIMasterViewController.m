@@ -218,11 +218,6 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     if(!indexPath){
         return;
     }
-    [self selectRow:indexPath animated:animated scrollToSelection:scrollToSelection];
-}
-
-
-- (void)selectRow:(NSIndexPath *)indexPath animated:(BOOL)animated scrollToSelection:(BOOL)scrollToSelection{
     UITableView *tableView = self.fetchedTableViewController.tableView;
     [tableView selectRowAtIndexPath:indexPath animated:animated scrollPosition:UITableViewScrollPositionNone];
     if(!scrollToSelection){
@@ -231,18 +226,7 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:animated];
 }
 
-- (BOOL)alwaysHaveSelectedRow{
-    BOOL result = NO;
-    if(self.alwaysShowDetailObject){
-//        if(self.tableView.isEditing){
-//            result = self.isMovingOrDeletingNotes;
-//        }
-        result = !self.isEditing && !self.isEditingRow;
-    }
-    return result;
-}
-
-- (BOOL)alwaysShowDetailObject{
+- (BOOL)alwaysHaveSelectedObject{
     // splitViewController  traitCollection horizontalSizeClass
     // isInHardwareKeyboardMode
 //    if(![self.navigationController.viewControllers containsObject:self]){
@@ -256,14 +240,35 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     return !self.splitViewController.isCollapsed || [self.navigationController.topViewController isKindOfClass:UINavigationController.class];
 }
 
+- (BOOL)alwaysHaveSelectedRow{
+    BOOL result = NO;
+    if(self.alwaysHaveSelectedObject){
+//        if(self.tableView.isEditing){
+//            result = self.isMovingOrDeletingNotes;
+//        }
+        result = !self.isEditing && !self.isEditingRow;
+    }
+    return result;
+}
 
 // called on a appear and controller changed if the selected object was deleted.
 - (void)updateSelectedObject{
-  
+    if(!self.alwaysHaveSelectedObject){
+        return;
+    }
+    id object = self.selectedObject;
+    if(!object){
+        object = self.splitViewController.mui_currentSplitDetailItem.object;
+    }
+    if(![self.fetchedResultsController indexPathForObject:object]){
+        object = self.fetchedResultsController.fetchedObjects.firstObject;
+    }
+    self.selectedObject = object;
 }
 
+// only if we are on the navigation stack
 - (void)updateCurrentDetailObject{
-    if(!self.alwaysShowDetailObject){
+    if(!self.alwaysHaveSelectedObject){
         //if(!self.tableView.isEditing){
 //                for(NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows.copy){
 //                    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -271,9 +276,10 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
         //}
         return;
     }
-    else if(self.splitViewController.mui_currentSplitDetailItem.object != self.selectedObject){
-        [self showDetailWithObject:self.selectedObject];
+    else if(self.splitViewController.mui_currentSplitDetailItem.object == self.selectedObject){
+        return;
     }
+    [self showDetailWithObject:self.selectedObject];
 }
 
 //- (void)setDetailViewController:(UIViewController<MUIDetail> *)detailViewController{
@@ -287,17 +293,7 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
 //}
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    if(self.isMovingToParentViewController){
-        id object = self.splitViewController.mui_currentSplitDetailItem.object;
-        if(![self.fetchedResultsController indexPathForObject:object]){
-          object = self.fetchedResultsController.fetchedObjects.firstObject;
-        }
-        self.selectedObject = object;
-    }
-    
-    
-    //[self updateSelectedObject]; // this won't cause updateCurrentDetailObject if we select nil because it is already nil by default.
+    [self updateSelectedObject]; // this won't cause updateCurrentDetailObject if we select nil because it is already nil by default.
     [self updateCurrentDetailObject];
     //[self updateRowSelectionAnimated:animated];
     [self updateEditButton];
@@ -326,7 +322,7 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
     // turned this off because when on root and no detail was selected, rotating will select show the first on the detail even tho we aren't on the master.
     // actually added it back but added the check if always show detail.
     // removed it again because.
-    //[self updateSelectedObject];
+    [self updateSelectedObject];
     
     [self updateCurrentDetailObject];
     [self updateRowSelectionAnimated:NO];
@@ -514,6 +510,8 @@ NSString * const MasterViewControllerStateRestorationPersistentContainerKey = @"
 }
 
 - (void)applicationFinishedRestoringState{
+    //self.selectedObject = self.splitViewController.mui_currentSplitDetailItem.object;
+    
    // [self.tableView layoutIfNeeded]; // fix going back unlight bu
    // [self reselectTableRowIfNecessary];
     // [self configureViewForCurrentDetailObject];
