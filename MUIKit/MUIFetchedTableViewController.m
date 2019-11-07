@@ -38,6 +38,9 @@
 @implementation MUIFetchedTableViewController
 @synthesize fetchedResultsController = _fetchedResultsController;
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+}
 
 //- (instancetype)initWithTableViewController:(UITableViewController *)tableViewController {
 //    self = [super init];

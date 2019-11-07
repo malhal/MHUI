@@ -45,6 +45,7 @@
 #import <MUIKit/UINavigationItem+MUI.h>
 #import <MUIKit/UIViewController+MUI.h>
 #import <MUIKit/UIViewController+MUIShowing.h>
+#import <MUIKit/UIViewController+MUIDetailItem.h>
 #import <MUIKit/UIAlertView+MUI.h>
 #import <MUIKit/UITextField+MUI.h>
 #import <MUIKit/UITableViewCell+MUI.h>

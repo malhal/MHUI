@@ -12,10 +12,13 @@
 #import "UIViewController+MUI.h"
 #import <objc/runtime.h>
 #import "MUISplitViewController.h"
+#import "UIViewController+MUIDetailItem.h"
 
 @interface UISplitViewController ()
 
-@property (strong, nonatomic, readwrite, setter=mui_setCurrentSplitDetailItem:) MUISplitDetailItem *mui_currentSplitDetailItem;
+//@property (strong, nonatomic, readwrite, setter=mui_setCurrentSplitDetailItem:) MUISplitDetailItem *mui_currentSplitDetailItem;
+
+//@property (strong, nonatomic, readwrite, setter=mui_setDetailViewController:) UIViewController *mui_detailViewController;
 
 @end
 
@@ -26,11 +29,9 @@
 
 @end
 
-
-@implementation MUISplitDetailItem
-
-@end
-
+//@implementation MUISplitDetailItem
+//
+//@end
 
 @implementation MUICollapseController
 
@@ -56,29 +57,15 @@
         splitViewController.delegate = self;
         _splitViewController = splitViewController;
         NSAssert(splitViewController.viewControllers.count == 2, @"splitViewController must have 2 child view controllers");
-        splitViewController.mui_currentSplitDetailItem = splitViewController.viewControllers[1].mui_splitDetailItem;
+        //splitViewController.mui_currentSplitDetailItem = splitViewController.viewControllers[1].mui_splitDetailItem;
+       // splitViewController.mui_detailViewController = splitViewController.viewControllers[1];
     }
     return self;
 }
 
-//- (void)setMasterViewController:(UIViewController<MUIMasterCollapsing> *)masterViewController{
-//    if(masterViewController == _masterViewController){
-//        return;
-//    }
-//    masterViewController.mui_collapseControllerForMaster = self;
-//    _masterViewController = masterViewController;
-//}
-
-//- (void)setDetailViewController:(UIViewController<MUIDetailCollapsing> *)detailViewController{
-//    if(detailViewController == _detailViewController){
-//        return;
-//    }
-//    detailViewController.mui_collapseControllerForDetail = self;
-//    _detailViewController = detailViewController;
-//}
-
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController showDetailViewController:(UIViewController *)vc sender:(id)sender{
-    splitViewController.mui_currentSplitDetailItem = vc.mui_splitDetailItem;
+    //splitViewController.mui_currentSplitDetailItem = vc.mui_splitDetailItem;
+    //splitViewController.mui_detailViewController = vc;
     return NO;
 }
 
@@ -91,7 +78,7 @@
     
     
     //return NO;
-    id object = secondaryViewController.mui_splitDetailItem.object;
+    id object = secondaryViewController.mui_detailItem;
     if (!object) {
         // If our secondary controller doesn't show a photo, do the collapse ourself by doing nothing
         return YES;
@@ -111,7 +98,7 @@
         
         //if(pcn.viewControllers.lastObject.aapl_containedPhoto == photo)
         
-    else if(![primaryViewController mui_canSelectSplitDetailItemObject:object]){
+    else if(![primaryViewController mui_canSelectDetailItem:object]){
         return YES;
     }
         
@@ -138,38 +125,20 @@
 
 @implementation UIViewController (MUICollapseController)
 
-- (BOOL)mui_canSelectSplitDetailItemObject:(id)object{
-    return NO;
-}
-
-- (MUISplitDetailItem *)mui_splitDetailItem{
-    MUISplitDetailItem *item = objc_getAssociatedObject(self, @selector(mui_splitDetailItem));
-    if(!item){
-        item = [MUISplitDetailItem.alloc init];
-        objc_setAssociatedObject(self, @selector(mui_splitDetailItem), item, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    return item;
-}
-
-@end
-
-
-@implementation UINavigationController (MUICollapseController)
-
-- (BOOL)mui_canSelectSplitDetailItemObject:(id)object{
-    return [self.topViewController mui_canSelectSplitDetailItemObject:object];
-}
-
 @end
 
 @implementation UISplitViewController (MUICollapseController)
 
-- (MUISplitDetailItem *)mui_currentSplitDetailItem{
-    return objc_getAssociatedObject(self, @selector(mui_currentSplitDetailItem));
-}
 
-- (void)mui_setCurrentSplitDetailItem:(MUISplitDetailItem *)currentSplitDetailItem {
-    objc_setAssociatedObject(self, @selector(mui_currentSplitDetailItem), currentSplitDetailItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+
+//- (UIViewController *)mui_detailViewController{
+//    return objc_getAssociatedObject(self, @selector(mui_detailViewController));
+//}
+//
+//- (void)mui_setDetailViewController:(UIViewController *)detailViewController {
+//    objc_setAssociatedObject(self, @selector(mui_detailViewController), detailViewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
+
+
 
 @end

@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MUIMasterCollapsing, MUIDetailCollapsing;
 @class MUIRootNavigationController;
 
-@interface MUISplitDetailItem : NSObject
-
-@property (strong, nonatomic) id object;
-
-@end
+//@interface MUISplitDetailItem : NSObject
+//
+//@property (strong, nonatomic) id object;
+//
+//@end
 
 @interface MUICollapseController : NSObject <UISplitViewControllerDelegate, UIStateRestoring>
 
@@ -31,17 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIViewController (MUICollapseController)
-
-- (BOOL)mui_canSelectSplitDetailItemObject:(id)object;
-
-@property (strong, nonatomic, readonly) MUISplitDetailItem *mui_splitDetailItem;
-
-@end
 
 @interface UISplitViewController (MUICollapseController)
 
-@property (strong, nonatomic, readonly) MUISplitDetailItem *mui_currentSplitDetailItem;
+//@property (strong, nonatomic, readonly) UIViewController *mui_detailViewController;
+
+//@property (strong, nonatomic, readonly) MUISplitDetailItem *mui_currentSplitDetailItem;
 
 @end
 

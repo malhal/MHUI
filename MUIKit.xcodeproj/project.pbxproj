@@ -24,6 +24,8 @@
 		EC08B97E22E660E1009BA3F3 /* UINavigationController+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08B97D22E660E1009BA3F3 /* UINavigationController+MUI.m */; };
 		EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5D1C8C1F75C451008BC02E /* MUILongRunningTaskController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC17D98C2181F9680045B7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC17D98B2181F9680045B7C3 /* UIKit.framework */; };
+		EC1B8FDD236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1B8FDB236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC1B8FDE236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1B8FDC236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m */; };
 		EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E129A201299290036130D /* UITableViewCell+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC1E129D201299290036130D /* UITableViewCell+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1E129B201299290036130D /* UITableViewCell+MUI.m */; };
 		EC1E12A82012A60C0036130D /* UITableView+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E12A62012A60C0036130D /* UITableView+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -148,6 +150,8 @@
 /* Begin PBXFileReference section */
 		EC08B97D22E660E1009BA3F3 /* UINavigationController+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+MUI.m"; sourceTree = "<group>"; };
 		EC17D98B2181F9680045B7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC1B8FDB236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MUIDetailItem.h"; sourceTree = "<group>"; };
+		EC1B8FDC236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MUIDetailItem.m"; sourceTree = "<group>"; };
 		EC1E129A201299290036130D /* UITableViewCell+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+MUI.h"; sourceTree = "<group>"; };
 		EC1E129B201299290036130D /* UITableViewCell+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+MUI.m"; sourceTree = "<group>"; };
 		EC1E12A62012A60C0036130D /* UITableView+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+MUI.h"; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 				ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */,
 				EC76D6E61D9E4470002DC0A0 /* UIViewController+MUI.h */,
 				EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */,
+				EC1B8FDB236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h */,
+				EC1B8FDC236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m */,
 				EC596B14218A4433000B5302 /* UIViewController+MUIShowing.h */,
 				EC596B15218A4433000B5302 /* UIViewController+MUIShowing.m */,
 				EC6758A51DB02C1F00838798 /* UIAlertView+MUI.h */,
@@ -401,6 +407,7 @@
 				ECBD882A218C7EC800F5E602 /* MUISplitViewController.h in Headers */,
 				EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */,
 				ECD3862421C0752400BF2BCB /* MUICollapseController.h in Headers */,
+				EC1B8FDD236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h in Headers */,
 				ECD385ED21BC881E00BF2BCB /* UISplitViewController+MUI.h in Headers */,
 				EC34503F232BC63400B6136E /* UIResponder+MUI.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MUI.h in Headers */,
@@ -608,6 +615,7 @@
 				EC3145511D0740EA0025F669 /* UIAlertController+MUI.m in Sources */,
 				ECCB758A22B2B273008F2064 /* MUITableView.m in Sources */,
 				EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */,
+				EC1B8FDE236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m in Sources */,
 				EC6758A81DB02C1F00838798 /* UIAlertView+MUI.m in Sources */,
 				EC596B17218A4433000B5302 /* UIViewController+MUIShowing.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MUI.m in Sources */,
