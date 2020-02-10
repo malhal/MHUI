@@ -23,7 +23,6 @@
 /* Begin PBXBuildFile section */
 		EC08B97E22E660E1009BA3F3 /* UINavigationController+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08B97D22E660E1009BA3F3 /* UINavigationController+MUI.m */; };
 		EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC5D1C8C1F75C451008BC02E /* MUILongRunningTaskController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC17D98C2181F9680045B7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC17D98B2181F9680045B7C3 /* UIKit.framework */; };
 		EC1B8FDD236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1B8FDB236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC1B8FDE236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1B8FDC236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m */; };
 		EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC1E129A201299290036130D /* UITableViewCell+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -82,8 +81,8 @@
 		EC76D6E81D9E4470002DC0A0 /* UIViewController+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC76D6E61D9E4470002DC0A0 /* UIViewController+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */; };
 		EC90C9FF21AF53D9001A7883 /* MUITableViewCellObject.h in Headers */ = {isa = PBXBuildFile; fileRef = EC90C9FC21AF53D9001A7883 /* MUITableViewCellObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC90CA4021AF70BA001A7883 /* MHFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC90CA3421AF70AB001A7883 /* MHFoundation.framework */; };
-		EC90CA4121AF70BD001A7883 /* MCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC90CA3D21AF70AD001A7883 /* MCoreData.framework */; };
+		EC98278423F219B500FF832B /* MCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC98277423F2198400FF832B /* MCoreData.framework */; };
+		EC98278523F219B500FF832B /* MHFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC98277D23F2198500FF832B /* MHFoundation.framework */; };
 		EC998C91233E6E98008B10C2 /* MUIMasterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC998C8C233E6E98008B10C2 /* MUIMasterViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC998C92233E6E98008B10C2 /* MUIMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC998C90233E6E98008B10C2 /* MUIMasterViewController.m */; };
 		EC9A9CA120344F0900E5A698 /* UIImage+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC9A9C9F20344F0900E5A698 /* UIImage+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -114,40 +113,47 @@
 			remoteGlobalIDString = EC3145251D0740C70025F669;
 			remoteInfo = MHUI;
 		};
-		EC56BA0122AFE02600C6D57B /* PBXContainerItemProxy */ = {
+		EC98277323F2198400FF832B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EC3144D91D073E010025F669;
-			remoteInfo = MCoreData;
-		};
-		EC90CA3321AF70AB001A7883 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EC31444D1D073A1A0025F669;
-			remoteInfo = MHFoundation;
-		};
-		EC90CA3521AF70AB001A7883 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EC3144571D073A1A0025F669;
-			remoteInfo = MHFoundationTests;
-		};
-		EC90CA3C21AF70AD001A7883 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+			containerPortal = EC98276E23F2198400FF832B /* MCoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EC3144DA1D073E010025F669;
 			remoteInfo = MCoreData;
 		};
-		EC90CA3E21AF70AD001A7883 /* PBXContainerItemProxy */ = {
+		EC98277523F2198400FF832B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+			containerPortal = EC98276E23F2198400FF832B /* MCoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EC3144E41D073E010025F669;
 			remoteInfo = MCoreDataTests;
+		};
+		EC98277C23F2198500FF832B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC98277723F2198500FF832B /* MHFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC31444D1D073A1A0025F669;
+			remoteInfo = MHFoundation;
+		};
+		EC98277E23F2198500FF832B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC98277723F2198500FF832B /* MHFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC3144571D073A1A0025F669;
+			remoteInfo = MHFoundationTests;
+		};
+		EC98278023F219AD00FF832B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC98276E23F2198400FF832B /* MCoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EC3144D91D073E010025F669;
+			remoteInfo = MCoreData;
+		};
+		EC98278223F219AD00FF832B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC98277723F2198500FF832B /* MHFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EC31444C1D073A1A0025F669;
+			remoteInfo = MHFoundation;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -216,8 +222,8 @@
 		EC76D6E61D9E4470002DC0A0 /* UIViewController+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MUI.h"; sourceTree = "<group>"; };
 		EC76D6E71D9E4470002DC0A0 /* UIViewController+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MUI.m"; sourceTree = "<group>"; };
 		EC90C9FC21AF53D9001A7883 /* MUITableViewCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUITableViewCellObject.h; sourceTree = "<group>"; };
-		EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MHFoundation.xcodeproj; path = MHFoundation/MHFoundation.xcodeproj; sourceTree = "<group>"; };
-		EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MCoreData.xcodeproj; path = MCoreData/MCoreData.xcodeproj; sourceTree = "<group>"; };
+		EC98276E23F2198400FF832B /* MCoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MCoreData.xcodeproj; path = ../MCoreData/MCoreData.xcodeproj; sourceTree = "<group>"; };
+		EC98277723F2198500FF832B /* MHFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MHFoundation.xcodeproj; path = ../MHFoundation/MHFoundation.xcodeproj; sourceTree = "<group>"; };
 		EC998C8C233E6E98008B10C2 /* MUIMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIMasterViewController.h; sourceTree = "<group>"; };
 		EC998C90233E6E98008B10C2 /* MUIMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIMasterViewController.m; sourceTree = "<group>"; };
 		EC9A9C9F20344F0900E5A698 /* UIImage+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+MUI.h"; sourceTree = "<group>"; };
@@ -245,9 +251,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC90CA4121AF70BD001A7883 /* MCoreData.framework in Frameworks */,
-				EC90CA4021AF70BA001A7883 /* MHFoundation.framework in Frameworks */,
-				EC17D98C2181F9680045B7C3 /* UIKit.framework in Frameworks */,
+				EC98278423F219B500FF832B /* MCoreData.framework in Frameworks */,
+				EC98278523F219B500FF832B /* MHFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,8 +270,8 @@
 		EC02A87B21808BE300DCC84C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */,
-				EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */,
+				EC98277723F2198500FF832B /* MHFoundation.xcodeproj */,
+				EC98276E23F2198400FF832B /* MCoreData.xcodeproj */,
 				EC17D98B2181F9680045B7C3 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -386,20 +391,20 @@
 			path = MUIKitTests;
 			sourceTree = "<group>";
 		};
-		EC90CA2F21AF70AB001A7883 /* Products */ = {
+		EC98276F23F2198400FF832B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EC90CA3421AF70AB001A7883 /* MHFoundation.framework */,
-				EC90CA3621AF70AB001A7883 /* MHFoundationTests.xctest */,
+				EC98277423F2198400FF832B /* MCoreData.framework */,
+				EC98277623F2198400FF832B /* MCoreDataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EC90CA3821AF70AD001A7883 /* Products */ = {
+		EC98277823F2198500FF832B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EC90CA3D21AF70AD001A7883 /* MCoreData.framework */,
-				EC90CA3F21AF70AD001A7883 /* MCoreDataTests.xctest */,
+				EC98277D23F2198500FF832B /* MHFoundation.framework */,
+				EC98277F23F2198500FF832B /* MHFoundationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -469,7 +474,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				EC56BA0222AFE02600C6D57B /* PBXTargetDependency */,
+				EC98278123F219AD00FF832B /* PBXTargetDependency */,
+				EC98278323F219AD00FF832B /* PBXTargetDependency */,
 			);
 			name = MUIKit;
 			productName = MHUI;
@@ -529,12 +535,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EC90CA3821AF70AD001A7883 /* Products */;
-					ProjectRef = EC90CA3721AF70AD001A7883 /* MCoreData.xcodeproj */;
+					ProductGroup = EC98276F23F2198400FF832B /* Products */;
+					ProjectRef = EC98276E23F2198400FF832B /* MCoreData.xcodeproj */;
 				},
 				{
-					ProductGroup = EC90CA2F21AF70AB001A7883 /* Products */;
-					ProjectRef = EC90CA2E21AF70AB001A7883 /* MHFoundation.xcodeproj */;
+					ProductGroup = EC98277823F2198500FF832B /* Products */;
+					ProjectRef = EC98277723F2198500FF832B /* MHFoundation.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -547,32 +553,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EC90CA3421AF70AB001A7883 /* MHFoundation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MHFoundation.framework;
-			remoteRef = EC90CA3321AF70AB001A7883 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EC90CA3621AF70AB001A7883 /* MHFoundationTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MHFoundationTests.xctest;
-			remoteRef = EC90CA3521AF70AB001A7883 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EC90CA3D21AF70AD001A7883 /* MCoreData.framework */ = {
+		EC98277423F2198400FF832B /* MCoreData.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = MCoreData.framework;
-			remoteRef = EC90CA3C21AF70AD001A7883 /* PBXContainerItemProxy */;
+			remoteRef = EC98277323F2198400FF832B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EC90CA3F21AF70AD001A7883 /* MCoreDataTests.xctest */ = {
+		EC98277623F2198400FF832B /* MCoreDataTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = MCoreDataTests.xctest;
-			remoteRef = EC90CA3E21AF70AD001A7883 /* PBXContainerItemProxy */;
+			remoteRef = EC98277523F2198400FF832B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC98277D23F2198500FF832B /* MHFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MHFoundation.framework;
+			remoteRef = EC98277C23F2198500FF832B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC98277F23F2198500FF832B /* MHFoundationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MHFoundationTests.xctest;
+			remoteRef = EC98277E23F2198500FF832B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -676,10 +682,15 @@
 			target = EC3145251D0740C70025F669 /* MUIKit */;
 			targetProxy = EC3145321D0740C80025F669 /* PBXContainerItemProxy */;
 		};
-		EC56BA0222AFE02600C6D57B /* PBXTargetDependency */ = {
+		EC98278123F219AD00FF832B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MCoreData;
-			targetProxy = EC56BA0122AFE02600C6D57B /* PBXContainerItemProxy */;
+			targetProxy = EC98278023F219AD00FF832B /* PBXContainerItemProxy */;
+		};
+		EC98278323F219AD00FF832B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MHFoundation;
+			targetProxy = EC98278223F219AD00FF832B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
