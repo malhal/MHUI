@@ -30,8 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (strong, nonatomic, readonly) NSManagedObject *selectedObject;
 
-
-
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 //@property (weak, nonatomic) id<NSFetchedResultsControllerDelegate> fetchedResultsDelegate;
@@ -54,11 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) id<MUIFetchedTableViewControllerDelegate> delegate;
 
-- (void)createFetchedResultsController;
+// removed this because its ok for it to be nil.
+//- (void)createFetchedResultsController;
 
 @end
 
-@protocol MUIFetchedTableViewControllerDelegate <NSObject>
+@protocol MUIFetchedTableViewControllerDelegate<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 @optional
 
 - (void)fetchedTableViewController:(MUIFetchedTableViewController *)fetchedTableViewController configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object;

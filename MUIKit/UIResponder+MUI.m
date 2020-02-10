@@ -19,5 +19,15 @@
     return (UIViewController *)responder;
 }
 
+//- (NSPersistentContainer *)mui_persistentContainer{
+//    NSPersistentContainer *result;
+//    if (self.nextResponder != nil){
+//        if ([self.nextResponder respondsToSelector:@selector(mui_persistentContainer)]){
+//            result = self.nextResponder.mui_persistentContainer;
+//        }
+//    }
+//    return result;
+//}
+
 @end
 

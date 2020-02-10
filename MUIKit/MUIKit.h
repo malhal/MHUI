@@ -22,6 +22,7 @@
 #import <MUIKit/MUIProgressViewController.h>
 #import <MUIKit/MUICompletionStoryboardSegue.h>
 #import <MUIKit/MUIMasterNavigationController.h>
+#import <MUIKit/MUIAnimationFixStoryboardSegue.h>
 
 #import <MUIKit/MUITableView.h>
 #import <MUIKit/MUIFetchedTableViewController.h>
@@ -29,9 +30,9 @@
 #import <MUIKit/MUIRootNavigationController.h>
 //#import <MUIKit/MUIDetailNavigationController.h>
 //#import <MUIKit/MUIFetchedTableViewControllerViewControllerSupport.h>
-#import <MUIKit/MUISplitViewController.h>
+#import <MUIKit/MUIBigSplitViewController.h>
 //#import <MUIKit/MUIDetailItemSplitter.h>
-#import <MUIKit/MUICollapseController.h>
+#import <MUIKit/MUIDetailViewManager.h>
 //#import <MUIKit/MUIObjectsTable.h>
 
 

@@ -13,8 +13,6 @@
 
 extern NSString * const MasterViewControllerStateRestorationDetailViewControllerKey;
 
-@protocol MUIDetail;
-
 // reason this is a subclass is so it has access to setEditing
 @interface MUIMasterViewController : UIViewController <UIDataSourceModelAssociation, NSFetchedResultsControllerDelegate, MUIFetchedTableViewControllerDelegate>
 
@@ -26,21 +24,27 @@ extern NSString * const MasterViewControllerStateRestorationDetailViewController
 // maybe it can cause we only want selected row when its showing.
 //@property (strong, nonatomic) UIViewController<MUIDetail> *detailViewController;
 
-@property (strong, nonatomic) NSPersistentContainer *persistentContainer;
+//@property (strong, nonatomic) NSPersistentContainer *persistentContainer;
 //@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext; // despite needing a master item it also needs this otherwise can fail when masterItem is deleted and has lost its context.
 
 @property (strong, nonatomic, readonly) __kindof NSManagedObject *selectedObject;
 
-- (instancetype)initWithCoder:(NSCoder *)coder persistentContainer:(NSPersistentContainer *)persistentContainer;
+//@property (weak, assign) id<> delegate;
 
-- (void)showDetailWithObject:(NSManagedObject *)object;
+// - (instancetype)initWithCoder:(NSCoder *)coder persistentContainer:(NSPersistentContainer *)persistentContainer;
 
-//@property (strong, nonatomic) NSManagedObject *detailViewControllerDetailItem;
+- (void)showViewControllerForObject:(NSManagedObject *)object;
+
+// @property (strong, nonatomic) NSManagedObject *detailViewControllerDetailItem;
+
+@property (strong, nonatomic) UISplitViewController *resolvedSplitViewController;
 
 @end
 
-@protocol MUIDetail <NSObject>
+@interface UIViewController (MUIMasterViewController)
 
-//@property (strong, nonatomic) NSManagedObject *detailItem;
+//- (id)mui_detailItemWithSender:(id)sender;
+//
+//- (void)mui_setDetailItem:(id)detailItem sender:(id)sender;
 
 @end

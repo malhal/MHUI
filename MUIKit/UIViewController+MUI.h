@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MUIKit/MUIDefines.h>
+#import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

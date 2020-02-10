@@ -90,16 +90,20 @@
 		EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */; };
 		ECAE233F1D90878500806031 /* UINavigationItem+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECAE23401D90878500806031 /* UINavigationItem+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */; };
-		ECBD8829218C7EC800F5E602 /* MUISplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */; };
-		ECBD882A218C7EC800F5E602 /* MUISplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECBD8829218C7EC800F5E602 /* MUIBigSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBD8827218C7EC800F5E602 /* MUIBigSplitViewController.m */; };
+		ECBD882A218C7EC800F5E602 /* MUIBigSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECBD8828218C7EC800F5E602 /* MUIBigSplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECC2CC3421B890970000C99C /* MUIFetchedTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECC2CC3221B890970000C99C /* MUIFetchedTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECC2CC3521B890970000C99C /* MUIFetchedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC2CC3321B890970000C99C /* MUIFetchedTableViewController.m */; };
 		ECCB758A22B2B273008F2064 /* MUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCB758522B2B273008F2064 /* MUITableView.m */; };
 		ECCB758B22B2B273008F2064 /* MUITableView.h in Headers */ = {isa = PBXBuildFile; fileRef = ECCB758922B2B273008F2064 /* MUITableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECD385ED21BC881E00BF2BCB /* UISplitViewController+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ECD385EB21BC881E00BF2BCB /* UISplitViewController+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ECD385EE21BC881E00BF2BCB /* UISplitViewController+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD385EC21BC881E00BF2BCB /* UISplitViewController+MUI.m */; };
-		ECD3862321C0752400BF2BCB /* MUICollapseController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3861E21C0752400BF2BCB /* MUICollapseController.m */; };
-		ECD3862421C0752400BF2BCB /* MUICollapseController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECD3862221C0752400BF2BCB /* MUICollapseController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECD3862321C0752400BF2BCB /* MUIDetailViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3861E21C0752400BF2BCB /* MUIDetailViewManager.m */; };
+		ECD3862421C0752400BF2BCB /* MUIDetailViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = ECD3862221C0752400BF2BCB /* MUIDetailViewManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECF90439238DD930002126DB /* MUISplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = ECF90437238DD930002126DB /* MUISplitViewController.h */; };
+		ECF9043A238DD930002126DB /* MUISplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF90438238DD930002126DB /* MUISplitViewController.m */; };
+		ECFA95D2238576470044D6C5 /* MUIAnimationFixStoryboardSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = ECFA95CD238576470044D6C5 /* MUIAnimationFixStoryboardSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECFA95D3238576470044D6C5 /* MUIAnimationFixStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ECFA95D1238576470044D6C5 /* MUIAnimationFixStoryboardSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,16 +224,20 @@
 		EC9A9CA020344F0900E5A698 /* UIImage+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MUI.m"; sourceTree = "<group>"; };
 		ECAE233D1D90878500806031 /* UINavigationItem+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MUI.h"; sourceTree = "<group>"; };
 		ECAE233E1D90878500806031 /* UINavigationItem+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MUI.m"; sourceTree = "<group>"; };
-		ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUISplitViewController.m; sourceTree = "<group>"; };
-		ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUISplitViewController.h; sourceTree = "<group>"; };
+		ECBD8827218C7EC800F5E602 /* MUIBigSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIBigSplitViewController.m; sourceTree = "<group>"; };
+		ECBD8828218C7EC800F5E602 /* MUIBigSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIBigSplitViewController.h; sourceTree = "<group>"; };
 		ECC2CC3221B890970000C99C /* MUIFetchedTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUIFetchedTableViewController.h; sourceTree = "<group>"; };
 		ECC2CC3321B890970000C99C /* MUIFetchedTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUIFetchedTableViewController.m; sourceTree = "<group>"; };
 		ECCB758522B2B273008F2064 /* MUITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUITableView.m; sourceTree = "<group>"; };
 		ECCB758922B2B273008F2064 /* MUITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUITableView.h; sourceTree = "<group>"; };
 		ECD385EB21BC881E00BF2BCB /* UISplitViewController+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+MUI.h"; sourceTree = "<group>"; };
 		ECD385EC21BC881E00BF2BCB /* UISplitViewController+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+MUI.m"; sourceTree = "<group>"; };
-		ECD3861E21C0752400BF2BCB /* MUICollapseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUICollapseController.m; sourceTree = "<group>"; };
-		ECD3862221C0752400BF2BCB /* MUICollapseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUICollapseController.h; sourceTree = "<group>"; };
+		ECD3861E21C0752400BF2BCB /* MUIDetailViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIDetailViewManager.m; sourceTree = "<group>"; };
+		ECD3862221C0752400BF2BCB /* MUIDetailViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIDetailViewManager.h; sourceTree = "<group>"; };
+		ECF90437238DD930002126DB /* MUISplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUISplitViewController.h; sourceTree = "<group>"; };
+		ECF90438238DD930002126DB /* MUISplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUISplitViewController.m; sourceTree = "<group>"; };
+		ECFA95CD238576470044D6C5 /* MUIAnimationFixStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIAnimationFixStoryboardSegue.h; sourceTree = "<group>"; };
+		ECFA95D1238576470044D6C5 /* MUIAnimationFixStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIAnimationFixStoryboardSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +297,8 @@
 				EC31452B1D0740C70025F669 /* Info.plist */,
 				EC3145291D0740C70025F669 /* MUIKit.h */,
 				EC76D6D71D9E42A5002DC0A0 /* MUIDefines.h */,
+				ECFA95CD238576470044D6C5 /* MUIAnimationFixStoryboardSegue.h */,
+				ECFA95D1238576470044D6C5 /* MUIAnimationFixStoryboardSegue.m */,
 				EC6758941DB0251E00838798 /* MUIEditableTableCell.h */,
 				EC6758951DB0251E00838798 /* MUIEditableTableCell.m */,
 				EC3E0E071DBA46C800D49472 /* MUIMultilineTableCell.h */,
@@ -301,11 +311,11 @@
 				EC998C90233E6E98008B10C2 /* MUIMasterViewController.m */,
 				ECC2CC3221B890970000C99C /* MUIFetchedTableViewController.h */,
 				ECC2CC3321B890970000C99C /* MUIFetchedTableViewController.m */,
-				ECD3862221C0752400BF2BCB /* MUICollapseController.h */,
-				ECD3861E21C0752400BF2BCB /* MUICollapseController.m */,
+				ECD3862221C0752400BF2BCB /* MUIDetailViewManager.h */,
+				ECD3861E21C0752400BF2BCB /* MUIDetailViewManager.m */,
 				EC90C9FC21AF53D9001A7883 /* MUITableViewCellObject.h */,
-				ECBD8828218C7EC800F5E602 /* MUISplitViewController.h */,
-				ECBD8827218C7EC800F5E602 /* MUISplitViewController.m */,
+				ECBD8828218C7EC800F5E602 /* MUIBigSplitViewController.h */,
+				ECBD8827218C7EC800F5E602 /* MUIBigSplitViewController.m */,
 				EC64A2D921E003A800CF90AA /* MUIRootNavigationController.h */,
 				EC64A2DD21E003A800CF90AA /* MUIRootNavigationController.m */,
 				EC6758901DB024AC00838798 /* MUIAccountViewController.h */,
@@ -361,6 +371,8 @@
 				EC34503E232BC63400B6136E /* UIResponder+MUI.m */,
 				EC395CE1233563E200B25139 /* MUICompletionStoryboardSegue.h */,
 				EC395CE2233563E200B25139 /* MUICompletionStoryboardSegue.m */,
+				ECF90437238DD930002126DB /* MUISplitViewController.h */,
+				ECF90438238DD930002126DB /* MUISplitViewController.m */,
 			);
 			path = MUIKit;
 			sourceTree = "<group>";
@@ -400,13 +412,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC72FF45232BFE21009D4048 /* UIBarButtonItem+MUI.h in Headers */,
+				ECFA95D2238576470044D6C5 /* MUIAnimationFixStoryboardSegue.h in Headers */,
 				ECC2CC3421B890970000C99C /* MUIFetchedTableViewController.h in Headers */,
 				EC3145521D0740EA0025F669 /* UINavigationBar+MUI.h in Headers */,
 				EC53896C22C6B01C00EACD40 /* UINavigationController+MUI.h in Headers */,
 				EC76D6D81D9E431B002DC0A0 /* MUIDefines.h in Headers */,
-				ECBD882A218C7EC800F5E602 /* MUISplitViewController.h in Headers */,
+				ECBD882A218C7EC800F5E602 /* MUIBigSplitViewController.h in Headers */,
 				EC1E129C201299290036130D /* UITableViewCell+MUI.h in Headers */,
-				ECD3862421C0752400BF2BCB /* MUICollapseController.h in Headers */,
+				ECD3862421C0752400BF2BCB /* MUIDetailViewManager.h in Headers */,
 				EC1B8FDD236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h in Headers */,
 				ECD385ED21BC881E00BF2BCB /* UISplitViewController+MUI.h in Headers */,
 				EC34503F232BC63400B6136E /* UIResponder+MUI.h in Headers */,
@@ -418,6 +431,7 @@
 				EC31452A1D0740C70025F669 /* MUIKit.h in Headers */,
 				EC1E12A82012A60C0036130D /* UITableView+MUI.h in Headers */,
 				ECCB758B22B2B273008F2064 /* MUITableView.h in Headers */,
+				ECF90439238DD930002126DB /* MUISplitViewController.h in Headers */,
 				EC76D6E81D9E4470002DC0A0 /* UIViewController+MUI.h in Headers */,
 				EC0A2BCB1FA67FD400F3CA25 /* MUILongRunningTaskController.h in Headers */,
 				EC6758961DB0251E00838798 /* MUIEditableTableCell.h in Headers */,
@@ -608,7 +622,7 @@
 			files = (
 				EC5D1C891F75C2F0008BC02E /* MUIAlertController.m in Sources */,
 				EC6758931DB024AC00838798 /* MUIAccountViewController.m in Sources */,
-				ECBD8829218C7EC800F5E602 /* MUISplitViewController.m in Sources */,
+				ECBD8829218C7EC800F5E602 /* MUIBigSplitViewController.m in Sources */,
 				EC6758971DB0251E00838798 /* MUIEditableTableCell.m in Sources */,
 				EC3145531D0740EA0025F669 /* UINavigationBar+MUI.m in Sources */,
 				EC3145551D0740EA0025F669 /* UITabBar+MUI.m in Sources */,
@@ -619,6 +633,7 @@
 				EC6758A81DB02C1F00838798 /* UIAlertView+MUI.m in Sources */,
 				EC596B17218A4433000B5302 /* UIViewController+MUIShowing.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MUI.m in Sources */,
+				ECFA95D3238576470044D6C5 /* MUIAnimationFixStoryboardSegue.m in Sources */,
 				EC72FF44232BFE21009D4048 /* UIBarButtonItem+MUI.m in Sources */,
 				EC5D1C911F75C4B0008BC02E /* MUIProgressViewController.m in Sources */,
 				EC76D6E91D9E4470002DC0A0 /* UIViewController+MUI.m in Sources */,
@@ -635,12 +650,13 @@
 				EC5D1C8D1F75C451008BC02E /* MUILongRunningTaskController.m in Sources */,
 				EC1F4BAE23461F4C0067FCCD /* MUIMasterNavigationController.m in Sources */,
 				EC31454D1D0740EA0025F669 /* MUIDictionaryViewController.m in Sources */,
-				ECD3862321C0752400BF2BCB /* MUICollapseController.m in Sources */,
+				ECD3862321C0752400BF2BCB /* MUIDetailViewManager.m in Sources */,
 				EC76D6E31D9E4442002DC0A0 /* MUILogInViewController.m in Sources */,
 				EC31454F1D0740EA0025F669 /* MUIFlipController.m in Sources */,
 				EC2F7E36200D8455001B9D3B /* UITextField+MUI.m in Sources */,
 				ECD385EE21BC881E00BF2BCB /* UISplitViewController+MUI.m in Sources */,
 				EC08B97E22E660E1009BA3F3 /* UINavigationController+MUI.m in Sources */,
+				ECF9043A238DD930002126DB /* MUISplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,9 @@
 //
 
 #import "UISplitViewController+MUI.h"
+#import <objc/runtime.h>
+
+NSString * const MUIViewControllerDetailItemDidChange = @"MUIViewControllerDetailItemDidChange";
 
 @implementation UISplitViewController (MUI)
 
@@ -21,5 +24,14 @@
 - (UINavigationController *)mui_secondaryNavigationController{
     return MHFDynamicCast(UINavigationController.class, self.mui_secondaryViewController);
 }
+
+//- (id)mui_detailItem{
+//    return objc_getAssociatedObject(self, @selector(mui_detailItem));
+//}
+//
+//- (void)mui_setDetailItem:(id)detailItem {
+//    objc_setAssociatedObject(self, @selector(mui_detailItem), detailItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//    [NSNotificationCenter.defaultCenter postNotificationName:MUIViewControllerDetailItemDidChange object:self userInfo:nil];
+//}
 
 @end

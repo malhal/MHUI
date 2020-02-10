@@ -1,18 +1,19 @@
 //
-//  MUICollapseController.m
+//  MUIDetailViewManager.m
 //  RootMUIMasterDetail
 //
 //  Created by Malcolm Hall on 10/12/2018.
 //  Copyright © 2018 Malcolm Hall. All rights reserved.
 //
-// MUISplitCollapseController or MUICollapseController
+// MUISplitCollapseController or MUIDetailViewManager
 
-#import "MUICollapseController.h"
+#import "MUIDetailViewManager.h"
 #import <objc/runtime.h>
 #import "UIViewController+MUI.h"
 #import <objc/runtime.h>
-#import "MUISplitViewController.h"
 #import "UIViewController+MUIDetailItem.h"
+
+NSString * const MUIDetailViewManagerWillShowDetailViewControllerNotification = @"MUIDetailViewManagerWillShowDetailViewControllerNotification";
 
 @interface UISplitViewController ()
 
@@ -20,12 +21,14 @@
 
 //@property (strong, nonatomic, readwrite, setter=mui_setDetailViewController:) UIViewController *mui_detailViewController;
 
+@property (weak, nonatomic, readwrite, setter=mui_setCollapseController:) MUIDetailViewManager *mui_detailViewManager;
+
 @end
 
 @interface UIViewController ()
 
-//@property (weak, nonatomic, readwrite, setter=mui_setCollapseControllerForMaster:) MUICollapseController *mui_collapseControllerForMaster;
-//@property (weak, nonatomic, readwrite, setter=mui_setCollapseControllerForDetail:) MUICollapseController *mui_collapseControllerForDetail;
+//@property (weak, nonatomic, readwrite, setter=mui_setCollapseControllerForMaster:) MUIDetailViewManager *mui_detailViewManagerForMaster;
+//@property (weak, nonatomic, readwrite, setter=mui_setCollapseControllerForDetail:) MUIDetailViewManager *mui_detailViewManagerForDetail;
 
 @end
 
@@ -33,7 +36,13 @@
 //
 //@end
 
-@implementation MUICollapseController
+@interface MUIDetailViewManager()
+
+@property (strong, nonatomic, readwrite) UIViewController *detailViewController;
+
+@end
+
+@implementation MUIDetailViewManager
 
 //- (id<UIStateRestoring>)restorationParent{
 //    return self.splitViewController;
@@ -49,14 +58,15 @@
 //  //  self.detailItem = [coder decodeObjectForKey:@"DetailItem"];
 //}
 
-
 - (instancetype)initWithSplitViewController:(UISplitViewController *)splitViewController{
     self = [super init];
     if (self) {
         //NSAssert([splitViewController.viewControllers.firstObject isKindOfClass:MUIRootNavigationController.class], @"Primary must be instance of MUIRootNavigationController");
         splitViewController.delegate = self;
+        splitViewController.mui_detailViewManager = self;
         _splitViewController = splitViewController;
         NSAssert(splitViewController.viewControllers.count == 2, @"splitViewController must have 2 child view controllers");
+        _detailViewController = splitViewController.viewControllers.lastObject;
         //splitViewController.mui_currentSplitDetailItem = splitViewController.viewControllers[1].mui_splitDetailItem;
        // splitViewController.mui_detailViewController = splitViewController.viewControllers[1];
     }
@@ -65,9 +75,15 @@
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController showDetailViewController:(UIViewController *)vc sender:(id)sender{
     //splitViewController.mui_currentSplitDetailItem = vc.mui_splitDetailItem;
-    //splitViewController.mui_detailViewController = vc;
+    self.detailViewController = vc;
+    [NSNotificationCenter.defaultCenter postNotificationName:MUIDetailViewManagerWillShowDetailViewControllerNotification object:self];
     return NO;
 }
+
+// not called from showDetail
+//- (BOOL)splitViewController:(UISplitViewController *)splitViewController showViewController:(UIViewController *)vc sender:(id)sender{
+//    return NO;
+//}
 
 // we throw away detail if not on the master or the master does not contain the current detail item.
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
@@ -75,10 +91,8 @@
 //        return NO;
 //    }
 //    return YES;
-    
-    
     //return NO;
-    id object = secondaryViewController.mui_detailItem;
+    id object = secondaryViewController.mui_containedDetailItem;
     if (!object) {
         // If our secondary controller doesn't show a photo, do the collapse ourself by doing nothing
         return YES;
@@ -98,7 +112,7 @@
         
         //if(pcn.viewControllers.lastObject.aapl_containedPhoto == photo)
         
-    else if(![primaryViewController mui_canSelectDetailItem:object]){
+    else if(![primaryViewController mui_containsDetailItem:object]){
         return YES;
     }
         
@@ -123,22 +137,18 @@
 
 @end
 
-@implementation UIViewController (MUICollapseController)
+@implementation UIViewController (MUIDetailViewManager)
 
 @end
 
-@implementation UISplitViewController (MUICollapseController)
+@implementation UISplitViewController (MUIDetailViewManager)
 
+- (MUIDetailViewManager *)mui_detailViewManager{
+    return objc_getAssociatedObject(self, @selector(mui_detailViewManager));
+}
 
-
-//- (UIViewController *)mui_detailViewController{
-//    return objc_getAssociatedObject(self, @selector(mui_detailViewController));
-//}
-//
-//- (void)mui_setDetailViewController:(UIViewController *)detailViewController {
-//    objc_setAssociatedObject(self, @selector(mui_detailViewController), detailViewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-//}
-
-
+- (void)mui_setCollapseController:(MUIDetailViewManager *)detailViewManager {
+    objc_setAssociatedObject(self, @selector(mui_detailViewManager), detailViewManager, OBJC_ASSOCIATION_ASSIGN);
+}
 
 @end

@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Returns whether calling showDetailViewController:sender: would cause a navigation "push" to occur
 - (BOOL)mui_willShowingDetailViewControllerPushWithSender:(id)sender;
 
+- (BOOL)mui_willShowingDetailDetailViewControllerPushWithSender:(id)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

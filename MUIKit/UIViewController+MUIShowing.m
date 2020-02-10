@@ -34,6 +34,18 @@
     }
 }
 
+- (BOOL)mui_willShowingDetailDetailViewControllerPushWithSender:(id)sender
+{
+    // Find and ask the right view controller about showing detail
+    UIViewController *target = [self targetViewControllerForAction:@selector(mui_willShowingDetailDetailViewControllerPushWithSender:) sender:sender];
+    if (target) {
+        return [target mui_willShowingDetailDetailViewControllerPushWithSender:sender];
+    } else {
+        // Or if we can't find one, we won't be pushing
+        return NO;
+    }
+}
+
 @end
 
 @implementation UINavigationController (MUIShowing)
@@ -58,7 +70,7 @@
 {
     if (self.collapsed) {
         // If we're collapsed, re-ask this question as showViewController: to our primary view controller
-        UIViewController *target = self.viewControllers.lastObject;
+        UIViewController *target = self.viewControllers.firstObject;
         return [target mui_willShowingViewControllerPushWithSender:sender];
     } else {
         // Otherwise, we don't push for showDetailViewController:
