@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const MUIViewControllerDetailItemDidChange;
+extern NSString * const MUISplitViewControllerDidChangeSplitItem;
 
 @interface UISplitViewController (MUI)
 
@@ -21,6 +21,8 @@ extern NSString * const MUIViewControllerDetailItemDidChange;
 @property (strong, nonatomic, nullable, readonly) UINavigationController *mui_secondaryNavigationController;
 
 //@property (strong, nonatomic, nullable, setter=mui_setDetailItem:) id mui_containedDetailItem;
+
+
 
 @end
 
