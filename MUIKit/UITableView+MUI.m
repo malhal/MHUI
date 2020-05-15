@@ -44,4 +44,17 @@
     return [self indexPathsForRowsInRect:self.safeAreaLayoutGuide.layoutFrame];
 }
 
+- (NSArray<UITableViewCell *> *)mui_selectedVisibleCells{
+    return [self.visibleCells filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"selected = YES"]];
+}
+
+- (UITableViewCell *)mui_visibleCellAncestorOfView:(UIView *)view{
+    for(UITableViewCell *visibleCell in self.visibleCells){
+        if([view isDescendantOfView:visibleCell]){
+            return visibleCell;
+        }
+    }
+    return nil;
+}
+
 @end

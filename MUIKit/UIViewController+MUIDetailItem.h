@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //- (UIBarButtonItem *)mui_currentDisplayModeButtonItemWithSender:(id)sender;
 
+- (UIViewController *)mui_currentVisibleDetailViewControllerWithSender:(id)sender;
+
 @end
 
 @interface UISplitViewController (MUIDetailItem)

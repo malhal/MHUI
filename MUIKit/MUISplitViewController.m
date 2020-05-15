@@ -42,7 +42,7 @@ NSString * const UIViewControllerCurrentDetailModelIdentifierDidChangeNotificati
 }
 
 - (void)commonInit{
-    //self.childViewControllers.lastObject.showingDetailSplitViewController = self;
+    //self.childViewControllers.lastObject.showingTabSplitViewController = self;
     NSAssert(self.childViewControllers.count == 2, @"Needs 2 children");
     UIViewController *vc = self.childViewControllers.lastObject;
     //vc.mui_detailShowingViewController = self;
@@ -105,7 +105,7 @@ NSString * const UIViewControllerCurrentDetailModelIdentifierDidChangeNotificati
     }
     objc_setAssociatedObject(self, @selector(mui_detailShowingViewController), svc, OBJC_ASSOCIATION_ASSIGN);
     //[svc mui_viewControllerUpdatedDetailModelIdentifier:self];
-   // [self.showingDetailSplitViewController viewControllerUpdatedDetailModelIdentifier:splitItem];
+   // [self.showingTabSplitViewController viewControllerUpdatedDetailModelIdentifier:splitItem];
     //[self didChangeValueForKey:kSplitItemKeyPath];
     //[NSNotificationCenter.defaultCenter postNotificationName:MUISplitViewControllerDidChangeSplitItem object:self userInfo:nil];
 }
@@ -117,7 +117,7 @@ NSString * const UIViewControllerCurrentDetailModelIdentifierDidChangeNotificati
     //[self willChangeValueForKey:kSplitItemKeyPath];
     objc_setAssociatedObject(self, @selector(mui_detailModelIdentifier), identifier, OBJC_ASSOCIATION_COPY_NONATOMIC);
     [self.mui_detailShowingViewController mui_viewControllerUpdatedDetailModelIdentifier:self]; // does nothing if not shownDetail yet
-   // [self.showingDetailSplitViewController viewControllerUpdatedDetailModelIdentifier:splitItem];
+   // [self.showingTabSplitViewController viewControllerUpdatedDetailModelIdentifier:splitItem];
     //[self didChangeValueForKey:kSplitItemKeyPath];
     //[NSNotificationCenter.defaultCenter postNotificationName:MUISplitViewControllerDidChangeSplitItem object:self userInfo:nil];
 }

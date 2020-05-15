@@ -8,38 +8,37 @@
 #import <MCoreData/MCoreData.h>
 #import <MHFoundation/MHFoundation.h>
 #import <UIKit/UIKit.h>
-//#import <MUIKit/MUIDefines.h>
-//#import <MUIKit/MUIFetchedDataSource.h>
-#import <MUIKit/MUITableViewController.h>
-//#import <MUIKit/MUIDataSource.h>
-//#import <MUIKit/MUIMasterTable.h>
+#import <MUIKit/MUIDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 //extern NSString * const MUIFetchedTableViewControllerSelectedObjectDidUpdateNotification;
 
 @protocol MUIFetchedTableViewControllerDelegate;
+@class MUIFetchedTableDataSource;
 
 // only put table stuff in here
-@interface MUIFetchedTableViewController<ResultType:id<NSFetchRequestResult>> : MUITableViewController <NSFetchedResultsControllerDelegate, UIDataSourceModelAssociation>{
-    //@protected
-    //NSFetchedResultsController *_fetchedResultsController;
-}
+@interface MUIFetchedTableViewController<ResultType:NSManagedObject *> : UITableViewController <NSFetchedResultsControllerDelegate> // UIDataSourceModelAssociation
 
-//- (instancetype)initWithTableViewController:(UITableViewController *)tableViewController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-//@property (strong, nonatomic, readonly) NSManagedObject *selectedObject;
+//@property (strong, nonatomic, nullable) NSFetchedResultsController<ResultType> *fetchedResultsController;
 
-@property (strong, nonatomic) NSFetchedResultsController<ResultType> *fetchedResultsController;
+//@property (strong, nonatomic, readonly) NSArray<ResultType> *fetchedObjects;
 
-//@property (weak, nonatomic) id<NSFetchedResultsControllerDelegate> fetchedResultsDelegate;
-
-//@property (weak, nonatomic, readonly) UITableViewController *tableViewController;
+@property (strong, nonatomic, nullable) MUIFetchedTableDataSource *fetchedTableDataSource;
 
 // the default implementation sets the accessory depending on push.
 - (void)configureCell:(UITableViewCell *)cell withObject:(ResultType)object;
 
-//- (void)selectObject:(id)object;
+- (void)selectObject:(NSManagedObject *)object;
+- (void)deselectObject:(NSManagedObject *)object;
+
+@property (strong, nonatomic) ResultType selectedObject;
+
+- (void)configureView;
+
+- (void)fetchAndReload;
 
 // calls tableViewDidEndEditing after the animations end, so table rows can be reselected.
 //- (void)setEditing:(BOOL)editing animated:(BOOL)animated NS_REQUIRES_SUPER;
@@ -55,11 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 // removed this because its ok for it to be nil.
 //- (void)createFetchedResultsController;
 
+- (ResultType)objectAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 @protocol MUIFetchedTableViewControllerDelegate<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 @optional
-
 - (void)fetchedTableViewController:(MUIFetchedTableViewController *)fetchedTableViewController configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object;
 
 @end

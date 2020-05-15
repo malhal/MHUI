@@ -25,8 +25,9 @@
 #import <MUIKit/MUIAnimationFixStoryboardSegue.h>
 
 #import <MUIKit/MUITableView.h>
-#import <MUIKit/MUITableViewController.h>
+#import <MUIKit/MUIMasterTableViewController.h>
 #import <MUIKit/MUIFetchedTableViewController.h>
+#import <MUIKit/MUIFetchedTableDataSource.h>
 #import <MUIKit/MUIRootNavigationController.h>
 //#import <MUIKit/MUIDetailNavigationController.h>
 //#import <MUIKit/MUIFetchedTableViewControllerViewControllerSupport.h>
@@ -35,11 +36,14 @@
 #import <MUIKit/MUIDetailViewManager.h>
 //#import <MUIKit/MUIObjectsTable.h>
 #import <MUIKit/MUISplitViewController.h>
-#import <MUIKit/MUIDetailNavigationController.h>
-#import <MUIKit/MUIFetchedDetailNavigationController.h>
+//#import <MUIKit/MUIDetailNavigationController.h>
+//#import <MUIKit/MUIFetchedDetailNavigationController.h>
 
 //#import <MUIKit/MUIFetchedTableRowsController.h>
 //#import <MUIKit/MUIFetchedTableViewControllerSelectionController.h>
+#import <MUIKit/MUIFetchedPageViewController.h>
+#import <MUIKit/MUIFetchedPageContainerDataSource.h>
+//#import <MUIKit/MUIFetchedPageViewControllerDelegate.h>
 
 #import <MUIKit/UIAlertController+MUI.h>
 #import <MUIKit/UINavigationBar+MUI.h>
@@ -60,6 +64,9 @@
 
 #import <MUIKit/UISplitViewController+MUI.h>
 #import <MUIKit/UINavigationController+MUI.h>
+
+
+
 
 //#import <MUIKit/MUIFetchedTableViewController.h>
 
