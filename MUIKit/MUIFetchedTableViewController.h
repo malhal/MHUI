@@ -8,9 +8,9 @@
 #import <MCoreData/MCoreData.h>
 #import <MHFoundation/MHFoundation.h>
 #import <UIKit/UIKit.h>
-#import <MUIKit/MUIDefines.h>
+//#import <MUIKit/MUIDefines.h>
 //#import <MUIKit/MUIFetchedDataSource.h>
-#import <MUIKit/MUITableView.h>
+#import <MUIKit/MUITableViewController.h>
 //#import <MUIKit/MUIDataSource.h>
 //#import <MUIKit/MUIMasterTable.h>
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MUIFetchedTableViewControllerDelegate;
 
 // only put table stuff in here
-@interface MUIFetchedTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIDataSourceModelAssociation>{
+@interface MUIFetchedTableViewController<ResultType:id<NSFetchRequestResult>> : MUITableViewController <NSFetchedResultsControllerDelegate, UIDataSourceModelAssociation>{
     //@protected
     //NSFetchedResultsController *_fetchedResultsController;
 }
@@ -30,14 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (strong, nonatomic, readonly) NSManagedObject *selectedObject;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSFetchedResultsController<ResultType> *fetchedResultsController;
 
 //@property (weak, nonatomic) id<NSFetchedResultsControllerDelegate> fetchedResultsDelegate;
 
 //@property (weak, nonatomic, readonly) UITableViewController *tableViewController;
 
 // the default implementation sets the accessory depending on push.
-- (void)configureCell:(UITableViewCell *)cell withObject:(NSManagedObject *)object;
+- (void)configureCell:(UITableViewCell *)cell withObject:(ResultType)object;
 
 //- (void)selectObject:(id)object;
 

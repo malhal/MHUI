@@ -25,8 +25,8 @@
 #import <MUIKit/MUIAnimationFixStoryboardSegue.h>
 
 #import <MUIKit/MUITableView.h>
+#import <MUIKit/MUITableViewController.h>
 #import <MUIKit/MUIFetchedTableViewController.h>
-#import <MUIKit/MUIMasterViewController.h>
 #import <MUIKit/MUIRootNavigationController.h>
 //#import <MUIKit/MUIDetailNavigationController.h>
 //#import <MUIKit/MUIFetchedTableViewControllerViewControllerSupport.h>
@@ -34,7 +34,9 @@
 //#import <MUIKit/MUIDetailItemSplitter.h>
 #import <MUIKit/MUIDetailViewManager.h>
 //#import <MUIKit/MUIObjectsTable.h>
-
+#import <MUIKit/MUISplitViewController.h>
+#import <MUIKit/MUIDetailNavigationController.h>
+#import <MUIKit/MUIFetchedDetailNavigationController.h>
 
 //#import <MUIKit/MUIFetchedTableRowsController.h>
 //#import <MUIKit/MUIFetchedTableViewControllerSelectionController.h>
@@ -54,6 +56,7 @@
 #import <MUIKit/UIImage+MUI.h>
 #import <MUIKit/UIBarButtonItem+MUI.h>
 #import <MUIKit/UIResponder+MUI.h>
+#import <MUIKit/UITableViewController+MUI.h>
 
 #import <MUIKit/UISplitViewController+MUI.h>
 #import <MUIKit/UINavigationController+MUI.h>

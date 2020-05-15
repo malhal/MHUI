@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MUISplitItem;
 
 @protocol MUIViewControllerHierarchy <NSObject>
 
@@ -51,6 +52,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIViewController *)mui_ancestorViewControllerOfClass:(Class)aClass allowModalParent:(bool)allowModalParent;
 
 - (UIViewController *)mui_childContainingSender:(id)sender;
+
+
+
+
 
 @end
 

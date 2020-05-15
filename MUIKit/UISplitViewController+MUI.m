@@ -9,7 +9,13 @@
 #import "UISplitViewController+MUI.h"
 #import <objc/runtime.h>
 
-NSString * const MUIViewControllerDetailItemDidChange = @"MUIViewControllerDetailItemDidChange";
+NSString * const MUISplitViewControllerDidChangeSplitItem = @"MUISplitViewControllerDidChangeSplitItem";
+
+@interface UISplitViewController (MUI)
+
+
+
+@end
 
 @implementation UISplitViewController (MUI)
 
@@ -33,5 +39,7 @@ NSString * const MUIViewControllerDetailItemDidChange = @"MUIViewControllerDetai
 //    objc_setAssociatedObject(self, @selector(mui_detailItem), detailItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 //    [NSNotificationCenter.defaultCenter postNotificationName:MUIViewControllerDetailItemDidChange object:self userInfo:nil];
 //}
+
+
 
 @end

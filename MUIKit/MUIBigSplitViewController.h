@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIViewController (MUISplitViewController)
+@interface UIViewController (MUIBigSplitViewController)
 
 @property (strong, nonatomic, readonly) MUIBigSplitViewController *mui_bigSplitViewController;
 

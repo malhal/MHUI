@@ -15,6 +15,7 @@
 #import "UINavigationController+MUI.h"
 #import <objc/runtime.h>
 #import <QuartzCore/QuartzCore.h>
+#import "UITableViewController+MUI.h"
 
 //NSString * const MUIFetchedTableViewControllerSelectedObjectDidUpdateNotification = @"MUIFetchedTableViewControllerSelectedObjectDidUpdateNotification";
 
@@ -25,11 +26,11 @@
 
 //@property (strong, nonatomic) NSBlockOperation *tableUpdates;
 
-@property (assign, nonatomic) BOOL didBeginUpdatingFromFetchedResultsController;
-@property (assign, nonatomic) BOOL wasDisplayed;
-@property (assign, nonatomic) BOOL needsTableViewUpdates;
-@property (assign, nonatomic) BOOL tableViewBeginUpdatesWasCalled;
-@property (assign, nonatomic) BOOL reloadTableOnNextAppear;
+//@property (assign, nonatomic) BOOL didBeginUpdatingFromFetchedResultsController;
+//@property (assign, nonatomic) BOOL wasDisplayed;
+//@property (assign, nonatomic) BOOL needsTableViewUpdates;
+//@property (assign, nonatomic) BOOL tableViewBeginUpdatesWasCalled;
+//@property (assign, nonatomic) BOOL reloadTableOnNextAppear;
 @property (assign, nonatomic) BOOL isEditingRow;
 //@property (strong, nonatomic) UIViewController *shownViewController;
 
@@ -218,28 +219,29 @@
 //}
 
 - (void)viewWillAppear:(BOOL)animated{
-    if(self.reloadTableOnNextAppear){
-        // can't reselect because selection has probably changed.
-       UITableView *tableView = self.tableView;
-        NSIndexPath *ip = [tableView indexPathForSelectedRow];
-        [tableView reloadData];
-        [tableView selectRowAtIndexPath:ip animated:NO scrollPosition:UITableViewScrollPositionNone];
-//
-        id <UIViewControllerTransitionCoordinator> transitionCoordinator;
-        if((transitionCoordinator = self.transitionCoordinator)){
-            [transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-                UITableViewCell *cell = [tableView cellForRowAtIndexPath:ip];
-                if(cell){   
-                    [cell setNeedsLayout];
-                }
-                else{
-                    [tableView setNeedsLayout];
-                }
-            } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-            }];
-        }
-        self.reloadTableOnNextAppear = NO;
-    }
+    [self configureTableViewForFetchedResultsController];
+//    if(self.reloadTableOnNextAppear){
+//        // can't reselect because selection has probably changed.
+//       UITableView *tableView = self.tableView;
+//        NSIndexPath *ip = [tableView indexPathForSelectedRow];
+//        [tableView reloadData];
+//        [tableView selectRowAtIndexPath:ip animated:NO scrollPosition:UITableViewScrollPositionNone];
+////
+//        id <UIViewControllerTransitionCoordinator> transitionCoordinator;
+//        if((transitionCoordinator = self.transitionCoordinator)){
+//            [transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+//                UITableViewCell *cell = [tableView cellForRowAtIndexPath:ip];
+//                if(cell){
+//                    [cell setNeedsLayout];
+//                }
+//                else{
+//                    [tableView setNeedsLayout];
+//                }
+//            } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+//            }];
+//        }
+//        self.reloadTableOnNextAppear = NO;
+//    }
     [super viewWillAppear:animated]; // table first load
   //  [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil]; // prevent adding twice.
     //[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showDetailTargetDidChange:) name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
@@ -252,10 +254,11 @@
     //[self.managedObjectContext processPendingChanges];
 //}
 
-//- (void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:animated];
-//   // [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
-//}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+   // [NSNotificationCenter.defaultCenter removeObserver:self name:UIViewControllerShowDetailTargetDidChangeNotification object:nil];
+    self.fetchedResultsController.delegate = nil;
+}
 
 //- (NSFetchedResultsController *)fetchedResultsController{
 //    if(!_fetchedResultsController){
@@ -273,30 +276,39 @@
     if(fetchedResultsController == _fetchedResultsController){
         return;
     }
-    else if(_fetchedResultsController && _fetchedResultsController.delegate == self){
+    else if(_fetchedResultsController.delegate == self){
         _fetchedResultsController.delegate = nil;
     }
     _fetchedResultsController = fetchedResultsController;
-    if(!fetchedResultsController.delegate){
-        fetchedResultsController.delegate = self;
-    }
-   // self.tableView.delegate = self;
-   // self.tableView.dataSource = self;
-   // if(self.mui_isViewVisible){
-        //[self.tableView reloadData];
-      //  [self updateViewForFetchedResultsController];
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    if(self.mui_isViewVisible){
+//        [self.tableView reloadData];
+//        [self configureTableViewForFetchedResultsController];
 //        if(self.tableView.window){
 //            [self.tableView reloadData];
 //            [self updateTableViewForSelectedObject];
 //        }
-    //}
-    if(self.isViewLoaded){
-        [self updateViewForFetchedResultsController];
+//    }
+    if(self.mui_isViewVisible){
+        [self configureTableViewForFetchedResultsController];
     }
 }
 
-- (void)updateViewForFetchedResultsController{
-    self.tableView.separatorStyle = self.fetchedResultsController ? UITableViewCellSeparatorStyleSingleLine : UITableViewCellSeparatorStyleNone;
+- (void)configureTableViewForFetchedResultsController{
+    UITableViewCellSeparatorStyle separatorStyle = UITableViewCellSeparatorStyleNone;
+    NSFetchedResultsController *fetchedResultsController = self.fetchedResultsController;
+    if(fetchedResultsController){
+        fetchedResultsController.delegate = self;
+        NSError *error;
+        if(![fetchedResultsController performFetch:&error]){
+            NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+            abort();
+        }
+        separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    self.tableView.separatorStyle = separatorStyle;
+    [self.tableView reloadData];
   //  [self.tableView reloadData];
   //  [self.tableView layoutIfNeeded];
   //  [self updateTableViewForSelectedObjectIfNecessary];
@@ -407,8 +419,9 @@
 #pragma mark - Fetched results controller
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    self.didBeginUpdatingFromFetchedResultsController = YES;
-    self.wasDisplayed = self.mui_isViewVisible;
+    //self.didBeginUpdatingFromFetchedResultsController = YES;
+    //self.wasDisplayed = self.mui_isViewVisible;
+    self.sectionsCountChanged = NO;
 //    [self.tableViewIfVisible beginUpdates];
  //   self.tableUpdates = [NSBlockOperation.alloc init];
 //    if([self.fetchedResultsDelegate respondsToSelector:@selector(controllerWillChangeContent:)]){
@@ -443,17 +456,18 @@
 
     
     UITableView *tableView = self.tableView;
+    [tableView beginUpdates];
     //if(type != NSFetchedResultsChangeUpdate){
-    if(!self.wasDisplayed){
-        self.needsTableViewUpdates = YES;
+//    if(!self.wasDisplayed){
+//        self.needsTableViewUpdates = YES;
 //        return;
-    }
-    else
-    {
-        if(!self.tableViewBeginUpdatesWasCalled){
-            [tableView beginUpdates];
-            self.tableViewBeginUpdatesWasCalled = YES;
-        }
+//    }
+//    else
+//    {
+//        if(!self.tableViewBeginUpdatesWasCalled){
+//            [tableView beginUpdates];
+//            self.tableViewBeginUpdatesWasCalled = YES;
+//        }
     //}
         switch(type) {
             case NSFetchedResultsChangeInsert:
@@ -484,24 +498,25 @@
             }
         }
     }
-    if([self.delegate respondsToSelector:_cmd]){
-        [self.delegate controller:controller didChangeObject:object atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
-    }
-}
+//    if([self.delegate respondsToSelector:_cmd]){
+//        [self.delegate controller:controller didChangeObject:object atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
+//    }
+
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if(self.tableViewBeginUpdatesWasCalled){
-        [self.tableView endUpdates];
-        self.tableViewBeginUpdatesWasCalled = NO;
-    }
-    self.sectionsCountChanged = NO;
+     [self.tableView endUpdates];
+//    if(self.tableViewBeginUpdatesWasCalled){
+//        [self.tableView endUpdates];
+//        self.tableViewBeginUpdatesWasCalled = NO;
+//    }
     
-    if(self.needsTableViewUpdates){
-        self.reloadTableOnNextAppear = YES;
-        self.needsTableViewUpdates = NO; // think this is to do with the item changing while
-    }
     
-    self.didBeginUpdatingFromFetchedResultsController = NO;
+//    if(self.needsTableViewUpdates){
+//        self.reloadTableOnNextAppear = YES;
+//        self.needsTableViewUpdates = NO; // think this is to do with the item changing while
+//    }
+//
+  //  self.didBeginUpdatingFromFetchedResultsController = NO;
     
     if([self.delegate respondsToSelector:_cmd]){
         [self.delegate controllerDidChangeContent:controller];
