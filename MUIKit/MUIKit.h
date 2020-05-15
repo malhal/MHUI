@@ -62,3 +62,7 @@
 #import <MUIKit/UINavigationController+MUI.h>
 
 //#import <MUIKit/MUIFetchedTableViewController.h>
+
+#import <MUIKit/MUIExternalWebActivity.h>
+#import <MUIKit/MUIFullerWebViewController.h>
+#import <MUIKit/UIDevice+MUI.h>

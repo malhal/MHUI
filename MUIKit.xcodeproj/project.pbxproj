@@ -34,6 +34,13 @@
 		EC3145551D0740EA0025F669 /* UITabBar+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3145491D0740EA0025F669 /* UITabBar+MUI.m */; };
 		EC3145561D0740EA0025F669 /* UIView+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31454A1D0740EA0025F669 /* UIView+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC3145571D0740EA0025F669 /* UIView+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31454B1D0740EA0025F669 /* UIView+MUI.m */; };
+		EC31CCD8246EAE1100DCFF05 /* MUIFullerWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31CCD4246EAE1100DCFF05 /* MUIFullerWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC31CCD9246EAE1100DCFF05 /* MUIExternalWebActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31CCD5246EAE1100DCFF05 /* MUIExternalWebActivity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC31CCDA246EAE1100DCFF05 /* MUIExternalWebActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31CCD6246EAE1100DCFF05 /* MUIExternalWebActivity.m */; };
+		EC31CCDB246EAE1100DCFF05 /* MUIFullerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31CCD7246EAE1100DCFF05 /* MUIFullerWebViewController.m */; };
+		EC31CCDD246EAF2200DCFF05 /* MUIFullerWebViewController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC31CCDC246EAF2200DCFF05 /* MUIFullerWebViewController.xcassets */; };
+		EC31CCE4246EB08D00DCFF05 /* UIDevice+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31CCE2246EB08D00DCFF05 /* UIDevice+MUI.m */; };
+		EC31CCE5246EB08D00DCFF05 /* UIDevice+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC31CCE3246EB08D00DCFF05 /* UIDevice+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC34503F232BC63400B6136E /* UIResponder+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC34503D232BC63400B6136E /* UIResponder+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC345040232BC63400B6136E /* UIResponder+MUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EC34503E232BC63400B6136E /* UIResponder+MUI.m */; };
 		EC356FDA23F3402700E6214F /* UITableViewController+MUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EC356FD823F3402700E6214F /* UITableViewController+MUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -181,6 +188,13 @@
 		EC3145491D0740EA0025F669 /* UITabBar+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+MUI.m"; sourceTree = "<group>"; };
 		EC31454A1D0740EA0025F669 /* UIView+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MUI.h"; sourceTree = "<group>"; };
 		EC31454B1D0740EA0025F669 /* UIView+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MUI.m"; sourceTree = "<group>"; };
+		EC31CCD4246EAE1100DCFF05 /* MUIFullerWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIFullerWebViewController.h; sourceTree = "<group>"; };
+		EC31CCD5246EAE1100DCFF05 /* MUIExternalWebActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUIExternalWebActivity.h; sourceTree = "<group>"; };
+		EC31CCD6246EAE1100DCFF05 /* MUIExternalWebActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIExternalWebActivity.m; sourceTree = "<group>"; };
+		EC31CCD7246EAE1100DCFF05 /* MUIFullerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUIFullerWebViewController.m; sourceTree = "<group>"; };
+		EC31CCDC246EAF2200DCFF05 /* MUIFullerWebViewController.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MUIFullerWebViewController.xcassets; sourceTree = "<group>"; };
+		EC31CCE2246EB08D00DCFF05 /* UIDevice+MUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+MUI.m"; sourceTree = "<group>"; };
+		EC31CCE3246EB08D00DCFF05 /* UIDevice+MUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+MUI.h"; sourceTree = "<group>"; };
 		EC34503D232BC63400B6136E /* UIResponder+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIResponder+MUI.h"; sourceTree = "<group>"; };
 		EC34503E232BC63400B6136E /* UIResponder+MUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+MUI.m"; sourceTree = "<group>"; };
 		EC356FD823F3402700E6214F /* UITableViewController+MUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+MUI.h"; sourceTree = "<group>"; };
@@ -385,6 +399,13 @@
 				ECF90437238DD930002126DB /* MUISplitViewController.h */,
 				EC356FE423F3562000E6214F /* MUISplitViewController+Private.h */,
 				ECF90438238DD930002126DB /* MUISplitViewController.m */,
+				EC31CCD5246EAE1100DCFF05 /* MUIExternalWebActivity.h */,
+				EC31CCD6246EAE1100DCFF05 /* MUIExternalWebActivity.m */,
+				EC31CCD4246EAE1100DCFF05 /* MUIFullerWebViewController.h */,
+				EC31CCD7246EAE1100DCFF05 /* MUIFullerWebViewController.m */,
+				EC31CCDC246EAF2200DCFF05 /* MUIFullerWebViewController.xcassets */,
+				EC31CCE3246EB08D00DCFF05 /* UIDevice+MUI.h */,
+				EC31CCE2246EB08D00DCFF05 /* UIDevice+MUI.m */,
 			);
 			path = MUIKit;
 			sourceTree = "<group>";
@@ -424,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC72FF45232BFE21009D4048 /* UIBarButtonItem+MUI.h in Headers */,
+				EC31CCD8246EAE1100DCFF05 /* MUIFullerWebViewController.h in Headers */,
 				ECFA95D2238576470044D6C5 /* MUIAnimationFixStoryboardSegue.h in Headers */,
 				ECC2CC3421B890970000C99C /* MUIFetchedTableViewController.h in Headers */,
 				EC3145521D0740EA0025F669 /* UINavigationBar+MUI.h in Headers */,
@@ -434,6 +456,7 @@
 				ECD3862421C0752400BF2BCB /* MUIDetailViewManager.h in Headers */,
 				EC356FF123F45D6100E6214F /* MUIFetchedDetailNavigationController.h in Headers */,
 				EC1B8FDD236A4C0E005DBD0A /* UIViewController+MUIDetailItem.h in Headers */,
+				EC31CCE5246EB08D00DCFF05 /* UIDevice+MUI.h in Headers */,
 				ECD385ED21BC881E00BF2BCB /* UISplitViewController+MUI.h in Headers */,
 				EC34503F232BC63400B6136E /* UIResponder+MUI.h in Headers */,
 				EC3145501D0740EA0025F669 /* UIAlertController+MUI.h in Headers */,
@@ -463,6 +486,7 @@
 				EC90C9FF21AF53D9001A7883 /* MUITableViewCellObject.h in Headers */,
 				EC5D1C901F75C4B0008BC02E /* MUIProgressViewController.h in Headers */,
 				EC76D6E41D9E4442002DC0A0 /* MUISignUpViewController.h in Headers */,
+				EC31CCD9246EAE1100DCFF05 /* MUIExternalWebActivity.h in Headers */,
 				EC998C91233E6E98008B10C2 /* MUITableViewController.h in Headers */,
 				EC3145561D0740EA0025F669 /* UIView+MUI.h in Headers */,
 				EC395CE3233563E200B25139 /* MUICompletionStoryboardSegue.h in Headers */,
@@ -594,6 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC67588F1DB024A200838798 /* MUIAccount.storyboard in Resources */,
+				EC31CCDD246EAF2200DCFF05 /* MUIFullerWebViewController.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +648,8 @@
 				EC9A9CA220344F0900E5A698 /* UIImage+MUI.m in Sources */,
 				EC356FDB23F3402700E6214F /* UITableViewController+MUI.m in Sources */,
 				EC1B8FDE236A4C0E005DBD0A /* UIViewController+MUIDetailItem.m in Sources */,
+				EC31CCDA246EAE1100DCFF05 /* MUIExternalWebActivity.m in Sources */,
+				EC31CCDB246EAE1100DCFF05 /* MUIFullerWebViewController.m in Sources */,
 				EC6758A81DB02C1F00838798 /* UIAlertView+MUI.m in Sources */,
 				EC596B17218A4433000B5302 /* UIViewController+MUIShowing.m in Sources */,
 				EC3145571D0740EA0025F669 /* UIView+MUI.m in Sources */,
@@ -651,6 +678,7 @@
 				ECD385EE21BC881E00BF2BCB /* UISplitViewController+MUI.m in Sources */,
 				EC08B97E22E660E1009BA3F3 /* UINavigationController+MUI.m in Sources */,
 				ECF9043A238DD930002126DB /* MUISplitViewController.m in Sources */,
+				EC31CCE4246EB08D00DCFF05 /* UIDevice+MUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
