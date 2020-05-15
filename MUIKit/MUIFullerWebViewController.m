@@ -1,5 +1,5 @@
 //
-//  DLFullerWebViewController.m
+//  MUIFullerWebViewController.m
 //  Simple RSS Reader
 //
 //  Created by marek on 07/01/2013.

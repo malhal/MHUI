@@ -1,9 +1,9 @@
 //
-//  DLIdentifier.h
+//  UIDevice+MUI.h
 //  WiFiFoFum Nearby
 //
 //  Created by marek on 24/07/2013.
-//  Copyright (c) 2013 Dynamically Loaded. All rights reserved.
+//  Copyright (c) 2013 Malcolm Hall. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -1,5 +1,5 @@
 //
-//  DLExternalWebActivity.m
+//  MUIExternalWebActivity.m
 //  Simple RSS Reader
 //
 //  Created by marek on 11/01/2013.
