@@ -12,15 +12,38 @@
 
 @property (assign, nonatomic) BOOL completionSet;
 
+
 @end
 
 @implementation MUITableView
 @dynamic delegate;
 
-- (void)loadView{
-    
-}
 
+
+//- (void)willMoveToWindow:(UIWindow *)newWindow{
+//
+//    id<UIDataSourceModelAssociation> dataSourceModelAssociation = (id<UIDataSourceModelAssociation>)self.dataSource;
+//    if(!newWindow){
+//        NSIndexPath *indexPath = [self indexPathForSelectedRow];
+//        self.selectedModelItemIdentifier = [dataSourceModelAssociation modelIdentifierForElementAtIndexPath:indexPath inView:self];
+//    }
+//    else{
+//        UITableViewController *tableViewController = (UITableViewController *)[self valueForKey:@"_viewDelegate"];
+//        [tableViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+//            NSIndexPath *indexPath = [dataSourceModelAssociation indexPathForElementWithModelIdentifier:self.selectedModelItemIdentifier inView:self];
+//            [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+//        } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+//            if(context.cancelled){
+//
+//            }else{
+//                self.selectedModelItemIdentifier = nil;
+//            }
+//        }];
+//
+//    }
+//}
+
+/*
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     if(editing){
         [super setEditing:editing animated:animated];
@@ -94,6 +117,7 @@
         [self.delegate tableViewDidMoveToSuperview:self];
     }
 }
+*/
 
 //- (void)willMoveToWindow:(UIWindow *)newWindow{
 //    if([self.delegate respondsToSelector:@selector(tableView:willMoveToWindow:)]){

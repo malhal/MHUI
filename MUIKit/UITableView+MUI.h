@@ -27,11 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 // rows that are fully visible and not under any translucent bars.
 - (NSArray *)mui_indexPathsForSafeAreaRows;
 
+- (NSArray<UITableViewCell *> *)mui_selectedVisibleCells;
+
+- (UITableViewCell *)mui_visibleCellAncestorOfView:(UIView *)view;
+
 @end
 
 @protocol UITableViewDelegate_MUI <UITableViewDelegate>
 
 @optional
+// this is more like didEndEditing because is only called when editing ends, and is called even if text wasn't changed.
 - (void)tableView:(UITableView *)tableView didUpdateTextFieldForRowAtIndexPath:(NSIndexPath *)indexPath withValue:(NSString *)value;
 
 @end

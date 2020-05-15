@@ -58,6 +58,15 @@
 //    return nil;
 //}
 
+- (UIViewController *)mui_currentVisibleDetailViewControllerWithSender:(id)sender{
+    UIViewController *target = [self targetViewControllerForAction:@selector(mui_currentVisibleDetailViewControllerWithSender:) sender:sender];
+    if (target) {
+        return [target mui_currentVisibleDetailViewControllerWithSender:sender];
+    } else {
+        return nil;
+    }
+}
+
 @end
 
 
@@ -100,6 +109,14 @@
 //        return self.viewControllers.firstObject;
 //    }
 //}
+
+
+- (UIViewController *)mui_currentVisibleDetailViewControllerWithSender:(id)sender{
+    if(self.viewControllers.count < 2){
+        return nil;
+    }
+    return self.viewControllers.lastObject;
+}
 
 - (BOOL)mui_containsDetailItem:(id)object{
     return [self.viewControllers.firstObject mui_containsDetailItem:object];
